@@ -20,6 +20,7 @@ using Occultations, Random, Printf, LinearAlgebra
 using Plots
 import CairoMakie                     # saves the GeoMakie maps (Makie figures)
 include(joinpath(@__DIR__, "standard_figures.jl"))
+include(joinpath(@__DIR__, "sim_stations.jl"))       # stations on land, in the dark, with their equipment
 ENV["GKSwstype"] = "100"   #src
 
 out = length(ARGS) >= 1 ? ARGS[1] : mkpath(joinpath(@__DIR__, "output", "tutorial"))
@@ -30,7 +31,7 @@ section("1. light curves → timings → chords")
 eph = EphemKeplerian(a=43.0, e=0.05, i=12.0, Ω=80.0, ω=150.0, M=10.0, epoch=Epoch("2023-01-01"), name="SimTNO")
 body = Body("SimTNO", eph; radius=300.0, pole=(30.0, 10.0), rotation_period=7.0, W0=40.0,
             shape=Ellipsoid(340.0, 290.0, 250.0))
-t0 = Epoch("2023-05-01T03:00:00")
+t0 = Epoch("2023-05-01T05:00:00")
 ra, dec, _ = ephem_radec(body, t0)
 star = Star(ra + 0.002 / 3600 / cosd(dec), dec; name="SimStar", mag=Dict("V" => 14.0, "K" => 12.5),
             ra_err=0.15, dec_err=0.12)
@@ -42,12 +43,20 @@ truth = project(body, ev.tref)                      # the true apparent limb
 center = (25.0, -12.0)                              # ephemeris offset [km]
 println("true limb: ", truth, ", centre ", center)
 
-t = collect(-45:0.25:45.0)
-for (j, dlat) in enumerate([-3.2, -2.3, -1.0, 0.4, 1.7, 2.45, 3.6])
-    obs = Observer("Station $j", lon0 + 0.3j, lat0 + dlat, 200.0)
+# Seven stations across the path (offsets from the body's centre, km), in central South America,
+# spread along the track by up to ±15 s, each with its own camera (`examples/sim_stations.jl`):
+pv = positionv(star, eph, GEOCENTER, ev.tref)
+n̂ = (-pv.vg, pv.vf) ./ hypot(pv.vf, pv.vg)          # cross-track unit vector
+offsets = [-380.0, -260.0, -110.0, 30.0, 160.0, 240.0, 360.0]
+sites = stations(star, body, ev.tref, offsets .+ (center[1] * n̂[1] + center[2] * n̂[2]); rng=rng, spread=30.0,
+                 prefix="Station ", equipment=EQUIPMENT[1:3])
+for (j, st) in enumerate(sites)
+    obs = st.observer
+    _, _, texp, noise = st.equipment
+    t = collect(round(st.τ) - 45:texp:round(st.τ) + 45)
     pc = predicted_contacts(ev, obs, truth; center=center)
     if isempty(pc)
-        lc = LightCurve(t, 1 .+ 0.05 .* randn(rng, length(t)); tref=ev.tref, σ=0.05, exptime=0.25, name=obs.name)
+        lc = LightCurve(t, 1 .+ noise .* randn(rng, length(t)); tref=ev.tref, σ=noise, exptime=texp, name=obs.name)
         push!(ev, Chord(obs.name, obs, lc))
         continue
     end
@@ -55,7 +64,7 @@ for (j, dlat) in enumerate([-3.2, -2.3, -1.0, 0.4, 1.7, 2.45, 3.6])
     j == 2 && ((ti, te) = (ti + 0.9, te + 0.9))      # station 2: clock 0.9 s late
     v = hypot(velocity(Track(star, body, obs, ev.tref, -60, 60), ti)...)
     lc = simulate_lightcurve(t, ti, te; tref=ev.tref, vel=v, dist=ev.ca.dist_km,
-                             star_diam=apparent_diameter(star, ev.ca.dist_km), σ=0.05, exptime=0.25, rng=rng,
+                             star_diam=apparent_diameter(star, ev.ca.dist_km), σ=noise, exptime=texp, rng=rng,
                              name=obs.name)
     tf = fit_timing(lc; vel=v, dist=ev.ca.dist_km, star_diam=apparent_diameter(star, ev.ca.dist_km), rng=rng)
     c = contact_times(tf)
@@ -91,7 +100,7 @@ println("\njoint photometric fit: χ²/dof = ", round(reduced_chi2(fitP); digits
         ", a = ", fitP[:equatorial_radius], ", ε = ", fitP[:oblateness])
 
 section("3. a published ellipse against the negative chords")
-lit = ellipse_outline(; equatorial_radius=360.0, oblateness=0.1, position_angle=120.0)
+lit = ellipse_outline(; equatorial_radius=385.0, oblateness=0.15, position_angle=67.0)   # the truth, 16 % larger
 for r in check_negative_chords(ev, lit; center=(fitE[:center_f][1], fitE[:center_g][1]))
     @printf("%-10s %s  min distance %7.2f km%s\n", r.chord, r.conflict ? "CONFLICT" : "ok      ", r.distance,
             r.conflict ? @sprintf("  (would have seen %.2f s)", r.duration) : "")
@@ -99,16 +108,20 @@ end
 
 section("4. three events of a rotating triaxial body: 3-D ellipsoid and mesh")
 evs = Event[]
-for (k, dt) in enumerate([0.0, 2.2 * 3600, 4.9 * 3600])
+## the same hour on three nights (P = 7 h): rotational phases 0, 0.43 and 0.86
+for (k, dt) in enumerate([0.0, 1.0, 2.0] .* 86400)
     tk = t0 + dt
     rak, deck, _ = ephem_radec(body, tk)
     st = Star(rak + 0.001 / 3600 / cosd(deck), deck; name="star $k")
     e = Event(st, body, tk; name="event $k")
-    p = shadow_path(st, body, e.tref, e.tref; offsets=[0.0])
     Ok = project(body, e.tref)
-    for (j, dlat) in enumerate([-2.0, -0.7, 0.6, 1.9])
-        o = Observer("E$k-S$j", p.lon[1, 1], p.lat[1, 1] + dlat, 0.0)
-        pc = predicted_contacts(e, o, Ok; center=(5.0k, -3.0k))
+    ck = (5.0k, -3.0k)
+    pk = positionv(st, eph, GEOCENTER, e.tref)
+    nk = (-pk.vg, pk.vf) ./ hypot(pk.vf, pk.vg)
+    for s in stations(st, body, e.tref, [-220.0, -80.0, 60.0, 200.0] .+ (ck[1] * nk[1] + ck[2] * nk[2]); rng=rng,
+                      prefix="E$k-S")
+        o = s.observer
+        pc = predicted_contacts(e, o, Ok; center=ck)
         isempty(pc) && continue
         push!(e, Chord(o.name, o; immersion=pc[1][1] + 0.03randn(rng), emersion=pc[1][2] + 0.03randn(rng),
                        immersion_err=0.03, emersion_err=0.03))
@@ -142,14 +155,17 @@ println("\nmesh fit: scale = ", fitM[:scale], ", W0 = ", fitM[:W0], ", volume-eq
 section("5. atmosphere (2002 XV93-like, Arimatsu et al. 2026)")
 ephA = EphemKeplerian(a=37.5, e=0.02, i=12.0, Ω=80.0, ω=150.0, M=10.0, epoch=Epoch("2024-01-01"), name="XV93-like")
 bodyA = Body("XV93-like", ephA; radius=244.0, density=1500.0)
-tA = Epoch("2024-01-10T15:00:00")
+tA = Epoch("2024-05-20T04:00:00")
 raA, decA, _ = ephem_radec(bodyA, tA)
 starA = Star(raA + 0.001 / 3600 / cosd(decA), decA; name="StarA", diameter=0.0032)
 evA = Event(starA, bodyA, tA)
-pA = shadow_path(starA, bodyA, evA.tref, evA.tref; offsets=[0.0])
-for (j, dlat) in enumerate([0.2, 1.0, 2.3])
-    tt = collect(-30:0.5:30.0)
-    push!(evA, Chord("A$j", Observer("A$j", pA.lon[1, 1], pA.lat[1, 1] + dlat, 0.0),
+## a central chord, one halfway to the limb and a near miss through the atmosphere
+pvA = positionv(starA, ephA, GEOCENTER, evA.tref)
+nA = (-pvA.vg, pvA.vf) ./ hypot(pvA.vf, pvA.vg)
+for (j, s) in enumerate(stations(starA, bodyA, evA.tref, [20.0, 110.0, 250.0] .+ (15.0 * nA[1] - 20.0 * nA[2]); rng=rng,
+                                 prefix="A"))
+    tt = collect(round(s.τ) - 30:0.5:round(s.τ) + 30)
+    push!(evA, Chord("A$j", s.observer,
                      LightCurve(tt, ones(length(tt)); tref=evA.tref, σ=0.03, exptime=0.5, λ=0.6, name="A$j")))
 end
 atm = xv93_atmosphere(:CH4)

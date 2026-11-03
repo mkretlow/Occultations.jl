@@ -2,119 +2,119 @@
 ==============================================================================
 1. light curves → timings → chords
 ==============================================================================
-Event SimTNO, 2023-05-01T02:59:57: SimTNO occults Star(SimStar, RA=16 04 37.6090, Dec=-16 51 19.775)
-  closest approach 2023-05-01T02:59:57.470: 0.0004" (10.7 km), PA 190.62°, 22.516 km/s, distance 39.9572 au
+Event SimTNO, 2023-05-01T04:59:57: SimTNO occults Star(SimStar, RA=16 04 37.2259, Dec=-16 51 18.739)
+  closest approach 2023-05-01T04:59:57.472: 0.0004" (10.7 km), PA 190.64°, 22.532 km/s, distance 39.9567 au
 
-true limb: EllipseOutline(a = 333.744 km, b = 282.362 km, PA(minor) = 125.67°), centre (25.0, -12.0)
-Station 2  immersion 2023-05-01T02:59:44.820 ± 0.014 s   emersion 2023-05-01T03:00:02.520 ± 0.009 s
-Station 3  immersion 2023-05-01T02:59:41.056 ± 0.013 s   emersion 2023-05-01T03:00:05.461 ± 0.013 s
-Station 4  immersion 2023-05-01T02:59:41.567 ± 0.014 s   emersion 2023-05-01T03:00:06.161 ± 0.013 s
-Station 5  immersion 2023-05-01T02:59:45.031 ± 0.013 s   emersion 2023-05-01T03:00:03.580 ± 0.017 s
-Station 6  immersion 2023-05-01T02:59:49.962 ± 0.014 s   emersion 2023-05-01T02:59:58.043 ± 0.012 s
+true limb: EllipseOutline(a = 331.810 km, b = 283.186 km, PA(minor) = 66.92°), centre (25.0, -12.0)
+Station 2  immersion 2023-05-01T05:00:10.643 ± 0.008 s   emersion 2023-05-01T05:00:25.463 ± 0.004 s
+Station 3  immersion 2023-05-01T05:00:16.570 ± 0.010 s   emersion 2023-05-01T05:00:40.729 ± 0.009 s
+Station 4  immersion 2023-05-01T05:00:05.962 ± 0.010 s   emersion 2023-05-01T05:00:31.601 ± 0.009 s
+Station 5  immersion 2023-05-01T05:00:03.151 ± 0.009 s   emersion 2023-05-01T05:00:25.384 ± 0.010 s
+Station 6  immersion 2023-05-01T05:00:12.831 ± 0.008 s   emersion 2023-05-01T05:00:29.693 ± 0.007 s
 
 ==============================================================================
 2. limb fit: ellipse, negative chords, clock offset, uncertainties
 ==============================================================================
-LimbProblem fit: χ² = 2.927, dof = 4, χ²/dof = 0.732
-  center_f               =      24.974721 ± 0.143653
-  center_g               =     -11.958934 ± 0.129877
-  equatorial_radius      =     333.694985 ± 0.153694
-  oblateness             =       0.153875 ± 0.000681
-  position_angle         =     125.753161 ± 0.147610
-  dt_Station 2           =      -0.899805 ± 0.014631
+LimbProblem fit: χ² = 1.152, dof = 4, χ²/dof = 0.288
+  center_f               =      25.012000 ± 0.088126
+  center_g               =     -12.018739 ± 0.071325
+  equatorial_radius      =     331.834921 ± 0.113831
+  oblateness             =       0.146698 ± 0.000525
+  position_angle         =      66.885435 ± 0.112823
+  dt_Station 2           =      -0.889612 ± 0.010077
   derived:
-  offset_ra              =       0.861798 ± 0.004957
-  offset_dec             =      -0.412664 ± 0.004482
-  equivalent_radius      =     306.949445 ± 0.073883
-  semi_minor_axis        =     282.347551 ± 0.134695
+  offset_ra              =       0.863096 ± 0.003041
+  offset_dec             =      -0.414734 ± 0.002461
+  equivalent_radius      =     306.530271 ± 0.044670
+  semi_minor_axis        =     283.155271 ± 0.095613
 
 
-contact residuals [s]: [0.0018, -0.0007, -0.004, 0.0081, 0.0079, -0.0085, -0.012, -0.0097, 0.0087, 0.0052]
-clock offsets: Dict("Station 2" => (-0.8998053800423351, 0.014631332728680268))
-χ² profile 1σ interval of the equatorial radius: (333.54145131891227, 333.8488571388495)
-astrometry: RA 16 04 37.60902  Dec -16 51 19.7758  (σ 0.150, 0.120 mas)  offsets +0.862, -0.413 mas
+contact residuals [s]: [-0.0003, 0.0001, 0.0047, -0.0, -0.0081, -0.0007, 0.0042, -0.0005, -0.0003, 0.0005]
+clock offsets: Dict("Station 2" => (-0.8896122691287107, 0.010076624687761505))
+χ² profile 1σ interval of the equatorial radius: (331.721168527809, 331.94882809779057)
+astrometry: RA 16 04 37.22594  Dec -16 51 18.7403  (σ 0.150, 0.120 mas)  offsets +0.863, -0.415 mas
 Posterior of LimbProblem: 24 walkers × 2000 steps (burn-in 666), acceptance 0.52
-  center_f               =      24.972794  -0.143305 +0.146407
-  center_g               =     -11.963293  -0.126228 +0.121241
-  equatorial_radius      =     333.705468  -0.159649 +0.144704
-  oblateness             =       0.153903  -0.000700 +0.000629
-  position_angle         =     125.752101  -0.149305 +0.147394
-  dt_Station 2           =      -0.898863  -0.015680 +0.014591
+  center_f               =      25.008730  -0.087259 +0.089916
+  center_g               =     -12.012910  -0.073398 +0.069869
+  equatorial_radius      =     331.829218  -0.107777 +0.114191
+  oblateness             =       0.146660  -0.000496 +0.000509
+  position_angle         =      66.889640  -0.113355 +0.110470
+  dt_Station 2           =      -0.890064  -0.010377 +0.009704
 
-derived (posterior): (offset_ra = (median = 0.8618095730924973, minus = 0.004994765222358644, plus = 0.004865350624370546), offset_dec = (median = -0.41273189630032336, minus = 0.0042881409246668944, plus = 0.003910851537164917), equivalent_radius = (median = 306.9596169100677, minus = 0.0794656688827331, plus = 0.07298979052308141), semi_minor_axis = (median = 282.3479292034749, minus = 0.1259491338693124, plus = 0.15272166153914668))
-autocorrelation times [steps]: [47.6, 60.8, 64.3, 54.7, 54.5, 48.3]
+derived (posterior): (offset_ra = (median = 0.8629489955296952, minus = 0.003086436140248283, plus = 0.003247874586261301), offset_dec = (median = -0.4146598400668745, minus = 0.0024550161016830274, plus = 0.002502475466896581), equivalent_radius = (median = 306.53219505719784, minus = 0.044029166885195536, plus = 0.04532883319836856), semi_minor_axis = (median = 283.16825995674793, minus = 0.0985504765099563, plus = 0.09092970690073798))
+autocorrelation times [steps]: [45.6, 52.7, 46.9, 45.9, 58.6, 40.2]
 
-joint photometric fit: χ²/dof = 0.997, a = (333.5248644610994, 0.176366959739564), ε = (0.15364553995848032, 0.0007418729715379284)
+joint photometric fit: χ²/dof = 0.996, a = (331.6235319126676, 0.09446725887541964), ε = (0.14620339574006405, 0.00047154435918851157)
 
 ==============================================================================
 3. a published ellipse against the negative chords
 ==============================================================================
-Station 1  CONFLICT  min distance  -20.80 km  (would have seen 9.60 s)
-Station 7  ok        min distance   82.52 km
+Station 7  CONFLICT  min distance   -8.39 km  (would have seen 6.29 s)
+Station 1  ok        min distance   11.53 km
 
 ==============================================================================
 4. three events of a rotating triaxial body: 3-D ellipsoid and mesh
 ==============================================================================
-LimbProblem fit: χ² = 11.388, dof = 15, χ²/dof = 0.759
-  center_f_1             =       5.310604 ± 0.272160
-  center_g_1             =      -3.179985 ± 0.422390
-  center_f_2             =       9.907924 ± 0.241146
-  center_g_2             =      -6.368168 ± 0.444196
-  center_f_3             =      14.499689 ± 0.241561
-  center_g_3             =      -8.494676 ± 0.302416
-  a                      =     340.825120 ± 0.481989
-  b                      =     289.821070 ± 0.425279
-  c                      =     249.417835 ± 2.125612
+LimbProblem fit: χ² = 15.781, dof = 15, χ²/dof = 1.052
+  center_f_1             =       5.030251 ± 0.240534
+  center_g_1             =      -3.302467 ± 0.412225
+  center_f_2             =      10.313899 ± 0.243051
+  center_g_2             =      -6.641024 ± 0.326060
+  center_f_3             =      14.846539 ± 0.251293
+  center_g_3             =      -9.139773 ± 0.296713
+  a                      =     340.432167 ± 0.523856
+  b                      =     290.194355 ± 0.379793
+  c                      =     247.148675 ± 2.457694
   pole_ra                =      30.000000 (fixed)
   pole_dec               =      10.000000 (fixed)
-  W0                     =      66.339227 ± 0.236418
+  W0                     =     169.160884 ± 0.234131
   period                 =       7.000000 (fixed)
   derived:
-  offset_ra_1            =       0.183252 ± 0.009391
-  offset_dec_1           =      -0.109731 ± 0.014575
-  offset_ra_2            =       0.341896 ± 0.008321
-  offset_dec_2           =      -0.219748 ± 0.015328
-  offset_ra_3            =       0.500355 ± 0.008336
-  offset_dec_3           =      -0.293134 ± 0.010436
-  volume_equivalent_radius =     290.979919 ± 0.596928
-  b_over_a               =       0.850351 ± 0.001070
-  c_over_b               =       0.860592 ± 0.008442
-  apparent_a_1           =     334.579035 ± 0.405227
-  apparent_b_1           =     282.070823 ± 0.212413
-  apparent_pa_1          =     125.453091 ± 0.316397
-  aspect_1               =     148.970272 ± 0.000000
-  rotation_phase_1       =     141.498696 ± 0.236418
-  apparent_a_2           =     335.779966 ± 0.398512
-  apparent_b_2           =     281.581449 ± 0.210672
-  apparent_pa_2          =      75.113613 ± 0.274110
-  aspect_2               =     148.971981 ± 0.000000
-  rotation_phase_2       =     254.645881 ± 0.236418
-  apparent_a_3           =     321.624515 ± 0.215477
-  apparent_b_3           =     288.346228 ± 0.332962
-  apparent_pa_3          =      34.061390 ± 0.464913
-  aspect_3               =     148.974081 ± 0.000000
-  rotation_phase_3       =      33.508325 ± 0.236418
+  offset_ra_1            =       0.173580 ± 0.008300
+  offset_dec_1           =      -0.113959 ± 0.014225
+  offset_ra_2            =       0.355962 ± 0.008388
+  offset_dec_2           =      -0.229201 ± 0.011253
+  offset_ra_3            =       0.512476 ± 0.008674
+  offset_dec_3           =      -0.315489 ± 0.010242
+  volume_equivalent_radius =     290.107715 ± 0.734021
+  b_over_a               =       0.852429 ± 0.001088
+  c_over_b               =       0.851666 ± 0.009373
+  apparent_a_1           =     331.920746 ± 0.345982
+  apparent_b_1           =     282.925975 ± 0.238094
+  apparent_pa_1          =      66.926645 ± 0.287203
+  aspect_1               =     148.971826 ± 0.000000
+  rotation_phase_1       =     244.324285 ± 0.234131
+  apparent_a_2           =     322.519605 ± 0.203864
+  apparent_b_2           =     287.703200 ± 0.253539
+  apparent_pa_2          =      41.081329 ± 0.409882
+  aspect_2               =     148.990556 ± 0.000000
+  rotation_phase_2       =      38.656272 ± 0.234131
+  apparent_a_3           =     318.468450 ± 0.226488
+  apparent_b_3           =     290.135395 ± 0.373782
+  apparent_pa_3          =       3.746748 ± 0.417604
+  aspect_3               =     149.009442 ± 0.000000
+  rotation_phase_3       =     192.986304 ± 0.234131
 
 (true axes 340, 290, 250 km)
 
-mesh fit: scale = (1.0012335597831663, 0.0003916602161212916), W0 = (246.4933593780465, 0.23928846060391076), volume-equivalent radius = (291.1797857689707, 0.11390303161250502)
+mesh fit: scale = (1.0001807662591273, 0.00038227058748484277), W0 = (349.2776563809304, 0.2064468068431107), volume-equivalent radius = (290.87361126074205, 0.11117233004739611)
 
 ==============================================================================
 5. atmosphere (2002 XV93-like, Arimatsu et al. 2026)
 ==============================================================================
-LimbProblem fit: χ² = 351.083, dof = 353, χ²/dof = 0.995
-  center_f               =      15.356803 ± 0.182860
-  center_g               =     -19.681172 ± 0.542491
-  radius                 =     244.165614 ± 0.453015
-  pressure               =     123.615782 ± 3.673984
+LimbProblem fit: χ² = 354.364, dof = 353, χ²/dof = 1.004
+  center_f               =      14.964549 ± 0.217521
+  center_g               =     -21.666413 ± 0.543949
+  radius                 =     244.804329 ± 0.368998
+  pressure               =     125.150404 ± 2.508963
   derived:
-  offset_ra              =       0.565888 ± 0.006738
-  offset_dec             =      -0.725238 ± 0.019990
+  offset_ra              =       0.577075 ± 0.008388
+  offset_dec             =      -0.835518 ± 0.020976
 
-airless model: χ² = 1030.0; with atmosphere: χ² = 351.1 (at the simulated truth, 124 nbar and R = 244 km: 355.5)
+airless model: χ² = 1581.1; with atmosphere: χ² = 354.4 (at the simulated truth, 124 nbar and R = 244 km: 355.8)
 
 ==============================================================================
 6. maps
 ==============================================================================
 
-figures written to examples/output/tutorial
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/tutorial
