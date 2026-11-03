@@ -127,6 +127,7 @@ figures and printed results to `examples/output/<example>/`:
 
 | Example | Event | Publication | Shows |
 |---|---|---|---|
+| [`quickstart.ipynb`](examples/quickstart.ipynb) | Varda 2018 | Souami et al. 2020 | Jupyter notebook: prediction, chords, limb fit, astrometry, posterior, maps |
 | [`tutorial.jl`](examples/tutorial.jl) | synthetic | – | all features, offline |
 | [`sim_binary.jl`](examples/sim_binary.jl) | synthetic | – | a satellite (circle or ellipse), a binary of similar bodies, barycentre, coverage |
 | [`sim_contact_binary.jl`](examples/sim_contact_binary.jl) | synthetic | – | a contact binary: light curves with two drops, joint light-curve fit |

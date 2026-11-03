@@ -9,6 +9,7 @@ so all examples run offline. Each writes its figures and its printed results to
 
 | Example | Event | Publication | Shows |
 |---|---|---|---|
+| [Quick start notebook](https://github.com/mkretlow/Occultations.jl/blob/main/examples/quickstart.ipynb) | 2018 Varda | [Souami2020](@citet) | Jupyter: prediction, chords, limb fit, astrometry, posterior, maps |
 | [Tutorial](generated/tutorial.md) | synthetic | – | all features, offline |
 | [A satellite and a binary](generated/sim_binary.md) | synthetic | – | `BinaryLimb`: satellite as circle or ellipse, two drops per chord, barycentre, coverage |
 | [A contact binary](generated/sim_contact_binary.md) | synthetic | – | `ContactBinaryLimb`: light curves with two drops, visible segments, joint light-curve fit |

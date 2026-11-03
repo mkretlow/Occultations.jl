@@ -328,7 +328,7 @@ function _band_label(u, nsigma=1; composite::Bool=false)
     pc = string(round(100 * SpecialFunctions.erf(nsigma / sqrt(2)); digits=1))      # 68.3, 95.4, 99.7
     sg = isinteger(nsigma) ? string(Int(nsigma)) : string(nsigma)
     composite && return u === :shape ? "$(sg)σ shape (occupancy)" : "$(sg)σ band (occupancy)"
-    return _simultaneous(u) ? "$pc % ($(sg)σ) region" : u === :shape ? "$(sg)σ shape (a, b)" : "$pc % band (pointwise, $(sg)σ)"
+    return _simultaneous(u) ? "$pc % ($(sg)σ) region" : u === :shape ? "$(sg)σ shape (a′, b′)" : "$pc % band (pointwise, $(sg)σ)"
 end
 
 # nσ error ellipse of the centre: the spread (covariance) of the drawn centres cs, drawn

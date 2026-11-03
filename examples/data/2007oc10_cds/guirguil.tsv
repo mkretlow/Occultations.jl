@@ -1,0 +1,93 @@
+#
+#   VizieR Astronomical Server vizier.idia.ac.za
+#    Date: 2026-11-02T20:42:26 [V7.6.1]
+#   In case of problem, please report to:	cds-question@unistra.fr
+#
+#
+#Coosys	J2000:	eq_FK5 J2000
+#INFO	service_protocol=ASU	  IVOID of the protocol through which the data was retrieved
+#INFO	request_date=2026-11-02T20:42:26	  Query execution date
+#INFO	request=https://vizier.idia.ac.za/viz-bin/asu-tsv?-source=J/A%2BA/697/A157/guirguil&-out.all&-out.max=unlimited	  Full request URL
+#INFO	contact=cds-question@unistra.fr	  Email or URL to contact publisher
+#INFO	server_software=VizieR/7.6.1	  Software version
+#INFO	publisher=CDS	  Data centre that produced the VOTable
+
+#RESOURCE=yCat_36970157
+#Name: J/A+A/697/A157
+#Title: Occultation light-curves 2007 OC10 (Gomez-Limon+, 2025)
+#INFO	ivoid=ivo://cds.vizier/j/a+a/697/a157	    IVOID of underlying data collection
+#INFO	data_ivoid=ivo://cds.vizier/j/a+a/697/a157	    IVOID of underlying data collection
+#INFO	creator=Gomez-Limon J.M.	    First author or institution
+#INFO	cites=bibcode:2025A&A...697A.157G	    Article or Data origin sources
+#INFO	journal=A&A	    Journal name
+#INFO	original_date=2025	    Year of the article publication
+#INFO	reference_url=https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/697/A157	    Dataset landing page
+#INFO	citation=doi:10.26093/cds/vizier.36970157	    Dataset identifier that can be used for citation
+#INFO	publication_date=2025-10-10	    Date of first publication in the data centre
+#INFO	rights_uri=https://cds.unistra.fr/vizier-org/licences_vizier.html	    Licence URI
+#Table	J_A_A_697_A157_guirguil:
+#Name: J/A+A/697/A157/guirguil
+#Title: Light-curve from guirguillano
+#Column	recno	(I8)	Record number assigned by the VizieR team. Should Not be used for identification.	[ucd=meta.record]
+#Column	Time	(F9.3)	Time (JD-2450000), scale: seconds from midnight	[ucd=time.epoch]
+#Column	Flux	(F7.4)	Normalized flux of target stars	[ucd=phot.flux;arith.ratio]
+#Column	e_Flux	(F7.4)	Uncertainty in normalized flux	[ucd=stat.error;phot.flux]
+recno	Time	Flux	e_Flux
+ 	s	 	
+--------	---------	-------	-------
+       1	 5342.563	 0.9746	 0.0744
+       2	 5348.703	 1.0974	 0.0760
+       3	 5354.843	 1.0063	 0.0757
+       4	 5360.983	 0.9194	 0.0735
+       5	 5367.123	 1.0049	 0.0761
+       6	 5373.263	 0.9421	 0.0747
+       7	 5379.403	 1.0163	 0.0739
+       8	 5385.543	 1.0199	 0.0699
+       9	 5391.683	 1.0480	 0.0706
+      10	 5397.823	 0.9987	 0.0726
+      11	 5403.963	 1.1061	 0.0734
+      12	 5410.104	 1.0903	 0.0750
+      13	 5416.243	 1.0299	 0.0741
+      14	 5422.383	 0.9357	 0.0705
+      15	 5428.523	 1.0293	 0.0707
+      16	 5434.663	 0.8730	 0.0735
+      17	 5440.803	 0.9815	 0.0748
+      18	 5446.943	 0.8310	 0.0726
+      19	 5453.083	 1.0340	 0.0714
+      20	 5459.222	 0.9472	 0.0690
+      21	 5465.362	 0.9451	 0.0695
+      22	 5471.503	 0.9234	 0.0711
+      23	 5477.643	 1.0647	 0.0747
+      24	 5483.783	 1.1187	 0.0723
+      25	 5489.923	 1.0106	 0.0741
+      26	 5496.063	 1.0608	 0.0796
+      27	 5502.203	 1.0967	 0.0777
+      28	 5508.343	 1.0846	 0.0768
+      29	 5514.483	 0.8525	 0.0705
+      30	 5520.623	 0.8986	 0.0709
+      31	 5526.763	 1.0117	 0.0697
+      32	 5532.903	 1.0951	 0.0723
+      33	 5539.043	 1.0271	 0.0718
+      34	 5545.183	 1.0291	 0.0759
+      35	 5551.323	 0.9218	 0.0710
+      36	 5557.463	 1.0243	 0.0731
+      37	 5563.603	 0.9545	 0.0708
+      38	 5569.743	 0.9232	 0.0718
+      39	 5575.883	 1.0360	 0.0707
+      40	 5582.023	 0.9882	 0.0713
+      41	 5588.163	 0.9983	 0.0725
+      42	 5594.303	 0.9911	 0.0724
+      43	 5600.443	 0.8196	 0.0704
+      44	 5606.583	 1.1016	 0.0719
+      45	 5612.723	 1.0959	 0.0716
+      46	 5618.863	 0.9986	 0.0704
+      47	 5625.003	 0.8722	 0.0705
+      48	 5631.143	 1.0280	 0.0713
+      49	 5637.283	 1.0422	 0.0688
+      50	 5643.423	 1.0062	 0.0726
+      51	 5649.563	 0.9461	 0.0696
+      52	 5655.703	 1.0423	 0.0728
+      53	 5661.843	 0.9877	 0.0707
+      54	 5667.983	 1.0194	 0.0727
+      55	 5674.123	 1.0989	 0.0754
+

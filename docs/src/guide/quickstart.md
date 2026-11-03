@@ -3,7 +3,8 @@
 A complete reduction in outline, with a real event whose elliptical limb agrees closely with
 the publication: star and body, published timings and a negative chord, the limb fit with its
 posterior and astrometry, and maps. Each step is described in detail in the following
-chapters.
+chapters. The same steps, including the prediction of the event, are in the Jupyter notebook
+[`examples/quickstart.ipynb`](https://github.com/mkretlow/Occultations.jl/blob/main/examples/quickstart.ipynb), which runs offline.
 
 ```julia
 using Occultations, Plots
