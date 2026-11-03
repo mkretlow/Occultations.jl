@@ -1,7 +1,7 @@
 # Occultations.jl compared with published reductions
 
-Twenty-two published occultation studies were re-reduced with Occultations.jl from the timings,
-stations and stars given in the papers (2002 XV93: from the authors' light curves) (DOIs in
+Twenty-three published occultation studies were re-reduced with Occultations.jl from the timings,
+stations and stars given in the papers (2002 XV93 and 2007 OC10: from the authors' light curves) (DOIs in
 [`references/`](https://github.com/mkretlow/Occultations.jl/blob/main/references/README.md)). The examples, their data and their complete printed
 output are:
 
@@ -27,6 +27,7 @@ output are:
 | (307261) 2002 MS4 | 2020-08-08 | [Rommel2023](@citet), A&A 678, A167 (stations at the CDS) | [script](https://github.com/mkretlow/Occultations.jl/blob/main/examples/2002ms4_2020.jl) · [data](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/2002ms4_20200808.jl) · [output](https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/2002ms4_2020/output.txt) |
 | (50000) Quaoar | 2011-05-04 and 2022-08-09 | [BragaRibas2013](@citet), ApJ 773, 26; [Pereira2023](@citet), A&A 673, L4 | [script](https://github.com/mkretlow/Occultations.jl/blob/main/examples/quaoar_2011_2022.jl) · [data](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/quaoar_2011_2022.jl) · [output](https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/quaoar_2011_2022/output.txt) |
 | (2060) Chiron | 2018-11-28 and 2019-09-08 | [BragaRibas2023](@citet), A&A 676, A72 | [script](https://github.com/mkretlow/Occultations.jl/blob/main/examples/chiron_2018_2019.jl) · [data](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/chiron_2018_2019.jl) · [output](https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/chiron_2018_2019/output.txt) |
+| (470316) 2007 OC10 | 2022-08-22 (double star) | [GomezLimon2025](@citet), A&A 697, A157 (light curves at the CDS) | [script](https://github.com/mkretlow/Occultations.jl/blob/main/examples/2007oc10_2022.jl) · [data](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/2007oc10_20220822.jl) · [output](https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/2007oc10_2022/output.txt) |
 
 Each case is also a regression test in `test/runtests.jl`.
 
@@ -720,6 +721,53 @@ Findings:
 * The 2018 chord length of the paper is the duration times the geocentric velocity
   (5.77 km/s); at this slow event the station's velocity is 0.2 km/s higher.
 * The Boyden negative chord selects the centre north of the SAAO chord, as in the paper.
+
+## (470316) 2007 OC10, 2022 August 22: a double star
+
+The light curves of 13 stations [GomezLimon2025](@citep), published at the CDS: drops of 75 % in
+Sicily (GAL Hassin, SLN), of 25 % on Tenerife (Artemis, TAR2) and none at Liverpool on La Palma,
+between them. The star is double; the two groups saw the occultation of its two components. As
+in the paper, the light curves are fitted directly, with an ellipse and two point-like stars
+(`double_star = true`: the flux fraction f₁ of the primary and its offset (x₁, y₁) from the
+photocentre; the secondary at −f₁/(1 − f₁)·(x₁, y₁)), here with diffraction, the stellar disc
+and the exposure. The starting point is the paper's solution transferred to the JPL ephemeris.
+Distance 35.532 au (35.532), shadow velocity 23.62 km/s (23.6).
+
+| Quantity | Here (posterior) | Paper (sampling 1) |
+|---|---|---|
+| single star: χ²/dof | 2.84 (4101 dof) | – |
+| double star: χ²/dof | 1.04 (4098 dof) | – |
+| a′ [km] | 215.5 −3.5 +6.2 | 215 −7 +10 |
+| b′/a′ | 0.58 −0.13 +0.14 | 0.58 ± 0.16 |
+| tilt ϕ (major axis from east towards north) [°] | 17.2 −8.7 +7.6 | 16 −11 +12 |
+| D_eq [km] | 329.4 −40.2 +37.2 | 330 −55 +56 |
+| f₁ | 0.748 −0.007 +0.006 | 0.748 −0.012 +0.011 |
+| x₁, y₁ [km] | −307 −9 +7, −208 ± 7 | −305 −38 +31, −209 −146 +22 |
+| separation [mas] | 57.0 −0.5 +0.6 | 57 −11 +4 |
+| position angle of the secondary [°] | 56.0 ± 0.8 | 56 −17 +3 |
+| Δmag | 1.18 ± 0.04 | 1.18 ± 0.07 |
+| 2007 OC10 − Table 5 [mas] (Δα cos δ, Δδ) | −0.4, −0.2 | – |
+| primary star − Table 5 [mas] | −0.4, −0.1 | – |
+| secondary star − Table 5 [mas] | −0.4, +0.3 | – |
+
+Findings:
+
+* The double star explains the light curves to their noise; a single star cannot (χ²/dof 2.84):
+  it cannot produce the two different depths with no drop between them.
+* All published values are reproduced: the limb, its area-equivalent diameter, and the flux
+  ratio, separation, position angle and magnitude difference of the stars. The positions of the
+  body and of the two stars agree with Table 5 to 0.5 mas (at the epoch of the table, the
+  predicted closest approach, 10 s after the one computed here).
+* The credible intervals of the ellipse are somewhat narrower than the paper's, those of the
+  star geometry much narrower (separation ±0.5 against −11 +4 mas; y₁ ±7 against −146 +22 km).
+  The paper's intervals have long tails, in y₁ and in the centre (y_c −180 km), that do not
+  appear here. The posterior here comes from 32 walkers started at the least-squares solution
+  (autocorrelation times ≤ 250 steps, 2500 steps sampled); the paper used 512 walkers started
+  from its uniform priors. Whether the tails are real (a second, weaker mode) or an effect of
+  the paper's sampling is not resolved here.
+* The least-squares covariance is not usable: with exposures of up to 10 s the model is
+  piecewise linear in the contact times and its Jacobian by finite differences is unreliable.
+  The posterior gives the uncertainties.
 
 ## Summary
 

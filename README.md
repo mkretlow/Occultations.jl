@@ -154,6 +154,7 @@ figures and printed results to `examples/output/<example>/`:
 | [`2002ms4_2020.jl`](examples/2002ms4_2020.jl) | (307261) 2002 MS4, 2020-08-08 | Rommel et al. 2023 | 59 chords, global ellipse, topography |
 | [`quaoar_2011_2022.jl`](examples/quaoar_2011_2022.jl) | (50000) Quaoar, 2011 and 2022 | Braga-Ribas et al. 2013, Pereira et al. 2023 | limb, two rings |
 | [`chiron_2018_2019.jl`](examples/chiron_2018_2019.jl) | (2060) Chiron, 2018 and 2019 | Braga-Ribas et al. 2023 | few chords, clock offset |
+| [`2007oc10_2022.jl`](examples/2007oc10_2022.jl) | (470316) 2007 OC10, 2022 | Gómez-Limón et al. 2025 | a double star: light curves fitted directly, posterior |
 | [`bienor_2019_2023.jl`](examples/bienor_2019_2023.jl) | (54598) Bienor, 4 events 2019–2023 | Fernández-Valenzuela et al. 2023, Rizos et al. 2024 | clock offsets, binary alternative, 3-D ellipsoid |
 
 ![2003 UY117 limb fit](examples/output/2003uy117_2020/2003uy117_limb_fit.png)

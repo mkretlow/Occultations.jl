@@ -21,7 +21,7 @@ const EXAMPLES = ["tutorial", "sim_binary", "sim_contact_binary", "sim_contact_b
                   "huya_2023", "huya_2023_satellite", "ixion_2020_2023", "2007uk126_2014", "varda_2018",
                   "2002tc302_2018", "2003az84_2012_2014", "2003vs2_2019", "haumea_2017", "2002gz32_2017", "makemake_2011",
                   "bienor_2019_2023", "chariklo_2017_2020", "2002ms4_2020", "quaoar_2011_2022",
-                  "chiron_2018_2019"]
+                  "chiron_2018_2019", "2007oc10_2022"]
 
 # the printed output of an example, by section (the titles printed by `section("…")`)
 function example_output(name)

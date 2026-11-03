@@ -36,6 +36,7 @@ so all examples run offline. Each writes its figures and its printed results to
 | [2002 MS4](generated/2002ms4_2020.md) | (307261) 2002 MS4, 2020-08-08 | [Rommel2023](@citet) | 59 chords, the global ellipse, a large depression |
 | [Quaoar](generated/quaoar_2011_2022.md) | (50000) Quaoar, 2011 and 2022 | [BragaRibas2013](@citet), [Pereira2023](@citet) | limb, two rings far from the body, ring allowance |
 | [Chiron](generated/chiron_2018_2019.md) | (2060) Chiron, 2018 and 2019 | [BragaRibas2023](@citet) | three effective chords, a clock offset, a single chord |
+| [2007 OC10](generated/2007oc10_2022.md) | (470316) 2007 OC10, 2022 | [GomezLimon2025](@citet) | a double star: the light curves of 13 stations fitted directly, posterior |
 | [Bienor](generated/bienor_2019_2023.md) | (54598) Bienor, 4 events 2019–2023 | [FernandezValenzuela2023](@citet), [Rizos2024](@citet) | clock offsets, a binary alternative, a triaxial ellipsoid from three events |
 
 The pages are made from the example scripts with [Literate.jl](https://github.com/fredrikekre/Literate.jl):

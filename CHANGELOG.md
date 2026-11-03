@@ -14,6 +14,9 @@ First version.
 - **Light curves**: readers (text, PyMovie, Tangra, AstroImageJ), normalisation, event
   detection; a physical model with Fresnel diffraction over the passband, the stellar disc,
   the exposure time, finite opacity and several drops per light curve; fitted timings.
+- **Double stars**: `double_star=true` in joint light-curve fits: two point sources with a free
+  flux ratio and separation, each occulted by the limb; separation, position angle and
+  magnitude difference derived. Example: 2007 OC10, 2022 (Gómez-Limón et al. 2025).
 - **Atmospheres**: hydrostatic, spherically symmetric atmospheres (N₂, CH₄, CO) ray-traced to
   the refracted flux; the surface pressure as a fit parameter.
 - **Limb fits** for one or several events: circle, ellipse, triaxial ellipsoid with pole and
@@ -32,7 +35,7 @@ First version.
   Limb plots draw the occulted parts of the positive chords; their tracks beyond the limb
   only with `extend=true`. The fundamental-plane plots have a compass (E, N; east to the left, as
   on the sky); the dimensions of apparent ellipses are labelled a′, b′.
-- **Examples**: re-reductions of 22 published studies (19 objects, 43 events), synthetic
+- **Examples**: re-reductions of 23 published studies (20 objects, 44 events), synthetic
   examples (binaries, contact binaries, rings; stations at random offsets, on land and in the
   dark, with their own equipment) and a tutorial, with their data and outputs;
   the comparison with the publications and with SORA in the manual.

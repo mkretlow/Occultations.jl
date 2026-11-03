@@ -877,4 +877,41 @@ end
     @test cora_chord(read_cora_report(fd)) === nothing
 end
 
+@testset "double star (photometry)" begin
+    eph = EphemKeplerian(a=40.0, e=0.05, i=10.0, Ω=80.0, ω=150.0, M=10.0, epoch=Epoch("2022-01-01"), name="SimDS")
+    body = Body("SimDS", eph; radius=150.0)
+    t0 = Epoch("2022-06-20T02:00:00")
+    ra, dec, _ = ephem_radec(body, t0)
+    star = Star(ra + 0.001 / 3600 / cosd(dec), dec; name="double")
+    ev = Event(star, body, t0; window=900)
+    path = shadow_path(star, body, ev.tref, ev.tref; offsets=[0.0])
+    lon0, lat0 = path.lon[1, 1], path.lat[1, 1]
+    tt = collect(-40:0.5:40.0)
+    for (j, dlat) in enumerate(-6.0:1.0:6.0)                  # stations across the shadows of both stars
+        push!(ev, Chord("S$j", Observer("S$j", lon0, lat0 + dlat, 0.0),
+                        LightCurve(tt, ones(length(tt)); tref=ev.tref, σ=0.03, exptime=0.5, name="S$j")))
+    end
+    truth = Dict(:center_f => 20.0, :center_g => -10.0, :equatorial_radius => 160.0, :oblateness => 0.1,
+                 :position_angle => 40.0, :star_f1 => 0.75, :star_x1 => -120.0, :star_y1 => -150.0)
+    prob = LimbProblem(ev; photometry=true, double_star=true, init=truth)
+    v = [q.value for q in parameters(prob)]
+    rng = MersenneTwister(5)
+    for d in prob.photometry                                  # simulated light curves from the model
+        I, _ = Occultations._phot_model(prob, d, Occultations._outlines(prob, v)[1], v)
+        d.lc.flux .= I .+ 0.03 .* randn(rng, length(I))
+    end
+    @test count(d -> minimum(d.lc.flux) < 0.5, prob.photometry) >= 1     # the primary is occulted somewhere
+    @test count(d -> 0.6 < minimum(d.lc.flux) < 0.9 && maximum(d.lc.flux) > 0.9, prob.photometry) >= 1   # the secondary
+    ## a start near the solution, as from the timings (joint light-curve fits have local minima)
+    start = merge(truth, Dict(:star_f1 => 0.72, :star_x1 => -110.0, :star_y1 => -140.0, :equatorial_radius => 155.0))
+    r = fit(LimbProblem(ev; photometry=true, double_star=true, init=start); starts=4, rng=rng)
+    @test reduced_chi2(r) < 1.3
+    @test r[:star_f1][1] ≈ 0.75 atol = 4r[:star_f1][2] + 0.01
+    @test r[:star_x1][1] ≈ -120 atol = 4r[:star_x1][2] + 5
+    @test r[:star_y1][1] ≈ -150 atol = 4r[:star_y1][2] + 5
+    @test r[:equatorial_radius][1] ≈ 160 atol = 4r[:equatorial_radius][2] + 5
+    @test r[:star_dmag][1] ≈ 2.5log10(3) atol = 0.1
+    @test_throws ArgumentError LimbProblem(ev; double_star=true, photometry=false)
+end
+
 end

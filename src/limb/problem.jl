@@ -83,8 +83,8 @@ end
 
 """
     LimbProblem(events; model=EllipseLimb(), residual=:chord, negative=:hard, visible=:auto,
-                σ_limb=0, σ_ring=σ_limb, fit_dt=(), photometry=false, atmosphere=nothing, amplitudes=(), phases=(),
-                fix=(), init=Dict(), priors=Dict(), bounds=Dict())
+                σ_limb=0, σ_ring=σ_limb, fit_dt=(), photometry=false, atmosphere=nothing, double_star=false,
+                amplitudes=(), phases=(), fix=(), init=Dict(), priors=Dict(), bounds=Dict())
 
 Fit of the apparent limb to one event or a vector of events (multi-event fit).
 
@@ -118,7 +118,12 @@ or [`setparam!`](@ref).
   fitted with the model flux predicted by the limb — diffraction, stellar diameter,
   passband, exposure (contacts of these chords are not used separately), or the
   refractive flux of the `atmosphere` ([`Atmosphere`](@ref)) whose surface pressure is
-  then fitted; the flux levels are profiled per light curve;
+  then fitted; the flux levels are profiled per light curve. With `double_star = true` the
+  star is a pair of point sources: the primary with the fraction `star_f1` of the flux at
+  (`star_x1`, `star_y1`) [km, f and g at the body] from the photocentre, the secondary at
+  −f₁/(1 − f₁)·(x₁, y₁), each occulted by the limb (as Gómez-Limón et al. 2025); derived are
+  the separation (`star_sep_km`, `star_sep_mas`), the position angle of the secondary from the
+  primary (`star_pa`, north towards east) and the magnitude difference (`star_dmag`);
 * rotational light-curve `amplitudes` ([`RotationalAmplitude`](@ref)) and `phases`
   ([`RotationalPhase`](@ref)) for 3-D models.
 
@@ -143,6 +148,7 @@ struct LimbProblem{M<:LimbModel} <: AbstractProblem
     centers::Vector{Tuple{Int,Int}}
     pressure::Int
     atm_cache::Dict{NTuple{5,Float64},AtmosphereProfile}
+    double_star::NTuple{3,Int}         # indices of star_f1, star_x1, star_y1 (zeros: a single star)
 end
 
 parameters(p::LimbProblem) = p.ps
@@ -152,7 +158,8 @@ LimbProblem(ev::Event; kw...) = LimbProblem([ev]; kw...)
 
 function LimbProblem(evs::AbstractVector{Event}; model::LimbModel=EllipseLimb(), residual::Symbol=:chord,
                      negative::Symbol=:hard, visible::Symbol=:auto, σ_limb::Real=0.0, σ_ring::Real=NaN, fit_dt=(), photometry=false,
-                     atmosphere::Union{Nothing,Atmosphere}=nothing, amplitudes=(), phases=(), fix=(), init=Dict(),
+                     atmosphere::Union{Nothing,Atmosphere}=nothing, double_star::Bool=false, amplitudes=(), phases=(),
+                     fix=(), init=Dict(),
                      priors=Dict(), bounds=Dict(), epoch=nothing)
     residual in (:chord, :radial) || throw(ArgumentError("residual must be :chord or :radial"))
     negative in (:soft, :hard, :none) || throw(ArgumentError("negative must be :soft, :hard or :none"))
@@ -211,6 +218,11 @@ function LimbProblem(evs::AbstractVector{Event}; model::LimbModel=EllipseLimb(),
         isempty(photchords) && throw(ArgumentError("an atmosphere needs light curves: set `photometry`"))
         push!(ps, Param(:pressure, 100.0; lower=0.0, scale=20.0))
     end
+    if double_star
+        isempty(photchords) && throw(ArgumentError("a double star needs light curves: set `photometry`"))
+        push!(ps, Param(:star_f1, 0.75; lower=0.5, upper=0.999, scale=0.05), Param(:star_x1, 0.0; scale=50.0),
+              Param(:star_y1, 0.0; scale=50.0))
+    end
     _configure!(ps; fix=fix, init=init, priors=priors, bounds=bounds)
     for (i, p) in enumerate(ps)
         setup.index[p.name] = i
@@ -268,7 +280,8 @@ function LimbProblem(evs::AbstractVector{Event}; model::LimbModel=EllipseLimb(),
     return LimbProblem(setup, model, ps, contacts, negs, vis, phots, amps, phs, residual, negative, visible, Float64(σ_limb),
                        Float64(isnan(σ_ring) ? σ_limb : σ_ring),
                        atmosphere, centers, atmosphere === nothing ? 0 : setup.index[:pressure],
-                       Dict{NTuple{5,Float64},AtmosphereProfile}())
+                       Dict{NTuple{5,Float64},AtmosphereProfile}(),
+                       double_star ? (setup.index[:star_f1], setup.index[:star_x1], setup.index[:star_y1]) : (0, 0, 0))
 end
 
 # outlines of all events for the values v
@@ -445,9 +458,21 @@ nobs(p::LimbProblem) = length(p.contacts) + sum(d -> length(d.lc) - 2, p.photome
                        length(p.phases)
 
 # model intensity of a light curve for the outline O; returns (I, weights)
+# the model light curve: one star, or the sum of the two components of a double star, each seeing
+# the body shifted by minus its offset from the photocentre
 function _phot_model(p::LimbProblem, d::_PhotData, O::Outline, v, rings=_rings(p.model, v, d.k, p.setup))
+    p.double_star[1] == 0 && return _phot_model1(p, d, O, v, rings)
+    f1, x1, y1 = v[p.double_star[1]], v[p.double_star[2]], v[p.double_star[3]]
+    q = f1 / (1 - f1)                             # the secondary lies at −q·(x₁, y₁)
+    m1 = _phot_model1(p, d, O, v, rings; shift=(x1, y1))
+    m2 = _phot_model1(p, d, O, v, rings; shift=(-q * x1, -q * y1))
+    (m1 === nothing || m2 === nothing) && return nothing
+    return f1 .* m1[1] .+ (1 - f1) .* m2[1], m1[2]
+end
+
+function _phot_model1(p::LimbProblem, d::_PhotData, O::Outline, v, rings; shift=(0.0, 0.0))
     lc = d.lc
-    cf, cg = v[p.centers[d.k][1]], v[p.centers[d.k][2]]
+    cf, cg = v[p.centers[d.k][1]] - shift[1], v[p.centers[d.k][2]] - shift[2]
     dt = d.dt == 0 ? 0.0 : v[d.dt]
     w = 1 ./ lc.σ .^ 2
     if p.atmosphere !== nothing
@@ -551,6 +576,12 @@ function derived(p::LimbProblem, v)
         D = s.contexts[k].dist
         push!(d, _pn(:offset_ra, k, nev) => v[p.centers[k][1]] / D * RAD2MAS,
               _pn(:offset_dec, k, nev) => v[p.centers[k][2]] / D * RAD2MAS)
+    end
+    if p.double_star[1] != 0
+        f1, x1, y1 = v[p.double_star[1]], v[p.double_star[2]], v[p.double_star[3]]
+        sep = hypot(x1, y1) / (1 - f1)                # |s₂ − s₁| = |s₁| (1 + q)
+        push!(d, :star_sep_km => sep, :star_sep_mas => sep / s.contexts[1].dist * RAD2MAS,
+              :star_pa => mod(atand(-x1, -y1), 360.0), :star_dmag => 2.5 * log10(f1 / (1 - f1)))
     end
     return merge(NamedTuple(d), _model_derived(p.model, v, s))
 end
