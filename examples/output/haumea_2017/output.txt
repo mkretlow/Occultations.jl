@@ -1,0 +1,40 @@
+
+==============================================================================
+Event and geometry (paper values in parentheses)
+==============================================================================
+12 chords (8 with ring events); distance 50.48 au, shadow velocity 14.36 km/s (13.1)
+
+==============================================================================
+The limb of the body
+==============================================================================
+a′ = 853.7 ± 1.7 km (852 ± 2), b′ = 579.6 ± 8.7 km (569 ± 13), PA = -77.2 ± 0.8° (-76.3 ± 1.2), χ²/dof = 2.71
+with σ_limb = 16.7 km: a′ = 852.3 ± 7.7, b′ = 563.1 ± 21.3 km, PA = -75.5 ± 1.4°
+
+==============================================================================
+The ring
+==============================================================================
+solution A           χ² =  73.12: ring radius 2310 ± 5 km, B = +13.84 ± 0.09°, P = 285.26°; pole (105.1, +10.2)°, antipode (285.1, -10.2)°
+solution B (mirror)  χ² =  73.12: ring radius 2310 ± 5 km, B = -13.84 ± 0.09°, P = 285.26°; pole (132.5, +18.3)°, antipode (312.5, -18.3)°
+apparent ring ellipse: a′ = 2310 km (2287 −45 +75), b′ = 552 km (541 ± 15), PA of the minor axis -74.7° (-74.3 ± 1.3), |B| = 13.8° (13.8 ± 0.5)
+published poles: solution 1 (285.1, -10.6)°, solution 2 (312.3, -18.6)°; Hi'iaka's orbit pole (283.0, -10.6)°
+(a pole and its antipode describe the same plane; the fit reports the northern one)
+  Mount Agliale (ring only): consistent, 9 km from the limb of the body
+
+==============================================================================
+3-D shape: the ring plane as the equator
+==============================================================================
+solution A: a = 1153 ± 24, b = 852 ± 7, c = 503 ± 24 km, D_eq,V = 1582 km, aspect 103.8°, χ² = 17.06
+solution B: a = 1655 ± 3833, b = 853 ± 8, c = 432 ± 885 km, D_eq,V = 1696 km, aspect 76.2°, χ² = 17.67
+published: a = 1161 ± 30, b = 852 ± 4, c = 513 ± 16 km, D_eq,V = 1595 ± 11 km
+
+==============================================================================
+Astrometry
+==============================================================================
+RA 14 12 03.19774  Dec +16 33 58.6681 at 2017-01-21T03:06:08.0 UTC (σ 0.52, 0.39 mas); offset from JPL Horizons Δα cos δ = -5.38, Δδ = -8.07 mas
+(the position refers to the star position of the paper; Hi'iaka shifts Haumea from the system's
+ barycentre by up to ≈ 1232/(1 + r) mas, r the mass ratio)
+
+==============================================================================
+Figures
+==============================================================================
+figures written to examples/output/haumea_2017

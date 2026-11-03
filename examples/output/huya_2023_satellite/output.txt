@@ -1,0 +1,54 @@
+
+==============================================================================
+Event and the satellite chord
+==============================================================================
+Chord(La Palma, positive)
+  observer: Observer(La Palma, lon=-17.879200°, lat=28.762516°, h=2387.6 m)
+  span: 2023-06-24T00:52:00.00 – 2023-06-24T01:02:00.00
+  Contact(immersion, 2023-06-24T00:58:26.4200 ± 0.29 s, secondary)
+  Contact(emersion, 2023-06-24T00:58:34.4300 ± 0.3 s, secondary)
+
+satellite chord: 182.9 km (paper 179 ± 14 km); a circle of 106.5 km lies 54.6 km from it on either side
+
+==============================================================================
+Huya and the satellite fitted together (radius 106.5 km, as the paper)
+==============================================================================
+southern  χ² =  16.16 (χ²/dof 0.95)  Huya a′ = 223.2 ± 10.0, b′ = 185.8 ± 11.5 km, PA 12.0 ± 12.6°
+          satellite at Δα cos δ = +65.30 ± 0.47 mas, Δδ = -46.54 ± 0.63 mas from Huya; separation 1631 ± 11 km, PA 125.5°
+northern  χ² =  16.16 (χ²/dof 0.95)  Huya a′ = 223.2 ± 10.0, b′ = 185.8 ± 11.5 km, PA 12.0 ± 12.6°
+          satellite at Δα cos δ = +65.29 ± 0.47 mas, Δδ = -41.17 ± 0.63 mas from Huya; separation 1570 ± 11 km, PA 122.2°
+paper (Table 5, mean of both): Δα cos δ = +65.46 ± 3.00 mas, Δδ = -44.40 ± 5.00 mas; separation 1603 km
+Both solutions fit equally well: the single chord cannot tell on which side the satellite lies.
+
+==============================================================================
+Astrometry (Table 4)
+==============================================================================
+southern solution (satellite south of the chord), 2023-06-24T00:58:10.9 UTC:
+  Huya        RA 17 16 43.653349  Dec -07 00 20.11884   (paper 17 16 43.653342  -07 00 20.11836)
+  satellite   RA 17 16 43.657735  Dec -07 00 20.16539   (paper, "Northern": 17 16 43.657738  -07 00 20.16537)
+  barycentre  RA 17 16 43.653898  Dec -07 00 20.12467   (equal densities, mass ratio 0.143)
+northern solution (satellite north of the chord), 2023-06-24T00:58:10.9 UTC:
+  Huya        RA 17 16 43.653349  Dec -07 00 20.11884   (paper 17 16 43.653342  -07 00 20.11836)
+  satellite   RA 17 16 43.657734  Dec -07 00 20.16002   (paper, "Southern": 17 16 43.657737  -07 00 20.16006)
+  barycentre  RA 17 16 43.653898  Dec -07 00 20.12400   (equal densities, mass ratio 0.143)
+(Huya's centre refers to the JPL orbit; the paper's to NIMA v10, so the absolute positions differ by
+ the difference of the orbits; the relative position of the satellite does not depend on them)
+The satellite positions agree with Table 4 within a few hundredths of a mas, but with the labels
+interchanged: the solution with the satellite south of the chord (the smaller declination) is the one
+labelled "Northern" in the paper.
+
+==============================================================================
+The satellite's radius
+==============================================================================
+  R =  90.0 km: χ² =  16.25
+  R = 100.0 km: χ² =  16.16
+  R = 106.5 km: χ² =  16.16
+  R = 130.0 km: χ² =  16.16
+  R = 160.0 km: χ² =  16.16
+  R = 200.0 km: χ² =  16.16
+lower limit: D ≥ 183 km (the chord, 179 ± 14 km; the paper quotes D ≥ 165 km)
+
+==============================================================================
+Figures
+==============================================================================
+figures written to examples/output/huya_2023_satellite

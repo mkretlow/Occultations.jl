@@ -1,0 +1,61 @@
+
+==============================================================================
+Event and geometry (paper values in parentheses)
+==============================================================================
+11 positive and 13 negative chords; distance 5.4e+09 km (5.40e9), shadow velocity 13.01 km/s (13.01)
+Fresnel scale 1.33 km at 0.65 µm (1.33), stellar diameter 0.88 km (0.86–0.91)
+
+==============================================================================
+Limb fits
+==============================================================================
+published, only chord 8 shifted            a′ = 292.0 ± 3.0  b′ = 231.0 ± 6.0  PA =  11.0 ± 2.0  D_eq = 519.0 ± 10.0
+published, all chord centres aligned       a′ = 293.0 ± 3.0  b′ = 230.0 ± 6.0  PA =   6.0 ± 2.0  D_eq = 519.0 ± 10.0
+timing errors only, chord 8 as recorded    a′ = 289.8 ± 2.8  b′ = 234.7 ± 7.4  PA =   7.5 ± 1.1  D_eq = 521.6 ±  5.8  χ²/dof =  47.25
+chord 8 clock offset free                  a′ = 291.2 ± 2.8  b′ = 231.8 ± 7.0  PA =   7.0 ± 1.1  D_eq = 519.6 ±  5.5  χ²/dof =   6.37
+  chord 8 offset -14.02 ± 0.53 s (paper: shifted by -14 s)
+all clock offsets, priors N(0, 1 s)        a′ = 293.6 ± 3.0  b′ = 225.9 ± 6.5  PA =   9.1 ± 3.4  D_eq = 515.1 ±  4.9  χ²/dof =   2.98
+  fitted offsets [s] (paper's shifts, towards the east, in parentheses):
+    Belogradchik      -0.68 ± 0.54  (-0.70)
+    Berthelot         +0.82 ± 0.68  (+1.60)
+    ROASTERR-1 (1)    +0.14 ± 0.53  (+0.70)
+    ROASTERR-1 (2)    +0.02 ± 0.56  (+0.60)
+    Romania 12        -1.53 ± 1.52  (-2.00)
+    Romania 3'        -0.45 ± 0.49  (+0.03)
+    Romania 5         -0.35 ± 0.53  (-0.06)
+    Romania 8        -14.13 ± 0.72  (-14.00)
+    Stardreams        +0.54 ± 0.52  (+1.10)
+    Stardust          -0.09 ± 0.46  (+0.07)
+    Vidojevica        +0.23 ± 0.54  (+0.30)
+chord 8 free, σ_limb = 8.3 km              a′ = 292.4 ± 4.5  b′ = 225.9 ± 9.6  PA =   8.3 ± 1.9  D_eq = 514.0 ±  8.1  χ²/dof =   1.00
+
+==============================================================================
+Negative chords
+==============================================================================
+  Romania (Dumitrescu)   consistent,    8.4 km from the limb
+  Konkoly, Normafa       consistent,  108.1 km from the limb
+  Piszkesteto            consistent,  108.4 km from the limb
+  Mount Etna             consistent,  117.7 km from the limb
+
+==============================================================================
+Posterior, diameter and albedo
+==============================================================================
+area-equivalent diameter 516.4 −6.9 +6.3 km (published 519 ± 10), geometric albedo 0.133 ± 0.009 (0.134 ± 0.010)
+mean area-equivalent diameter 541.7 −7.2 +6.6 km (published 545 ± 13)
+
+==============================================================================
+3-D shape: occultation + light-curve amplitude + rotational phase
+==============================================================================
+least squares: a = 355.6  b = 226.9  c = 223.2 km, aspect 54°, D_eq,V = 524.2 km  (χ² = 16.00)
+posterior: a = 365.3 −17.2 +33.4, b = 266.3 −25.2 +13.5, c = 215.5 −27.7 +13.4 km, D_eq,V = 547.8 −21.7 +17.4 km, aspect (folded) 70.2 −11.1 +13.4°
+published (Table 7): a = 339 ± 5, b = 235 ± 6, c = 226 ± 8 km, D_eq,V = 524 ± 7 km, aspect 59 ± 2°
+
+==============================================================================
+Astrometry
+==============================================================================
+RA 05 30 38.04561  Dec +33 07 01.8375 at 2019-10-22T20:35:42.3 UTC (σ 0.10, 0.16 mas); offset from JPL Horizons Δα cos δ = +0.16, Δδ = -0.19 mas
+(the paper's offsets, (−38.6, +29.4) mas, refer to the older JPL#33 orbit)
+
+==============================================================================
+Figures
+==============================================================================
+figures written to examples/output/2003vs2_2019

@@ -1,0 +1,55 @@
+
+==============================================================================
+Event and geometry (paper values in parentheses)
+==============================================================================
+distance 37.04 au (37.0), shadow velocity 25.17 km/s (25.2), stellar diameter 0.086 km, Fresnel scale 1.29 km at 0.6 µm
+
+==============================================================================
+1. Timings from the light curves (diffraction, stellar diameter, exposure)
+==============================================================================
+Kiso   immersion 13:12:52.817 ± 0.029 s, emersion 13:13:09.346 ± 0.031 s, duration 16.528 ± 0.043 s (16.53 ± 0.08 s), χ²/dof 1.59
+Kyoto  immersion 13:12:58.230 ± 0.322 s, emersion 13:13:16.134 ± 0.313 s, duration 17.904 ± 0.451 s (18.00 ± 0.90 s), χ²/dof 1.13
+
+==============================================================================
+2. Circular shadow from the four chord extremities
+==============================================================================
+radius 230.8 ± 8.7 km (paper 235 +22 −15 km), χ²/dof = 5.63 for 1 dof (paper χ² = 1.40)
+  Kyoto      closest to the centre at 13:13:07.78 UTC,   31.6 km (paper 41 +45 −41 km)
+  Kiso       closest to the centre at 13:13:01.07 UTC,   93.5 km (paper 103 +45 −43 km)
+  Fukushima  closest to the centre at 13:12:50.80 UTC,  245.4 km (paper 255 +45 −43 km)
+  (paper: Fukushima closest at 13:12:50.818 UTC)
+
+==============================================================================
+3. The atmosphere model: this package vs the authors' best-fit profiles
+==============================================================================
+CH4  ρ = 1500 kg/m³, 124 nbar: rms Δ = 0.0096, max |Δ| = 0.035; shadow edge 229.9 km (paper's profile: 230.1 km)
+N2   ρ = 1500 kg/m³, 177 nbar: rms Δ = 0.0086, max |Δ| = 0.032; shadow edge 229.9 km (paper's profile: 230.1 km)
+CO   ρ = 1500 kg/m³, 159 nbar: rms Δ = 0.0093, max |Δ| = 0.034; shadow edge 229.7 km (paper's profile: 230.1 km)
+CH4  ρ = 1000 kg/m³, 131 nbar: rms Δ = 0.0423, max |Δ| = 0.459; shadow edge 229.3 km (paper's profile: 231.1 km)
+N2   ρ = 1000 kg/m³, 181 nbar: rms Δ = 0.0412, max |Δ| = 0.454; shadow edge 229.9 km (paper's profile: 231.1 km)
+CO   ρ = 1000 kg/m³, 163 nbar: rms Δ = 0.0414, max |Δ| = 0.454; shadow edge 229.6 km (paper's profile: 231.1 km)
+
+==============================================================================
+4. Joint fit of the light curves: limb + atmosphere
+==============================================================================
+188 light-curve points; 12 starting points
+airless (diffraction + stellar diameter):  R = 220.0 ± 0.9 km                       χ² =  229.0, dof = 179
+CH4  atmosphere: R = 235.2 ± 2.0 km, p = 129.3 ± 12.3 nbar (paper 124 +15 −12)   χ² =  171.3, dof = 178
+N2   atmosphere: R = 235.1 ± 1.9 km, p = 185.3 ± 19.9 nbar (paper 177 +18 −19)   χ² =  171.2, dof = 178
+CO   atmosphere: R = 235.1 ± 2.2 km, p = 166.1 ± 20.1 nbar (paper 159 +15 −17)   χ² =  171.1, dof = 178
+χ² profile in the radius (CH₄; centre and pressure refitted): the radius is only loosely constrained
+  R [km]:    222   226   230   234   238   242   246   250
+  Δχ²:      46.3  13.7   2.7   0.3   0.8   0.8   0.1   2.2
+Δχ² airless − CH₄ = 57.7   (paper, Kiso alone: 89.2 − 28.7 = 60.5)
+paper: R = 244 ± 1 km from the Kiso light curve alone, χ² 28.7 for 29 dof
+
+==============================================================================
+Test for an atmosphere (profile likelihood in the CH₄ surface pressure)
+==============================================================================
+best p = 129 nbar; detection 8.1σ (Δχ² against p = 0: 64.9); 95 % interval 104 – 157 nbar
+3σ (one-sided 99.865 %) interval 81 – 176 nbar
+
+==============================================================================
+Figures
+==============================================================================
+figures written to examples/output/2002xv93_2024

@@ -1,0 +1,93 @@
+#
+#   VizieR Astronomical Server vizier.idia.ac.za
+#    Date: 2026-11-02T20:40:00 [V7.6.1]
+#   In case of problem, please report to:	cds-question@unistra.fr
+#
+#
+#Coosys	J2000:	eq_FK5 J2000
+#INFO	service_protocol=ASU	  IVOID of the protocol through which the data was retrieved
+#INFO	request_date=2026-11-02T20:40:00	  Query execution date
+#INFO	request=https://vizier.idia.ac.za/viz-bin/asu-tsv?-source=J/A%2BA/678/A167/tableb2&-out.all&-out.max=unlimited	  Full request URL
+#INFO	contact=cds-question@unistra.fr	  Email or URL to contact publisher
+#INFO	server_software=VizieR/7.6.1	  Software version
+#INFO	publisher=CDS	  Data centre that produced the VOTable
+
+#RESOURCE=yCat_36780167
+#Name: J/A+A/678/A167
+#Title: occultation events by (307261) 2002 MS4 (Rommel+, 2023)
+#INFO	ivoid=ivo://cds.vizier/j/a+a/678/a167	    IVOID of underlying data collection
+#INFO	data_ivoid=ivo://cds.vizier/j/a+a/678/a167	    IVOID of underlying data collection
+#INFO	creator=Rommel F.L.	    First author or institution
+#INFO	cites=bibcode:2023A&A...678A.167R	    Article or Data origin sources
+#INFO	journal=A&A	    Journal name
+#INFO	original_date=2023	    Year of the article publication
+#INFO	reference_url=https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/678/A167	    Dataset landing page
+#INFO	citation=doi:10.26093/cds/vizier/bc-n6/lbgh	    Dataset identifier that can be used for citation
+#INFO	publication_date=2026-07-01	    Date of first publication in the data centre
+#INFO	rights_uri=https://cds.unistra.fr/vizier-org/licences_vizier.html	    Licence URI
+#Table	J_A_A_678_A167_tableb2:
+#Name: J/A+A/678/A167/tableb2
+#Title: Observational circumstances of all the stations that acquired data of the 8 August 2020 event but did not detect the occultation
+#Column	recno	(I8)	Record number assigned by the VizieR team. Should Not be used for identification.	[ucd=meta.record]
+#Column	Obs	(a33)	Observatory	[ucd=meta.id;instr.obsty]
+#Column	City	(a22)	Nearest city	[ucd=meta.note]
+#Column	Country	(a14)	Country	[ucd=meta.note]
+#Column	LAT	(F14.10)	Latitude of the observatory	[ucd=pos.earth.lat;instr.obsty]
+#Column	LON	(F14.10)	Longitude of the observatory	[ucd=pos.earth.lon]
+#Column	Alt	(F6.1)	Altitude of the observatory	[ucd=pos.earth.altitude;instr.obsty]
+#Column	Tel	(a22)	Telescope	[ucd=meta.id;instr.tel]
+#Column	Aper	(F7.4)	Aperture	[ucd=instr.fov]
+#Column	Filt	(a16)	Filter	[ucd=meta.id;instr.filter]
+#Column	TSource	(a22)	Time source (1)	[ucd=meta.id;instr]
+#Column	Inst	(a24)	Instrument	[ucd=meta.id;instr]
+#Column	Exp	(F9.5)	Exposure time	[ucd=time.expo]
+#Column	n_Exp	(A1)	[*] Note on Exp (2)	[ucd=meta.note]
+#Column	l_Cycle	(A1)	[~] Limit lfag on Cycle	[ucd=meta.code.error;obs.proposal.cycle]
+#Column	Cycle	(F9.5)	? Cycle	[ucd=obs.proposal.cycle]
+#Column	n_Cycle	(A1)	[*] Note on Cyle (2)	[ucd=meta.note]
+#Column	Corr	(F8.4)	? Correction	[ucd=arith.factor]
+#Column	Observs	(a68)	Observers	[ucd=obs.observer]
+recno	Obs	City	Country	LAT	LON	Alt	Tel	Aper	Filt	TSource	Inst	Exp	n_Exp	l_Cycle	Cycle	n_Cycle	Corr	Observs
+ 	 	 	 	deg	deg	m	 	m	 	 	 	s	 	 	s	 	s	
+--------	---------------------------------	----------------------	--------------	--------------	--------------	------	----------------------	-------	----------------	----------------------	------------------------	---------	-	-	---------	-	--------	--------------------------------------------------------------------
+       1	Sternwarte Comthurey             	Neustrelitz           	Germany       	 53.2660800000	 13.1901666000	  74.0	 -                    	 0.1800	Clear           	GPS                   	QHY174                  	  2.96400	 	 	  2.96400	 	        	Konrad Guhl
+       2	Breitenweg                       	Herkenrath            	Germany       	 50.9933100000	  7.1837940000	 200.0	RC                    	 0.3040	Clear           	GPS                   	Watec 120N+             	  2.56000	 	 	  2.56000	 	        	Bernd Klemt
+       3	Biesenthal                       	Biesenthal            	Germany       	 52.7592780000	 13.6630000000	 263.0	Newtonian             	 0.3000	Clear           	GPS                   	QHY174                  	  0.60000	 	 	  0.60000	 	        	Nikolai Wuensche
+       4	-                                	Berlin                	Germany       	 52.5161110000	 13.4277780000	  40.0	Newtonian             	 0.2540	Clear           	GPS                   	DVTI                    	  3.00000	 	 	  3.00000	 	        	Christian Weber
+       5	Eppstein-Bremthal                	Wiesbaden             	Germany       	 50.1381666700	  8.3640000000	 256.0	Schmidt-Cassegrain    	 0.2540	Clear           	GPS                   	QHY-174M                	  3.00000	 	 	  3.00000	 	        	Oliver Klos
+       6	Vierzon                          	Vierzon               	France        	 47.2232580000	  2.0527310000	 100.0	Newtonian             	 0.2500	Clear           	Time Box              	ZWO 1600 M              	  1.50000	 	 	  1.50000	 	        	Lionel Rousselot
+       7	Borowiec                         	Poznan                	Poland        	 52.2768960000	 17.0752160000	 123.0	Newtonian             	 0.4000	Clear           	NTP                   	SBIG ST7                	  3.00000	 	 	  5.00000	 	        	Anna Marciniak
+       8	Teplice                          	Teplice               	Czech Republic	 50.6383300000	 13.8467500000	 275.0	Planewave CDK17       	 0.4300	Clear           	TimeBox               	Apogee Aspen CG9000     	  0.50000	 	 	  0.58000	 	        	Zdenek Moravec
+       9	Plzen                            	Plzen                 	Czech Republic	 49.6947500000	 13.3210000000	 339.0	-                     	 0.3030	Clear           	GPS                   	QHY 174                 	  1.00000	 	 	         	 	        	Jiri Polak
+      10	Plzen                            	Plzen                 	Czech Republic	 49.7073333000	 13.3321667000	 326.0	-                     	 0.3030	Clear           	GPS                   	QHY 174                 	  1.00000	 	 	         	 	        	Michal Rottenborn
+      11	Ksiezyno                         	Bialystok             	Poland        	 53.0759440000	 23.1021940000	 145.0	Newtonian             	 0.3000	Clear           	GPS                   	QHY174                  	  2.00000	 	 	         	 	        	Wojciech Burzynski, Maciej Borkowski
+      12	Ondrejov                         	Ondrejov              	Czech Republic	 49.9105600000	 14.7836400000	 528.0	-                     	 0.6500	Clear           	NTP                   	Moravian G2-3200        	  6.00000	 	 	         	 	        	Kamil Hornoch
+      13	Allariz                          	Orense                	Spain         	 42.2000000000	 -7.7700000000	 490.0	-                     	 0.2540	Clear           	NTP                   	QHY6                    	  8.00000	 	~	 10.00000	 	        	Luis Perez
+      14	Buelach                          	Buelach               	Switzerland   	 47.5195600000	  8.5706400000	 550.0	Newtonian             	 0.5000	Clear           	GPS                   	DVTI                    	  0.20000	 	 	  0.20000	 	        	Stefan Meister
+      15	MPI fur extraterrestrische Physik	Garching              	Germany       	 48.2613888890	 11.6711111110	 480.0	-                     	 0.6100	Clear           	GPS                   	SBIG STX-16803          	  3.00000	 	 	 12.90000	 	        	Vadim Burwitz, Piotr Sybilski, Wienczyslaw Bykowski, Thomas Muller
+      16	Giesing                          	Munich                	Germany       	 48.1219400000	 11.6072000000	 500.0	Cassegrain            	 0.8000	Orange          	Computer              	Atik 3141               	  1.35500	 	 	  1.35500	 	        	Bernd Gahrken
+      17	Cesky Rudolec - Matejovec        	Strmilov              	Czechia       	 49.0827777800	 15.2284166700	 707.0	-                     	 0.2030	Clear           	GPS                   	QHY 174M                	  2.50000	 	 	         	 	        	Jiri Kubanek
+      18	Wendelstein                      	Brannenburg           	Germany       	 47.7036388890	 12.0120555560	1836.0	-                     	 2.1000	SDSS r + SDSS i 	GPS                   	3kk                     	  1.00000	 	 	 13.00000	 	        	Michael Schmidt, Ulrich Hopp
+      19	Nonndorf                         	Waidhofen an der Thaya	Austria       	 48.7869566700	 15.2356566700	 549.0	-                     	 0.2540	Clear           	GPS                   	WAT-610BD               	  1.28000	 	 	         	 	        	Gerhard Dangl
+      20	Cannet                           	Riscle                	France        	 43.6209300000	 -0.0446850000	 180.0	-                     	 0.4000	Clear           	GPS                   	Watec 120N+             	  1.28000	 	 	         	 	        	Jean Jaques Castellani
+      21	Saint-Caprais                    	Rabastens             	France        	 43.8740440000	  1.7187490000	 193.0	-                     	 0.9400	Clear           	GPS                   	WATEC 910HX             	  0.64000	 	 	         	 	        	Eric Frappa, Alain Klotz, Maylis Lavayssiere
+      22	Zakopcie                         	Cadca                 	Slovakia      	 49.4042222000	 18.7026306000	 680.2	Newtonian             	 0.4000	Clear           	GPS                   	QHY 5 III 290M          	  0.99450	 	 	  0.99450	 	        	Peter Delincak
+      23	-                                	Muzzano-Lugano        	Switzerland   	 45.9862778000	  8.9195833300	 350.0	Schmidt-Cassegrain    	 0.2300	Clear           	GPS                   	Watec 910/HX-RC         	  1.28000	 	 	         	 	        	Alberto Ossola
+      24	Schiaparelli                     	Varese                	Italy         	 45.8677800000	  8.7708300000	1230.0	Reflector             	 0.8400	Clear           	NTP                   	SBIG STX-16803          	  4.00000	 	 	  7.00000	 	        	Luca Buzzi
+      25	-                                	Kysucke Nove Mesto    	Slovakia      	 49.3073055560	 18.7653888890	 469.0	-                     	 0.2520	Clear           	GPS                   	QHY174                  	380.00000	 	 	380.00000	 	        	Marian Urbanik
+      26	Belesta                          	Toulouse              	France        	 43.4383919490	  1.8315254900	 234.0	-                     	 0.2000	Clear           	GPS                   	WATEC 910HX             	  0.64000	 	 	         	 	        	Andre Pascal
+      27	Latrape                          	Toulouse              	France        	 43.2439690000	  1.2901110000	 350.0	-                     	 0.3050	UV-IR block     	GPS                   	Watec 910 HX/RC         	  5.12000	 	 	         	 	        	Michel Boutet, Jacques Sanchez
+      28	Suhora                           	Poreba Wielka         	Poland        	 49.5691728579	 20.0672857900	1000.0	-                     	 0.6000	Clear           	GPS                   	Apogee Aspen-47         	  2.00000	 	 	  3.00000	 	        	Waldemar Ogloza
+      29	Filzi School                     	Bolzano               	Italy         	 46.4227800000	 11.3383300000	 280.0	RC Refractor          	 0.3550	Clear           	NTP                   	ASI 294 pro             	  1.00000	 	 	  1.00000	 	        	G. B. Casalnuovo
+      30	GiaGa                            	Pogliano Milanese     	Italy         	 45.5414583300	  8.9954750000	 172.0	Schmidt-Cassegrain    	 0.3560	Clear           	NTP                   	Moravian G2-3200 Mark II	  4.00000	 	 	 12.33000	 	        	Galli Gianni
+      31	Skalnate Pleso                   	Tatranska Lomnica     	Slovakia      	 49.1893550000	 20.2338160000	1786.0	-                     	 0.6100	Clear           	NTP                   	SBIG ST-10XME           	  4.00000	 	 	  6.80000	 	        	Marek Husarik
+      32	Skalnate Pleso                   	Tatranska Lomnica     	Slovakia      	 49.1894000000	 20.2341000000	1786.0	-                     	 1.3000	Clear           	NTP                   	ZWO ASI 1600MM pro      	  1.00000	 	 	  1.00000	 	        	Richard Komzik, Theodor Pribulla, Dusan Tomko
+      33	Chante-Perdrix                   	Dauban                	France        	 43.9997222200	  5.6475000000	 630.0	SC                    	 0.2750	Clear           	NTP                   	SBIG ST8-XME            	  2.00000	 	 	  4.10000	 	        	Marc Serrau, X. Delmotte
+      34	Centro de Ciencia Viva           	Constancia            	Portugal      	 39.4948900000	 -8.3236700000	 147.0	RC                    	 0.5080	Clear           	GPS                   	WATEC 910HX-RC          	  0.64000	 	 	  0.64000	 	        	Rui Goncalves, Joao Ferreira, Maximo Ferreira, Miguel Bento
+      35	Cima Ekar                        	Asiago                	Italy         	 45.8494453000	 11.5688257000	1369.9	-                     	 0.6700	Clear           	NTP                   	Moravian G4-16000       	  4.00000	 	 	         	 	        	Domenico Nardiello
+      36	Montsec                          	Catalonia             	Spain         	 42.0516660000	  0.7297222000	1570.0	Joan Oro              	 0.8000	V               	NTP+GPS*              	MEIA3                   	  5.00000	 	~	  8.85000	 	        	Toni Santana-Ros
+      37	TURKSAT                          	Ankara                	Turkey        	 39.6366320000	 32.8041570000	 950.0	TURKSAT               	 0.5000	Clear           	GPS                   	FLI PL4240              	  3.00000	 	 	  5.00000	 	        	Mehmed Naim Bagiran
+      38	TUBITAK National Observatory     	Antalya               	Turkey        	 36.8252710000	 30.3333000000	2500.0	T100                  	 1.0000	Clear           	GPS                   	SI 1100                 	  3.00000	 	 	  6.45000	 	        	Yucel Kilic, Orhan Erece, Sila Eryilmaz
+      39	Cukurova University              	Adana                 	Turkey        	 37.0596840000	 35.3554000000	 130.0	Pro RC 500 LK7        	 0.5000	Clear           	NTP                   	Apogee Aspen CG6        	  5.00000	 	 	  5.00000	 	        	Mahmut Tekes
+      40	Adiyaman University              	Adiyaman              	Turkey        	 37.7516670000	 38.2252780000	 675.0	ADYU60                	 0.6100	Clear           	GPS                   	Andor iKon-M 934        	  3.00000	 	 	  3.00000	 	        	Eda Sonbas, Huseyin ER
+

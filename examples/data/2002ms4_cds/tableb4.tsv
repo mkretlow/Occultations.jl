@@ -1,0 +1,69 @@
+#
+#   VizieR Astronomical Server vizier.idia.ac.za
+#    Date: 2026-11-02T20:40:03 [V7.6.1]
+#   In case of problem, please report to:	cds-question@unistra.fr
+#
+#
+#Coosys	J2000:	eq_FK5 J2000
+#INFO	service_protocol=ASU	  IVOID of the protocol through which the data was retrieved
+#INFO	request_date=2026-11-02T20:40:03	  Query execution date
+#INFO	request=https://vizier.idia.ac.za/viz-bin/asu-tsv?-source=J/A%2BA/678/A167/tableb4&-out.all&-out.max=unlimited	  Full request URL
+#INFO	contact=cds-question@unistra.fr	  Email or URL to contact publisher
+#INFO	server_software=VizieR/7.6.1	  Software version
+#INFO	publisher=CDS	  Data centre that produced the VOTable
+
+#RESOURCE=yCat_36780167
+#Name: J/A+A/678/A167
+#Title: occultation events by (307261) 2002 MS4 (Rommel+, 2023)
+#INFO	ivoid=ivo://cds.vizier/j/a+a/678/a167	    IVOID of underlying data collection
+#INFO	data_ivoid=ivo://cds.vizier/j/a+a/678/a167	    IVOID of underlying data collection
+#INFO	creator=Rommel F.L.	    First author or institution
+#INFO	cites=bibcode:2023A&A...678A.167R	    Article or Data origin sources
+#INFO	journal=A&A	    Journal name
+#INFO	original_date=2023	    Year of the article publication
+#INFO	reference_url=https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/678/A167	    Dataset landing page
+#INFO	citation=doi:10.26093/cds/vizier/bc-n6/lbgh	    Dataset identifier that can be used for citation
+#INFO	publication_date=2026-07-01	    Date of first publication in the data centre
+#INFO	rights_uri=https://cds.unistra.fr/vizier-org/licences_vizier.html	    Licence URI
+#Table	J_A_A_678_A167_tableb4:
+#Name: J/A+A/678/A167/tableb4
+#Title: Observational circumstances of all stations that detected 2002 MS4 in a stellar occultation on the other eight events
+#Column	recno	(I8)	Record number assigned by the VizieR team. Should Not be used for identification.	[ucd=meta.record]
+#Column	Date	(A10)	Observation date	[ucd=time.epoch;obs]
+#Column	Site	(a24)	Site/Country	[ucd=meta.id;instr.obsty]
+#Column	LAT	(A3)	Latitude	[ucd=pos.earth.lat]
+#Column	LON	(A3)	Longitude	[ucd=pos.earth.lon]
+#Column	Alt	(F7.2)	Altitude	[ucd=pos.earth.altitude]
+#Column	Tel	(a18)	Telescope	[ucd=meta.id;instr.tel]
+#Column	Aper	(F6.3)	Aperture	[ucd=instr.fov]
+#Column	Filt	(a9)	Filter	[ucd=meta.id;instr.filter]
+#Column	TSource	(A3)	Time source	[ucd=meta.id;instr]
+#Column	Inst	(a19)	Instrument	[ucd=meta.id;instr]
+#Column	Exp	(F6.3)	Exposure time	[ucd=time.expo]
+#Column	l_Cycle	(A1)	[~] Limit flag on Cycle	[ucd=meta.code.error;obs.proposal.cycle]
+#Column	Cycle	(F7.4)	Cycle	[ucd=obs.proposal.cycle]
+#Column	Corr	(F4.1)	? Correction	[ucd=arith.factor]
+#Column	Observs	(a65)	Observers	[ucd=obs.observer]
+recno	Date	Site	LAT	LON	Alt	Tel	Aper	Filt	TSource	Inst	Exp	l_Cycle	Cycle	Corr	Observs
+ 	"Y:M:D"	 	"d:m:s"	"d:m:s"	m	 	m	 	 	 	s	 	s	s	
+--------	----------	------------------------	---	---	-------	------------------	------	---------	---	-------------------	------	-	-------	----	-----------------------------------------------------------------
+       1	2019-07-09	San Pedro de Atacama/CHL	023	068	2396.90	OPSPA             	 0.400	Luminance	NTP	Proline PL16803    	 2.000	~	 3.6700	    	Alain Maury, Joaquin Fabrega Polleri
+       2	2019-07-09	San Pedro de Atacama/CHL	023	068	2398.50	ASH2              	 0.407	Clear    	NTP	SBIG STL11000      	 8.000	~	10.5000	    	Nicolas Morales
+       3	2019-07-09	Pico dos Dias/BRA       	023	046	1810.70	Perkin-Elmer      	 1.600	-        	GPS	Andor Ixon 4269    	 0.300	~	 1.6500	    	Flavia L. Rommel, Rodrigo Boufleur
+       4	2019-07-26	San Pedro de Atacama/CHL	023	068	2396.90	OPSPA             	 0.400	Luminance	NTP	Proline PL16803    	30.000	~	31.9000	    	Alain Maury, Joaquin Fabrega Polleri
+       5	2019-07-26	San Pedro de Atacama/CHL	023	068	2398.50	ASH2              	 0.407	-        	NTP	SBIG STL11000      	25.000	~	27.6000	 3.0	Nicolas Morales
+       6	2019-07-26	Paranal/CHL             	025	070	2479.20	SPECULOOS         	 1.000	-        	-  	Andor Tech         	 2.000	~	 4.0000	    	Emmanuel Jehin
+       7	2019-07-26	Pico dos Dias/BRA       	023	046	1810.70	Perkin-Elmer      	 1.600	-        	GPS	Andor Ixon 4269    	 0.800	~	 0.8130	    	Gustavo Benedetti Rossi
+       8	2019-07-26	Osoyoos/CAN             	049	119	1088.00	Cassegrain        	 0.300	no filter	GPS	QHY174M            	 2.000	 	 2.0000	    	Peter Ceravolo
+       9	2019-08-19	Penticton/CAN           	050	120	   0.00	Meade SCT         	 0.400	-        	GPS	QHY174M            	 2.500	 	 2.5000	    	Bruce Gowe
+      10	2019-08-19	Osoyoos/CAN             	049	119	1088.00	Cassegrain        	 0.300	no filter	GPS	QHY174M            	 4.000	 	 4.0000	    	Peter Ceravolo
+      11	2020-07-26	Pretoria/ZAF            	026	028	1489.00	Celestron SCT     	 0.356	-        	NTP	ZWOASI290MM        	 1.000	 	 1.0150	    	Clyde Foster
+      12	2020-07-26	Johannesburg/ZAF        	026	028	1547.00	-                 	 0.305	-        	NTP	ZWOASI290MM        	 2.000	 	 2.0150	    	Cory Schmitz
+      13	2021-02-24	San Pedro de Atacama/CHL	023	068	2396.90	OPSPA             	 0.400	Luminance	GPS	ZWO ASI6200MM Pro  	10.000	~	11.7000	    	Alain Maury, Joaquin Fabrega Polleri
+      14	2021-02-24	San Pedro de Atacama/CHL	023	068	2398.50	ASH2              	 0.407	-        	NTP	SBIG STL11000      	10.000	~	12.8000	    	Nicolas Morales
+      15	2021-10-14	Osoyoos/CAN             	049	119	   0.00	Celestron SCT     	 0.350	no filter	GPS	QHY174M            	 3.000	 	 3.0000	    	Peter Ceravolo
+      16	2021-10-14	Flagstaff/USA           	035	112	2216.00	Ritchey-Chretien  	 0.318	-        	GPS	CMOS               	 2.498	 	 2.4996	    	Michael Collins
+      17	2022-06-10	La Palma/ESP            	029	018	2387.63	Liverpool         	 2.000	-        	NTP	Andor DW485 (RISE) 	 1.183	 	 1.2226	    	Rene Duffard, Jose Luis Ortiz, Nicolas Morales, Pablo Santos Sanz
+      18	2022-06-10	Teide/ESP               	028	017	2390.00	Artemis           	 1.000	Clear    	GPS	Andor IKONL BEX2 DD	 1.000	 	 1.8100	 0.5	Emmanuel Jehin, Khalid Barkaoui, Michael Gillon
+      19	2022-06-10	Tree Gate Farm/USA      	033	089	  93.05	Schmidt-Cassegrain	 0.200	-        	NTP	Atik 414ex via Ekos	 5.000	 	 5.4518	-0.8	Jean-Francois Gout
+

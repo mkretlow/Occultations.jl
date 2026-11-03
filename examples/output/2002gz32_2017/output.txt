@@ -1,0 +1,54 @@
+
+==============================================================================
+Event and geometry (paper values in parentheses)
+==============================================================================
+6 positive chords (5 used) and 2 negative; distance 17.1033 au (17.1033), shadow velocity 20.95 km/s (21.19)
+stellar diameter 0.59 km (0.59), Fresnel scale 0.88 km at 0.6 µm (0.88)
+
+==============================================================================
+Limb fits
+==============================================================================
+published, original chords (radial)        a′ = 146.0 ± 12.0  b′ = 73.0 ± 4.6  PA = 318.0 ± 3.0  D_eq = 206.0 ± 15.0  χ² =  29.50
+published, chords aligned (radial)         a′ = 152.6 ±  8.4  b′ = 73.0 ± 4.2  PA = 322.0 ± 3.0  D_eq = 211.0 ± 12.0  χ² =   4.00
+radial residuals, timing errors only       a′ = 184.3 ± 24.8  b′ = 40.4 ± 1.9  PA = 163.7 ± 1.0  D_eq = 172.5 ±  8.4  χ² =  41.62
+along the chords, timing errors only       a′ = 163.7 ± 22.9  b′ = 71.1 ± 4.1  PA = 139.1 ± 4.7  D_eq = 215.7 ± 20.6  χ² =  42.90
+clock offsets, priors N(0, 0.5 s)          a′ = 160.7 ± 29.7  b′ = 67.9 ± 5.9  PA = 140.1 ± 6.1  D_eq = 208.9 ± 25.3  χ² =   4.08
+  fitted offsets [s] (the paper's shifts in parentheses):
+    Allariz             +0.16 ± 0.47  (+0.013)
+    Aras de los Olmos   -0.68 ± 0.31  (-0.771)
+    Javalambre OAJ      +0.29 ± 0.28  (+0.006)
+    La Hita 77cm        +0.06 ± 0.41  (-0.258)
+    Univ. of Athens     +0.17 ± 0.48  (+2.048)
+along the chords, σ_limb = 8.3 km          a′ = 151.8 ± 20.8  b′ = 70.7 ± 5.0  PA = 142.1 ± 6.1  D_eq = 207.2 ± 18.2  χ² =   5.00
+
+==============================================================================
+Negative chords
+==============================================================================
+  Sant Esteve  consistent,   2.5 km from the limb
+  La Sagra     consistent,  25.0 km from the limb
+(the negative chord at Sant Esteve passes just outside the north-eastern end of the limb; as a hard
+ constraint it bounds the major axis)
+
+==============================================================================
+Posterior, diameter and albedo
+==============================================================================
+Posterior of LimbProblem: 20 walkers × 4000 steps (burn-in 1333), acceptance 0.51
+  center_f               =     -33.479284  -7.226338 +7.034921
+  center_g               =    -161.172521  -8.344525 +8.568991
+  equatorial_radius      =     148.705127  -10.619390 +10.420870
+  oblateness             =       0.523414  -0.049558 +0.042875
+  position_angle         =     143.171430  -3.752117 +3.815448
+
+area-equivalent diameter 205.2 −9.5 +8.6 km (published 211 ± 12), geometric albedo 0.044 ± 0.005 (0.043 ± 0.007)
+axis ratio a′/b′ = 2.1 −0.2 +0.2 (published 2.09 ± 0.24)
+
+==============================================================================
+Astrometry
+==============================================================================
+RA 16 50 08.54048  Dec -13 05 12.3289 at 2017-05-20T01:30:27.4 UTC (σ 1.03, 1.33 mas); offset from JPL Horizons Δα cos δ = -2.78, Δδ = -13.03 mas
+(the paper's centre, (−500, −112) km, refers to the older JPL#23 orbit)
+
+==============================================================================
+Figures
+==============================================================================
+figures written to examples/output/2002gz32_2017

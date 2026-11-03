@@ -1,0 +1,98 @@
+
+==============================================================================
+1. the simulation
+==============================================================================
+BilobedEllipsoid(Ellipsoid(130.000, 100.000, 85.000 km), Ellipsoid(100.000, 85.000, 75.000 km), d = 207.000 km)
+volume-equivalent diameter 240.1 km, mass ratio 0.577 (equal densities)
+event 1: 8 positive chords (0 with two drops), area-equivalent diameter 251.6 km
+event 2: 8 positive chords (0 with two drops), area-equivalent diameter 269.0 km
+event 3: 10 positive chords (0 with two drops), area-equivalent diameter 273.1 km
+event 4: 10 positive chords (0 with two drops), area-equivalent diameter 266.7 km
+rotational amplitude 0.265 mag
+
+==============================================================================
+2. the pole known
+==============================================================================
+LimbProblem fit: χ² = 67.299, dof = 57, χ²/dof = 1.181
+  center_f_1             =       5.768329 ± 0.200929
+  center_g_1             =      -3.463548 ± 0.291661
+  center_f_2             =      12.232272 ± 0.328285
+  center_g_2             =      -7.694441 ± 0.393181
+  center_f_3             =      18.029584 ± 0.309751
+  center_g_3             =     -11.580062 ± 0.517962
+  center_f_4             =      24.073220 ± 0.177713
+  center_g_4             =     -16.062823 ± 0.327258
+  a1                     =     129.543344 ± 0.804369
+  b1                     =      99.840583 ± 0.319727
+  c1                     =      85.786219 ± 0.411702
+  a2                     =     100.362112 ± 0.425165
+  b2                     =      84.402435 ± 0.293494
+  c2                     =      75.114934 ± 0.308177
+  neck                   =       0.103077 ± 0.005106
+  pole_ra                =      35.000000 (fixed)
+  pole_dec               =      40.000000 (fixed)
+  W0                     =      20.657960 ± 0.079472
+  period                 =       9.500000 (fixed)
+  derived:
+  offset_ra_1            =       0.187746 ± 0.006540
+  offset_dec_1           =      -0.112731 ± 0.009493
+  offset_ra_2            =       0.398133 ± 0.010685
+  offset_dec_2           =      -0.250437 ± 0.012797
+  offset_ra_3            =       0.586822 ± 0.010082
+  offset_dec_3           =      -0.376905 ± 0.016859
+  offset_ra_4            =       0.780874 ± 0.005765
+  offset_dec_4           =      -0.521037 ± 0.010615
+  volume_equivalent_radius =     120.108448 ± 0.118695
+  lobe1_volume_equivalent_radius =     103.525319 ± 0.162381
+  lobe2_volume_equivalent_radius =      86.010278 ± 0.124238
+  mass_ratio             =       0.573471 ± 0.003657
+  separation             =     206.207558 ± 0.553182
+  length                 =     436.113014 ± 0.790512
+  area_equivalent_radius_1 =     125.668756 ± 0.117179
+  aspect_1               =      56.375982 ± 0.000000
+  rotation_phase_1       =     158.142879 ± 0.079472
+  area_equivalent_radius_2 =     134.479871 ± 0.119101
+  aspect_2               =      56.374462 ± 0.000000
+  rotation_phase_2       =     237.721704 ± 0.079472
+  area_equivalent_radius_3 =     136.615428 ± 0.131415
+  aspect_3               =      56.373377 ± 0.000000
+  rotation_phase_3       =     294.563712 ± 0.079472
+  area_equivalent_radius_4 =     133.348327 ± 0.114419
+  aspect_4               =      55.885379 ± 0.000000
+  rotation_phase_4       =     130.857095 ± 0.079472
+
+fitted vs true:
+  a1                          129.543 ±  0.804   (truth  130.000)
+  b1                           99.841 ±  0.320   (truth  100.000)
+  c1                           85.786 ±  0.412   (truth   85.000)
+  a2                          100.362 ±  0.425   (truth  100.000)
+  b2                           84.402 ±  0.293   (truth   85.000)
+  c2                           75.115 ±  0.308   (truth   75.000)
+  neck                          0.103 ±  0.005   (truth    0.100)
+  volume_equivalent_radius    120.108 ±  0.119   (truth  120.049)
+  mass_ratio                    0.573 ±  0.004   (truth    0.577)
+
+==============================================================================
+3. the pole unknown
+==============================================================================
+  start (  0.0°, -30.0°): pole (  42.5°, +34.5°), χ² = 16585.64
+  start (  0.0°, +30.0°): pole (  35.2°, +40.0°), χ² =    66.27
+  start ( 90.0°, -30.0°): pole ( 111.3°, +29.5°), χ² = 82927.64
+  start ( 90.0°, +30.0°): pole (  37.4°, +40.6°), χ² = 16829.15
+  start (180.0°, -30.0°): pole ( 143.6°, -12.7°), χ² =    79.76
+  start (180.0°, +30.0°): pole ( 143.5°, -10.4°), χ² = 65125.49
+  start (270.0°, -30.0°): pole ( 229.4°, -38.7°), χ² = 210920.83
+  start (270.0°, +30.0°): pole ( 259.4°, +14.2°), χ² = 143314.15
+best: pole (35.2 ± 0.2°, 40.0 ± 0.1°), truth (35°, 40°); χ² = 66.27 for 55 degrees of freedom
+  a1      129.716 ±  0.903   (truth 130.000)
+  b1       99.861 ±  0.333   (truth 100.000)
+  c1       85.627 ±  0.497   (truth  85.000)
+  a2      100.337 ±  0.425   (truth 100.000)
+  b2       84.424 ±  0.294   (truth  85.000)
+  c2       75.079 ±  0.315   (truth  75.000)
+  neck      0.106 ±  0.006   (truth   0.100)
+
+==============================================================================
+4. shape model and 3-D views
+==============================================================================
+figures written to examples/output/sim_contact_binary_3d

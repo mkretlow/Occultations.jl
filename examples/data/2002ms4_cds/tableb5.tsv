@@ -1,0 +1,72 @@
+#
+#   VizieR Astronomical Server vizier.idia.ac.za
+#    Date: 2026-11-02T20:40:04 [V7.6.1]
+#   In case of problem, please report to:	cds-question@unistra.fr
+#
+#
+#Coosys	J2000:	eq_FK5 J2000
+#INFO	service_protocol=ASU	  IVOID of the protocol through which the data was retrieved
+#INFO	request_date=2026-11-02T20:40:05	  Query execution date
+#INFO	request=https://vizier.idia.ac.za/viz-bin/asu-tsv?-source=J/A%2BA/678/A167/tableb5&-out.all&-out.max=unlimited	  Full request URL
+#INFO	contact=cds-question@unistra.fr	  Email or URL to contact publisher
+#INFO	server_software=VizieR/7.6.1	  Software version
+#INFO	publisher=CDS	  Data centre that produced the VOTable
+
+#RESOURCE=yCat_36780167
+#Name: J/A+A/678/A167
+#Title: occultation events by (307261) 2002 MS4 (Rommel+, 2023)
+#INFO	ivoid=ivo://cds.vizier/j/a+a/678/a167	    IVOID of underlying data collection
+#INFO	data_ivoid=ivo://cds.vizier/j/a+a/678/a167	    IVOID of underlying data collection
+#INFO	creator=Rommel F.L.	    First author or institution
+#INFO	cites=bibcode:2023A&A...678A.167R	    Article or Data origin sources
+#INFO	journal=A&A	    Journal name
+#INFO	original_date=2023	    Year of the article publication
+#INFO	reference_url=https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/678/A167	    Dataset landing page
+#INFO	citation=doi:10.26093/cds/vizier/bc-n6/lbgh	    Dataset identifier that can be used for citation
+#INFO	publication_date=2026-07-01	    Date of first publication in the data centre
+#INFO	rights_uri=https://cds.unistra.fr/vizier-org/licences_vizier.html	    Licence URI
+#Table	J_A_A_678_A167_tableb5:
+#Name: J/A+A/678/A167/tableb5
+#Title: Observational circumstances of all the stations that did not detect 2002 MS4 or experienced bad weather during the other eight stellar occultations
+#Column	recno	(I8)	Record number assigned by the VizieR team. Should Not be used for identification.	[ucd=meta.record]
+#Column	Date	(A10)	Observation date	[ucd=time.epoch;obs]
+#Column	Site	(a27)	Site/Country	[ucd=meta.id;instr.obsty]
+#Column	Reasons	(a18)	Reasons for no detection	[ucd=meta.note]
+#Column	LAT	(A3)	? Latitude	[ucd=pos.earth.lat]
+#Column	LON	(A3)	? Longitude	[ucd=pos.earth.lon]
+#Column	Alt	(F8.3)	? Altitude	[ucd=pos.earth.altitude]
+#Column	Tel	(a20)	Telescope	[ucd=meta.id;instr.tel]
+#Column	Aper	(F6.3)	? Aperture	[ucd=instr.fov]
+#Column	Inst	(a14)	Instrument (1)	[ucd=meta.id;instr]
+#Column	Exp	(F4.1)	? Exposure time	[ucd=time.expo]
+#Column	Cycle	(F4.1)	? Cycle	[ucd=obs.proposal.cycle]
+#Column	TSource	(A3)	Time source	[ucd=meta.id;instr]
+#Column	Observs	(a58)	Observers	[ucd=obs.observer]
+recno	Date	Site	Reasons	LAT	LON	Alt	Tel	Aper	Inst	Exp	Cycle	TSource	Observs
+ 	"Y:M:D"	 	 	"d:m:s"	"d:m:s"	m	 	m	 	s	s	 	
+--------	----------	---------------------------	------------------	---	---	--------	--------------------	------	--------------	----	----	---	----------------------------------------------------------
+       1	2019-07-09	Guaratingueta/BRA          	technical problems	023	045	 573.000	Meade LX200         	 0.400	Merlin Raptor 	    	    	   	Rafael Sfair, Thamiris Santana, Othon Winter
+       2	2019-07-09	Ponta Grossa/BRA           	negative          	025	050	 909.000	Meade RC400         	 0.406	Merlin Raptor 	 1.5	 1.5	GPS	Chrystian L. Pereira, Marcelo Emilio
+       3	2019-07-09	La Silla/CHL               	bad weather       	029	071	2375.000	NTT                 	 3.580	SOFI          	    	    	   	Emmanuel Jehin
+       4	2019-07-09	Cerro Pachon/CHL           	bad weather       	030	071	2713.000	SOAR                	 4.000	Merlin Raptor 	    	    	   	Julio I. B. Camargo
+       5	2019-07-09	San Juan/ARG               	negative          	032	069	2552.000	CASLEO              	 2.150	PI-2040B      	    	    	   	Luis A. Mammana, Eduardo F. Lajus
+       6	2019-07-09	Cordoba/ARG                	negative          	031	065	 864.000	                    	      	              	    	    	   	Carlos A. Colazo
+       7	2019-07-09	Santa Rosa/ARG             	negative          	037	064	 182.000	Celestron C8-NGT    	 0.200	Meade DSI-I   	 5.0	 6.0	NTP	Julio Spagnotto
+       8	2020-07-26	Sutherland/ZAF             	bad weather       	032	021	1810.000	SAAO                	 1.000	SHOC^+^       	    	    	GPS	Amanda Sickafoose
+       9	2020-07-26	La Reunion Island/FRA      	bad weather       	   	   	        	                    	      	              	    	    	   	Jean Paul, Piere Thierry
+      10	2020-07-26	Santa Rosa/ARG             	bad weather       	037	064	 182.000	Celestron C8-NGT    	 0.200	QHY174M       	    	    	GPS	Julio Spagnotto
+      11	2020-07-26	Santa Rosa/ARG             	bad weather       	037	064	 198.784	Skywatcher          	 0.200	QHY174M       	    	    	GPS	Aldo Javier Wilberger
+      12	2021-02-24	Cerro Pachon/CHL           	negative          	030	071	2713.000	SOAR                	 4.000	Merlin Raptor 	 1.0	 1.0	GPS	Altair Gomes Junior, Flavia L. Rommel, Julio I. B. Camargo
+      13	2021-02-24	Columbus North Carolina/USA	Technical Problems	035	082	 326.000	Celestron Edge      	 0.360	ZWO ASI 1600mm	    	    	NTP	Randy L. Flynn
+      14	2021-10-14	North Carolina/USA         	Cloudy            	036	083	 700.000	Celestron EdgeHD 14"	 0.356	Atik One 6.0  	    	    	   	David Wake
+      15	2021-10-14	Indiana/USA                	Cloudy            	041	087	 195.700	RCOS 20"            	 0.510	FLI PLO9000   	    	    	NTP	Adam W. Rengstorf
+      16	2021-10-14	Oregon/USA                 	Cloudy            	044	121	1920.000	-                   	 0.610	Andor Xyla    	 1.0	 1.0	GPS	Scott Fisher
+      17	2021-10-14	Alberta/CAN                	Cloudy            	   	   	        	                    	      	              	    	    	   	Phil Langill
+      18	2021-10-14	North Dakota/USA           	Cloudy            	   	   	        	                    	      	              	    	    	   	Sherry Fieber-Beyer
+      19	2021-10-14	Illinois/USA               	Cloudy            	   	   	        	                    	      	              	    	    	   	Aart Olsen
+      20	2021-10-14	Idaho/USA                  	Cloudy            	   	   	        	                    	      	              	    	    	   	Jason W. Barnes
+      21	2021-10-14	Kansas/USA                 	Cloudy            	   	   	        	                    	      	              	    	    	   	Greg Rudnick
+      22	2021-10-14	New Mexico/USA             	Cloudy            	   	   	        	                    	      	              	    	    	   	Larry Molnar
+      23	2021-10-14	Ohio/USA                   	(Cloudy)          	   	   	        	                    	      	              	    	    	   	  Rush Swaney
+      24	2021-10-14	Montana/USA                	(Cloudy)          	   	   	        	                    	      	              	    	    	   	  Bill Hanna
+

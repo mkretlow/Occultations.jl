@@ -1,0 +1,61 @@
+
+==============================================================================
+Events and geometry (paper values in parentheses)
+==============================================================================
+2012: 3 positive and 11 negative chords; distance 44.26 au, shadow velocity 24.82 km/s (25.0)
+2014: 4 positive and 1 negative chords; distance 44.54 au, shadow velocity 9.41 km/s (9.4)
+
+==============================================================================
+2012: limb fit and posterior
+==============================================================================
+fit: χ² = 2.08 for 1 degree(s) of freedom
+  a′      412.4 ±  17.4 km   (426 −16 +26)
+  ε′      0.272 ± 0.124      (0.34 −0.086 +0.097)
+  PA       44.0 ±  10.5°     (41 −5 +8)
+  R_eq    352.0 ±  17.0 km   (346 ± 6)
+posterior (median and 68 % interval):
+  a′ 415 −12 +24 km, ε′ 0.191 −0.12 +0.093, PA 66.6 −23 +21°, R_eq 380 −20 +15 km
+  closest negative chord: Liverpool Tel.     consistent, 137 km from the limb
+  closest negative chord: Alicante           consistent, 179 km from the limb
+
+==============================================================================
+2014: limb fit and posterior
+==============================================================================
+fit: χ² = 0.01 for 1 degree(s) of freedom
+  a′      394.3 ±   0.6 km   (393 ± 1)
+  ε′      0.049 ± 0.004      (0.054 ± 0.003)
+  PA       46.5 ±   1.8°     (36 ± 4)
+  R_eq    384.4 ±   0.2 km   (382 ± 3)
+posterior (median and 68 % interval):
+  a′ 394 −0.59 +0.66 km, ε′ 0.0489 −0.0035 +0.0037, PA 46.3 −1.9 +1.8°, R_eq 384 −0.18 +0.18 km
+  closest negative chord: Hamamatsu          consistent, 24 km from the limb
+
+==============================================================================
+The apparent oblateness changed between 2012 and 2014
+==============================================================================
+ε′ (2012) = 0.191 −0.12 +0.093, ε′ (2014) = 0.0489 −0.0035 +0.0037; P(ε′2012 ≤ ε′2014) = 0.104
+
+==============================================================================
+The single-chord events of 2011 and 2013
+==============================================================================
+2003 AZ84, 2011-01-08, San Pedro de Atacama (SPACE) (Gaia DR3 3151679712277335168): shadow velocity 26.00 km/s, chord 572.8 km (573 ± 21); 2a′ of 2012/2014: 825/789 km
+  centre (f, g) = ( -199,    70) km: RA 07 43 41.82564  Dec +11 30 23.4734 at 2011-01-08T06:31:43.0 UTC (σ 1.1, 0.9 mas); offset from JPL Horizons Δα cos δ = -6.2, Δδ = +2.2 mas
+  centre (f, g) = ( -260,  -439) km: RA 07 43 41.82551  Dec +11 30 23.4576 at 2011-01-08T06:31:43.0 UTC (σ 1.1, 0.9 mas); offset from JPL Horizons Δα cos δ = -8.1, Δδ = -13.7 mas
+2003 AZ84, 2013-12-02, Rockhampton (Gaia DR3 3147373651082806272): shadow velocity 16.51 km/s, chord 669.7 km (657 ± 35); 2a′ of 2012/2014: 825/789 km
+  centre (f, g) = (  548,  -441) km: RA 07 58 56.73037  Dec +10 19 04.8934 at 2013-12-02T14:49:00.4 UTC (σ 0.9, 0.9 mas); offset from JPL Horizons Δα cos δ = +17.0, Δδ = -13.7 mas
+  centre (f, g) = (  578,  -818) km: RA 07 58 56.73043  Dec +10 19 04.8817 at 2013-12-02T14:49:00.4 UTC (σ 0.9, 0.9 mas); offset from JPL Horizons Δα cos δ = +18.0, Δδ = -25.4 mas
+
+==============================================================================
+Astrometry (the paper's corrected positions, same star positions)
+==============================================================================
+2012, 2012-02-03T19:45:00 UTC: RA 07 45 54.77622  Dec +11 12 43.1304  (σ 22.0, 23.0 mas)
+      published:              RA 07 45 54.80510   Dec +11 12 43.1310
+      difference: Δα cos δ = -424.9 mas, Δδ = -0.6 mas
+2014, 2014-11-15T17:55:00 UTC: RA 08 03 51.29099  Dec +09 57 18.8062  (σ 22.0, 23.0 mas)
+      published:              RA 08 03 51.29112   Dec +09 57 18.8060
+      difference: Δα cos δ = -1.9 mas, Δδ = +0.2 mas
+
+==============================================================================
+Figures
+==============================================================================
+figures written to examples/output/2003az84_2012_2014

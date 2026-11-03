@@ -1,0 +1,45 @@
+
+==============================================================================
+Event and geometry (paper values in parentheses)
+==============================================================================
+59 positive and 40 negative chords; distance 45.70 au (45.70), shadow velocity 20.53 km/s
+stellar diameter 1.19 km (1.19), Fresnel scale 1.43 km at 0.6 µm (1.54)
+
+==============================================================================
+The global ellipse from the 13 selected chords
+==============================================================================
+published (Table 4)                          a′ = 412.0 ± 10.0  ε′ = 0.066 ± 0.034  PA = 121.0 ± 16.0  R_eq = 398.0 ± 12.0  (3σ)
+σ_limb = 7 km, negative chords hard          a′ = 415.5 ±  2.1  ε′ = 0.080 ± 0.006  PA = 126.4 ±  2.7  R_eq = 398.5 ±  1.1  χ²/dof =   3.40
+σ_limb = 12.5 km, negative chords soft       a′ = 417.4 ±  3.3  ε′ = 0.089 ± 0.011  PA = 117.7 ±  4.1  R_eq = 398.4 ±  1.9  χ²/dof =   1.00
+  negative chord Montsec (Catalonia)                    crosses the limb,  -5.2 km from the limb
+  negative chord Cima Ekar (Asiago)                     outside,   5.5 km from the limb
+  negative chord Centro de Ciencia Viva (Constancia)    outside,  11.0 km from the limb
+
+==============================================================================
+Topography: all 59 chords against the global ellipse
+==============================================================================
+outlier: Khmelnytskyi immersion, +277 km (PA 277°)
+94 limb points; deviation from the global ellipse: median +0.5 km, scatter (MAD) 11.5 km
+PA bin    n  median    min [km]   chords more than 15 km inside
+  0– 30°  17    1.7  -47.6   Massa 02, Borgo a Mozzano, Sta. Maria a Monte, Signa
+ 30– 60°  14  -31.0  -58.3   Sevilla, Huelva, Cluj-Napoca, Fiastra, Dragsina, Ibiza, Granada (150 cm), Granada (90 cm), Marbella
+ 60– 90°   8   -3.0  -20.9   Kharkiv (70 cm), Ceccano
+ 90–120°   6    9.2    4.8   
+120–150°   2   -4.0   -4.0   
+180–210°   1    8.2    8.2   
+210–240°   6  -12.7  -21.6   La Palma, Tijarafe
+240–270°  11    4.0   -7.4   
+270–300°  11    9.4   -4.1   
+300–330°  16   -0.2  -10.3   
+330–360°   2   -6.7   -9.3   
+deepest point: -58.3 km at PA 46° (Ibiza); paper: depression of 45.1 ± 1.5 km depth over 322 ± 39 km
+
+==============================================================================
+Astrometry
+==============================================================================
+2020-08-08T20:44:27.26 UTC: RA 18 47 29.96131  Dec -06 16 31.3445 (σ 0.1, 0.1 mas); minus Table 5: Δα cos δ = +0.0 mas, Δδ = -0.0 mas
+
+==============================================================================
+Figures
+==============================================================================
+figures written to examples/output/2002ms4_2020

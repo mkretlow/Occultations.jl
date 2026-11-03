@@ -1,0 +1,54 @@
+
+==============================================================================
+Event and geometry (paper values in parentheses)
+==============================================================================
+7 positive and 31 negative chords; distance 37.83 au, shadow velocity 10.42 km/s (10.42),
+stellar diameter 0.63 km (0.6), Fresnel scale 1.41 km at 0.7 µm (1.32)
+
+==============================================================================
+Apparent limb (Table 3)
+==============================================================================
+published (N = 14)                 a′ = 104.30 ± 0.40  b′ = 83.50 ± 0.50  φ′ =  44.1 ± 0.4  D_eq = 186.70 ± 1.80  χ²/dof =   1.55
+radial residuals (as SORA)         a′ = 102.85 ± 1.39  b′ = 82.21 ± 1.14  φ′ =  41.0 ± 1.8  D_eq = 183.90 ± 2.42  χ²/dof =  39.25
+residuals along the chords         a′ = 105.42 ± 1.25  b′ = 84.89 ± 0.91  φ′ =  44.9 ± 1.5  D_eq = 189.20 ± 2.06  χ²/dof =  46.34
+normalised contact residuals of the radial fit (immersion, emersion):
+  Cluj-Napoca    -0.5   +2.5
+  Wise H80       -6.5   +0.3
+  Wise T45.7    +16.9   -0.8
+  TUG RTT150     -0.2   -2.3
+  TUG T100       -3.5   +0.6
+  Berthelot      -1.1   -0.6
+  Chalin         +0.3   -0.3
+The two Wise telescopes stand at the same place, but their immersions differ by 0.75 s
+(18:17:41.091 ± 0.014 s vs 18:17:40.344 ± 0.035 s, i.e. 20σ): with the published timing
+errors no ellipse reaches χ²/dof ≈ 1.5. A limb allowance σ_limb absorbs such errors:
+radial, σ_limb = 13.5 km           a′ = 106.41 ± 27.67  b′ = 87.71 ± 8.42  φ′ =  95.4 ± 40.3  D_eq = 193.22 ± 26.37  χ²/dof =   1.00
+closest negative chords:
+  IST40                  consistent,   1.0 km from the limb
+  DROT                   consistent,  19.4 km from the limb
+  Starhopper             consistent,  23.4 km from the limb
+(the fitted centre, (-280.7, 52.7) km, refers to the current JPL orbit; the paper's (303.8, −787.8) km to NIMA v10)
+
+==============================================================================
+Diameter and albedo (posterior; H_V = 4.55 ± 0.03)
+==============================================================================
+area-equivalent diameter 182.9 -11.1 +10.7 km (published 186.7 ± 1.8), geometric albedo 81.6 -8.8 +10.9 % (80 ± 4 %)
+
+==============================================================================
+Astrometry (Sect. 4.3)
+==============================================================================
+  timing errors only   2024-02-25T18:13:53.460 UTC: RA 03 40 30.534398  Dec +39 08 06.70796  (σ 0.10, 0.12 mas)
+  σ_limb               2024-02-25T18:13:53.460 UTC: RA 03 40 30.534430  Dec +39 08 06.70845  (σ 0.54, 0.85 mas)
+  published                                         RA 03 40 30.5344080  Dec +39 08 06.708383  (σ 0.1, 0.1 mas)
+
+==============================================================================
+3-D shape: occultation + light-curve amplitude + rotational phase
+==============================================================================
+least squares: a = 101.8  b = 93.7  c = 88.8 km  aspect 51°  D_eq,V = 189.2 km  (χ² = 9.64)
+posterior: a = 102.6 -6.5 +9.7, b = 92.2 -6.9 +5.4, c = 76.5 -27.9 +11.4 km, D_eq,V = 176.9 -18.6 +12.2 km, aspect (folded) 45.1 -14.4 +22.0°
+published (grid search, conditional errors): a = 106 ± 2, b = 92 ± 12, c = 76 ± 10 km, D_eq,V = 181 ± 12 km, aspect 52 +38 −28°
+
+==============================================================================
+Figures
+==============================================================================
+figures written to examples/output/1995sm55_2024

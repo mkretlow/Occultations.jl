@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use Occultations.jl, please cite it as below."
+title: "Occultations.jl: reduction and modelling of stellar occultations"
+type: software
+authors:
+  - family-names: Kretlow
+    given-names: Mike
+    email: mike@kretlow.de
+    orcid: "https://orcid.org/0000-0001-8858-3420"
+    affiliation: "German Center for Astrophysics (DZA)"
+    website: "https://github.com/mkretlow"
+version: 0.1.0
+repository-code: "https://github.com/mkretlow/Occultations.jl"
+license: MIT
+abstract: >-
+  A Julia package for the reduction and modelling of stellar occultations by small
+  bodies: shadow tracks, light-curve timing with diffraction and stellar diameter,
+  general limb fits (2-D ellipse, multi-event 3-D ellipsoid with rotational amplitude
+  and phase constraints, shape meshes) with negative chords, ray-traced atmospheres,
+  astrometry, uncertainties from covariances, likelihood profiles and MCMC, and maps.
+keywords:
+  - stellar occultations
+  - trans-Neptunian objects
+  - asteroids
+  - astrometry
+  - shape models
+  - atmospheres
+  - Julia

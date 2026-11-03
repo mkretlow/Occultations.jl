@@ -1,0 +1,48 @@
+
+==============================================================================
+Event and geometry (paper values in parentheses)
+==============================================================================
+12 positive chords and 4 near misses; distance 44.48 au, shadow velocity 4.77 km/s (4.77)
+stellar diameter 0.29 km, Fresnel scale 1.53 km at 0.7 µm
+Table 1 position − star at the event: Δα cos δ = -637 mas, Δδ = +128 mas (20975 km at the body)
+(Gaia DR2 propagated to J2000.0: the Table 1 position is the star 18 years before the event)
+
+==============================================================================
+Limb fits
+==============================================================================
+published (Sect. 5)                      a′ = 271.6 ±  9.0  b′ = 229.8 ±  5.5  PA =   3.0 ±  1.0  D_eq = 499.6
+timing errors only                       a′ = 260.0 ±  1.4  b′ = 228.5 ±  1.4  PA =  12.1 ±  2.0  D_eq = 487.6 ±  2.4  χ²/dof =  12.80
+along chords, σ_limb = 10.9 km           a′ = 272.1 ± 11.9  b′ = 232.7 ±  7.3  PA =   4.2 ± 11.2  D_eq = 503.2 ± 17.1  χ²/dof =   1.00
+radial, σ_limb = 10.0 km                 a′ = 270.8 ± 12.7  b′ = 231.0 ±  9.0  PA =   7.6 ± 13.8  D_eq = 500.2 ± 19.4  χ²/dof =   1.00
+clock offsets, priors N(0, 0.5 s)        a′ = 270.9 ±  3.3  b′ = 231.2 ±  1.7  PA =   3.5 ±  2.3  D_eq = 500.6 ±  3.7  χ²/dof =  10.84
+fitted clock offsets [s]: Aosta Valley +0.57, Asiago -0.14, Biot, Nice -0.09, Crni Vrh -0.39, Gnosca -0.88, La Spezia +1.28, Mount Agliale +0.22, OCA, Nice -1.44, S. Marcello Pistoiese -0.27, Tavolaia -4.85, Varese, Schiaparelli Obs. +1.29, Vinon sur Verdon -0.03
+
+==============================================================================
+Near misses
+==============================================================================
+  Sabadell               consistent,  31.0 km from the limb
+  Salvatore Di Giacomo   consistent,  36.2 km from the limb
+  Agerola                consistent,  36.5 km from the limb
+  San Esteve             consistent,  42.6 km from the limb
+
+==============================================================================
+Posterior (along the chords with σ_limb)
+==============================================================================
+Posterior of LimbProblem: 20 walkers × 4000 steps (burn-in 1333), acceptance 0.53
+  center_f               =      58.982347  -8.610387 +9.226442
+  center_g               =    -244.270635  -5.240186 +5.973243
+  equatorial_radius      =     270.998343  -8.397548 +9.119133
+  oblateness             =       0.144584  -0.028252 +0.025990
+  position_angle         =       4.423906  -7.202750 +9.525174
+
+D_eq = 502.9 −13.6 +11.2 km (published 499.6 km), b′ = 232.2 −6.2 +5.8 km
+
+==============================================================================
+Astrometry
+==============================================================================
+RA 02 21 49.44338  Dec +28 24 13.4122 at 2018-01-28T21:53:36.6 UTC (σ 0.46, 0.33 mas); offset from JPL Horizons Δα cos δ = +1.79, Δδ = -7.58 mas
+
+==============================================================================
+Figures
+==============================================================================
+figures written to examples/output/2002tc302_2018

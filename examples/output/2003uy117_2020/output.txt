@@ -1,0 +1,70 @@
+
+==============================================================================
+Event and geometry (paper values in parentheses)
+==============================================================================
+4 positive and 13 negative chords; distance 33.47 au (33.47), shadow velocity 21.80 km/s (21.80),
+stellar diameter 0.43 km (0.4), Fresnel scale 1.32 km at 0.7 µm (1.32)
+
+==============================================================================
+Apparent limb (Table 3)
+==============================================================================
+published                      a′ = 141.0 ±  9.0  b′ =  94.0 ± 16.0  φ′ =  -31.0 ± 11.0  ε′ = 0.33 ± 0.11  D_eq = 228.0 ± 21.0  χ²/dof = 0.43
+radial residuals (as SORA)     a′ = 139.2 ±  9.6  b′ =  92.9 ± 12.9  φ′ =  -27.3 ± 11.3  ε′ = 0.33 ± 0.12  D_eq = 227.4 ± 13.5  χ²/dof = 0.41
+residuals along the chords     a′ = 138.2 ±  5.2  b′ =  94.2 ±  7.2  φ′ =  -29.8 ±  6.4  ε′ = 0.32 ± 0.05  D_eq = 228.2 ± 10.4  χ²/dof = 2.10
+closest negative chords:
+  CAHA220         consistent,   7.9 km from the limb
+  Albox           consistent,   8.2 km from the limb
+  Ibiza           consistent,   9.1 km from the limb
+  Las Negras      consistent,  59.5 km from the limb
+(the fitted centre, (-91.6, 77.0) km, refers to the current JPL orbit; the paper's (119, −10) km to JPL#20)
+
+==============================================================================
+Astrometry (Sect. 4.3)
+==============================================================================
+  Gaia DR3 star position, 2020-10-23T22:19:21.8 UTC: RA 03 23 26.21358  Dec +22 47 19.3179  (σ 0.38, 0.40 mas)
+  Gaia DR2 star position, 2020-10-23T22:19:21.8 UTC: RA 03 23 26.21408  Dec +22 47 19.3189  (σ 0.38, 0.40 mas)
+  published:                               RA 03 23 26.21404  Dec +22 47 19.3184  (σ 0.3, 0.4 mas)
+  (the published position matches the solution with the Gaia DR2 star position)
+
+==============================================================================
+Size, albedo
+==============================================================================
+area-equivalent diameter 231.8 -13.1 +17.2 km (published 228 ± 21), geometric albedo 13.4 -1.9 +1.9 % (0.139 ± 0.027)
+
+==============================================================================
+3-D shape: triaxial ellipsoid from the occultation and the light-curve amplitude
+==============================================================================
+least-squares solutions from different starts (all equally good):
+  χ² = 6.296  a = 159.4  b = 104.5  c =  91.6 km  aspect 69.8°  pole (326°, +49°)  D_eq,V = 230.3 km
+  χ² = 6.296  a = 163.1  b = 102.9  c =  90.7 km  aspect 66.6°  pole (332°, +45°)  D_eq,V = 230.1 km
+  χ² = 6.296  a = 164.2  b = 101.7  c =  90.6 km  aspect 65.1°  pole (334°, +43°)  D_eq,V = 229.6 km
+  χ² = 6.296  a = 166.2  b =  98.6  c =  91.1 km  aspect 61.9°  pole ( 26°, +84°)  D_eq,V = 228.6 km
+  χ² = 6.296  a = 190.8  b = 133.7  c =  91.1 km  aspect 81.3°  pole (303°, +55°)  D_eq,V = 264.9 km
+  χ² = 6.296  a = 190.9  b = 109.2  c =  81.4 km  aspect 65.1°  pole (  2°, +87°)  D_eq,V = 238.5 km
+published (grid search, conditional errors): a = 166 ± 12, b = 108 ± 12, c = 90 ± 13 km, aspect 70°, D_eq,V = 235 ± 25 km
+posterior, occultation + amplitude:
+  a = 168.0 -21.9 +30.5, b = 118.8 -16.5 +18.6, c = 93.1 -18.1 +12.7 km
+  volume-equivalent diameter 242.8 -23.9 +33.3 km, aspect (folded to 0–90°) 70.7 -19.0 +13.8°
+  pole in the hemisphere towards the observer (ψ < 90°) in 66 % of the samples
+  pole RA 305.3 -30.5 +51.0°, Dec 49.5 -23.3 +14.7°
+  (autocorrelation time ≤ 815 steps; acceptance 0.07)
+
+with the rotational phase, least-squares solutions from different starts:
+  χ² = 6.296  a = 160.3  b =  96.2  c =  92.9 km  aspect 61.4°  pole ( 16°, +83°)  D_eq,V = 225.4 km
+  χ² = 6.296  a = 160.6  b =  97.3  c =  92.4 km  aspect 62.3°  pole (  5°, +83°)  D_eq,V = 226.0 km
+  χ² = 6.296  a = 160.6  b =  97.3  c =  92.4 km  aspect 62.3°  pole (  5°, +83°)  D_eq,V = 226.0 km
+  χ² = 6.296  a = 160.6  b =  97.5  c =  92.3 km  aspect 62.5°  pole (  3°, +83°)  D_eq,V = 226.2 km
+  χ² = 6.296  a = 161.0  b =  98.8  c =  91.8 km  aspect 63.6°  pole (350°, +82°)  D_eq,V = 226.9 km
+  χ² = 6.296  a = 161.5  b = 103.0  c =  91.1 km  aspect 67.3°  pole (323°, +79°)  D_eq,V = 229.7 km
+posterior, occultation + amplitude + rotational phase:
+  a = 168.1 -20.3 +35.4, b = 113.9 -12.2 +17.3, c = 91.6 -20.1 +10.3 km
+  volume-equivalent diameter 240.9 -20.8 +19.9 km, aspect (folded to 0–90°) 69.0 -15.6 +12.8°
+  pole in the hemisphere towards the observer (ψ < 90°) in 59 % of the samples
+  pole RA 292.6 -17.7 +83.2°, Dec 55.3 -33.9 +19.8°
+  (autocorrelation time ≤ 731 steps; acceptance 0.15)
+published: a = 166 ± 12, b = 108 ± 12, c = 90 ± 13 km, D_eq,V = 235 ± 25 km, aspect 70°, pole (337 ± 10°, 62 ± 5°)
+
+==============================================================================
+Figures
+==============================================================================
+figures written to examples/output/2003uy117_2020

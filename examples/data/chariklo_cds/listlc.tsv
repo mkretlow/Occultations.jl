@@ -1,0 +1,81 @@
+#
+#   VizieR Astronomical Server vizier.idia.ac.za
+#    Date: 2026-11-02T20:40:29 [V7.6.1]
+#   In case of problem, please report to:	cds-question@unistra.fr
+#
+#
+#Coosys	J2000:	eq_FK5 J2000
+#INFO	service_protocol=ASU	  IVOID of the protocol through which the data was retrieved
+#INFO	request_date=2026-11-02T20:40:29	  Query execution date
+#INFO	request=https://vizier.idia.ac.za/viz-bin/asu-tsv?-source=J/A%2BA/652/A141/listlc&-out.all&-out.max=unlimited	  Full request URL
+#INFO	contact=cds-question@unistra.fr	  Email or URL to contact publisher
+#INFO	server_software=VizieR/7.6.1	  Software version
+#INFO	publisher=CDS	  Data centre that produced the VOTable
+
+#RESOURCE=yCat_36520141
+#Name: J/A+A/652/A141
+#Title: Chariklo's system from stellar occultations (Morgado, 2021)
+#INFO	ivoid=ivo://cds.vizier/j/a+a/652/a141	    IVOID of underlying data collection
+#INFO	data_ivoid=ivo://cds.vizier/j/a+a/652/a141	    IVOID of underlying data collection
+#INFO	creator=Morgado B.E.	    First author or institution
+#INFO	cites=bibcode:2021A&A...652A.141M	    Article or Data origin sources
+#INFO	journal=A&A	    Journal name
+#INFO	original_date=2021	    Year of the article publication
+#INFO	reference_url=https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/652/A141	    Dataset landing page
+#INFO	citation=doi:10.26093/cds/vizier.36520141	    Dataset identifier that can be used for citation
+#INFO	publication_date=2021-10-05	    Date of first publication in the data centre
+#INFO	rights_uri=https://cds.unistra.fr/vizier-org/licences_vizier.html	    Licence URI
+#Table	J_A_A_652_A141_listlc:
+#Name: J/A+A/652/A141/listlc
+#Title: List of light curves, including non-detections
+#Column	recno	(I8)	Record number assigned by the VizieR team. Should Not be used for identification.	[ucd=meta.record]
+#Column	Date	(A10)	Observation date	[ucd=time.epoch;obs]
+#Column	LC	(A2)	Show the light curves	[ucd=meta.ref.url]
+#Column	FileName	(a41)	Name of the light curve file in subdirectory lc	[ucd=meta.id;meta.file]
+recno	Date	LC	FileName
+ 	"Y:M:D"	 	
+--------	----------	--	-----------------------------------------
+       1	2017-04-09	LC	Chariklo_2017-04-09_Hakos.dat
+       2	2017-04-09	LC	Chariklo_2017-04-09_Wabi.dat
+       3	2017-04-09	LC	Chariklo_2017-04-09_Weaver.dat
+       4	2017-06-22	LC	Chariklo_2017-06-22_Hakos.dat
+       5	2017-06-22	LC	Chariklo_2017-06-22_Onduruquea.dat
+       6	2017-06-22	LC	Chariklo_2017-06-22_Outeniqua.dat
+       7	2017-06-22	LC	Chariklo_2017-06-22_Tivoli.dat
+       8	2017-06-22	LC	Chariklo_2017-06-22_Windhoek_Backes.dat
+       9	2017-06-22	LC	Chariklo_2017-06-22_Windhoek_Meza.dat
+      10	2017-07-23	LC	Chariklo_2017-07-23_1m_LaSilla.dat
+      11	2017-07-23	LC	Chariklo_2017-07-23_Bilac.dat
+      12	2017-07-23	LC	Chariklo_2017-07-23_CachiAdentro.dat
+      13	2017-07-23	LC	Chariklo_2017-07-23_CerroBurek.dat
+      14	2017-07-23	LC	Chariklo_2017-07-23_Ckoirama.dat
+      15	2017-07-23	LC	Chariklo_2017-07-23_ConodeArita.dat
+      16	2017-07-23	LC	Chariklo_2017-07-23_Danish_Red.dat
+      17	2017-07-23	LC	Chariklo_2017-07-23_Danish_Visual.dat
+      18	2017-07-23	LC	Chariklo_2017-07-23_ElRodeo.dat
+      19	2017-07-23	LC	Chariklo_2017-07-23_ElSalvador.dat
+      20	2017-07-23	LC	Chariklo_2017-07-23_FozdoIguacu.dat
+      21	2017-07-23	LC	Chariklo_2017-07-23_IncadeOro.dat
+      22	2017-07-23	LC	Chariklo_2017-07-23_OPD.dat
+      23	2017-07-23	LC	Chariklo_2017-07-23_PROMPT.dat
+      24	2017-07-23	LC	Chariklo_2017-07-23_SARA.dat
+      25	2017-07-23	LC	Chariklo_2017-07-23_SPA_Fabrega.dat
+      26	2017-07-23	LC	Chariklo_2017-07-23_SPA_Maury.dat
+      27	2017-07-23	LC	Chariklo_2017-07-23_SPA_Morales.dat
+      28	2017-07-23	LC	Chariklo_2017-07-23_SPA_Soulier.dat
+      29	2017-07-23	LC	Chariklo_2017-07-23_SSO_Europa.dat
+      30	2017-07-23	LC	Chariklo_2017-07-23_SSO_Io.dat
+      31	2017-07-23	LC	Chariklo_2017-07-23_SaoJosedoRioPreto.dat
+      32	2017-07-23	LC	Chariklo_2017-07-23_TRAPPIST-South.dat
+      33	2017-07-23	LC	Chariklo_2017-07-23_TolarGrande.dat
+      34	2017-07-23	LC	Chariklo_2017-07-23_VLT.dat
+      35	2017-08-24	LC	Chariklo_2017-08-24_OPD.dat
+      36	2019-08-02	LC	Chariklo_2019-08-02_Murrumbateman.dat
+      37	2019-08-02	LC	Chariklo_2019-08-02_Yass.dat
+      38	2019-08-08	LC	Chariklo_2019-08-08_Langevin.dat
+      39	2019-08-08	LC	Chariklo_2019-08-08_LesMakes.dat
+      40	2019-08-08	LC	Chariklo_2019-08-08_Maido.dat
+      41	2019-08-08	LC	Chariklo_2019-08-08_SteMarie_Hesler.dat
+      42	2019-08-08	LC	Chariklo_2019-08-08_SteMarie_Mondon.dat
+      43	2020-06-19	LC	Chariklo_2020-06-19_Glenlee.dat
+

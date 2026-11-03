@@ -1,0 +1,29 @@
+
+==============================================================================
+Event, geometry and chords (Table 2 in parentheses)
+==============================================================================
+distance 42.573 au (42.572), shadow velocity 24.43 km/s
+  Schindler & Wolf  duration 25.893 s (25.893), chord 641.2 km (641.0 ± 3.9)
+  Olsen             duration 21.355 s (21.355), chord 526.1 km (525.9 ± 25.4)
+  Bardecker         duration 19.219 s (19.219), chord 475.8 km (475.7 ± 11.2)
+
+==============================================================================
+Ellipse (Table 5: full axes; θ of the major axis from east towards north)
+==============================================================================
+published (error-in-variables)   2a =  645.8 ±  5.7  2b =  597.8 ± 12.7  θ =  21.2 ±  5.7°  a/b = 1.080
+residuals along the chords       2a =  645.9 ±  7.2  2b =  595.4 ± 36.9  θ =  20.7 ± 14.6°  a/b = 1.085  D_eq = 620.1 km  χ²/dof = 0.04
+radial residuals                 2a =  645.8 ±  8.2  2b =  595.3 ± 47.0  θ =  20.5 ± 19.2°  a/b = 1.085  D_eq = 620.0 km  χ²/dof = 0.03
+Six contacts and five ellipse parameters leave one degree of freedom: the covariance is a
+local, Gaussian approximation. The posterior shows the actual (non-Gaussian) uncertainty:
+
+==============================================================================
+Posterior
+==============================================================================
+2a = 652.0 -9.3 +20.6 km, 2b = 623.0 -39.2 +22.4 km, θ = 40.0 -24.0 +72.0°, D_eq = 636.7 -21.8 +20.3 km
+a/b = 1.063 -0.044 +0.059 (paper 1.080 ± 0.025)
+geometric albedo 14.3 -1.1 +1.2 % (paper 15.0 ± 1.6 %)
+
+==============================================================================
+Figures
+==============================================================================
+figures written to examples/output/2007uk126_2014

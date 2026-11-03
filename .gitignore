@@ -1,0 +1,8 @@
+Manifest.toml
+*.png
+!examples/output/**/*.png
+*.obj
+!examples/output/**/*.obj
+work/
+references/*.pdf
+references/**/*.pdf

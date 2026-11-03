@@ -1,0 +1,47 @@
+# Best-fit synthetic refraction profiles (Fig. 3 and Extended Data Fig. 3)
+
+This directory contains the best-fit model profiles (synthetic occultation/refraction curves) used in:
+Arimatsu, K., et al., “Detection of an atmosphere on a trans-Neptunian object beyond Pluto”, Nature Astronomy, in revision.
+
+In the manuscript, the observed flux points are plotted as a function of the projected distance from the centre of (612533) 2002 XV93, derived from the circular shadow solution (Fig. 1). The solid curves shown in Fig. 3 (and the bulk-density comparison in Extended Data Fig. 3) correspond to the “best-fit” synthetic profiles provided here.
+
+These CSV files are outputs of the ray-tracing atmospheric refraction model described in the manuscript Methods. For each atmospheric-composition case, the model parameters (including the body radius, surface pressure, and central occultation time) were obtained by χ2 minimization to the Kiso light curve, and the resulting best-fit synthetic profile is tabulated as a function of distance to the body centre.
+
+## Files and naming convention
+
+File names follow:
+`bestfitmodel_<composition>_rho<rho>.csv`
+
+`<composition>` indicates the assumed main atmospheric component in the fit:
+`ch4` = pure CH₄ case  
+`n2`  = N₂-dominant case (with trace CH₄ heating as described in the Methods)  
+`co`  = CO-dominant case (with trace CH₄ heating as described in the Methods)
+
+`<rho>` indicates the assumed bulk density of 2002 XV93 (kg m⁻³) used to compute the gravity profile in the hydrostatic model:
+`rho1500` = 1.5×10³ kg m⁻³ (fiducial case in the manuscript)  
+`rho1000` = 1.0×10³ kg m⁻³ (systematic check shown in Extended Data Fig. 3)
+
+The six files in this directory are:
+`bestfitmodel_ch4_rho1500.csv`  
+`bestfitmodel_n2_rho1500.csv`  
+`bestfitmodel_co_rho1500.csv`  
+`bestfitmodel_ch4_rho1000.csv`  
+`bestfitmodel_n2_rho1000.csv`  
+`bestfitmodel_co_rho1000.csv`
+
+## CSV format
+
+Each file has two columns (with a header row):
+
+1) `distance to center [km]`  
+Projected distance from the centre of 2002 XV93 in the occultation shadow plane (km). This is the x-axis quantity used for the refraction profile in Fig. 3.
+
+2) `normalized intensity`  
+Model-predicted stellar intensity (dimensionless), normalized to the unocculted flux (=1 far from the event). Values near 0 correspond to deep attenuation/occultation in the model.
+
+The profiles are tabulated at 200 distance samples over the range used for plotting in the manuscript; users may interpolate these curves for visualization.
+
+## Contact
+
+Questions about these model-profile files should be directed to the corresponding author:
+Ko Arimatsu (ko.arimatsu@nao.ac.jp)

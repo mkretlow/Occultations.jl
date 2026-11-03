@@ -1,0 +1,109 @@
+#
+#   VizieR Astronomical Server vizier.idia.ac.za
+#    Date: 2026-11-02T20:40:27 [V7.6.1]
+#   In case of problem, please report to:	cds-question@unistra.fr
+#
+#
+#Coosys	J2000:	eq_FK5 J2000
+#INFO	service_protocol=ASU	  IVOID of the protocol through which the data was retrieved
+#INFO	request_date=2026-11-02T20:40:27	  Query execution date
+#INFO	request=https://vizier.idia.ac.za/viz-bin/asu-tsv?-source=J/A%2BA/652/A141/tablec2&-out.all&-out.max=unlimited	  Full request URL
+#INFO	contact=cds-question@unistra.fr	  Email or URL to contact publisher
+#INFO	server_software=VizieR/7.6.1	  Software version
+#INFO	publisher=CDS	  Data centre that produced the VOTable
+
+#RESOURCE=yCat_36520141
+#Name: J/A+A/652/A141
+#Title: Chariklo's system from stellar occultations (Morgado, 2021)
+#INFO	ivoid=ivo://cds.vizier/j/a+a/652/a141	    IVOID of underlying data collection
+#INFO	data_ivoid=ivo://cds.vizier/j/a+a/652/a141	    IVOID of underlying data collection
+#INFO	creator=Morgado B.E.	    First author or institution
+#INFO	cites=bibcode:2021A&A...652A.141M	    Article or Data origin sources
+#INFO	journal=A&A	    Journal name
+#INFO	original_date=2021	    Year of the article publication
+#INFO	reference_url=https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/652/A141	    Dataset landing page
+#INFO	citation=doi:10.26093/cds/vizier.36520141	    Dataset identifier that can be used for citation
+#INFO	publication_date=2021-10-05	    Date of first publication in the data centre
+#INFO	rights_uri=https://cds.unistra.fr/vizier-org/licences_vizier.html	    Licence URI
+#Table	J_A_A_652_A141_tablec2:
+#Name: J/A+A/652/A141/tablec2
+#Title: Fitted ring parameters in the ring plane obtained for each light curve
+#Column	recno	(I8)	Record number assigned by the VizieR team. Should Not be used for identification.	[ucd=meta.record]
+#Column	Station	(a14)	Observational Station	[ucd=meta.id;instr.obsty]
+#Column	Date	(A10)	Date and time of the event (ISO)	[ucd=time.epoch]
+#Column	Ring	(A3)	Ring identification	[ucd=meta.id;meta.main]
+#Column	Det	(A3)	Detection identification	[ucd=meta.id;instr.saturation]
+#Column	r	(F7.3)	Radial distance	[ucd=pos.distance]
+#Column	E_r	(F6.3)	Error on Radial distance (upper value)	[ucd=stat.error;stat.max]
+#Column	e_r	(F6.3)	Error on Radial distance (lower value)	[ucd=stat.error]
+#Column	l_Wr	(A1)	Limit flag on Wr	[ucd=meta.code.error]
+#Column	Wr	(F6.3)	Radial width of the ring	[ucd=src.morph.scLength]
+#Column	E_Wr	(F6.3)	Error on Radial width of the ring (upper value)	[ucd=stat.error;stat.max]
+#Column	e_Wr	(F6.3)	Error on Radial width of the ring (lower value)	[ucd=stat.error]
+#Column	pN	(F6.3)	Normal opacity of the ring	[ucd=phys.absorption.coeff]
+#Column	E_pN	(F6.3)	Error on Normal opacity of the ring (upper value)	[ucd=stat.error;stat.max]
+#Column	e_pN	(F6.3)	Error on Normal opacity of the ring (lower value)	[ucd=stat.error]
+#Column	l_Ep	(A1)	Limit flag on Ep	[ucd=meta.code.error]
+#Column	Ep	(F6.3)	Equivalent width of the ring	[ucd=src.morph.scLength]
+#Column	E_Ep	(F6.3)	Error on Equivalent width of the ring (upper value)	[ucd=stat.error;stat.max]
+#Column	e_Ep	(F6.3)	Error on Equivalent width of the ring (lower value)	[ucd=stat.error]
+#Column	N	(I2)	Number of point within each detection	[ucd=meta.number]
+#Column	(1-phi0)/RMS	(F5.2)	Flux depth over light curve RMS	[ucd=stat.error]
+recno	Station	Date	Ring	Det	r	E_r	e_r	l_Wr	Wr	E_Wr	e_Wr	pN	E_pN	e_pN	l_Ep	Ep	E_Ep	e_Ep	N	(1-phi0)/RMS
+ 	 	"Y:M:D"	 	 	km	km	km	 	km	km	km	 	 	 	 	 	 	 	 	
+--------	--------------	----------	---	---	-------	------	------	-	------	------	------	------	------	------	-	------	------	------	--	-----
+       1	Glenlee       	2020-06-19	C1R	1st	392.402	10.723	10.723	 	40.396	 8.286	 8.286	 0.177	 0.076	 0.048	 	 7.192	 2.381	 1.602	 3	 2.83
+       2	Glenlee       	2020-06-19	C1R	2nd	384.352	11.825	11.825	 	 6.465	10.634	 2.946	 0.590	 0.255	 0.460	 	 3.814	 1.956	 2.148	 1	 3.22
+       3	OPD           	2017-08-24	C1R	1st	391.700	 6.109	 6.109	 	 9.807	 1.724	 5.492	 0.214	 0.534	 0.042	 	 2.103	 1.769	 0.296	 2	 2.98
+       4	OPD           	2017-08-24	C1R	2nd	384.245	 3.826	 3.826	 	 6.465	10.634	 2.946	 0.590	 0.255	 0.460	 	 3.814	 1.956	 2.148	 1	 2.88
+       5	SPA - Fabrega 	2017-07-23	C1R	2nd	394.185	36.059	25.198	 	27.151	33.033	27.151	 0.234	 0.529	 0.127	 	18.137	 2.611	16.683	 1	 4.01
+       6	VLT           	2017-07-23	C1R	1st	386.211	 0.267	 0.267	 	 6.596	 0.262	 0.262	 0.297	 0.009	 0.009	 	 1.959	 0.140	 0.025	 4	23.52
+       7	VLT           	2017-07-23	C1R	2nd	386.274	 0.355	 0.355	 	 6.524	 0.360	 0.360	 0.327	 0.020	 0.020	 	 2.133	 0.255	 0.255	 3	24.44
+       8	SSO           	2017-07-23	C1R	1st	388.432	11.337	11.337	 	 7.920	14.125	 3.701	 0.394	 0.362	 0.267	 	 3.118	 0.861	 1.287	 2	 7.65
+       9	SSO           	2017-07-23	C1R	2nd	388.507	 0.491	 0.491	 	 4.760	12.671	 0.122	 0.749	 0.012	 0.637	 	 3.565	 0.090	 1.658	 2	 8.90
+      10	Tolar Grande  	2017-07-23	C1R	1st	391.109	 1.646	 1.646	 	 8.670	 1.635	 1.635	 0.207	 0.043	 0.043	 	 1.795	 0.782	 0.782	 3	 4.74
+      11	Tolar Grande  	2017-07-23	C1R	2nd	390.969	 1.222	 1.222	 	 6.068	 1.229	 1.229	 0.339	 0.069	 0.069	 	 2.057	 0.920	 0.920	 3	 7.33
+      12	El Rodeo      	2017-07-23	C1R	1st	384.165	 9.431	 9.431	 	 7.920	14.125	 3.701	 0.394	 0.362	 0.267	 	 3.118	 0.861	 1.287	 3	 2.61
+      13	El Rodeo      	2017-07-23	C1R	2nd	384.024	 5.652	 5.652	 	15.103	 4.076	 3.993	 0.199	 0.108	 0.100	 	 3.004	 1.295	 1.346	 4	 1.75
+      14	El Salvador   	2017-07-23	C1R	1st	390.513	 1.331	 1.331	 	 7.811	 1.367	 0.824	 0.388	 0.187	 0.088	 	 3.033	 1.428	 0.570	 7	 2.62
+      15	El Salvador   	2017-07-23	C1R	2nd	390.095	 5.325	 5.325	 	 5.390	 7.818	 1.695	 0.243	 0.159	 0.137	 	 1.307	 0.854	 0.530	 6	 1.72
+      16	Inca de Oro   	2017-07-23	C1R	1st	390.145	 4.428	 4.428	 	 6.614	 2.553	 4.898	 0.228	 0.512	 0.094	 	 1.510	 0.621	 0.714	 3	 2.35
+      17	Inca de Oro   	2017-07-23	C1R	2nd	389.436	 1.440	 1.440	 	 3.915	 1.020	 1.561	 0.394	 0.366	 0.126	 	 1.542	 1.077	 0.423	 3	 3.29
+      18	Danish Visual 	2017-07-23	C1R	1st	386.747	 0.185	 0.185	 	 6.064	 0.179	 0.179	 0.323	 0.019	 0.019	 	 1.959	 0.176	 0.176	11	 8.22
+      19	Danish Visual 	2017-07-23	C1R	2nd	385.576	 0.369	 0.369	 	 8.191	 0.378	 0.378	 0.349	 0.022	 0.022	 	 2.859	 0.320	 0.320	14	 8.60
+      20	Danish Red    	2017-07-23	C1R	1st	386.840	 0.167	 0.167	 	 5.779	 0.162	 0.162	 0.288	 0.014	 0.014	 	 1.664	 0.130	 0.130	12	 9.75
+      21	Danish Red    	2017-07-23	C1R	2nd	385.686	 0.240	 0.240	 	 8.326	 0.246	 0.246	 0.278	 0.014	 0.014	 	 2.315	 0.188	 0.188	15	 9.62
+      22	1m -- La Silla	2017-07-23	C1R	1st	387.081	 0.573	 0.573	 	 6.035	 0.557	 0.557	 0.300	 0.028	 0.028	 	 1.811	 0.352	 0.352	 3	 8.59
+      23	1m -- La Silla	2017-07-23	C1R	2nd	385.908	 0.388	 0.388	 	 9.107	 0.398	 0.398	 0.294	 0.021	 0.021	 	 2.677	 0.317	 0.317	 5	 8.42
+      24	TRAPPIST-South	2017-07-23	C1R	1st	376.900	60.358	49.445	 	25.448	57.334	22.207	 0.475	 0.287	 0.440	 	12.099	 7.152	10.784	 1	 2.95
+      25	TRAPPIST-South	2017-07-23	C1R	2nd	375.774	55.900	46.330	 	19.586	57.596	16.672	 0.608	 0.154	 0.575	 	11.918	 5.874	10.760	 1	 2.85
+      26	OPD           	2017-07-23	C1R	1st	385.321	 0.149	 0.149	 	 6.456	 0.134	 0.134	 0.291	 0.012	 0.012	 	 1.879	 0.118	 0.118	 7	21.10
+      27	OPD           	2017-07-23	C1R	2nd	385.441	 0.131	 0.131	 	 8.920	 0.141	 0.141	 0.294	 0.009	 0.009	 	 2.622	 0.123	 0.123	 8	21.41
+      28	SARA          	2017-07-23	C1R	-- 	388.928	 0.931	 0.852	>	 4.443	 0.244	 0.244	 0.289	 0.011	 0.011	>	 1.284	 0.122	 0.122	 3	 6.58
+      29	PROMPT        	2017-07-23	C1R	-- 	389.823	 0.682	 0.405	>	 4.819	 0.146	 0.146	 0.284	 0.012	 0.012	>	 1.369	 0.101	 0.101	 9	16.38
+      30	Outeniqua     	2017-06-22	C1R	1st	388.073	 2.716	 2.716	 	 8.266	 1.972	 2.750	 0.410	 0.367	 0.132	 	 3.391	 2.654	 1.081	 4	 2.45
+      31	Outeniqua     	2017-06-22	C1R	2nd	390.936	 2.179	 2.179	 	 8.104	 1.706	 1.880	 0.492	 0.285	 0.177	 	 3.989	 2.919	 1.370	 4	 2.65
+      32	Onduruquea    	2017-06-22	C1R	1st	391.014	 0.739	 0.739	 	 5.891	 0.441	 0.636	 0.360	 0.042	 0.057	 	 2.121	 0.179	 0.351	 3	 6.09
+      33	Onduruquea    	2017-06-22	C1R	2nd	390.503	 0.711	 0.711	 	 5.550	 0.532	 0.486	 0.314	 0.045	 0.047	 	 1.744	 0.239	 0.260	 3	 5.28
+      34	Wdh - Backes  	2017-06-22	C1R	1st	393.714	 3.655	 3.655	 	 7.459	 2.267	 3.973	 0.274	 0.504	 0.062	 	 2.045	 1.514	 0.381	 2	 5.51
+      35	Wdh - Backes  	2017-06-22	C1R	2nd	389.827	 3.439	 3.439	 	 9.987	 2.967	 2.690	 0.175	 0.092	 0.052	 	 1.746	 0.560	 0.416	 3	 3.90
+      36	Wdh - Meza    	2017-06-22	C1R	1st	391.699	 5.323	 5.323	 	 8.189	 3.029	 6.027	 0.193	 0.585	 0.064	 	 1.577	 1.340	 0.590	 2	 3.01
+      37	Wdh - Meza    	2017-06-22	C1R	2nd	389.881	 2.284	 2.284	 	 3.731	 2.011	 0.731	 0.755	 0.023	 0.411	 	 2.816	 0.810	 1.172	 1	 4.82
+      38	Tivoli        	2017-06-22	C1R	1st	391.348	 1.781	 1.781	 	 3.872	 1.269	 2.034	 0.320	 0.452	 0.095	 	 1.240	 0.388	 0.334	 2	 3.43
+      39	Tivoli        	2017-06-22	C1R	2nd	390.145	 1.394	 1.394	 	 3.909	 1.008	 1.561	 0.402	 0.298	 0.109	 	 1.571	 0.489	 0.382	 3	 4.04
+      40	Hakos         	2017-06-22	C1R	1st	387.490	 0.350	 0.350	 	 5.095	 0.273	 0.197	 0.342	 0.033	 0.043	 	 1.740	 0.202	 0.176	 4	 5.57
+      41	Hakos         	2017-06-22	C1R	2nd	393.668	 0.452	 0.452	 	 5.558	 0.365	 0.426	 0.313	 0.031	 0.043	 	 1.739	 0.125	 0.250	 4	 5.11
+      42	Wabi Lodge    	2017-04-09	C1R	1st	386.859	 0.635	 0.635	 	 7.056	 0.258	 0.258	 0.241	 0.035	 0.035	 	 1.700	 0.318	 0.318	16	 2.43
+      43	Wabi Lodge    	2017-04-09	C1R	2nd	389.603	 0.565	 0.565	 	 5.725	 0.167	 0.167	 0.326	 0.044	 0.044	 	 1.866	 0.314	 0.314	12	 3.07
+      44	Weaver R. L.  	2017-04-09	C1R	1st	388.185	 0.240	 0.240	 	 7.591	 0.717	 0.717	 0.287	 0.019	 0.019	 	 2.179	 0.364	 0.364	18	 4.02
+      45	Weaver R. L.  	2017-04-09	C1R	2nd	387.684	 0.218	 0.218	 	 5.712	 0.581	 0.581	 0.406	 0.023	 0.023	 	 2.319	 0.381	 0.381	15	 5.18
+      46	Hakos         	2017-04-09	C1R	2nd	388.314	 0.200	 0.200	 	 5.642	 0.205	 0.205	 0.411	 0.025	 0.025	 	 2.319	 0.230	 0.230	16	 8.63
+      47	VLT           	2017-07-23	C2R	1st	401.125	 0.630	 0.630	 	 3.716	 0.631	 0.527	 0.045	 0.005	 0.006	 	 0.168	 0.016	 0.020	 2	 4.26
+      48	VLT           	2017-07-23	C2R	2nd	400.790	 0.248	 0.248	 	 0.159	 3.110	 0.097	 0.664	 0.099	 0.631	 	 0.105	 0.096	 0.061	 1	 4.05
+      49	Danish Visual 	2017-07-23	C2R	1st	400.417	 0.425	 0.425	 	 0.277	 0.640	 0.129	 0.445	 0.317	 0.294	 	 0.123	 0.036	 0.026	 4	 2.65
+      50	Danish Visual 	2017-07-23	C2R	2nd	400.944	 0.213	 0.213	 	 0.258	 0.161	 0.072	 0.598	 0.158	 0.264	 	 0.154	 0.039	 0.034	 4	 4.08
+      51	Danish Red    	2017-07-23	C2R	1st	400.805	 0.543	 0.543	 	 0.191	 1.233	 0.073	 0.500	 0.212	 0.420	 	 0.095	 0.021	 0.016	 4	 2.96
+      52	Danish Red    	2017-07-23	C2R	2nd	400.286	 0.504	 0.504	 	 0.801	 0.440	 0.559	 0.158	 0.282	 0.056	 	 0.127	 0.029	 0.035	 4	 2.70
+      53	OPD           	2017-07-23	C2R	1st	399.263	 0.530	 0.530	 	 0.631	 0.545	 0.185	 0.152	 0.067	 0.073	 	 0.096	 0.015	 0.012	 1	 5.75
+      54	OPD           	2017-07-23	C2R	2nd	400.301	 0.095	 0.095	 	 0.095	 0.015	 0.010	 0.759	 0.002	 0.091	 	 0.072	 0.010	 0.009	 2	 3.78
+

@@ -1,0 +1,130 @@
+#
+#   VizieR Astronomical Server vizier.idia.ac.za
+#    Date: 2026-11-02T20:40:25 [V7.6.1]
+#   In case of problem, please report to:	cds-question@unistra.fr
+#
+#
+#Coosys	J2000:	eq_FK5 J2000
+#INFO	service_protocol=ASU	  IVOID of the protocol through which the data was retrieved
+#INFO	request_date=2026-11-02T20:40:26	  Query execution date
+#INFO	request=https://vizier.idia.ac.za/viz-bin/asu-tsv?-source=J/A%2BA/652/A141/tablec1&-out.all&-out.max=unlimited	  Full request URL
+#INFO	contact=cds-question@unistra.fr	  Email or URL to contact publisher
+#INFO	server_software=VizieR/7.6.1	  Software version
+#INFO	publisher=CDS	  Data centre that produced the VOTable
+
+#RESOURCE=yCat_36520141
+#Name: J/A+A/652/A141
+#Title: Chariklo's system from stellar occultations (Morgado, 2021)
+#INFO	ivoid=ivo://cds.vizier/j/a+a/652/a141	    IVOID of underlying data collection
+#INFO	data_ivoid=ivo://cds.vizier/j/a+a/652/a141	    IVOID of underlying data collection
+#INFO	creator=Morgado B.E.	    First author or institution
+#INFO	cites=bibcode:2021A&A...652A.141M	    Article or Data origin sources
+#INFO	journal=A&A	    Journal name
+#INFO	original_date=2021	    Year of the article publication
+#INFO	reference_url=https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/652/A141	    Dataset landing page
+#INFO	citation=doi:10.26093/cds/vizier.36520141	    Dataset identifier that can be used for citation
+#INFO	publication_date=2021-10-05	    Date of first publication in the data centre
+#INFO	rights_uri=https://cds.unistra.fr/vizier-org/licences_vizier.html	    Licence URI
+#Table	J_A_A_652_A141_tablec1:
+#Name: J/A+A/652/A141/tablec1
+#Title: Fitted parameters obtained for each light curve with a positive detection
+#Column	recno	(I8)	Record number assigned by the VizieR team. Should Not be used for identification.	[ucd=meta.record]
+#Column	Station	(a19)	Observational Station	[ucd=meta.id;instr.obsty]
+#Column	Date	(A10)	Date and time of the event (ISO)	[ucd=time.epoch]
+#Column	Det	(A7)	Detection identification (1)	[ucd=meta.id;instr.saturation]
+#Column	Imm.Time	(A12)	Moment of star disappearance, immersion time (ISO)	[ucd=time.epoch]
+#Column	e_Imm.Time	(F6.3)	Uncertainty on Imm.Time	[ucd=stat.error]
+#Column	Em.Time	(A12)	Moment of star reappearance, emersion time (ISO)	[ucd=time.epoch]
+#Column	e_Em.Time	(F6.3)	Uncertainty on Em.Time	[ucd=stat.error]
+#Column	Dur	(F6.3)	Duration of the event	[ucd=time.duration]
+#Column	E_Dur	(F6.3)	Error on Duration of the event (upper value)	[ucd=stat.error;stat.max]
+#Column	e_Dur	(F6.3)	Error on Duration of the event (lower value)	[ucd=stat.error]
+#Column	Obl	(F6.3)	Apparent Oblatness	[ucd=meta.note]
+#Column	E_Obl	(F6.3)	? Error on Apparent Oblatness (upper value)	[ucd=stat.error;stat.max]
+#Column	e_Obl	(F6.3)	? Error on Apparent Oblatness (lower value)	[ucd=stat.error]
+#Column	chi2	(F6.3)	Best fit Chi-Squared or best fit Chi-Squared for immersion	[ucd=stat.fit.chi2;meta.modelled]
+#Column	chi2em	(F6.3)	? Best fit Chi-Squared for emersion	[ucd=stat.fit.chi2]
+#Column	LC	(A2)	Show the light curves	[ucd=meta.ref.url]
+#Column	FileName	(a41)	Name of the light curve file in subdirectory lc	[ucd=meta.id;meta.file]
+recno	Station	Date	Det	Imm.Time	e_Imm.Time	Em.Time	e_Em.Time	Dur	E_Dur	e_Dur	Obl	E_Obl	e_Obl	chi2	chi2em	LC	FileName
+ 	 	"Y:M:D"	 	"h:m:s"	s	"h:m:s"	s	s	s	s	 	 	 	 	 	 	
+--------	-------------------	----------	-------	------------	------	------------	------	------	------	------	------	------	------	------	------	--	-----------------------------------------
+       1	Glenlee            	2020-06-19	MB     	15:51:51.770	 0.089	15:51:59.334	 0.108	 7.564	 0.197	 0.197	 1.000	      	      	 0.978	      	LC	Chariklo_2020-06-19_Glenlee.dat
+       2	Glenlee            	2020-06-19	C1R 1st	15:51:37.601	 0.212	15:51:39.584	 0.295	 1.983	 0.507	 0.507	 0.225	 0.073	 0.073	 0.920	      	LC	Chariklo_2020-06-19_Glenlee.dat
+       3	Glenlee            	2020-06-19	C1R 2nd	15:52:13.703	 0.337	15:52:14.004	 0.296	 0.301	 0.633	 0.301	 0.696	 0.301	 0.543	 1.072	      	LC	Chariklo_2020-06-19_Glenlee.dat
+       4	Ste. Marie - Mondon	2019-08-08	MB     	21:38:15.627	 0.223	21:38:28.460	 0.140	12.833	 0.363	 0.363	 1.000	      	      	 0.787	 0.590	LC	Chariklo_2019-08-08_SteMarie_Mondon.dat
+       5	Ste. Marie - Hesler	2019-08-08	MB     	21:38:15.871	 0.244	21:38:28.447	 0.320	12.576	 0.564	 0.564	 1.000	      	      	 1.250	 0.847	LC	Chariklo_2019-08-08_SteMarie_Hesler.dat
+       6	Maido              	2019-08-08	MB     	21:38:16.659	 0.266	21:38:29.231	 0.109	12.572	 0.375	 0.375	 1.000	      	      	 1.349	 1.427	LC	Chariklo_2019-08-08_Maido.dat
+       7	Les Makes          	2019-08-08	MB     	21:38:16.415	 0.144	21:38:29.092	 0.146	12.667	 0.290	 0.290	 1.000	      	      	 0.998	 0.821	LC	Chariklo_2019-08-08_LesMakes.dat
+       8	Langevin           	2019-08-08	MB     	21:38:15.788	 0.094	21:38:28.339	 0.102	12.551	 0.196	 0.196	 1.000	      	      	 0.750	 0.816	LC	Chariklo_2019-08-08_Langevin.dat
+       9	Yass               	2019-08-02	MB     	10:05:26.647	 0.371	10:05:35.976	 0.885	 9.302	 1.256	 1.256	 1.000	      	      	 0.681	 1.170	LC	Chariklo_2019-08-02_Yass.dat
+      10	Murrumbateman      	2019-08-02	MB     	10:05:26.657	 0.421	10:05:36.885	 0.405	10.229	 0.826	 0.826	 1.000	      	      	 0.288	 0.273	LC	Chariklo_2019-08-02_Murrumbateman.dat
+      11	OPD                	2017-08-24	MB     	02:54:17.122	 0.029	02:54:35.957	 0.039	18.834	 0.068	 0.068	 1.000	      	      	 0.795	      	LC	Chariklo_2017-08-24_OPD.dat
+      12	OPD                	2017-08-24	C1R 1st	02:54:03.343	 0.182	02:54:04.058	 0.175	 0.715	 0.357	 0.357	 0.782	 0.217	 0.548	 0.910	      	LC	Chariklo_2017-08-24_OPD.dat
+      13	OPD                	2017-08-24	C1R 2nd	02:54:48.556	 0.153	02:54:49.019	 0.071	 0.462	 0.224	 0.224	 0.286	 0.400	 0.056	 1.141	      	LC	Chariklo_2017-08-24_OPD.dat
+      14	S. P. A. - Fabrega 	2017-07-23	C1R 2nd	05:55:59.034	 1.290	05:56:01.222	 1.372	 2.188	 2.662	 2.188	 0.307	 0.693	 0.166	 1.385	      	LC	Chariklo_2017-07-23_SPA_Fabrega.dat
+      15	VLT                	2017-07-23	C1R 1st	05:55:51.104	 0.004	05:55:51.406	 0.008	 0.302	 0.012	 0.012	 0.390	 0.014	 0.014	 1.403	      	LC	Chariklo_2017-07-23_VLT.dat
+      16	VLT                	2017-07-23	C1R 2nd	05:56:14.242	 0.011	05:56:14.532	 0.006	 0.290	 0.016	 0.016	 0.429	 0.026	 0.026	 1.074	      	LC	Chariklo_2017-07-23_VLT.dat
+      17	VLT                	2017-07-23	C2R 1st	05:55:50.568	 0.016	05:55:50.740	 0.012	 0.172	 0.028	 0.028	 0.057	 0.007	 0.007	 1.873	      	LC	Chariklo_2017-07-23_VLT.dat
+      18	VLT                	2017-07-23	C2R 2nd	05:56:14.956	 0.055	05:56:15.011	 0.055	 0.055	 0.110	 0.055	 0.803	 0.196	 0.760	 0.968	      	LC	Chariklo_2017-07-23_VLT.dat
+      19	SSO                	2017-07-23	C1R 1st	05:55:50.836	 0.263	05:55:51.474	 0.243	 0.637	 0.506	 0.506	 0.949	 0.048	 0.847	 1.761	      	LC	Chariklo_2017-07-23_SSO_Io.dat
+      20	SSO                	2017-07-23	C1R 2nd	05:56:14.242	 0.215	05:56:14.731	 0.068	 0.288	 0.022	 0.022	 0.755	 0.187	 0.597	 1.197	      	LC	Chariklo_2017-07-23_SSO_Europa.dat
+      21	Tolar Grande       	2017-07-23	C1R 1st	05:55:37.371	 0.026	05:55:37.721	 0.040	 0.350	 0.066	 0.066	 0.271	 0.057	 0.057	 1.009	      	LC	Chariklo_2017-07-23_TolarGrande.dat
+      22	Tolar Grande       	2017-07-23	C1R 2nd	05:56:03.775	 0.022	05:56:04.017	 0.026	 0.242	 0.049	 0.049	 0.444	 0.090	 0.090	 1.132	      	LC	Chariklo_2017-07-23_TolarGrande.dat
+      23	Cono de Arita      	2017-07-23	MB     	05:55:48.909	 0.070	05:55:56.175	 0.074	 6.955	 0.160	 0.160	 1.000	      	      	 0.826	      	LC	Chariklo_2017-07-23_ConodeArita.dat
+      24	El Rodeo           	2017-07-23	MB     	05:55:41.690	 0.076	05:55:50.631	 0.091	 8.941	 0.167	 0.167	 1.000	      	      	 0.911	      	LC	Chariklo_2017-07-23_ElRodeo.dat
+      25	El Rodeo           	2017-07-23	C1R 1st	05:55:31.878	 0.288	05:55:32.374	 0.069	 0.496	 0.357	 0.357	 0.442	 0.533	 0.236	 0.955	      	LC	Chariklo_2017-07-23_ElRodeo.dat
+      26	El Rodeo           	2017-07-23	C1R 2nd	05:55:59.265	 0.107	05:55:59.819	 0.107	 0.554	 0.214	 0.214	 0.228	 0.178	 0.096	 0.888	      	LC	Chariklo_2017-07-23_ElRodeo.dat
+      27	Cachi Adentro      	2017-07-23	MB     	05:55:41.300	 0.062	05:55:51.360	 0.052	10.060	 0.114	 0.114	 1.000	      	      	 0.882	      	LC	Chariklo_2017-07-23_CachiAdentro.dat
+      28	Augusto de Lima    	2017-07-23	MB     	05:54:24.294	 0.270	05:54:35.248	 0.215	10.955	 0.485	 0.485	 1.000	      	      	 0.912	      	LC	Chariklo_2017-07-23_ElSalvador.dat
+      29	El Salvador        	2017-07-23	MB     	05:55:54.242	 0.027	05:56:06.002	 0.021	11.760	 0.049	 0.049	 1.000	      	      	 0.826	      	LC	Chariklo_2017-07-23_ElSalvador.dat
+      30	El Salvador        	2017-07-23	C1R 1st	05:55:45.710	 0.033	05:55:46.009	 0.017	 0.299	 0.049	 0.049	 0.590	 0.185	 0.185	 0.954	      	LC	Chariklo_2017-07-23_ElSalvador.dat
+      31	El Salvador        	2017-07-23	C1R 2nd	05:56:14.349	 0.056	05:56:14.660	 0.140	 0.311	 0.196	 0.196	 0.324	 0.182	 0.182	 0.944	      	LC	Chariklo_2017-07-23_ElSalvador.dat
+      32	Sao J. Rio Preto   	2017-07-23	MB     	05:54:39.593	 0.202	05:54:51.875	 0.201	12.282	 0.403	 0.403	 1.000	      	      	 1.123	      	LC	Chariklo_2017-07-23_SaoJosedoRioPreto.dat
+      33	Inca de Oro        	2017-07-23	MB     	05:55:54.765	 0.026	05:56:06.951	 0.026	12.186	 0.052	 0.052	 1.000	      	      	 0.838	      	LC	Chariklo_2017-07-23_IncadeOro.dat
+      34	Inca de Oro        	2017-07-23	C1R 1st	05:55:46.430	 0.043	05:55:46.651	 0.121	 0.220	 0.163	 0.163	 0.396	 0.437	 0.242	 1.296	      	LC	Chariklo_2017-07-23_IncadeOro.dat
+      35	Inca de Oro        	2017-07-23	C1R 2nd	05:56:15.079	 0.027	05:56:15.210	 0.025	 0.131	 0.053	 0.053	 0.559	 0.346	 0.192	 0.903	      	LC	Chariklo_2017-07-23_IncadeOro.dat
+      36	Bilac              	2017-07-23	MB     	05:54:46.233	 3.876	05:54:56.465	 2.694	10.232	 6.569	 6.569	 1.000	      	      	 0.552	      	LC	Chariklo_2017-07-23_Bilac.dat
+      37	Danish Visual      	2017-07-23	C1R 1st	05:55:54.536	 0.004	05:55:54.874	 0.006	 0.338	 0.010	 0.010	 0.423	 0.025	 0.025	 1.123	      	LC	Chariklo_2017-07-23_Danish_Visual.dat
+      38	Danish Visual      	2017-07-23	C1R 2nd	05:56:13.750	 0.011	05:56:14.183	 0.008	 0.433	 0.020	 0.020	 0.458	 0.029	 0.029	 1.433	      	LC	Chariklo_2017-07-23_Danish_Visual.dat
+      39	Danish Visual      	2017-07-23	C2R 1st	05:55:53.887	 0.010	05:55:53.914	 0.012	 0.027	 0.022	 0.022	 0.588	 0.362	 0.362	 0.994	      	LC	Chariklo_2017-07-23_Danish_Visual.dat
+      40	Danish Visual      	2017-07-23	C2R 2nd	05:56:14.868	 0.005	05:56:14.883	 0.006	 0.015	 0.011	 0.011	 0.723	 0.266	 0.266	 1.101	      	LC	Chariklo_2017-07-23_Danish_Visual.dat
+      41	Danish Red         	2017-07-23	C1R 1st	05:55:54.539	 0.004	05:55:54.861	 0.005	 0.322	 0.009	 0.009	 0.377	 0.018	 0.018	 1.077	      	LC	Chariklo_2017-07-23_Danish_Red.dat
+      42	Danish Red         	2017-07-23	C1R 2nd	05:56:13.752	 0.008	05:56:14.193	 0.005	 0.440	 0.013	 0.013	 0.365	 0.018	 0.018	 1.436	      	LC	Chariklo_2017-07-23_Danish_Red.dat
+      43	Danish Red         	2017-07-23	C2R 1st	05:55:53.838	 0.013	05:55:53.924	 0.015	 0.086	 0.028	 0.028	 0.115	 0.039	 0.039	 0.957	      	LC	Chariklo_2017-07-23_Danish_Red.dat
+      44	Danish Red         	2017-07-23	C2R 2nd	05:56:14.822	 0.006	05:56:14.862	 0.008	 0.040	 0.014	 0.014	 0.213	 0.036	 0.036	 0.904	      	LC	Chariklo_2017-07-23_Danish_Red.dat
+      45	1m La Silla        	2017-07-23	C1R 1st	05:55:54.519	 0.013	05:55:54.855	 0.018	 0.336	 0.031	 0.031	 0.394	 0.037	 0.037	 1.096	      	LC	Chariklo_2017-07-23_1m_LaSilla.dat
+      46	1m La Silla        	2017-07-23	C1R 2nd	05:56:13.745	 0.010	05:56:14.226	 0.011	 0.481	 0.021	 0.021	 0.386	 0.028	 0.028	 1.398	      	LC	Chariklo_2017-07-23_1m_LaSilla.dat
+      47	TRAPPIST-South     	2017-07-23	C1R 1st	05:55:54.498	 1.366	05:55:55.994	 1.743	 1.495	 3.110	 1.495	 0.067	 0.890	 0.018	 1.131	      	LC	Chariklo_2017-07-23_TRAPPIST-South.dat
+      48	TRAPPIST-South     	2017-07-23	C1R 2nd	05:56:12.782	 1.403	05:56:14.072	 1.498	 1.291	 2.902	 1.291	 0.506	 0.471	 0.448	 1.103	      	LC	Chariklo_2017-07-23_TRAPPIST-South.dat
+      49	OPD                	2017-07-23	C1R 1st	05:54:29.963	 0.009	05:54:30.731	 0.007	 0.769	 0.016	 0.016	 0.381	 0.016	 0.016	 2.155	      	LC	Chariklo_2017-07-23_OPD.dat
+      50	OPD                	2017-07-23	C1R 2nd	05:54:39.651	 0.006	05:54:40.534	 0.008	 0.883	 0.014	 0.014	 0.386	 0.012	 0.012	 2.909	      	LC	Chariklo_2017-07-23_OPD.dat
+      51	OPD                	2017-07-23	C2R 1st	05:54:28.778	 0.019	05:54:28.872	 0.027	 0.094	 0.045	 0.045	 0.214	 0.104	 0.104	 1.243	      	LC	Chariklo_2017-07-23_OPD.dat
+      52	OPD                	2017-07-23	C2R 2nd	05:54:41.699	 0.004	05:54:41.710	 0.004	 0.011	 0.008	 0.008	 0.978	 0.020	 0.115	 2.588	      	LC	Chariklo_2017-07-23_OPD.dat
+      53	SARA               	2017-07-23	C1R    	05:56:02.499	 0.205	05:56:06.988	 0.041	 4.488	 0.246	 0.246	 0.379	 0.014	 0.014	 1.113	      	LC	Chariklo_2017-07-23_SARA.dat
+      54	PROMPT             	2017-07-23	C1R    	05:56:02.260	 0.043	05:56:07.228	 0.107	 4.968	 0.150	 0.150	 0.373	 0.016	 0.016	 2.205	      	LC	Chariklo_2017-07-23_PROMPT.dat
+      55	Outeniqua Lodge    	2017-06-22	MB     	21:21:20.179	 0.032	21:21:30.193	 0.034	10.013	 0.066	 0.066	 1.000	      	      	 0.897	 0.905	LC	Chariklo_2017-06-22_Outeniqua.dat
+      56	Outeniqua Lodge    	2017-06-22	C1R 1st	21:21:11.469	 0.048	21:21:11.768	 0.053	 0.299	 0.101	 0.101	 0.527	 0.472	 0.170	 0.781	      	LC	Chariklo_2017-06-22_Outeniqua.dat
+      57	Outeniqua Lodge    	2017-06-22	C1R 2nd	21:21:39.450	 0.044	21:21:39.745	 0.037	 0.295	 0.081	 0.081	 0.633	 0.367	 0.227	 0.979	      	LC	Chariklo_2017-06-22_Outeniqua.dat
+      58	Onduruquea G. F.   	2017-06-22	MB     	21:21:22.023	 0.010	21:21:33.634	 0.011	11.610	 0.021	 0.021	 1.000	      	      	 0.809	 0.593	LC	Chariklo_2017-06-22_Onduruquea.dat
+      59	Onduruquea G. F.   	2017-06-22	C1R 1st	21:21:13.486	 0.012	21:21:13.702	 0.015	 0.216	 0.027	 0.027	 0.453	 0.063	 0.063	 1.058	      	LC	Chariklo_2017-06-22_Onduruquea.dat
+      60	Onduruquea G. F.   	2017-06-22	C1R 2nd	21:21:42.047	 0.014	21:21:42.251	 0.012	 0.204	 0.026	 0.026	 0.403	 0.059	 0.059	 0.946	      	LC	Chariklo_2017-06-22_Onduruquea.dat
+      61	Windhoek - Backes  	2017-06-22	MB     	21:21:17.234	 0.024	21:21:27.189	 0.026	 9.955	 0.050	 0.050	 1.000	      	      	 0.897	 1.124	LC	Chariklo_2017-06-22_Windhoek_Backes.dat
+      62	Windhoek - Backes  	2017-06-22	C1R 1st	21:21:07.646	 0.067	21:21:07.898	 0.069	 0.252	 0.136	 0.136	 0.352	 0.647	 0.080	 0.884	      	LC	Chariklo_2017-06-22_Windhoek_Backes.dat
+      63	Windhoek - Backes  	2017-06-22	C1R 2nd	21:21:35.709	 0.052	21:21:36.082	 0.076	 0.376	 0.128	 0.128	 0.225	 0.118	 0.067	 1.552	      	LC	Chariklo_2017-06-22_Windhoek_Backes.dat
+      64	Windhoek - Meza    	2017-06-22	MB     	21:21:17.288	 0.028	21:21:27.228	 0.034	 9.940	 0.062	 0.062	 1.000	      	      	 1.015	 1.187	LC	Chariklo_2017-06-22_Windhoek_Meza.dat
+      65	Windhoek - Meza    	2017-06-22	C1R 1st	21:21:07.718	 0.076	21:21:07.976	 0.122	 0.258	 0.198	 0.198	 0.247	 0.752	 0.083	 0.988	      	LC	Chariklo_2017-06-22_Windhoek_Meza.dat
+      66	Windhoek - Meza    	2017-06-22	C1R 2nd	21:21:35.825	 0.039	21:21:35.968	 0.046	 0.143	 0.085	 0.085	 0.970	 0.030	 0.528	 1.430	      	LC	Chariklo_2017-06-22_Windhoek_Meza.dat
+      67	Tivoli Lodge       	2017-06-22	MB     	21:21:15.478	 0.011	21:21:19.838	 0.038	 4.361	 0.049	 0.049	 1.000	      	      	 0.522	 0.817	LC	Chariklo_2017-06-22_Tivoli.dat
+      68	Tivoli Lodge       	2017-06-22	C1R 1st	21:21:03.630	 0.031	21:21:03.834	 0.038	 0.139	 0.069	 0.069	 0.412	 0.581	 0.122	 0.821	      	LC	Chariklo_2017-06-22_Tivoli.dat
+      69	Tivoli Lodge       	2017-06-22	C1R 2nd	21:21:30.580	 0.036	21:21:30.724	 0.018	 0.144	 0.054	 0.054	 0.517	 0.383	 0.140	 0.920	      	LC	Chariklo_2017-06-22_Tivoli.dat
+      70	Hakos              	2017-06-22	C1R 1st	21:21:10.218	 0.007	21:21:10.426	 0.007	 0.208	 0.014	 0.014	 0.433	 0.049	 0.059	 1.136	      	LC	Chariklo_2017-06-22_Hakos.dat
+      71	Hakos              	2017-06-22	C1R 2nd	21:21:36.347	 0.011	21:21:36.570	 0.007	 0.223	 0.018	 0.018	 0.390	 0.042	 0.042	 0.780	      	LC	Chariklo_2017-06-22_Hakos.dat
+      72	Wabi Lodge         	2017-04-09	MB     	02:11:36.536	 0.023	02:12:16.672	 0.021	40.154	 0.044	 0.044	 1.000	      	      	 0.640	 0.593	LC	Chariklo_2017-04-09_Wabi.dat
+      73	Wabi Lodge         	2017-04-09	C1R 1st	02:10:45.861	 0.045	02:10:47.259	 0.087	 1.398	 0.132	 0.132	 0.304	 0.044	 0.044	 1.085	      	LC	Chariklo_2017-04-09_Wabi.dat
+      74	Wabi Lodge         	2017-04-09	C1R 2nd	02:13:00.816	 0.054	02:13:01.868	 0.053	 1.052	 0.107	 0.107	 0.410	 0.056	 0.044	 0.975	      	LC	Chariklo_2017-04-09_Wabi.dat
+      75	Weaver R. L.       	2017-04-09	MB     	02:11:20.357	 0.010	02:12:15.199	 0.013	54.850	 0.023	 0.023	 1.000	      	      	 1.002	 0.968	LC	Chariklo_2017-04-09_Weaver.dat
+      76	Weaver R. L.       	2017-04-09	C1R 1st	02:10:38.477	 0.022	02:10:39.737	 0.024	 1.260	 0.046	 0.046	 0.361	 0.024	 0.024	 1.078	      	LC	Chariklo_2017-04-09_Weaver.dat
+      77	Weaver R. L.       	2017-04-09	C1R 2nd	02:12:56.960	 0.023	02:12:57.986	 0.007	 1.026	 0.030	 0.030	 0.511	 0.029	 0.029	 0.909	      	LC	Chariklo_2017-04-09_Weaver.dat
+      78	Hakos              	2017-04-09	C1R 2nd	02:13:09.054	 0.026	02:13:10.345	 0.020	 1.291	 0.047	 0.047	 0.518	 0.032	 0.032	 1.240	      	LC	Chariklo_2017-04-09_Hakos.dat
+

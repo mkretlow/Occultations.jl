@@ -1,0 +1,112 @@
+#
+#   VizieR Astronomical Server vizier.idia.ac.za
+#    Date: 2026-11-02T20:39:58 [V7.6.1]
+#   In case of problem, please report to:	cds-question@unistra.fr
+#
+#
+#Coosys	J2000:	eq_FK5 J2000
+#INFO	service_protocol=ASU	  IVOID of the protocol through which the data was retrieved
+#INFO	request_date=2026-11-02T20:39:58	  Query execution date
+#INFO	request=https://vizier.idia.ac.za/viz-bin/asu-tsv?-source=J/A%2BA/678/A167/tableb1&-out.all&-out.max=unlimited	  Full request URL
+#INFO	contact=cds-question@unistra.fr	  Email or URL to contact publisher
+#INFO	server_software=VizieR/7.6.1	  Software version
+#INFO	publisher=CDS	  Data centre that produced the VOTable
+
+#RESOURCE=yCat_36780167
+#Name: J/A+A/678/A167
+#Title: occultation events by (307261) 2002 MS4 (Rommel+, 2023)
+#INFO	ivoid=ivo://cds.vizier/j/a+a/678/a167	    IVOID of underlying data collection
+#INFO	data_ivoid=ivo://cds.vizier/j/a+a/678/a167	    IVOID of underlying data collection
+#INFO	creator=Rommel F.L.	    First author or institution
+#INFO	cites=bibcode:2023A&A...678A.167R	    Article or Data origin sources
+#INFO	journal=A&A	    Journal name
+#INFO	original_date=2023	    Year of the article publication
+#INFO	reference_url=https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/678/A167	    Dataset landing page
+#INFO	citation=doi:10.26093/cds/vizier/bc-n6/lbgh	    Dataset identifier that can be used for citation
+#INFO	publication_date=2026-07-01	    Date of first publication in the data centre
+#INFO	rights_uri=https://cds.unistra.fr/vizier-org/licences_vizier.html	    Licence URI
+#Table	J_A_A_678_A167_tableb1:
+#Name: J/A+A/678/A167/tableb1
+#Title: Observational circumstances of all observatories that detected the stellar occultation by MS4 on 8 August 2020
+#Column	recno	(I8)	Record number assigned by the VizieR team. Should Not be used for identification.	[ucd=meta.record]
+#Column	Obs	(a33)	Observatory	[ucd=meta.id;instr.obsty]
+#Column	City	(a22)	Nearest city	[ucd=meta.note]
+#Column	Country	(a14)	Country	[ucd=meta.note]
+#Column	LAT	(F14.10)	Latitude of the observatory	[ucd=pos.earth.lat;instr.obsty]
+#Column	LON	(F14.10)	Longitude of the observatory	[ucd=pos.earth.lon]
+#Column	Alt	(F6.1)	Altitude of the observatory	[ucd=pos.earth.altitude;instr.obsty]
+#Column	Tel	(a22)	Telescope	[ucd=meta.id;instr.tel]
+#Column	Aper	(F7.4)	Aperture	[ucd=instr.fov]
+#Column	Filt	(a16)	Filter	[ucd=meta.id;instr.filter]
+#Column	TSource	(a22)	Time source (1)	[ucd=meta.id;instr]
+#Column	Inst	(a24)	Instrument	[ucd=meta.id;instr]
+#Column	Exp	(F9.5)	Exposure time	[ucd=time.expo]
+#Column	n_Exp	(A1)	[*] Note on Exp (2)	[ucd=meta.note]
+#Column	l_Cycle	(A1)	[~] Limit lfag on Cycle	[ucd=meta.code.error;obs.proposal.cycle]
+#Column	Cycle	(F9.5)	? Cycle	[ucd=obs.proposal.cycle]
+#Column	n_Cycle	(A1)	[*] Note on Cyle (2)	[ucd=meta.note]
+#Column	Corr	(F8.4)	? Correction	[ucd=arith.factor]
+#Column	Observs	(a68)	Observers	[ucd=obs.observer]
+recno	Obs	City	Country	LAT	LON	Alt	Tel	Aper	Filt	TSource	Inst	Exp	n_Exp	l_Cycle	Cycle	n_Cycle	Corr	Observs
+ 	 	 	 	deg	deg	m	 	m	 	 	 	s	 	 	s	 	s	
+--------	---------------------------------	----------------------	--------------	--------------	--------------	------	----------------------	-------	----------------	----------------------	------------------------	---------	-	-	---------	-	--------	--------------------------------------------------------------------
+       1	Domaine de La Blaque             	Varages               	France        	 43.6123900000	  5.9636300000	 468.0	Ritchey-Chretien      	 0.5000	Clear           	GPS                   	WATEC 910HX             	  0.32000	 	 	  0.32000	 	        	Jean Lecacheux, Jean-Luc Plouvier
+       2	TAROT Calern                     	Caussols              	France        	 43.7520010000	  6.9236130000	1268.0	TAROT North           	 0.2500	Clear           	GPS                   	Andor DZ936N-BEX2-DD    	 90.00000	*	 	 90.00000	*	        	Eric Frappa, Alain Klotz
+       3	Meo Station                      	Grasse                	France        	 43.7546000000	  6.9216000000	1323.1	Ritchey-Chretien      	 1.5400	Clear           	NTP                   	ZWO ASI1600MM           	  1.00000	 	 	  1.00000	 	        	Dominique Albanese, Herve Mariey
+       4	Caussols                         	Caussols              	France        	 43.7530555560	  6.9216666670	1268.0	CFF T400              	 0.4000	Clear           	NTP                   	ZWO 294 MC              	  3.00000	 	 	  4.00000	 	  0.4000	Raymond Behem, Jean Pierre Prost
+       5	Sta Maria de Montmagastrell      	Lleida                	Spain         	 41.7201660000	  1.1053610000	 318.0	-                     	 0.4060	Clear           	NTP                   	SBIG STL-11000          	  7.00000	 	 	 18.00000	 	 -4.0000	Josep M. Bosch Ignes
+       6	Saint-Paul-en-Foret              	Cannes                	France        	 43.5601240000	  6.9628680000	  45.0	-                     	 0.2000	Clear           	NTP                   	ZWO ASI290MM            	  2.00000	 	 	  2.22000	 	        	Romain Fafet
+       7	Nice                             	Nice                  	France        	 43.7259020000	  7.2998750000	 364.0	-                     	 0.4000	Clear           	GPS                   	Raptor Photonics        	  0.30000	 	 	  0.30000	 	 -3.7000	Stefan Renner, Matthieu Conjat
+       8	Valbonne                         	Valbonne              	France        	 43.6196040000	  7.0391570000	 174.0	Francois Giraud (TFG) 	 0.4000	Clear           	GPS                   	WATEC 910HX             	  1.06880	 	 	  1.51630	 	 -0.5339	Florian Signoret
+       9	Crni Vrh                         	Crni Vrh              	Slovenia      	 45.9458611100	 14.0712222200	 726.0	Cichocki Sky Survey   	 0.6000	W (clear)       	NTP                   	Apogee Alta U16M        	  1.59840	 	 	  3.10950	 	        	Herman Mikuz
+      10	Piszkesteto Mountain Station     	Matraszentistvan      	Hungary       	 47.9178330000	 19.8955833000	 960.0	Ritchey-Chretien-Coude	 1.0000	Clear           	NTP                   	Andor iXon - 888        	  0.56115	 	 	  0.56791	 	        	Robert Szakats
+      11	University of Ljubljana          	Ljubljana             	Slovenia      	 46.0438060000	 14.5274444000	 400.0	-                     	 0.2500	Clear           	NTP                   	QHY 5III-178M           	  2.00000	 	 	  2.00000	 	        	Bojan Dintinjana
+      12	Konkoly Observatory              	Budapest              	Hungary       	 47.4999553000	 18.9620488000	 470.0	Refractor             	 0.3000	Clear           	NTP                   	ASI178MM                	  1.00000	 	 	  1.03850	 	        	Andras Pal, Balazs Csak
+      13	Trieste                          	Trieste               	Italy         	 45.6427210000	 13.8753830000	 400.0	Schmidt-Cassegrain    	 0.3550	Luminance       	NTP                   	Apogee U Alta KAF-8300  	  4.00000	 	 	  5.00000	 	  2.0000	Paolo Di Marcantonio, Igor Coretti, Giulia Iafrate, Veronica Baldini
+      14	Sant Esteve Sesrovires           	Catalonia             	Spain         	 41.4948670000	  1.8738000000	 180.0	Newtonian             	 0.4000	Clear           	GPS                   	Mintron 12V6HC-EX       	  1.28000	 	 	  1.28000	 	 -1.2800	Carles Schnabel, Marti Schnabel
+      15	ALMO Observatory                 	Bologna (Padulle)     	Italy         	 44.6270000000	 11.2805000000	  19.0	Schmidt-Cassegrain    	 0.2350	Clear           	NTP                   	ZWO ASI120mm            	  3.00000	 	 	  3.00000	 	  1.0000	Adriano Valvasori, Ernesto Guido
+      16	-                                	Massa                 	Italy         	 44.0260833330	 10.1386111110	  41.0	Schmidt-Cassegrain    	 0.2000	Clear           	GPS                   	WATEC 910BD             	  2.56000	 	 	  2.60000	 	 -2.5600	Michele Bigi
+      17	G. Pascoli                       	Castelvecchio Pascoli 	Italy         	 44.0603000000	 10.4625000000	 257.0	Newtonian             	 0.4100	Clear           	NTP                   	Sony QHY22              	  1.50000	 	 	  4.00000	 	  2.2000	Roberto Bacci
+      18	Mount Agliale                    	Borgo a Mozzano       	Italy         	 43.9953000000	 10.5149400000	 750.0	Newtonian             	 0.5000	Clear           	NTP                   	FLI - Proline 4710      	  4.00000	 	 	  5.35000	 	        	Fabrizio Ciabattari
+      19	Pistoiese Mountain               	San Marcello Pistoiese	Italy         	 44.0630550000	 10.8041660000	 990.0	Newtonian             	 0.6000	Clear           	NTP (GPS-PPS)         	Apogee U6 Alta          	  1.00000	 	 	  3.13000	 	        	Paolo Bacci, Martina Maestripieri, Marta Di Grazia
+      20	Tavolaia                         	Sta. Maria a Monte    	Italy         	 43.7368330000	 10.6734450000	  34.0	Newtonian             	 0.4000	Clear           	NTP                   	ASI 174 MM              	  2.00000	 	 	  2.00000	 	 -2.0000	Mauro Bachini, Giacomo Succi
+      21	Spica                            	Signa                 	Italy         	 43.7893360000	 11.0899220000	  50.0	-                     	 0.3000	Clear           	NTP                   	SBIG ST-402 XME         	  3.00000	 	 	  4.00000	 	        	Mauro Bertini
+      22	Margherita Hack                  	Lastra a Signa        	Italy         	 43.7422805560	 11.1030305556	 216.0	-                     	 0.3560	Clear           	NTP                   	SBIG ST10XME            	  2.00000	 	 	  4.45000	 	        	Nico Montigiani, Massimiliano Mannucci
+      23	Zalistci                         	Khmelnytskyi          	Ukraine       	 48.8477500000	 26.7213100000	 355.0	Newtonian             	 0.5000	Clear           	GPS                   	FLI 16070               	  2.00000	 	 	 33.20000	 	        	T. O. Dementiev, O. M. Kozhukhov
+      24	-                                	Sevilla               	Spain         	 37.3461110000	 -5.9805560000	  28.0	-                     	 0.2800	Clear           	GPS                   	QHY 174M                	  0.60000	 	 	  0.60000	 	        	Jose Maria Madiedo
+      25	El Arenosillo                    	Huelva                	Spain         	 37.1038890000	 -6.7338889000	  54.0	BOOTES-1B             	 0.3000	Clear           	NTP                   	Andor Ixon              	  2.00000	 	 	  4.00000	 	 -0.7000	Emilio Jesus Fernandez Garcia, Alberto J. Castro Tirado
+      26	ROASTERR-1                       	Cluj-Napoca           	Romania       	 46.8209540000	 23.5964000000	 390.0	-                     	 0.3000	Clear           	NTP                   	atik 383L+              	  4.00000	 	 	  5.00000	 	        	Lucian Hudin
+      27	Fuensanta de Martos              	Fuensanta de Martos   	Spain         	 37.6463890000	 -3.9174680000	 710.0	Newtonian             	 0.3600	Luminance       	atom time             	SBIG ST-10xme           	  2.00000	 	 	  8.00000	 	        	Jose Carrillo Gomez
+      28	-                                	Fiastra               	Italy         	 43.0570930000	 13.1730740000	 700.0	-                     	 0.2540	Clear           	NTP                   	SBIG ST8-XME            	  3.00000	 	 	  6.10000	 	        	Alessio Ciarnella
+      29	-                                	Dragsina              	Romania       	 45.7033440000	 21.4368790000	  97.0	-                     	 0.4000	Clear           	NTP                   	ZWO ASI 1600MM-Pro      	  0.90000	 	 	  1.47000	 	 -2.0000	Liviu Stoian, Andrei Juravle
+      30	Cala D'Hort                      	Ibiza                 	Spain         	 38.8911111100	  1.2408333300	 130.0	TCH                   	 0.5100	Luminance       	NTP                   	SBIG STL11000           	  3.00000	 	 	  6.00000	 	        	Ignacio de la Cueva Torregrosa, Marco Yuste-Moreno
+      31	Alhendin                         	Granada               	Spain         	 37.1110313000	 -3.6394227000	 740.0	Newtonian             	 0.2000	Clear           	NTP                   	ZWO ASI 178MM           	  5.00000	 	 	  5.12500	 	        	Miguel Sanchez Gonzalez
+      32	Sierra Nevada                    	Granada               	Spain         	 37.0641667000	 -3.3847220000	2896.0	T150                  	 1.5000	Clear           	NTP                   	Andor Ikon-L            	  1.00000	 	 	  2.00000	 	        	Alfredo Sota, Pablo Santos Sanz, Jose Luis Ortiz, Nicolas Morales
+      33	Sierra Nevada                    	Granada               	Spain         	 37.0641667000	 -3.3847220000	2896.0	T90                   	 0.9000	Clear           	NTP                   	Roper VersArray         	  1.00000	 	 	  3.00000	 	        	Alfredo Sota, Pablo Santos Sanz, Jose Luis Ortiz, Nicolas Morales
+      34	Cancelada                        	Estepona              	Spain         	 36.4611111110	 -5.0544444400	  25.0	-                     	 0.2540	Luminance       	Mount Sync MaxIm DL 6 	ATIK - 460 ex           	 10.00000	 	 	 18.00000	 	        	Juan Francisco Calvo Fernandez
+      35	Cosmos                           	Marbella              	Spain         	 36.5162290000	 -4.8573760000	  70.0	-                     	 0.3550	Luminance       	NTP                   	ATIK 460ex              	 10.00000	 	 	 21.00000	 	        	Fran Cuevas
+      36	Colle S. Agata                   	Rome                  	Italy         	 41.9495555500	 12.4285555500	 124.0	Schmidt-Cassegrain    	 0.2800	Clear           	GPS                   	QHY174M                 	  2.00000	 	 	  2.00000	 	        	Claudio Costa
+      37	Hvar                             	Hvar                  	Croatia       	 43.1789440000	 16.4477480000	 190.0	-                     	 1.0600	Clear           	NTP                   	ASI294MC Pro            	  3.00000	 	 	  3.20000	 	        	Stefan Cikota, Domagoj Ruzdjak, Aleksandar Cikota
+      38	PS Observatory                   	Bacau                 	Romania       	 46.5077900000	 26.8000700000	 555.0	Newtonian             	 0.2540	IR Cut          	NTP                   	ZWO ASI 178 MM          	  3.00000	 	 	  3.18000	 	        	Radu Mihai Anghel
+      39	Agrustos                         	Sassari               	Italy         	 40.7278448000	  9.6948317000	  20.0	SC                    	 0.1300	Clear           	GPS                   	QHY174 M                	  4.00000	 	 	  4.00000	 	        	Salvatore Lamina
+      40	Campo Catino                     	Guarcino              	Italy         	 41.8211150000	 13.3292867000	1485.0	Ritchey-Chretien      	 0.8000	Clear           	GPS                   	QHY 174C                	  1.00000	 	 	  1.00000	 	 -3.0000	Ugo Tagliaferri, Mario Di Sora, Giovanni Isopi
+      41	Kharkiv University               	Kharkiv               	Ukraine       	 49.6408300000	 36.9338900000	 156.0	Reflector AZT - 8     	 0.7000	Luminance       	NTP                   	FLI ML4710              	  2.00000	 	 	  3.00000	 	        	Y. Krugly, I. Slyusarev, V. Chiorny
+      42	Kharkiv University               	Kharkiv               	Ukraine       	 49.6408300000	 36.9338900000	 156.0	Baker-Schmidt         	 0.3600	R               	NTP                   	FLI PL1001E             	  4.00000	 	 	  5.00000	 	        	Y. Krugly, A.Zheleznyak
+      43	Ceccano                          	Ceccano               	Italy         	 41.5677170000	 13.3333010000	 178.0	-                     	 0.4320	Clear           	NTP                   	SBIG STL-6303E          	  3.50000	 	 	  4.00000	 	        	Gianluca Masi
+      44	Stardust                         	Brasov                	Romania       	 45.6416110000	 25.6218890000	 597.0	CPC800                	 0.2000	Clear           	NTP                   	Atik 383L+              	 10.00000	 	 	 13.00000	 	        	Lucian Curelaru
+      45	-                                	Barlad                	Romania       	 46.2313888000	 27.6694444000	  70.0	EQMOD ASCOM           	 0.2000	Luminance       	NTP                   	ASI 1600                	  8.00000	 	 	  8.80000	 	        	Dumitru Ciprian Vintdevara
+      46	Stardreams                       	Valenii de Munte      	Romania       	 45.2036420000	 26.0455260000	 380.0	Ritchey-Chretien      	 0.2030	Clear           	NTP                   	ATIK 460ex              	  4.00000	 	 	  5.00000	 	  1.5000	Radu Mihai Gherase
+      47	St. George                       	Ploiesti              	Romania       	 45.0072130000	 25.9787110000	 243.0	-                     	 0.1900	Luminance       	NTP                   	ATIK 460EX mono         	  7.00000	 	 	  8.00000	 	-18.0000	Cristian Adrian Danescu
+      48	Odesa-Mayaki                     	Odesa                 	Ukraine       	 46.3969619500	 30.2712770900	  19.0	OMT-800               	 0.8000	Clear           	GPS                   	QHY174M                 	  1.00000	 	 	  1.00000	 	        	V. Kashuba, N. Koshkin, V. Zhukov
+      49	Nastro Verde                     	Sorrento              	Italy         	 40.6187140000	 14.3576280000	 275.0	SC Meade LX200        	 0.3556	Clear           	NTP                   	ASI 120 MM-S            	  2.52640	 	 	  2.96000	 	 -3.2000	Nello Ruocco
+      50	-                                	Agerola               	Italy         	 40.6260833000	 14.5715550000	 708.0	SC C14 EDGE HD        	 0.3550	Clear           	NTP                   	ASI 178 mono            	  0.60000	 	 	  0.60000	 	        	Luigi Morrone
+      51	Algiers-Bouzareah                	Algiers               	Algeria       	 36.7978733300	  3.0322483330	 348.3	Ritchey-Chretien      	 0.8100	Clear           	GPS                   	WATEC 910 HX/RC         	  0.08000	 	 	  0.08000	 	 -0.0400	D. Baba Aissa, Z. Gringahcene
+      52	Roque de Los Muchachos           	La Palma              	Spain         	 28.7624000000	-17.8792000000	2363.0	Liverpool             	 2.0000	V+R             	NTP                   	Andor DW485 (RISE)      	  0.60000	 	 	  0.63240	 	        	Pablo Santos-Sanz, Nicolas Morales, Jose Luis Ortiz
+      53	EPTOs                            	Tijarafe              	Spain         	 28.7040870000	-17.9298560000	1079.0	Marcon RC             	 0.4000	Clear           	NTP                   	FLI PL4240              	  4.00000	 	 	  5.00000	 	  1.0000	Daniele Carosati
+      54	Astronomic Society of Tunisia    	Ariana                	Tunisia       	 36.8842000000	 10.1949000000	   5.0	-                     	 0.2030	Clear           	GPS                   	ZWO ASI 120 MM          	  2.00000	 	 	  2.00000	 	 -1.8940	Sofien Kamoun
+      55	-                                	Teide                 	Spain         	 28.3000000000	-16.5097000000	2390.0	Artemis               	 1.0000	Clear           	GPS                   	Andor IKONL BEX2 DD     	  1.50000	 	 	  2.00000	 	        	Artem Burdanov, Julien de Wit
+      56	-                                	Teide                 	Spain         	 28.3000000000	-16.5097000000	2390.0	TAR1                  	 0.4600	Clear           	NTP                   	FLI KL 400              	  1.00000	 	 	  1.00000	 	 -0.5000	Miquel Serra-Ricart, Miguel R. Alarcon, Javier Licandro
+      57	Serra La Nave                    	Catania               	Italy         	 37.6929100000	 14.9735500000	1727.0	-                     	 0.9100	Clear           	NTP                   	Developed at observatory	  6.00000	 	 	 10.00000	 	  2.0000	A. Frasca, G. Catanzaro, R. Zanchez, Giuseppe Leto
+      58	Kuban State University           	Kuban                 	Russia        	 45.0166700000	 39.0333000000	  76.0	Paramount ME          	 0.5080	Luminance       	GPS                   	FLI PL1001E             	  3.00000	 	 	  5.00000	 	        	A.L. Ivanov, V.A. Ivanov, N.B. Ivanova
+      59	Istanbul University              	Canakkale             	Turkey        	 40.0989900000	 26.4744900000	 410.0	ST60                  	 0.6000	Clear           	GPS                   	Andor iXon Ultra 888    	  2.00000	 	 	  3.00000	 	        	Suleyman Fisek, Ozuzhan Cakir, Simge Ozer
+

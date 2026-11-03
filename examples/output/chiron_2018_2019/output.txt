@@ -1,0 +1,33 @@
+
+==============================================================================
+Events and geometry (paper values in parentheses)
+==============================================================================
+2019: 4 positive and 1 negative chords, distance 17.85 au (17.85), shadow velocity 22.80 km/s (22.8)
+2018: 1 positive and 1 negative chords, distance 18.3555 au (18.3538), shadow velocity 5.77 km/s (5.77)
+
+==============================================================================
+2019 September 8: the limb
+==============================================================================
+least squares: a′ = 117 ± 58 km, ε′ = 0.26 ± 0.64, PA = 53 ± 33°, R_eq = 101 ± 7 km, χ² = 2.20 (2 dof)
+Paris clock offset +0.99 ± 0.59 s (paper: +0.9 s)
+negative chord Forcarei: outside, 27 km from the limb
+posterior: a′ = 119.2 −12.0 +20.5 km, ε′ = 0.3 −0.2 +0.2, R_eq = 102.7 −3.8 +4.0 km
+published (R_eq restricted to 98–111 km, Lellouch et al. 2017): a′ = 126 ± 22 km, ε′ = 0.27 ± 0.18, PA = 11 ± 33°, R_eq = 105 −7 +6 km
+
+==============================================================================
+2018 November 28: a single chord
+==============================================================================
+SAAO chord 186.9 km (paper 180.5 ± 0.9 km)
+centre (f, g) = (    7,   -35) km: the body would have covered Boyden
+centre (f, g) = (  -60,    34) km: consistent with Boyden
+
+==============================================================================
+Astrometry (the paper's Table 7, same star positions)
+==============================================================================
+2018-11-28T20:50:43.14 UTC: RA 23 46 04.35418  Dec +02 13 05.2582 (σ 0.3, 0.3 mas); minus Table 7: Δα cos δ = -0.1 mas, Δδ = -0.1 mas
+2019-09-08T23:04:26.20 UTC: RA 00 10 12.73281  Dec +04 37 05.2622 (σ 0.6, 0.7 mas); minus Table 7: Δα cos δ = +0.2 mas, Δδ = +0.2 mas
+
+==============================================================================
+Figures
+==============================================================================
+figures written to examples/output/chiron_2018_2019

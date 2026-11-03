@@ -1,0 +1,63 @@
+#
+#   VizieR Astronomical Server vizier.idia.ac.za
+#    Date: 2026-11-02T20:40:01 [V7.6.1]
+#   In case of problem, please report to:	cds-question@unistra.fr
+#
+#
+#Coosys	J2000:	eq_FK5 J2000
+#INFO	service_protocol=ASU	  IVOID of the protocol through which the data was retrieved
+#INFO	request_date=2026-11-02T20:40:02	  Query execution date
+#INFO	request=https://vizier.idia.ac.za/viz-bin/asu-tsv?-source=J/A%2BA/678/A167/tableb3&-out.all&-out.max=unlimited	  Full request URL
+#INFO	contact=cds-question@unistra.fr	  Email or URL to contact publisher
+#INFO	server_software=VizieR/7.6.1	  Software version
+#INFO	publisher=CDS	  Data centre that produced the VOTable
+
+#RESOURCE=yCat_36780167
+#Name: J/A+A/678/A167
+#Title: occultation events by (307261) 2002 MS4 (Rommel+, 2023)
+#INFO	ivoid=ivo://cds.vizier/j/a+a/678/a167	    IVOID of underlying data collection
+#INFO	data_ivoid=ivo://cds.vizier/j/a+a/678/a167	    IVOID of underlying data collection
+#INFO	creator=Rommel F.L.	    First author or institution
+#INFO	cites=bibcode:2023A&A...678A.167R	    Article or Data origin sources
+#INFO	journal=A&A	    Journal name
+#INFO	original_date=2023	    Year of the article publication
+#INFO	reference_url=https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/678/A167	    Dataset landing page
+#INFO	citation=doi:10.26093/cds/vizier/bc-n6/lbgh	    Dataset identifier that can be used for citation
+#INFO	publication_date=2026-07-01	    Date of first publication in the data centre
+#INFO	rights_uri=https://cds.unistra.fr/vizier-org/licences_vizier.html	    Licence URI
+#Table	J_A_A_678_A167_tableb3:
+#Name: J/A+A/678/A167/tableb3
+#Title: Observational circumstances of all the sites that tried to observe the 8 August 2020 event, but experienced bad weather or technical issues and did not acquire any data
+#Column	recno	(I8)	Record number assigned by the VizieR team. Should Not be used for identification.	[ucd=meta.record]
+#Column	Obs	(a34)	Observatory	[ucd=meta.id;instr.obsty]
+#Column	City	(a11)	Nearest city	[ucd=meta.note]
+#Column	Country	(A7)	Country	[ucd=meta.note]
+#Column	LAT	(F12.8)	? Latitude of the observatory	[ucd=pos.earth.lat;instr.obsty]
+#Column	LON	(F13.9)	? Longitude of the observatory	[ucd=pos.earth.lon]
+#Column	Alt	(F6.1)	? Altitude of the observatory	[ucd=pos.earth.altitude;instr.obsty]
+#Column	Tel	(a10)	Telescope	[ucd=meta.id;instr.tel]
+#Column	Aper	(F6.3)	Aperture	[ucd=instr.fov]
+#Column	Filt	(a9)	Filter	[ucd=meta.id;instr.filter]
+#Column	TSource	(a16)	Time source	[ucd=meta.id;instr]
+#Column	Inst	(a21)	Instrument	[ucd=meta.id;instr]
+#Column	Observs	(a32)	Observers	[ucd=obs.observer]
+recno	Obs	City	Country	LAT	LON	Alt	Tel	Aper	Filt	TSource	Inst	Observs
+ 	 	 	 	deg	deg	m	 	m	 	 	 	
+--------	----------------------------------	-----------	-------	------------	-------------	------	----------	------	---------	----------------	---------------------	--------------------------------
+       1	Pinsoro                           	Pinsoro    	Spain  	 42.19916666	 -1.338888800	 365.0	-         	 0.280	Clear    	GPS             	Mintron MTV-12V6HC-EX	Oscar Canales Moreno
+       2	Montseny                          	Sant Celoni	Spain  	 41.72140000	  2.520600000	 300.0	-         	 0.254	Clear    	NTP             	ST8                  	Josep M. Trigo-Rodriguez
+       3	Sabadell                          	Sabadell   	Spain  	 41.55002777	  2.083333330	 224.0	-         	 0.500	Clear    	GPS             	Watec 910HX-RC       	Carlos Perello
+       4	Calar Alto                        	Almeria    	Spain  	 37.22083245	 -2.540997836	2168.0	-         	 1.230	Clear    	NTP             	PlanetCam            	Ricardo Hueso, A. Sanchez-Lavega
+       5	Urseanu                           	Bucharest  	Romania	 44.44861100	 26.093056000	 100.0	-         	 0.405	Clear    	NTP             	ZWO ASI 224 MC color 	Mihai Dascalu
+       6	Traian - Ialomia                  	Slobozial  	Romania	 44.76148800	 27.341830000	  30.0	Newtonian 	 0.200	UV/IR Cut	NTP             	QHY 163 M            	Daniel Nicolae Bertesteanu
+       7	-                                 	-          	Romania	            	             	      	-         	 0.200	-        	-               	ASI1600              	Vlad Dumitrescu, Bogdan Dumitru
+       8	TRAPPIST-North                    	Oukaimeden 	Morroco	 31.20610000	 -7.866400000	2751.0	-         	 0.600	Clear    	NTP             	Andor IKONL BEX2 DD  	Emmanuel Jehin
+       9	AGM                               	Marrakech  	Morroco	 31.17341100	 -8.077456000	 400.0	-         	 0.355	Clear    	NTP             	DMK 31AU03.AS        	Mohammed Sabil
+      10	Specca                            	Ioannina   	Greece 	 39.60175000	 20.870140000	 480.0	-         	 0.200	Clear    	GPS             	Canon Eos 1200D      	Georgios Lekkas
+      11	Empesos                           	Agrinion   	Greece 	 39.02570544	 21.317303960	 334.0	-         	 0.250	Clear    	Occult Flash Tag	ZWO ASI 224 MC       	Vagelis Tsamis, Kyriaki Tigani
+      12	-                                 	Amfiloxia  	Greece 	 38.80517000	 21.173370000	 218.0	-         	 0.250	Clear    	NTP             	ATIK 460exm          	Nick Sioulas
+      13	Istanbul Univ.                    	Istanbul   	Turkey 	 41.01174900	 28.965718000	  60.0	ST40      	 0.400	Clear    	NTP             	Moravian G2 8300     	Suleyman Fisek, Oguzhan Cakir
+      14	Univ. of Athens Observatory - UOAO	Zografos   	Greece 	 37.96856100	 23.783368000	 250.0	Cassegrain	 0.400	Clear    	NTP             	ZWO ASI 290MM        	Kosmas Gazeas
+      15	Eskisehir Univ.                   	Eskisehir  	Turkey 	 39.88547200	 30.460689000	1005.0	-         	 0.400	Clear    	GPS             	FLI                  	Metin Altan
+      16	Ondokuz Mayis Univ.               	Samsun     	Turkey 	 41.36772700	 36.201576000	 150.0	-         	 0.370	Clear    	GPS             	SBIG STL-4020M       	Selami Kalkan
+

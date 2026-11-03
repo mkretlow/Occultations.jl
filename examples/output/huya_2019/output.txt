@@ -1,0 +1,83 @@
+
+==============================================================================
+Event and geometry
+==============================================================================
+Event Huya, 2019-03-18: (38628) Huya occults Star(Gaia DR2 4352760586390566400, RA=16 41 06.4260, Dec=-06 43 34.576)
+  closest approach 2019-03-18T00:42:35.218: 0.0937" (1927.6 km), PA 262.89°, 8.156 km/s, distance 28.3503 au
+  Chord(#1 TUBITAK-1 (Turkey), positive)
+  Chord(#2 TUBITAK-2 (Turkey), positive)
+  Chord(#3 Cluj-Feleacu (Romania), positive)
+  Chord(#4 ROASTERR-1 (Romania), partial)
+  Chord(#5 W-FAST Wise (Israel), positive)
+  Chord(#6 C18 Wise (Israel), positive)
+  Chord(#7 AIRA-1 Bucharest (Romania), positive)
+  Chord(#8 AIRA-2 Bucharest (Romania), positive)
+  Chord(#9 ISTEK Belde (Turkey), positive)
+  Chord(#10 Amateur Obs.-1 (Romania), positive)
+  Chord(#11 St. George (Romania), positive)
+  Chord(#12 Amateur Obs.-2 (Romania), positive)
+  Chord(#13 Stardust (Romania), positive)
+  Chord(#14 Stardreams (Romania), positive)
+  Chord(#15 Kraar/Weizmann (Israel), positive)
+  Chord(#16 Amateur Obs.-4 (Romania), positive)
+  Chord(#17 Bacau (Romania), positive)
+  Chord(#18 Galati (Romania), positive)
+  Chord(#19 Barlad (Romania), positive)
+  Chord(QOS (Ukraine), negative)
+  Chord(Cukurova (Turkey), negative)
+
+distance 28.3503 au (paper 28.35), shadow velocity 8.16 km/s (8.07), stellar diameter 0.70 km (0.70), Fresnel scale 1.13 km at 0.6 µm (1.13)
+
+==============================================================================
+Limb fits
+==============================================================================
+published (Table A.4)                  a = 217.6 ± 3.5  b = 194.1 ± 6.1  P =  55.2 ±  9.1  D_eq = 411.0 ± 7.3
+timing errors only                     a = 217.2 ± 0.1  b = 192.4 ± 0.3  P =  60.1 ±  0.4  D_eq = 408.8 ± 0.3  χ²/dof = 227.76
+radial, σ_limb = 7.3 km                a = 218.1 ± 2.1  b = 192.7 ± 5.9  P =  62.9 ±  7.3  D_eq = 410.0 ± 6.2  χ²/dof = 1.00
+along chords, σ_limb = 8.4 km          a = 218.2 ± 2.1  b = 194.7 ± 4.0  P =  59.8 ±  6.8  D_eq = 412.2 ± 4.6  χ²/dof = 1.00
+
+largest contact residuals of the timing-error-only fit:
+  #8 AIRA-2 Bucharest (Romania)  emersion  O−C =  -1.41 s =  -11.5 km  (-34.3 σ)
+  #9 ISTEK Belde (Turkey)        immersion O−C =  -1.97 s =  -16.1 km  (-31.8 σ)
+  #16 Amateur Obs.-4 (Romania)   immersion O−C =  +0.72 s =   +5.9 km  (+26.8 σ)
+  #17 Bacau (Romania)            emersion  O−C =  -2.19 s =  -17.9 km  (-26.4 σ)
+  #15 Kraar/Weizmann (Israel)    immersion O−C =  -2.18 s =  -17.9 km  (-21.8 σ)
+  #5 W-FAST Wise (Israel)        immersion O−C =  +0.33 s =   +2.7 km  (+20.8 σ)
+  #9 ISTEK Belde (Turkey)        emersion  O−C =  -1.54 s =  -12.6 km  (-18.6 σ)
+  #11 St. George (Romania)       emersion  O−C =  -1.39 s =  -11.4 km  (-18.1 σ)
+clock priors N(0,1 s), σ_limb = 10.1 km a = 217.8 ± 3.0  b = 195.6 ± 5.3  P =  61.0 ±  9.8  D_eq = 412.8 ± 5.7  χ²/dof = 1.00
+fitted clock offsets [s]: #1 -0.03, #2 +0.37, #3 -0.33, #4 -0.32, #6 -0.43, #7 +0.46, #8 +0.23, #9 +0.63, #10 +0.51, #11 +0.34, #12 -0.13, #13 +0.67, #14 -0.71, #15 +0.39, #16 -0.70, #17 +0.79, #18 +0.30, #19 -0.81
+
+==============================================================================
+Posterior (fit along the chords with σ_limb)
+==============================================================================
+Posterior of LimbProblem: 20 walkers × 3000 steps (burn-in 1000), acceptance 0.55
+  center_f               =      24.480528  -3.249289 +3.038554
+  center_g               =    -408.157355  -1.746011 +1.655985
+  equatorial_radius      =     218.263697  -2.093155 +2.237527
+  oblateness             =       0.101826  -0.020765 +0.021167
+  position_angle         =      58.376978  -7.728116 +6.374776
+
+D_eq = 413.6 -4.4 +4.5 km, b = 196.1 -4.2 +3.8 km   (paper: D_eq = 411.0 ± 7.3 km)
+χ² profile 1σ interval of the position angle: (52.1, 66.0)
+
+==============================================================================
+Negative chords, astrometry, shape
+==============================================================================
+  QOS (Ukraine)        consistent, closest distance to the limb 18.7 km
+  Cukurova (Turkey)    consistent, closest distance to the limb 31.4 km
+
+astrometric position at 2019-03-18T00:42:35.2 UTC:
+  RA = 16 41 06.41994  Dec = -06 43 34.6071   (σ = 0.21, 0.14 mas incl. the star)
+  offset from the JPL Horizons ephemeris: Δα cos δ = +1.17 ± 0.14 mas, Δδ = -19.86 ± 0.08 mas
+  (the paper's centre (f, g) = (2984.7, −1850.9) km refers to the older JPL#28 orbit)
+
+apparent axis ratio b/a = 0.892: a Maclaurin spheroid needs c/a ≤ 0.892 (equal only if equator-on);
+  aspect  90°: c/a = 0.892 (check: projected ratio 0.892)
+  aspect  70°: c/a = 0.877 (check: projected ratio 0.892)
+  aspect  60°: c/a = 0.853 (check: projected ratio 0.892)
+
+==============================================================================
+Maps
+==============================================================================
+figures written to examples/output/huya_2019

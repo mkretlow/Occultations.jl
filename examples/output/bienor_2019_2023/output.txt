@@ -1,0 +1,62 @@
+
+==============================================================================
+Events and geometry (paper values in parentheses)
+==============================================================================
+2019 Bienor, 2019-01-11: 5 positive and 4 negative chords, distance 14.161 au, shadow velocity 13.61 km/s, star Gaia DR2 236278279941456256
+A    Bienor, 2022-02-06: 2 positive and 0 negative chords, distance 13.391 au, shadow velocity 12.81 km/s, star Gaia DR3 202357903847210880
+B    Bienor, 2022-12-26: 7 positive and 0 negative chords, distance 12.811 au, shadow velocity 21.76 km/s, star Gaia DR3 961233167113907328
+C    Bienor, 2023-02-14: 2 positive and 0 negative chords, distance 13.160 au, shadow velocity 12.87 km/s, star Gaia DR3 193308850132660224
+(2019: 14.16 au and 13.47 km/s in the paper)
+
+==============================================================================
+2019 January 11: the limb
+==============================================================================
+timing errors only                     a′ = 122.6 ± 19.6  b′ = 55.1 ± 3.2  PA =  77.2 ±  4.2  D_eq = 164.4  χ² =  56.34 (5 dof)
+Manzanares clock offset free           a′ = 102.6 ± 21.3  b′ = 65.1 ± 3.1  PA =  38.0 ±  9.9  D_eq = 163.5  χ² =  10.96 (4 dof)
+  fitted offset +2.70 ± 0.40 s (paper: 4.06 s along the motion)
+Manzanares shifted by +4.06 s (S1)     a′ = 110.2 ± 23.4  b′ = 60.4 ± 2.4  PA =  14.0 ±  6.8  D_eq = 163.2  χ² =  22.51 (5 dof)
+all clock offsets, priors N(0, 2 s)    a′ = 110.2 ± 23.4  b′ = 59.8 ± 8.3  PA =  68.5 ± 16.1  D_eq = 162.4  χ² =   3.84 (0 dof)
+    Constancia   -1.76 ± 1.27 s  (paper S2: 3.00 s)
+    Javalambre   -0.22 ± 1.81 s  (paper S2: 2.60 s)
+    La Hita T40  +0.42 ± 0.99 s  (paper S2: 1.01 s)
+    La Hita T77  +0.25 ± 0.97 s  (paper S2: 1.01 s)
+    Manzanares   +1.33 ± 1.30 s  (paper S2: -0.50 s)
+published S1: a′ = 94 ± 27, b′ = 66 ± 5 km, PA = 52 ± 13°, D_eq = 160 ± 20 km
+published S2: a′ = 97 ± 24, b′ = 64 ± 4 km, PA = 61 ± 7°, D_eq = 160 ± 20 km
+  negative chord La Sagra    consistent,  55.6 km from the limb
+  negative chord Calar Alto  consistent, 131.2 km from the limb
+  negative chord Sabadell    consistent, 169.0 km from the limb
+  negative chord TJO         consistent, 196.9 km from the limb
+
+==============================================================================
+2019 January 11: a close binary (the paper's scenario S3)
+==============================================================================
+free orientation: primary a′ = 93 ± 26, b′ = 55 ± 8 km; secondary radius 57 ± 43 km; separation 93 km at PA 127°; χ² = 1.65 (1 dof)
+projected rotation pole at PA 317° (paper: 300–340°)
+separation ⊥ pole: best χ² = 3.59 at 70 km (PA 227°); primary a′ = 147, b′ = 54 km; secondary radius 14 km
+published S3: E1 84 × 57 km, E2 67 × 60 km, total D_eq = 188 ± 9 km
+
+==============================================================================
+2022 December 26 (Occ. B): the limb
+==============================================================================
+timing errors only                     a′ = 104.2 ±  2.6  b′ = 51.0 ± 0.6  PA = 110.3 ±  0.7  D_eq = 145.8  χ² = 134.66 (9 dof)
+σ_limb = 9.4 km                        a′ = 118.3 ± 11.3  b′ = 46.4 ± 3.7  PA = 106.5 ±  2.7  D_eq = 148.1  χ² =   8.09 (9 dof)
+published: u = 107.0 ± 3.7, v = 51.9 ± 2.1 km, position angle 19.3 ± 3.4° (+90° = 109.3°), D_eq = 149 ± 4 km
+
+==============================================================================
+2022–2023: a triaxial ellipsoid from three events
+==============================================================================
+a = 136.8 ± 15.7, b = 52.5 ± 4.0, c = 36.2 ± 4.8 km, D_eq,V = 127.6 km, χ² = 17.60 (15 dof)
+published (Occ. B and the light curves): a = 127 ± 5, b = 55 ± 4, c = 45 ± 4 km
+Van Vleck clock offset -4.63 ± 1.44 s (paper: shifted by 4.0 s)
+
+==============================================================================
+Astrometry
+==============================================================================
+2019 (S1 offset fitted)  RA 03 19 57.79259  Dec +40 40 53.0762 at 2019-01-11T01:09:09.8 UTC (σ 1.0, 0.8 mas); offset from JPL Horizons Δα cos δ = +0.1, Δδ = -0.3 mas
+Occ. B                   RA 06 06 16.68447  Dec +43 59 24.2190 at 2022-12-26T20:13:45.5 UTC (σ 0.4, 1.1 mas); offset from JPL Horizons Δα cos δ = +3.7, Δδ = +1.8 mas
+
+==============================================================================
+Figures
+==============================================================================
+figures written to examples/output/bienor_2019_2023

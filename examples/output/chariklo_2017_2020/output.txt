@@ -1,0 +1,47 @@
+
+==============================================================================
+Events and geometry
+==============================================================================
+2017-04-09:  3 chords,  4 contacts of the body,  5 ring detections of C1R, 0 of C2R; distance 15.47 au, shadow velocity 4.78 km/s
+2017-06-22:  6 chords, 10 contacts of the body, 12 ring detections of C1R, 0 of C2R; distance 14.66 au, shadow velocity 22.00 km/s
+2017-07-23: 17 chords, 16 contacts of the body, 23 ring detections of C1R, 8 of C2R; distance 14.72 au, shadow velocity 21.01 km/s
+2017-08-24:  1 chords,  2 contacts of the body,  2 ring detections of C1R, 0 of C2R; distance 15.06 au, shadow velocity 12.55 km/s
+2019-08-02:  2 chords,  4 contacts of the body,  0 ring detections of C1R, 0 of C2R; distance 15.25 au, shadow velocity 21.37 km/s
+2019-08-08:  5 chords, 10 contacts of the body,  0 ring detections of C1R, 0 of C2R; distance 15.30 au, shadow velocity 20.14 km/s
+2020-06-19:  1 chords,  2 contacts of the body,  2 ring detections of C1R, 0 of C2R; distance 15.55 au, shadow velocity 19.09 km/s
+
+==============================================================================
+2017 July 23: body and rings
+==============================================================================
+(paper values in parentheses; errors scaled by √(χ²/dof))
+2017-07-23   χ²/dof = 28.4: C1R radius 385.2 ± 0.5 km (385.9 ± 0.4), B = 50.00 ± 0.13° (49.91 ± 0.11), P = -60.94° (-60.85 ± 0.11), pole (150.91 ± 0.17, +41.76 ± 0.09)° ((151.03 ± 0.14, +41.81 ± 0.07))
+             C2R radius 401.7 ± 0.6 km (399.8 ± 0.6), distance between the rings 16.5 km (13.9)
+             body: a′ = 148.5 ± 0.9, b′ = 120.7 ± 0.4 km, PA = 133.3°, area-equivalent radius 133.9 km
+
+==============================================================================
+2017 June 22: body and the main ring
+==============================================================================
+2017-06-22   χ²/dof = 3.3: C1R radius 390.7 ± 2.6 km (386.6 ± 12.3), B = 50.73 ± 0.39° (52.33 ± 1.97), P = -60.23° (-62.13 ± 3.46), pole (151.76 ± 0.53, +42.27 ± 0.48)° ((149.46 ± 2.60, +40.98 ± 2.12))
+
+==============================================================================
+The mirror ambiguity, and all ring events together
+==============================================================================
+2017-07-23 alone: pole (150.91, +41.76)°, χ² = 1078.7; mirror plane: pole (67.50, +7.65)°, χ² = 1078.7
+five events (2017-04-09, 2017-06-22, 2017-07-23, 2017-08-24, 2020-06-19): pole (151.13, +41.94)°, χ² = 25888; started from the mirror pole: (73.95, +8.31)°, χ² = 185991
+joint fit: C1R radius 386.9 ± 1.7 km (385.9 ± 0.4), C2R radius 403.4 ± 1.9 km (399.8 ± 0.6), pole (151.13 ± 0.51, +41.94 ± 0.27)° ((151.03, +41.81))
+
+==============================================================================
+Astrometry (the paper's Table 5, same star positions)
+==============================================================================
+2017-04-09 02:24 UTC: RA 19 04 03.62557  Dec -31 17 15.2575; minus Table 5: Δα cos δ =   +0.1 mas, Δδ =   +0.2 mas (σ 0.0, 0.0 mas)
+2017-06-22 21:18 UTC: RA 18 55 15.66017  Dec -31 31 21.6225; minus Table 5: Δα cos δ =   -0.4 mas, Δδ =   -0.7 mas (σ 0.0, 0.0 mas)
+2017-07-23 05:58 UTC: RA 18 48 09.22889  Dec -31 26 32.4379; minus Table 5: Δα cos δ =   +0.0 mas, Δδ =   -0.3 mas (σ 0.0, 0.0 mas)
+2017-08-24 02:59 UTC: RA 18 42 35.23720  Dec -31 09 50.5609; minus Table 5: Δα cos δ =   +0.2 mas, Δδ =   +0.6 mas (σ 0.0, 0.1 mas)
+2019-08-02 10:02 UTC: RA 19 33 07.48127  Dec -25 34 42.5194; minus Table 5: Δα cos δ =   -0.1 mas, Δδ =   -0.2 mas (σ 0.5, 0.8 mas)
+2019-08-08 21:41 UTC: RA 19 31 49.79105  Dec -25 34 26.7821; minus Table 5: Δα cos δ =   +0.4 mas, Δδ =   +2.9 mas (σ 2.6, 17.5 mas)
+2020-06-19 15:51 UTC: RA 20 02 32.00023  Dec -22 20 41.4887; minus Table 5: Δα cos δ =   -0.1 mas, Δδ =   -0.2 mas (σ 0.1, 0.1 mas)
+
+==============================================================================
+Figures
+==============================================================================
+figures written to examples/output/chariklo_2017_2020

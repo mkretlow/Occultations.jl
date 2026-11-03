@@ -1,0 +1,86 @@
+
+==============================================================================
+Events and geometry (paper values in parentheses)
+==============================================================================
+Occ. A 2020-05-26: 8 chords (2 negative), distance 38.01 au (38.01), velocity 23.41 km/s (23.41), star 1.27 km (1.26)
+Occ. B 2022-06-23: 3 chords (0 negative), distance 37.88 au (37.88), velocity 24.33 km/s (24.33), star 0.52 km (0.58)
+Occ. C 2023-05-17: 3 chords (0 negative), distance 37.97 au (37.97), velocity 20.38 km/s (20.38), star 1.27 km (1.25)
+Occ. D 2023-05-19: 2 chords (0 negative), distance 37.96 au (37.96), velocity 20.83 km/s (20.83), star 0.88 km (0.89)
+Occ. E 2023-07-01: 1 chords (0 negative), distance 37.85 au (37.85), velocity 23.74 km/s (23.74), star 1.10 km (0.65)
+
+==============================================================================
+Occultation A alone (6 chords)
+==============================================================================
+published (Table 2)                          a = 241.5 ± 11.0  b = 159.0 ±  8.1  angle     = 105.8 ±  5.8
+this work (errors × √(χ²/dof), χ²/dof = 13.4) a = 248.8 ± 18.0  b = 167.5 ± 11.9  PA(major) = 118.6 ±  7.9  D_eq = 408.3 ± 24.8
+(the paper's angle is consistent with the position angle of the major axis)
+  negative chord Buelach (Switzerland)  consistent, 24 km from the limb
+  negative chord Cukurova (Turkey)      consistent, 168 km from the limb
+
+==============================================================================
+All five events: one ellipse, one centre per event
+==============================================================================
+best fit: χ² = 117.8, centre of event D at g = -185 km, of event C at g = +146 km
+other side: χ² = 124.6, centre of event D at g = +74 km  (paper: D − C = -68 km in g; here -73 km)
+
+published (Fig. 1)                           a = 241.0 ±  7.2  b = 157.1 ±  5.2  angle     = 105.8        D_eq = 389.2 ±  8.7
+joint fit, prior D≈C (χ²/dof = 7.8, scaled)  a = 245.0 ± 12.0  b = 169.0 ±  9.2  PA(major) = 117.9 ±  6.3  D_eq = 406.9 ± 17.9
+
+contact residuals [s]:
+  Occ. A Borowiec (Poland)        immersion  +1.17 s
+  Occ. A Borowiec (Poland)        emersion   +0.32 s
+  Occ. A Odesa-Mayaki (Ukraine)   immersion  +0.73 s
+  Occ. A Odesa-Mayaki (Ukraine)   emersion   -0.01 s
+  Occ. A Konkoly (Hungary)        immersion  +0.81 s
+  Occ. A Konkoly (Hungary)        emersion   +0.49 s
+  Occ. A Gothard (Hungary)        immersion  -0.10 s
+  Occ. A Gothard (Hungary)        emersion   -0.08 s
+  Occ. A Millen-Bruch (Germany)   immersion  +1.29 s
+  Occ. A Millen-Bruch (Germany)   emersion   +2.35 s
+  Occ. A Nandrin (Belgium)        immersion  +1.16 s
+  Occ. A Nandrin (Belgium)        emersion   +0.94 s
+  Occ. B Javalambre (Spain)       immersion  +1.39 s
+  Occ. B Javalambre (Spain)       emersion   +0.76 s
+  Occ. B La Hita (Spain)          immersion  -2.99 s
+  Occ. B La Hita (Spain)          emersion   +3.38 s
+  Occ. B Calar Alto (Spain)       immersion  -0.29 s
+  Occ. B Calar Alto (Spain)       emersion   +0.05 s
+  Occ. C Shiawassee (USA)         immersion  +0.52 s
+  Occ. C Shiawassee (USA)         emersion   +0.27 s
+  Occ. C Comer Field (USA)        immersion  +0.56 s
+  Occ. C Comer Field (USA)        emersion   -0.70 s
+  Occ. C Nederland (USA)          immersion  -2.31 s
+  Occ. C Nederland (USA)          emersion   -1.15 s
+  Occ. D GOA (Brazil)             immersion  +1.26 s
+  Occ. D GOA (Brazil)             emersion   -2.73 s
+  Occ. D Sonear3 (Brazil)         immersion  -0.90 s
+  Occ. D Sonear3 (Brazil)         emersion   +0.42 s
+  Occ. E Apache Point (USA)       immersion  -0.00 s
+  Occ. E Apache Point (USA)       emersion   +0.00 s
+
+==============================================================================
+Posterior, diameter and albedo
+==============================================================================
+  equatorial_radius  =  245.859  -4.108 +4.492
+  oblateness         =    0.309  -0.014 +0.013
+  position_angle     =   28.643  -2.315 +2.448
+  D_eq = 408.8 -6.5 +7.0 km (paper 389.2 ± 8.7)
+  pV   = 0.108 -0.005 +0.005    (paper 0.119 ± 0.007)
+  autocorrelation times [steps]: 126.0 (max)
+  (the likelihood uses the timing errors only: χ²/dof ≈ 7.8, so these
+   intervals are narrower than the scaled covariance errors above)
+
+==============================================================================
+Astrometry of the five events (offsets from the JPL Horizons ephemeris)
+==============================================================================
+  Occ. A 2020-05-26T22:28:59  RA 17 24 20.67395  Dec -23 21 49.9914   Δα cos δ =   +0.52 ± 0.29 mas  Δδ =   +9.22 ± 0.40 mas
+  Occ. B 2022-06-23T00:51:35  RA 17 35 07.97605  Dec -23 28 25.8095   Δα cos δ =   +0.20 ± 0.75 mas  Δδ =   +6.29 ± 1.56 mas
+  Occ. C 2023-05-17T08:51:51  RA 17 45 03.27066  Dec -23 32 34.5118   Δα cos δ =   +1.16 ± 0.62 mas  Δδ =   +5.35 ± 1.02 mas
+  Occ. D 2023-05-19T03:08:53  RA 17 44 54.98947  Dec -23 32 31.5856   Δα cos δ =   -0.64 ± 0.88 mas  Δδ =   +2.80 ± 0.77 mas
+  Occ. E 2023-07-01T07:09:09  RA 17 41 01.95694  Dec -23 30 54.1157   Δα cos δ =  +49.90 ± 0.38 mas  Δδ =  +33.82 ± 0.42 mas
+  (event E: the star has Gaia RUWE = 1.5 – its position, not the body's, is off)
+
+==============================================================================
+Figures
+==============================================================================
+figures written to examples/output/2002kx14_2020_2023

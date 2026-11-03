@@ -1,0 +1,41 @@
+# Light-curve CSV files (Kyoto, Kiso, Fukushima)
+
+This directory contains the reduced, normalized occultation light curves used in the manuscript:
+Arimatsu, K., et al., “Detection of an atmosphere on a trans-Neptunian object beyond Pluto”, Nature Astronomy, in revision.
+
+The light curves were produced from the raw movie/cube data (see 'movie_data/' and its README for raw-file formats and instrument-specific timing notes). Each CSV file provides time-series photometry of the occulted star around the event.
+
+## Files in this directory
+
+| Station     | CSV file name              | N (rows) | MJD range (UTC)                        | Approx. UTC coverage (start–end)           |
+|-------------|----------------------------|----------|----------------------------------------|--------------------------------------------|
+| Kyoto       | `lightcurve_Kyoto.csv`     | 580      | 60319.54761314815 – 60319.55444662037  | 2024-01-10 13:08:33.776 – 13:18:24.188 UTC |
+| Kiso        | `lightcurve_Kiso.csv`      | 360      | 60319.549578101854 – 60319.55169814815 | 2024-01-10 13:11:23.548 – 13:14:26.720 UTC |
+| Fukushima   | `lightcurve_Fukushima.csv` | 183      | 60319.55005473 – 60319.5510869         | 2024-01-10 13:12:04.728 – 13:13:33.908 UTC |
+
+Cadences are computed from the median time step in each file; occasional gaps can exist due to dropped/flagged frames.
+
+## CSV format
+
+All files are comma-separated values (CSV) with a single header row and three columns:
+
+### Column 1: `MJD`
+Time stamp in Modified Julian Date (days). The times are the UTC time stamps used in our analysis pipeline for each exposure/frame.
+Instrument-specific timing definitions/corrections (e.g., GPS synchronization, sensor readout timing, PPS-based corrections) are described in the 'movie_data/' README. Users should refer to that document if they wish to reconstruct timestamps directly from the raw movies/cubes.
+
+### Column 2: `Scaled_flux`
+Dimensionless, normalized flux of the occulted star after differential photometry and normalization to the unocculted (out-of-occultation) flux level.
+Values are expected to scatter around ~1 outside the occultation features.
+
+### Column 3: `Error`
+1σ uncertainty of `Scaled_flux` for each time sample (dimensionless). These uncertainties are intended for weighted fitting and χ² calculations.
+
+## Practical notes
+
+1. These CSV light curves are the recommended inputs for reproducing the figures and atmospheric fits in the manuscript. They already reflect the photometric calibration and time-stamping conventions used in the analysis.
+2. If you need to regenerate the light curves from raw data, use the raw files under 'movie_data/' together with the instrument/timing notes provided there.
+
+## Contact
+
+Questions about these light-curve products should be directed to the corresponding author:
+Ko Arimatsu (ko.arimatsu@nao.ac.jp)
