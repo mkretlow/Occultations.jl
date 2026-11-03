@@ -15,13 +15,20 @@ const SRC = joinpath(@__DIR__, "src")
 
 const REPO = "https://github.com/mkretlow/Occultations.jl/blob/main/"
 
-# the examples, in the order of the manual
-const EXAMPLES = ["tutorial", "sim_binary", "sim_contact_binary", "sim_contact_binary_3d", "sim_rings", "sim_ring_pole",
-                  "huya_2019", "2002kx14_2020_2023", "2003uy117_2020", "2002xv93_2024", "1995sm55_2024",
-                  "huya_2023", "huya_2023_satellite", "ixion_2020_2023", "2007uk126_2014", "varda_2018",
-                  "2002tc302_2018", "2003az84_2012_2014", "2003vs2_2019", "haumea_2017", "2002gz32_2017", "makemake_2011",
-                  "bienor_2019_2023", "chariklo_2017_2020", "2002ms4_2020", "quaoar_2011_2022",
-                  "chiron_2018_2019", "2007oc10_2022"]
+# the examples, in the order of the manual: synthetic, then the published events grouped by the
+# kind of analysis (as in docs/src/examples.md and the paper)
+const SYNTHETIC = ["tutorial", "sim_binary", "sim_contact_binary", "sim_contact_binary_3d", "sim_rings", "sim_ring_pole"]
+const REPRODUCED = ["makemake_2011", "varda_2018", "huya_2019", "2003vs2_2019",      # one event
+                    "2002ms4_2020",                                                  # a large campaign
+                    "bienor_2019_2023", "ixion_2020_2023",                           # several events
+                    "2003uy117_2020",                                                # three-dimensional shape
+                    "haumea_2017", "chariklo_2017_2020", "quaoar_2011_2022",         # rings
+                    "2007oc10_2022",                                                 # double star
+                    "2002xv93_2024"]                                                 # atmosphere
+const DIFFERENCES = ["2007uk126_2014", "2002gz32_2017", "2002tc302_2018", "chiron_2018_2019", "1995sm55_2024",  # few chords
+                     "huya_2023", "huya_2023_satellite",                             # negative chords, satellite
+                     "2003az84_2012_2014", "2002kx14_2020_2023"]                     # several events
+const EXAMPLES = [SYNTHETIC; REPRODUCED; DIFFERENCES]
 
 # the printed output of an example, by section (the titles printed by `section("…")`)
 function example_output(name)
@@ -133,7 +140,9 @@ makedocs(;
         ],
         "Examples" => [
             "Overview" => "examples.md",
-            ["generated/$name.md" for name in EXAMPLES]...,
+            "Synthetic events" => ["generated/$name.md" for name in SYNTHETIC],
+            "Published: reproduced" => ["generated/$name.md" for name in REPRODUCED],
+            "Published: with differences" => ["generated/$name.md" for name in DIFFERENCES],
             "comparison/publications.md",
             "comparison/sora.md",
         ],

@@ -38,7 +38,8 @@ First version.
 - **Examples**: re-reductions of 23 published studies (20 objects, 44 events), synthetic
   examples (binaries, contact binaries, rings; stations at random offsets, on land and in the
   dark, with their own equipment) and a tutorial, with their data and outputs;
-  the comparison with the publications and with SORA in the manual.
+  the comparison with the publications and with SORA in the manual. The published events are
+  grouped by the kind of analysis (reproduced, with differences), as in the paper.
 - **Quick-start Jupyter notebook** (`examples/quickstart.ipynb`): prediction, chords, limb fit,
   astrometry, posterior and maps for the Varda occultation of 2018, offline.
 - **Comparison with SORA on the same data** (`examples/sora/`, outputs in

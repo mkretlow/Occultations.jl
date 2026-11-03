@@ -122,40 +122,52 @@ meshview(body, ev.tref)                                   # as seen from the Ear
 ## Examples
 
 The tutorial and the synthetic examples simulate occultations with a known truth; the others
-reduce a published occultation again, from the data given in the paper. Each example writes its
-figures and printed results to `examples/output/<example>/`:
+reduce a published occultation again, from the data given in the paper, grouped by the kind of
+analysis (as in the manual). Each example writes its figures and printed results to
+`examples/output/<example>/`:
 
 | Example | Event | Publication | Shows |
 |---|---|---|---|
 | [`quickstart.ipynb`](examples/quickstart.ipynb) | Varda 2018 | Souami et al. 2020 | Jupyter notebook: prediction, chords, limb fit, astrometry, posterior, maps |
+| ***Synthetic events*** | | | *known truth; the stations, their equipment and timing errors are simulated* |
 | [`tutorial.jl`](examples/tutorial.jl) | synthetic | – | all features, offline |
 | [`sim_binary.jl`](examples/sim_binary.jl) | synthetic | – | a satellite (circle or ellipse), a binary of similar bodies, barycentre, coverage |
 | [`sim_contact_binary.jl`](examples/sim_contact_binary.jl) | synthetic | – | a contact binary: light curves with two drops, joint light-curve fit |
 | [`sim_contact_binary_3d.jl`](examples/sim_contact_binary_3d.jl) | synthetic, 4 events | – | a contact binary in 3-D: two rotating ellipsoids, unknown pole |
 | [`sim_rings.jl`](examples/sim_rings.jl) | synthetic | – | two narrow rings: ring dips in light curves, widths and optical depths |
 | [`sim_ring_pole.jl`](examples/sim_ring_pole.jl) | synthetic, 3 events | – | a distant ring: the ring pole from several events |
+| ***Reproduced: one event, ellipse or circle*** | | | *limb allowance, clock offsets, posterior* |
+| [`makemake_2011.jl`](examples/makemake_2011.jl) | (136472) Makemake, 2011-04-23 | Ortiz et al. 2012 | circle and ellipse, star from Gaia |
+| [`varda_2018.jl`](examples/varda_2018.jl) | (174567) Varda, 2018-09-10 | Souami et al. 2020 | limb and astrometry |
 | [`huya_2019.jl`](examples/huya_2019.jl) | (38628) Huya, 2019-03-18 | Santos-Sanz et al. 2022 | σ_limb, clock priors, posterior |
-| [`2002kx14_2020_2023.jl`](examples/2002kx14_2020_2023.jl) | (119951) 2002 KX14, 5 events | Rizos et al. 2025 | multi-event fit, mirror solution, albedo |
+| [`2003vs2_2019.jl`](examples/2003vs2_2019.jl) | (84922) 2003 VS2, 2019-10-22 | Vara-Lubiano et al. 2022 | clock offset of a chord, 3-D ellipsoid |
+| ***Reproduced: a large campaign*** | | | *many chords, selected chords, topography* |
+| [`2002ms4_2020.jl`](examples/2002ms4_2020.jl) | (307261) 2002 MS4, 2020-08-08 | Rommel et al. 2023 | 59 chords, global ellipse, topography |
+| ***Reproduced: several events*** | | | *one shape with a centre per event, clock offsets, a triaxial ellipsoid from several events* |
+| [`bienor_2019_2023.jl`](examples/bienor_2019_2023.jl) | (54598) Bienor, 4 events 2019–2023 | Fernández-Valenzuela et al. 2023, Rizos et al. 2024 | clock offsets, binary alternative, 3-D ellipsoid |
+| [`ixion_2020_2023.jl`](examples/ixion_2020_2023.jl) | (28978) Ixion, 6 events | Kilic et al. 2026 | global fit, astrometry |
+| ***Reproduced: a three-dimensional shape*** | | | *triaxial ellipsoid, rotational amplitude and phase, posterior* |
 | [`2003uy117_2020.jl`](examples/2003uy117_2020.jl) | (143707) 2003 UY117, 2020-10-23 | Kretlow et al. 2024 | 13 negative chords, 3-D ellipsoid with light-curve amplitude and phase |
+| ***Reproduced: rings*** | | | *body and rings together, ring mid-times, ring pole and its mirror* |
+| [`haumea_2017.jl`](examples/haumea_2017.jl) | (136108) Haumea, 2017-01-21 | Ortiz et al. 2017 | the ring from mid-times, 3-D shape |
+| [`chariklo_2017_2020.jl`](examples/chariklo_2017_2020.jl) | (10199) Chariklo, 7 events 2017–2020 | Morgado et al. 2021 | two rings, mirror pole, astrometry |
+| [`quaoar_2011_2022.jl`](examples/quaoar_2011_2022.jl) | (50000) Quaoar, 2011 and 2022 | Braga-Ribas et al. 2013, Pereira et al. 2023 | limb, two rings |
+| ***Reproduced: a double star*** | | | *light curves fitted directly, posterior* |
+| [`2007oc10_2022.jl`](examples/2007oc10_2022.jl) | (470316) 2007 OC10, 2022 | Gómez-Limón et al. 2025 | a double star: light curves fitted directly, posterior |
+| ***Reproduced: an atmosphere*** | | | *light curves fitted directly, ray-traced refraction* |
 | [`2002xv93_2024.jl`](examples/2002xv93_2024.jl) | (612533) 2002 XV93, 2024-01-10 | Arimatsu et al. 2026 | light-curve fits, atmosphere detection |
+| ***With differences: one event, few chords*** | | | *error estimates, residuals along the chords, star positions* |
+| [`2007uk126_2014.jl`](examples/2007uk126_2014.jl) | (229762) 2007 UK126, 2014-11-15 | Schindler et al. 2017 | three chords, non-Gaussian posterior |
+| [`2002gz32_2017.jl`](examples/2002gz32_2017.jl) | (95626) 2002 GZ32, 2017-05-20 | Santos-Sanz et al. 2021 | an elongated centaur |
+| [`2002tc302_2018.jl`](examples/2002tc302_2018.jl) | 2002 TC302, 2018-01-28 | Ortiz et al. 2020 | σ_limb, clock offsets, star position |
+| [`chiron_2018_2019.jl`](examples/chiron_2018_2019.jl) | (2060) Chiron, 2018 and 2019 | Braga-Ribas et al. 2023 | few chords, clock offset |
 | [`1995sm55_2024.jl`](examples/1995sm55_2024.jl) | (24835) 1995 SM55, 2024-02-25 | Ortiz et al. 2025 | albedo, 3-D ellipsoid, inconsistent timings |
+| ***With differences: negative chords and a satellite*** | | | *negative chords as constraints, binary fit* |
 | [`huya_2023.jl`](examples/huya_2023.jl) | (38628) Huya, 2023-06-24 | Rommel et al. 2025 | negative chords, satellite |
 | [`huya_2023_satellite.jl`](examples/huya_2023_satellite.jl) | (38628) Huya, 2023-06-24 | Rommel et al. 2025 | Huya and its satellite fitted together (`BinaryLimb`) |
-| [`ixion_2020_2023.jl`](examples/ixion_2020_2023.jl) | (28978) Ixion, 6 events | Kilic et al. 2026 | global fit, astrometry |
-| [`2007uk126_2014.jl`](examples/2007uk126_2014.jl) | (229762) 2007 UK126, 2014-11-15 | Schindler et al. 2017 | three chords, non-Gaussian posterior |
-| [`varda_2018.jl`](examples/varda_2018.jl) | (174567) Varda, 2018-09-10 | Souami et al. 2020 | limb and astrometry |
-| [`2002tc302_2018.jl`](examples/2002tc302_2018.jl) | 2002 TC302, 2018-01-28 | Ortiz et al. 2020 | σ_limb, clock offsets, star position |
+| ***With differences: several events*** | | | *joint fit, mirror solutions, astrometry* |
 | [`2003az84_2012_2014.jl`](examples/2003az84_2012_2014.jl) | (208996) 2003 AZ84, 2011–2014 | Dias-Oliveira et al. 2017 | three chords per event, single-chord events, astrometry |
-| [`2003vs2_2019.jl`](examples/2003vs2_2019.jl) | (84922) 2003 VS2, 2019-10-22 | Vara-Lubiano et al. 2022 | clock offset of a chord, 3-D ellipsoid |
-| [`haumea_2017.jl`](examples/haumea_2017.jl) | (136108) Haumea, 2017-01-21 | Ortiz et al. 2017 | the ring from mid-times, 3-D shape |
-| [`2002gz32_2017.jl`](examples/2002gz32_2017.jl) | (95626) 2002 GZ32, 2017-05-20 | Santos-Sanz et al. 2021 | an elongated centaur |
-| [`makemake_2011.jl`](examples/makemake_2011.jl) | (136472) Makemake, 2011-04-23 | Ortiz et al. 2012 | circle and ellipse, star from Gaia |
-| [`chariklo_2017_2020.jl`](examples/chariklo_2017_2020.jl) | (10199) Chariklo, 7 events 2017–2020 | Morgado et al. 2021 | two rings, mirror pole, astrometry |
-| [`2002ms4_2020.jl`](examples/2002ms4_2020.jl) | (307261) 2002 MS4, 2020-08-08 | Rommel et al. 2023 | 59 chords, global ellipse, topography |
-| [`quaoar_2011_2022.jl`](examples/quaoar_2011_2022.jl) | (50000) Quaoar, 2011 and 2022 | Braga-Ribas et al. 2013, Pereira et al. 2023 | limb, two rings |
-| [`chiron_2018_2019.jl`](examples/chiron_2018_2019.jl) | (2060) Chiron, 2018 and 2019 | Braga-Ribas et al. 2023 | few chords, clock offset |
-| [`2007oc10_2022.jl`](examples/2007oc10_2022.jl) | (470316) 2007 OC10, 2022 | Gómez-Limón et al. 2025 | a double star: light curves fitted directly, posterior |
-| [`bienor_2019_2023.jl`](examples/bienor_2019_2023.jl) | (54598) Bienor, 4 events 2019–2023 | Fernández-Valenzuela et al. 2023, Rizos et al. 2024 | clock offsets, binary alternative, 3-D ellipsoid |
+| [`2002kx14_2020_2023.jl`](examples/2002kx14_2020_2023.jl) | (119951) 2002 KX14, 5 events | Rizos et al. 2025 | multi-event fit, mirror solution, albedo |
 
 ![2003 UY117 limb fit](examples/output/2003uy117_2020/2003uy117_limb_fit.png)
 
