@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Tutorial: an offline tour with synthetic data · Occultations.jl</title><meta name="title" content="Tutorial: an offline tour with synthetic data · Occultations.jl"/><meta property="og:title" content="Tutorial: an offline tour with synthetic data · Occultations.jl"/><meta property="twitter:title" content="Tutorial: an offline tour with synthetic data · Occultations.jl"/><meta name="description" content="Documentation for Occultations.jl."/><meta property="og:description" content="Documentation for Occultations.jl."/><meta property="twitter:description" content="Documentation for Occultations.jl."/><meta property="og:url" content="https://mkretlow.github.io/Occultations.jl/generated/tutorial/"/><meta property="twitter:url" content="https://mkretlow.github.io/Occultations.jl/generated/tutorial/"/><link rel="canonical" href="https://mkretlow.github.io/Occultations.jl/generated/tutorial/"/><script data-outdated-warner src="../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.63.2/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../search_index.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script><link href="../../assets/documentercitations/citations-hover.css" rel="stylesheet" type="text/css"/><link href="../../assets/documentercitations/citations.css" rel="stylesheet" type="text/css"/><link href="../../assets/citations.css" rel="stylesheet" type="text/css"/><script src="../../assets/documentercitations/citations-data.js"></script><script src="../../assets/documentercitations/citations-hover.js"></script><script src="../../assets/documentercitations/citations-backlinks.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../">Occultations.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><span class="tocitem">User guide</span><ul><li><a class="tocitem" href="../../guide/quickstart/">Quick start</a></li><li><a class="tocitem" href="../../guide/lightcurves/">Light curves and timing</a></li><li><a class="tocitem" href="../../guide/limbfits/">Limb fits</a></li><li><a class="tocitem" href="../../guide/binaries/">Binaries and contact binaries</a></li><li><a class="tocitem" href="../../guide/rings/">Ring systems</a></li><li><a class="tocitem" href="../../guide/atmospheres/">Atmospheres</a></li><li><a class="tocitem" href="../../guide/plots/">Plots and maps</a></li><li><a class="tocitem" href="../../guide/occview/">The occultation in 3-D</a></li><li><a class="tocitem" href="../../guide/design/">Package design and conventions</a></li></ul></li><li><span class="tocitem">Methods</span><ul><li><a class="tocitem" href="../../theory/limbfit/">The mathematics of the limb fit</a></li><li><a class="tocitem" href="../../theory/residuals/">Residuals along the chords or radial residuals?</a></li><li><a class="tocitem" href="../../theory/sigma_limb/">The limb allowance σ_limb</a></li><li><a class="tocitem" href="../../theory/uncertainty_bands/">Uncertainty of the limb in the plots</a></li></ul></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../../examples/">Overview</a></li><li class="is-active"><a class="tocitem" href>Tutorial: an offline tour with synthetic data</a><ul class="internal"><li><a class="tocitem" href="#1.-light-curves-timings-chords"><span>1. light curves → timings → chords</span></a></li><li><a class="tocitem" href="#2.-limb-fit:-ellipse,-negative-chords,-clock-offset,-uncertainties"><span>2. limb fit: ellipse, negative chords, clock offset, uncertainties</span></a></li><li><a class="tocitem" href="#3.-a-published-ellipse-against-the-negative-chords"><span>3. a published ellipse against the negative chords</span></a></li><li><a class="tocitem" href="#4.-three-events-of-a-rotating-triaxial-body:-3-D-ellipsoid-and-mesh"><span>4. three events of a rotating triaxial body: 3-D ellipsoid and mesh</span></a></li><li><a class="tocitem" href="#5.-atmosphere-(2002-XV93-like,-Arimatsu-et-al.-2026)"><span>5. atmosphere (2002 XV93-like, Arimatsu et al. 2026)</span></a></li><li><a class="tocitem" href="#6.-maps"><span>6. maps</span></a></li></ul></li><li><a class="tocitem" href="../sim_binary/">Synthetic: a satellite and a binary system</a></li><li><a class="tocitem" href="../sim_contact_binary/">Synthetic: a contact binary in one event</a></li><li><a class="tocitem" href="../sim_contact_binary_3d/">Synthetic: a contact binary in 3-D</a></li><li><a class="tocitem" href="../sim_rings/">Synthetic: a body with two narrow rings</a></li><li><a class="tocitem" href="../sim_ring_pole/">Synthetic: a distant ring seen in three events</a></li><li><a class="tocitem" href="../huya_2019/">Huya, 2019 March 18</a></li><li><a class="tocitem" href="../2002kx14_2020_2023/">2002 KX14, five events 2020–2023</a></li><li><a class="tocitem" href="../2003uy117_2020/">2003 UY117, 2020 October 23</a></li><li><a class="tocitem" href="../2002xv93_2024/">2002 XV93, 2024 January 10</a></li><li><a class="tocitem" href="../1995sm55_2024/">1995 SM55, 2024 February 25</a></li><li><a class="tocitem" href="../huya_2023/">Huya, 2023 June 24, and its satellite</a></li><li><a class="tocitem" href="../huya_2023_satellite/">Huya and its satellite, 2023 June 24</a></li><li><a class="tocitem" href="../ixion_2020_2023/">Ixion, six events 2020–2023</a></li><li><a class="tocitem" href="../2007uk126_2014/">2007 UK126, 2014 November 15</a></li><li><a class="tocitem" href="../varda_2018/">Varda, 2018 September 10</a></li><li><a class="tocitem" href="../2002tc302_2018/">2002 TC302, 2018 January 28</a></li><li><a class="tocitem" href="../2003az84_2012_2014/">2003 AZ84, 2011–2014</a></li><li><a class="tocitem" href="../2003vs2_2019/">2003 VS2, 2019 October 22</a></li><li><a class="tocitem" href="../haumea_2017/">Haumea and its ring, 2017 January 21</a></li><li><a class="tocitem" href="../2002gz32_2017/">2002 GZ32, 2017 May 20</a></li><li><a class="tocitem" href="../makemake_2011/">Makemake, 2011 April 23</a></li><li><a class="tocitem" href="../bienor_2019_2023/">Bienor, 2019–2023</a></li><li><a class="tocitem" href="../chariklo_2017_2020/">Chariklo and its rings, 2017–2020</a></li><li><a class="tocitem" href="../2002ms4_2020/">2002 MS4, 2020 August 8</a></li><li><a class="tocitem" href="../quaoar_2011_2022/">Quaoar and its rings, 2011 and 2022</a></li><li><a class="tocitem" href="../chiron_2018_2019/">Chiron, 2018 and 2019</a></li><li><a class="tocitem" href="../../comparison/publications/">Occultations.jl compared with published reductions</a></li><li><a class="tocitem" href="../../comparison/sora/">Occultations.jl and SORA: the fitting methods compared</a></li></ul></li><li><a class="tocitem" href="../../validation/">Validation</a></li><li><a class="tocitem" href="../../api/">API reference</a></li><li><a class="tocitem" href="../../references/">References</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li class="is-active"><a href>Tutorial: an offline tour with synthetic data</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Tutorial: an offline tour with synthetic data</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/mkretlow/Occultations.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/tutorial.jl" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Tutorial:-an-offline-tour-with-synthetic-data"><a class="docs-heading-anchor" href="#Tutorial:-an-offline-tour-with-synthetic-data">Tutorial: an offline tour with synthetic data</a><a id="Tutorial:-an-offline-tour-with-synthetic-data-1"></a><a class="docs-heading-anchor-permalink" href="#Tutorial:-an-offline-tour-with-synthetic-data" title="Permalink"></a></h1><p>A tour of the package on simulated data. It needs no network and no data files, and prints the expected results next to the fitted ones:</p><ol><li>light curves → timings (diffraction model) → chords;</li><li>a limb fit (2-D ellipse) with negative chords and a clock offset; uncertainties by covariance, χ² profile and Bayesian posterior; astrometry; a joint fit of the light curves;</li><li>a published ellipse checked against the negative chords;</li><li>three events of a rotating triaxial body: a 3-D ellipsoid fit with a rotational-amplitude constraint, and the same with a triangle mesh (OBJ);</li><li>an atmosphere (2002 XV93-like): a joint fit of the light curves for the surface pressure;</li><li>maps (GeoMakie).</li></ol><p>Run it with:</p><pre><code class="nohighlight hljs">julia --project=. examples/tutorial.jl [output_dir]      (default: examples/output/tutorial)</code></pre><div class="admonition is-info" id="Output-ac3e19244371eb4e"><header class="admonition-header">Output<a class="admonition-anchor" href="#Output-ac3e19244371eb4e" title="Permalink"></a></header><div class="admonition-body"><p>The code is not run when the manual is built. The output after each section is that of the last run of <a href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/tutorial.jl"><code>examples/tutorial.jl</code></a>, stored in <a href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/tutorial/output.txt"><code>examples/output/tutorial/output.txt</code></a>.</p></div></div><pre><code class="language-julia hljs">using Occultations, Random, Printf, LinearAlgebra
+using Plots
+import CairoMakie                     # saves the GeoMakie maps (Makie figures)
+include(joinpath(@__DIR__, &quot;standard_figures.jl&quot;))
+
+out = length(ARGS) &gt;= 1 ? ARGS[1] : mkpath(joinpath(@__DIR__, &quot;output&quot;, &quot;tutorial&quot;))
+rng = MersenneTwister(42)</code></pre><h2 id="1.-light-curves-timings-chords"><a class="docs-heading-anchor" href="#1.-light-curves-timings-chords">1. light curves → timings → chords</a><a id="1.-light-curves-timings-chords-1"></a><a class="docs-heading-anchor-permalink" href="#1.-light-curves-timings-chords" title="Permalink"></a></h2><pre><code class="language-julia hljs">eph = EphemKeplerian(a=43.0, e=0.05, i=12.0, Ω=80.0, ω=150.0, M=10.0, epoch=Epoch(&quot;2023-01-01&quot;), name=&quot;SimTNO&quot;)
+body = Body(&quot;SimTNO&quot;, eph; radius=300.0, pole=(30.0, 10.0), rotation_period=7.0, W0=40.0,
+            shape=Ellipsoid(340.0, 290.0, 250.0))
+t0 = Epoch(&quot;2023-05-01T03:00:00&quot;)
+ra, dec, _ = ephem_radec(body, t0)
+star = Star(ra + 0.002 / 3600 / cosd(dec), dec; name=&quot;SimStar&quot;, mag=Dict(&quot;V&quot; =&gt; 14.0, &quot;K&quot; =&gt; 12.5),
+            ra_err=0.15, dec_err=0.12)
+ev = Event(star, body, t0)
+display(ev)
+path = shadow_path(star, body, ev.tref, ev.tref; offsets=[0.0])
+lon0, lat0 = path.lon[1, 1], path.lat[1, 1]
+truth = project(body, ev.tref)                      # the true apparent limb
+center = (25.0, -12.0)                              # ephemeris offset [km]
+println(&quot;true limb: &quot;, truth, &quot;, centre &quot;, center)
+
+t = collect(-45:0.25:45.0)
+for (j, dlat) in enumerate([-3.2, -2.3, -1.0, 0.4, 1.7, 2.45, 3.6])
+    obs = Observer(&quot;Station $j&quot;, lon0 + 0.3j, lat0 + dlat, 200.0)
+    pc = predicted_contacts(ev, obs, truth; center=center)
+    if isempty(pc)
+        lc = LightCurve(t, 1 .+ 0.05 .* randn(rng, length(t)); tref=ev.tref, σ=0.05, exptime=0.25, name=obs.name)
+        push!(ev, Chord(obs.name, obs, lc))
+        continue
+    end
+    ti, te = pc[1][1] - ev.tref, pc[1][2] - ev.tref
+    j == 2 &amp;&amp; ((ti, te) = (ti + 0.9, te + 0.9))      # station 2: clock 0.9 s late
+    v = hypot(velocity(Track(star, body, obs, ev.tref, -60, 60), ti)...)
+    lc = simulate_lightcurve(t, ti, te; tref=ev.tref, vel=v, dist=ev.ca.dist_km,
+                             star_diam=apparent_diameter(star, ev.ca.dist_km), σ=0.05, exptime=0.25, rng=rng,
+                             name=obs.name)
+    tf = fit_timing(lc; vel=v, dist=ev.ca.dist_km, star_diam=apparent_diameter(star, ev.ca.dist_km), rng=rng)
+    c = contact_times(tf)
+    @printf(&quot;%-10s immersion %s ± %.3f s   emersion %s ± %.3f s\n&quot;, obs.name, isot(c.immersion; digits=3),
+            c.immersion_err, isot(c.emersion; digits=3), c.emersion_err)
+    j == 3 &amp;&amp; savefig(plot(tf), joinpath(out, &quot;timing_fit.png&quot;))
+    push!(ev, Chord(obs.name, obs, tf))
+end</code></pre><pre><code class="language-text hljs">Event SimTNO, 2023-05-01T02:59:57: SimTNO occults Star(SimStar, RA=16 04 37.6090, Dec=-16 51 19.775)
+  closest approach 2023-05-01T02:59:57.470: 0.0004&quot; (10.7 km), PA 190.62°, 22.516 km/s, distance 39.9572 au
+
+true limb: EllipseOutline(a = 333.744 km, b = 282.362 km, PA(minor) = 125.67°), centre (25.0, -12.0)
+Station 2  immersion 2023-05-01T02:59:44.820 ± 0.014 s   emersion 2023-05-01T03:00:02.520 ± 0.009 s
+Station 3  immersion 2023-05-01T02:59:41.056 ± 0.013 s   emersion 2023-05-01T03:00:05.461 ± 0.013 s
+Station 4  immersion 2023-05-01T02:59:41.567 ± 0.014 s   emersion 2023-05-01T03:00:06.161 ± 0.013 s
+Station 5  immersion 2023-05-01T02:59:45.031 ± 0.013 s   emersion 2023-05-01T03:00:03.580 ± 0.017 s
+Station 6  immersion 2023-05-01T02:59:49.962 ± 0.014 s   emersion 2023-05-01T02:59:58.043 ± 0.012 s</code></pre><h2 id="2.-limb-fit:-ellipse,-negative-chords,-clock-offset,-uncertainties"><a class="docs-heading-anchor" href="#2.-limb-fit:-ellipse,-negative-chords,-clock-offset,-uncertainties">2. limb fit: ellipse, negative chords, clock offset, uncertainties</a><a id="2.-limb-fit:-ellipse,-negative-chords,-clock-offset,-uncertainties-1"></a><a class="docs-heading-anchor-permalink" href="#2.-limb-fit:-ellipse,-negative-chords,-clock-offset,-uncertainties" title="Permalink"></a></h2><pre><code class="language-julia hljs">fitE = fit_limb(ev; fit_dt=[&quot;Station 2&quot;], rng=rng)
+display(fitE)
+println(&quot;\ncontact residuals [s]: &quot;, [round(r.dt; digits=4) for r in contact_residuals(fitE)])
+println(&quot;clock offsets: &quot;, clock_offsets(fitE))
+println(&quot;χ² profile 1σ interval of the equatorial radius: &quot;, confidence_interval(fitE, :equatorial_radius))
+a = astrometry(fitE)
+@printf(&quot;astrometry: RA %s  Dec %s  (σ %.3f, %.3f mas)  offsets %+.3f, %+.3f mas\n&quot;, a.ra_str, a.dec_str,
+        a.ra_err, a.dec_err, a.offset_ra, a.offset_dec)
+post = sample(fitE; nsteps=2000, rng=rng)
+display(post)
+println(&quot;derived (posterior): &quot;, derived_summary(post))
+println(&quot;autocorrelation times [steps]: &quot;, round.(autocorrelation_time(post); digits=1))
+savefig(cornerplot(post; vars=[:equatorial_radius, :oblateness, :position_angle, Symbol(&quot;dt_Station 2&quot;)],
+                   axislabels=Dict(:equatorial_radius =&gt; &quot;a [km]&quot;, :oblateness =&gt; &quot;ε&quot;, :position_angle =&gt; &quot;PA [°]&quot;,
+                                   Symbol(&quot;dt_Station 2&quot;) =&gt; &quot;clock offset [s]&quot;),
+                   truths=Dict(:equatorial_radius =&gt; truth.a, :oblateness =&gt; 1 - truth.b / truth.a,
+                               :position_angle =&gt; truth.pa, Symbol(&quot;dt_Station 2&quot;) =&gt; -0.9), truth_label=&quot;simulated truth&quot;),
+        joinpath(out, &quot;corner.png&quot;))</code></pre><p>A joint photometric fit: the light curves themselves against the limb.</p><pre><code class="language-julia hljs">fitP = fit_limb(ev; photometry=true, fit_dt=[&quot;Station 2&quot;], rng=rng, starts=3)
+println(&quot;\njoint photometric fit: χ²/dof = &quot;, round(reduced_chi2(fitP); digits=3),
+        &quot;, a = &quot;, fitP[:equatorial_radius], &quot;, ε = &quot;, fitP[:oblateness])</code></pre><pre><code class="language-text hljs">LimbProblem fit: χ² = 2.927, dof = 4, χ²/dof = 0.732
+  center_f               =      24.974721 ± 0.143653
+  center_g               =     -11.958934 ± 0.129877
+  equatorial_radius      =     333.694985 ± 0.153694
+  oblateness             =       0.153875 ± 0.000681
+  position_angle         =     125.753161 ± 0.147610
+  dt_Station 2           =      -0.899805 ± 0.014631
+  derived:
+  offset_ra              =       0.861798 ± 0.004957
+  offset_dec             =      -0.412664 ± 0.004482
+  equivalent_radius      =     306.949445 ± 0.073883
+  semi_minor_axis        =     282.347551 ± 0.134695
+
+
+contact residuals [s]: [0.0018, -0.0007, -0.004, 0.0081, 0.0079, -0.0085, -0.012, -0.0097, 0.0087, 0.0052]
+clock offsets: Dict(&quot;Station 2&quot; =&gt; (-0.8998053800423351, 0.014631332728680268))
+χ² profile 1σ interval of the equatorial radius: (333.54145131891227, 333.8488571388495)
+astrometry: RA 16 04 37.60902  Dec -16 51 19.7758  (σ 0.150, 0.120 mas)  offsets +0.862, -0.413 mas
+Posterior of LimbProblem: 24 walkers × 2000 steps (burn-in 666), acceptance 0.52
+  center_f               =      24.972794  -0.143305 +0.146407
+  center_g               =     -11.963293  -0.126228 +0.121241
+  equatorial_radius      =     333.705468  -0.159649 +0.144704
+  oblateness             =       0.153903  -0.000700 +0.000629
+  position_angle         =     125.752101  -0.149305 +0.147394
+  dt_Station 2           =      -0.898863  -0.015680 +0.014591
+
+derived (posterior): (offset_ra = (median = 0.8618095730924973, minus = 0.004994765222358644, plus = 0.004865350624370546), offset_dec = (median = -0.41273189630032336, minus = 0.0042881409246668944, plus = 0.003910851537164917), equivalent_radius = (median = 306.9596169100677, minus = 0.0794656688827331, plus = 0.07298979052308141), semi_minor_axis = (median = 282.3479292034749, minus = 0.1259491338693124, plus = 0.15272166153914668))
+autocorrelation times [steps]: [47.6, 60.8, 64.3, 54.7, 54.5, 48.3]
+
+joint photometric fit: χ²/dof = 0.997, a = (333.5248644610994, 0.176366959739564), ε = (0.15364553995848032, 0.0007418729715379284)</code></pre><h2 id="3.-a-published-ellipse-against-the-negative-chords"><a class="docs-heading-anchor" href="#3.-a-published-ellipse-against-the-negative-chords">3. a published ellipse against the negative chords</a><a id="3.-a-published-ellipse-against-the-negative-chords-1"></a><a class="docs-heading-anchor-permalink" href="#3.-a-published-ellipse-against-the-negative-chords" title="Permalink"></a></h2><pre><code class="language-julia hljs">lit = ellipse_outline(; equatorial_radius=360.0, oblateness=0.1, position_angle=120.0)
+for r in check_negative_chords(ev, lit; center=(fitE[:center_f][1], fitE[:center_g][1]))
+    @printf(&quot;%-10s %s  min distance %7.2f km%s\n&quot;, r.chord, r.conflict ? &quot;CONFLICT&quot; : &quot;ok      &quot;, r.distance,
+            r.conflict ? @sprintf(&quot;  (would have seen %.2f s)&quot;, r.duration) : &quot;&quot;)
+end</code></pre><pre><code class="language-text hljs">Station 1  CONFLICT  min distance  -20.80 km  (would have seen 9.60 s)
+Station 7  ok        min distance   82.52 km</code></pre><h2 id="4.-three-events-of-a-rotating-triaxial-body:-3-D-ellipsoid-and-mesh"><a class="docs-heading-anchor" href="#4.-three-events-of-a-rotating-triaxial-body:-3-D-ellipsoid-and-mesh">4. three events of a rotating triaxial body: 3-D ellipsoid and mesh</a><a id="4.-three-events-of-a-rotating-triaxial-body:-3-D-ellipsoid-and-mesh-1"></a><a class="docs-heading-anchor-permalink" href="#4.-three-events-of-a-rotating-triaxial-body:-3-D-ellipsoid-and-mesh" title="Permalink"></a></h2><pre><code class="language-julia hljs">evs = Event[]
+for (k, dt) in enumerate([0.0, 2.2 * 3600, 4.9 * 3600])
+    tk = t0 + dt
+    rak, deck, _ = ephem_radec(body, tk)
+    st = Star(rak + 0.001 / 3600 / cosd(deck), deck; name=&quot;star $k&quot;)
+    e = Event(st, body, tk; name=&quot;event $k&quot;)
+    p = shadow_path(st, body, e.tref, e.tref; offsets=[0.0])
+    Ok = project(body, e.tref)
+    for (j, dlat) in enumerate([-2.0, -0.7, 0.6, 1.9])
+        o = Observer(&quot;E$k-S$j&quot;, p.lon[1, 1], p.lat[1, 1] + dlat, 0.0)
+        pc = predicted_contacts(e, o, Ok; center=(5.0k, -3.0k))
+        isempty(pc) &amp;&amp; continue
+        push!(e, Chord(o.name, o; immersion=pc[1][1] + 0.03randn(rng), emersion=pc[1][2] + 0.03randn(rng),
+                       immersion_err=0.03, emersion_err=0.03))
+    end
+    push!(evs, e)
+end
+u = normalize(geocentric_vector(eph, t0 + 30 * 86400))
+amp = RotationalAmplitude(t0 + 30 * 86400, rotational_amplitude(340.0, 290.0, 250.0, aspect_angle(30.0, 10.0, u)), 0.02)
+body.shape = Ellipsoid(310.0, 300.0, 280.0)            # deliberately poor starting shape
+fit3 = fit(LimbProblem(evs; model=EllipsoidLimb(), amplitudes=[amp], fix=[:pole_ra, :pole_dec]); rng=rng)
+display(fit3)
+println(&quot;(true axes 340, 290, 250 km)&quot;)
+write_obj(joinpath(out, &quot;simtno_fitted_ellipsoid.obj&quot;),
+          ellipsoid_mesh(fit3[:a][1], fit3[:b][1], fit3[:c][1]; name=&quot;SimTNO fitted ellipsoid&quot;))
+for k in 1:3
+    savefig(plot(fit3; event=k), joinpath(out, &quot;ellipsoid_event$k.png&quot;))
+end</code></pre><p>The 3-D view of each event. With GLMakie, the event, the rotational phase and (with <code>explore=true</code>) the pole, W0 and the axes are sliders, with the live χ²:</p><pre><code class="language-julia hljs">for k in 1:3
+    CairoMakie.save(joinpath(out, &quot;ellipsoid_occview_event$k.png&quot;), occview(fit3; event=k))
+end</code></pre><p>The same body as a triangle mesh, written to and read from an OBJ file:</p><pre><code class="language-julia hljs">objfile = joinpath(out, &quot;simtno.obj&quot;)
+write_obj(objfile, ellipsoid_mesh(340.0, 290.0, 250.0; subdivisions=4))
+mesh = read_obj(objfile)
+fitM = fit_limb(evs; model=MeshLimb(mesh; fit_orientation=true), fix=[:pole_ra, :pole_dec], rng=rng, starts=4)
+println(&quot;\nmesh fit: scale = &quot;, fitM[:scale], &quot;, W0 = &quot;, fitM[:W0], &quot;, volume-equivalent radius = &quot;,
+        fitM[:volume_equivalent_radius])</code></pre><pre><code class="language-text hljs">LimbProblem fit: χ² = 11.388, dof = 15, χ²/dof = 0.759
+  center_f_1             =       5.310604 ± 0.272160
+  center_g_1             =      -3.179985 ± 0.422390
+  center_f_2             =       9.907924 ± 0.241146
+  center_g_2             =      -6.368168 ± 0.444196
+  center_f_3             =      14.499689 ± 0.241561
+  center_g_3             =      -8.494676 ± 0.302416
+  a                      =     340.825120 ± 0.481989
+  b                      =     289.821070 ± 0.425279
+  c                      =     249.417835 ± 2.125612
+  pole_ra                =      30.000000 (fixed)
+  pole_dec               =      10.000000 (fixed)
+  W0                     =      66.339227 ± 0.236418
+  period                 =       7.000000 (fixed)
+  derived:
+  offset_ra_1            =       0.183252 ± 0.009391
+  offset_dec_1           =      -0.109731 ± 0.014575
+  offset_ra_2            =       0.341896 ± 0.008321
+  offset_dec_2           =      -0.219748 ± 0.015328
+  offset_ra_3            =       0.500355 ± 0.008336
+  offset_dec_3           =      -0.293134 ± 0.010436
+  volume_equivalent_radius =     290.979919 ± 0.596928
+  b_over_a               =       0.850351 ± 0.001070
+  c_over_b               =       0.860592 ± 0.008442
+  apparent_a_1           =     334.579035 ± 0.405227
+  apparent_b_1           =     282.070823 ± 0.212413
+  apparent_pa_1          =     125.453091 ± 0.316397
+  aspect_1               =     148.970272 ± 0.000000
+  rotation_phase_1       =     141.498696 ± 0.236418
+  apparent_a_2           =     335.779966 ± 0.398512
+  apparent_b_2           =     281.581449 ± 0.210672
+  apparent_pa_2          =      75.113613 ± 0.274110
+  aspect_2               =     148.971981 ± 0.000000
+  rotation_phase_2       =     254.645881 ± 0.236418
+  apparent_a_3           =     321.624515 ± 0.215477
+  apparent_b_3           =     288.346228 ± 0.332962
+  apparent_pa_3          =      34.061390 ± 0.464913
+  aspect_3               =     148.974081 ± 0.000000
+  rotation_phase_3       =      33.508325 ± 0.236418
+
+(true axes 340, 290, 250 km)
+
+mesh fit: scale = (1.0012335597831663, 0.0003916602161212916), W0 = (246.4933593780465, 0.23928846060391076), volume-equivalent radius = (291.1797857689707, 0.11390303161250502)</code></pre><h2 id="5.-atmosphere-(2002-XV93-like,-Arimatsu-et-al.-2026)"><a class="docs-heading-anchor" href="#5.-atmosphere-(2002-XV93-like,-Arimatsu-et-al.-2026)">5. atmosphere (2002 XV93-like, Arimatsu et al. 2026)</a><a id="5.-atmosphere-(2002-XV93-like,-Arimatsu-et-al.-2026)-1"></a><a class="docs-heading-anchor-permalink" href="#5.-atmosphere-(2002-XV93-like,-Arimatsu-et-al.-2026)" title="Permalink"></a></h2><pre><code class="language-julia hljs">ephA = EphemKeplerian(a=37.5, e=0.02, i=12.0, Ω=80.0, ω=150.0, M=10.0, epoch=Epoch(&quot;2024-01-01&quot;), name=&quot;XV93-like&quot;)
+bodyA = Body(&quot;XV93-like&quot;, ephA; radius=244.0, density=1500.0)
+tA = Epoch(&quot;2024-01-10T15:00:00&quot;)
+raA, decA, _ = ephem_radec(bodyA, tA)
+starA = Star(raA + 0.001 / 3600 / cosd(decA), decA; name=&quot;StarA&quot;, diameter=0.0032)
+evA = Event(starA, bodyA, tA)
+pA = shadow_path(starA, bodyA, evA.tref, evA.tref; offsets=[0.0])
+for (j, dlat) in enumerate([0.2, 1.0, 2.3])
+    tt = collect(-30:0.5:30.0)
+    push!(evA, Chord(&quot;A$j&quot;, Observer(&quot;A$j&quot;, pA.lon[1, 1], pA.lat[1, 1] + dlat, 0.0),
+                     LightCurve(tt, ones(length(tt)); tref=evA.tref, σ=0.03, exptime=0.5, λ=0.6, name=&quot;A$j&quot;)))
+end
+atm = xv93_atmosphere(:CH4)
+sim = LimbProblem(evA; model=CircleLimb(), photometry=true, atmosphere=atm,
+                  init=Dict(:center_f =&gt; 15.0, :center_g =&gt; -20.0, :radius =&gt; 244.0, :pressure =&gt; 124.0))
+v = [q.value for q in parameters(sim)]
+rngA = MersenneTwister(3)
+for d in sim.photometry                                  # synthetic light curves from the model
+    I, _ = Occultations._phot_model(sim, d, Occultations._outlines(sim, v)[1], v)
+    d.lc.flux .= I .+ 0.03 .* randn(rngA, length(I))
+end
+airless = fit(LimbProblem(evA; model=CircleLimb(), photometry=true,
+                          init=Dict(:center_f =&gt; 0.0, :center_g =&gt; 0.0, :radius =&gt; 230.0)); starts=3, rng=rng)
+fitA = fit(LimbProblem(evA; model=CircleLimb(), photometry=true, atmosphere=atm,
+                       init=Dict(:center_f =&gt; airless[:center_f][1], :center_g =&gt; airless[:center_g][1],
+                                 :radius =&gt; airless[:radius][1], :pressure =&gt; 50.0)); starts=6, rng=rng)
+display(fitA)
+χtruth = sum(abs2, residuals(fitA.problem, [15.0, -20.0, 244.0, 124.0]))
+@printf(&quot;airless model: χ² = %.1f; with atmosphere: χ² = %.1f (at the simulated truth, 124 nbar and R = 244 km: %.1f)\n&quot;,
+        airless.chi2, fitA.chi2, χtruth)
+prof = atmosphere_profile(atm, fitA[:pressure][1], fitA[:radius][1], body_gm(bodyA), evA.ca.dist_km;
+                          λ=0.6, star_diam=apparent_diameter(starA, evA.ca.dist_km))
+savefig(plot(prof; ρmax=400), joinpath(out, &quot;atmosphere_profile.png&quot;))
+lc1 = evA[&quot;A1&quot;].lightcurve
+savefig(plot(lc1; model=model_lightcurve(fitA, &quot;A1&quot;)[2]), joinpath(out, &quot;atmosphere_lightcurve.png&quot;))</code></pre><pre><code class="language-text hljs">LimbProblem fit: χ² = 351.083, dof = 353, χ²/dof = 0.995
+  center_f               =      15.356803 ± 0.182860
+  center_g               =     -19.681172 ± 0.542491
+  radius                 =     244.165614 ± 0.453015
+  pressure               =     123.615782 ± 3.673984
+  derived:
+  offset_ra              =       0.565888 ± 0.006738
+  offset_dec             =      -0.725238 ± 0.019990
+
+airless model: χ² = 1030.0; with atmosphere: χ² = 351.1 (at the simulated truth, 124 nbar and R = 244 km: 355.5)</code></pre><h2 id="6.-maps"><a class="docs-heading-anchor" href="#6.-maps">6. maps</a><a id="6.-maps-1"></a><a class="docs-heading-anchor-permalink" href="#6.-maps" title="Permalink"></a></h2><pre><code class="language-julia hljs"># the standard figures: limb fits (default, 68.3 % region, as the paper), posterior, maps (prediction,
+# post-fit, comparison) and the globe
+standard_figures(&quot;simtno&quot;, fitE; out=out, posterior=post,
+                 projection=&quot;+proj=laea +lon_0=$(round(lon0)) +lat_0=$(round(lat0))&quot;, limits=(lon0 - 30, lon0 + 30, lat0 - 20, lat0 + 20), window=600, marks=60)
+println(&quot;\nfigures written to &quot;, out)</code></pre><p>The timing fit of station 3, and the posterior of the ellipse and the clock offset with the simulated truth:</p><p><img src="../../assets/figures/timing_fit.png" alt="timing fit"/> <img src="../../assets/figures/corner.png" alt="corner plot"/></p><p>The fitted 3-D ellipsoid in the geometry of the first event:</p><p><img src="../../assets/figures/ellipsoid_occview_event1.png" alt="occview"/></p><p>The refracted flux of the fitted atmosphere, and a light curve with the model:</p><p><img src="../../assets/figures/atmosphere_profile.png" alt="atmosphere profile"/> <img src="../../assets/figures/atmosphere_lightcurve.png" alt="atmosphere light curve"/></p><pre><code class="language-text hljs"></code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../../examples/">« Overview</a><a class="docs-footer-nextpage" href="../sim_binary/">Synthetic: a satellite and a binary system »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Tuesday 3 November 2026 01:29">Tuesday 3 November 2026</span>. Using Julia version 1.13.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>

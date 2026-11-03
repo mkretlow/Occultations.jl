@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Synthetic: a contact binary in 3-D · Occultations.jl</title><meta name="title" content="Synthetic: a contact binary in 3-D · Occultations.jl"/><meta property="og:title" content="Synthetic: a contact binary in 3-D · Occultations.jl"/><meta property="twitter:title" content="Synthetic: a contact binary in 3-D · Occultations.jl"/><meta name="description" content="Documentation for Occultations.jl."/><meta property="og:description" content="Documentation for Occultations.jl."/><meta property="twitter:description" content="Documentation for Occultations.jl."/><meta property="og:url" content="https://mkretlow.github.io/Occultations.jl/generated/sim_contact_binary_3d/"/><meta property="twitter:url" content="https://mkretlow.github.io/Occultations.jl/generated/sim_contact_binary_3d/"/><link rel="canonical" href="https://mkretlow.github.io/Occultations.jl/generated/sim_contact_binary_3d/"/><script data-outdated-warner src="../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.63.2/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../search_index.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script><link href="../../assets/documentercitations/citations-hover.css" rel="stylesheet" type="text/css"/><link href="../../assets/documentercitations/citations.css" rel="stylesheet" type="text/css"/><link href="../../assets/citations.css" rel="stylesheet" type="text/css"/><script src="../../assets/documentercitations/citations-data.js"></script><script src="../../assets/documentercitations/citations-hover.js"></script><script src="../../assets/documentercitations/citations-backlinks.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../">Occultations.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><span class="tocitem">User guide</span><ul><li><a class="tocitem" href="../../guide/quickstart/">Quick start</a></li><li><a class="tocitem" href="../../guide/lightcurves/">Light curves and timing</a></li><li><a class="tocitem" href="../../guide/limbfits/">Limb fits</a></li><li><a class="tocitem" href="../../guide/binaries/">Binaries and contact binaries</a></li><li><a class="tocitem" href="../../guide/rings/">Ring systems</a></li><li><a class="tocitem" href="../../guide/atmospheres/">Atmospheres</a></li><li><a class="tocitem" href="../../guide/plots/">Plots and maps</a></li><li><a class="tocitem" href="../../guide/occview/">The occultation in 3-D</a></li><li><a class="tocitem" href="../../guide/design/">Package design and conventions</a></li></ul></li><li><span class="tocitem">Methods</span><ul><li><a class="tocitem" href="../../theory/limbfit/">The mathematics of the limb fit</a></li><li><a class="tocitem" href="../../theory/residuals/">Residuals along the chords or radial residuals?</a></li><li><a class="tocitem" href="../../theory/sigma_limb/">The limb allowance σ_limb</a></li><li><a class="tocitem" href="../../theory/uncertainty_bands/">Uncertainty of the limb in the plots</a></li></ul></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../../examples/">Overview</a></li><li><a class="tocitem" href="../tutorial/">Tutorial: an offline tour with synthetic data</a></li><li><a class="tocitem" href="../sim_binary/">Synthetic: a satellite and a binary system</a></li><li><a class="tocitem" href="../sim_contact_binary/">Synthetic: a contact binary in one event</a></li><li class="is-active"><a class="tocitem" href>Synthetic: a contact binary in 3-D</a><ul class="internal"><li><a class="tocitem" href="#1.-the-simulation"><span>1. the simulation</span></a></li><li><a class="tocitem" href="#2.-the-pole-known"><span>2. the pole known</span></a></li><li><a class="tocitem" href="#3.-the-pole-unknown"><span>3. the pole unknown</span></a></li><li><a class="tocitem" href="#4.-shape-model-and-3-D-views"><span>4. shape model and 3-D views</span></a></li></ul></li><li><a class="tocitem" href="../sim_rings/">Synthetic: a body with two narrow rings</a></li><li><a class="tocitem" href="../sim_ring_pole/">Synthetic: a distant ring seen in three events</a></li><li><a class="tocitem" href="../huya_2019/">Huya, 2019 March 18</a></li><li><a class="tocitem" href="../2002kx14_2020_2023/">2002 KX14, five events 2020–2023</a></li><li><a class="tocitem" href="../2003uy117_2020/">2003 UY117, 2020 October 23</a></li><li><a class="tocitem" href="../2002xv93_2024/">2002 XV93, 2024 January 10</a></li><li><a class="tocitem" href="../1995sm55_2024/">1995 SM55, 2024 February 25</a></li><li><a class="tocitem" href="../huya_2023/">Huya, 2023 June 24, and its satellite</a></li><li><a class="tocitem" href="../huya_2023_satellite/">Huya and its satellite, 2023 June 24</a></li><li><a class="tocitem" href="../ixion_2020_2023/">Ixion, six events 2020–2023</a></li><li><a class="tocitem" href="../2007uk126_2014/">2007 UK126, 2014 November 15</a></li><li><a class="tocitem" href="../varda_2018/">Varda, 2018 September 10</a></li><li><a class="tocitem" href="../2002tc302_2018/">2002 TC302, 2018 January 28</a></li><li><a class="tocitem" href="../2003az84_2012_2014/">2003 AZ84, 2011–2014</a></li><li><a class="tocitem" href="../2003vs2_2019/">2003 VS2, 2019 October 22</a></li><li><a class="tocitem" href="../haumea_2017/">Haumea and its ring, 2017 January 21</a></li><li><a class="tocitem" href="../2002gz32_2017/">2002 GZ32, 2017 May 20</a></li><li><a class="tocitem" href="../makemake_2011/">Makemake, 2011 April 23</a></li><li><a class="tocitem" href="../bienor_2019_2023/">Bienor, 2019–2023</a></li><li><a class="tocitem" href="../chariklo_2017_2020/">Chariklo and its rings, 2017–2020</a></li><li><a class="tocitem" href="../2002ms4_2020/">2002 MS4, 2020 August 8</a></li><li><a class="tocitem" href="../quaoar_2011_2022/">Quaoar and its rings, 2011 and 2022</a></li><li><a class="tocitem" href="../chiron_2018_2019/">Chiron, 2018 and 2019</a></li><li><a class="tocitem" href="../../comparison/publications/">Occultations.jl compared with published reductions</a></li><li><a class="tocitem" href="../../comparison/sora/">Occultations.jl and SORA: the fitting methods compared</a></li></ul></li><li><a class="tocitem" href="../../validation/">Validation</a></li><li><a class="tocitem" href="../../api/">API reference</a></li><li><a class="tocitem" href="../../references/">References</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li class="is-active"><a href>Synthetic: a contact binary in 3-D</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Synthetic: a contact binary in 3-D</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/mkretlow/Occultations.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/sim_contact_binary_3d.jl" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Synthetic:-a-contact-binary-in-3-D"><a class="docs-heading-anchor" href="#Synthetic:-a-contact-binary-in-3-D">Synthetic: a contact binary in 3-D</a><a id="Synthetic:-a-contact-binary-in-3-D-1"></a><a class="docs-heading-anchor-permalink" href="#Synthetic:-a-contact-binary-in-3-D" title="Permalink"></a></h1><p>Four simulated occultations by a rotating bilobed body, reduced with <a href="../../api/#Occultations.ContactBinaryEllipsoids"><code>ContactBinaryEllipsoids</code></a>: two triaxial ellipsoids on the body x-axis, rotating about z. Three events in one night see the body at different rotational phases, a fourth one a month later; a rotational light-curve amplitude is added. Each event sees the exact silhouette of the two ellipsoids (the union of their projected ellipses), so the events together constrain the 3-D shape of both lobes:</p><ol><li>the simulation: the shape, the pole, the rotation, the chords of each event (eleven stations per event on land and in the dark, with timing accuracies of 0.02–0.4 s);</li><li>the fit with the pole known, from a deliberately poor starting shape;</li><li>the fit with the pole unknown, from a grid of starting poles;</li><li>the shape as an OBJ file and the 3-D view of each event.</li></ol><p>Run it with:</p><pre><code class="nohighlight hljs">julia --project=. examples/sim_contact_binary_3d.jl [output_dir]      (default: examples/output/sim_contact_binary_3d)</code></pre><div class="admonition is-info" id="Output-6229810bcbf915fa"><header class="admonition-header">Output<a class="admonition-anchor" href="#Output-6229810bcbf915fa" title="Permalink"></a></header><div class="admonition-body"><p>The code is not run when the manual is built. The output after each section is that of the last run of <a href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/sim_contact_binary_3d.jl"><code>examples/sim_contact_binary_3d.jl</code></a>, stored in <a href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/sim_contact_binary_3d/output.txt"><code>examples/output/sim_contact_binary_3d/output.txt</code></a>.</p></div></div><pre><code class="language-julia hljs">using Occultations, Random, Printf, LinearAlgebra
+using Plots
+import CairoMakie                     # saves the 3-D views (Makie figures)
+include(joinpath(@__DIR__, &quot;sim_stations.jl&quot;))       # stations on land, in the dark, with their equipment
+
+out = length(ARGS) &gt;= 1 ? ARGS[1] : mkpath(joinpath(@__DIR__, &quot;output&quot;, &quot;sim_contact_binary_3d&quot;))
+rng = MersenneTwister(5)</code></pre><h2 id="1.-the-simulation"><a class="docs-heading-anchor" href="#1.-the-simulation">1. the simulation</a><a id="1.-the-simulation-1"></a><a class="docs-heading-anchor-permalink" href="#1.-the-simulation" title="Permalink"></a></h2><p>Lobe 1 with semi-axes 130 × 100 × 85 km, lobe 2 with 100 × 85 × 75 km, their centres (a₁ + a₂)(1 − 0.1) = 207 km apart; the pole at RA 35°, Dec 40°, a period of 9.5 h.</p><pre><code class="language-julia hljs">truth = BilobedEllipsoid(Ellipsoid(130.0, 100.0, 85.0), Ellipsoid(100.0, 85.0, 75.0), (130.0 + 100.0) * (1 - 0.1))
+println(truth)
+@printf(&quot;volume-equivalent diameter %.1f km, mass ratio %.3f (equal densities)\n&quot;, 2volume_equivalent_radius(truth),
+        volume(truth.lobe2) / volume(truth.lobe1))
+eph = EphemKeplerian(a=44.0, e=0.03, i=3.0, Ω=120.0, ω=40.0, M=300.0, epoch=Epoch(&quot;2024-01-01&quot;), name=&quot;SimCB3&quot;)
+body = Body(&quot;SimCB3&quot;, eph; radius=140.0, pole=(35.0, 40.0), rotation_period=9.5, W0=20.0, shape=truth)
+t0 = Epoch(&quot;2024-12-30T19:00:00&quot;)
+evs = Event[]
+for (k, dt) in enumerate([0.0, 2.1 * 3600, 3.6 * 3600, 30 * 86400 + 1.3 * 3600])
+    tk = t0 + dt
+    rak, deck, _ = ephem_radec(body, tk)
+    st = Star(rak + 0.001 / 3600 / cosd(deck), deck; name=&quot;star $k&quot;)
+    e = Event(st, body, tk; name=&quot;event $k&quot;)
+    Ok = project(body, e.tref)                           # the true silhouette at this event
+    pv = positionv(st, eph, GEOCENTER, e.tref)
+    n̂ = (-pv.vg, pv.vf) ./ hypot(pv.vf, pv.vg)
+    c = (6.0k, -4.0k)                                    # ephemeris offset of the event [km]
+    offs = collect(-200.0:40.0:200.0) .+ (c[1] * n̂[1] + c[2] * n̂[2])
+    for site in stations(st, body, e.tref, offs; rng=rng, prefix=&quot;E$k-S&quot;)
+        o, σ = site.observer, site.equipment[2]
+        pc = predicted_contacts(e, o, Ok; center=c, window=abs(site.τ) + 200, step=0.05)
+        span = (e.tref + site.τ - 100, e.tref + site.τ + 100)
+        cs = reduce(vcat, [[Contact(:immersion, a + σ * randn(rng), σ), Contact(:emersion, b + σ * randn(rng), σ)]
+                           for (a, b) in pc]; init=Contact[])
+        push!(e, isempty(cs) ? Chord(o.name, o; span=span) : Chord(o.name, o; contacts=cs, span=span))
+    end
+    @printf(&quot;%s: %d positive chords (%d with two drops), area-equivalent diameter %.1f km\n&quot;, e.name,
+            count(ispositive, e.chords), count(c -&gt; count(x -&gt; x.kind === :immersion, c.contacts) == 2, e.chords),
+            2equivalent_radius(Ok))
+    push!(evs, e)
+end</code></pre><p>A rotational light curve observed ten days after the first event, amplitude ± 0.02 mag:</p><pre><code class="language-julia hljs">u = normalize(geocentric_vector(eph, t0 + 10 * 86400))
+amp = RotationalAmplitude(t0 + 10 * 86400, rotational_amplitude(truth, 35.0, 40.0, u), 0.02)
+@printf(&quot;rotational amplitude %.3f mag\n&quot;, amp.amplitude)</code></pre><pre><code class="language-text hljs">BilobedEllipsoid(Ellipsoid(130.000, 100.000, 85.000 km), Ellipsoid(100.000, 85.000, 75.000 km), d = 207.000 km)
+volume-equivalent diameter 240.1 km, mass ratio 0.577 (equal densities)
+event 1: 8 positive chords (0 with two drops), area-equivalent diameter 251.6 km
+event 2: 8 positive chords (0 with two drops), area-equivalent diameter 269.0 km
+event 3: 10 positive chords (0 with two drops), area-equivalent diameter 273.1 km
+event 4: 10 positive chords (0 with two drops), area-equivalent diameter 266.7 km
+rotational amplitude 0.265 mag</code></pre><h2 id="2.-the-pole-known"><a class="docs-heading-anchor" href="#2.-the-pole-known">2. the pole known</a><a id="2.-the-pole-known-1"></a><a class="docs-heading-anchor-permalink" href="#2.-the-pole-known" title="Permalink"></a></h2><p>The starting shape: two equal lobes, far from the truth; the period and the pole are fixed.</p><pre><code class="language-julia hljs">body.shape = BilobedEllipsoid(Ellipsoid(110.0, 95.0, 85.0), Ellipsoid(110.0, 95.0, 85.0), 200.0)
+r1 = fit(LimbProblem(evs; model=ContactBinaryEllipsoids(), amplitudes=[amp], fix=[:pole_ra, :pole_dec]); rng=rng)
+display(r1)
+println(&quot;fitted vs true:&quot;)
+for (n, tv) in ((:a1, 130.0), (:b1, 100.0), (:c1, 85.0), (:a2, 100.0), (:b2, 85.0), (:c2, 75.0), (:neck, 0.1),
+                (:volume_equivalent_radius, volume_equivalent_radius(truth)),
+                (:mass_ratio, volume(truth.lobe2) / volume(truth.lobe1)))
+    @printf(&quot;  %-26s %8.3f ± %6.3f   (truth %8.3f)\n&quot;, n, r1[n]..., tv)
+end</code></pre><pre><code class="language-text hljs">LimbProblem fit: χ² = 67.299, dof = 57, χ²/dof = 1.181
+  center_f_1             =       5.768329 ± 0.200929
+  center_g_1             =      -3.463548 ± 0.291661
+  center_f_2             =      12.232272 ± 0.328285
+  center_g_2             =      -7.694441 ± 0.393181
+  center_f_3             =      18.029584 ± 0.309751
+  center_g_3             =     -11.580062 ± 0.517962
+  center_f_4             =      24.073220 ± 0.177713
+  center_g_4             =     -16.062823 ± 0.327258
+  a1                     =     129.543344 ± 0.804369
+  b1                     =      99.840583 ± 0.319727
+  c1                     =      85.786219 ± 0.411702
+  a2                     =     100.362112 ± 0.425165
+  b2                     =      84.402435 ± 0.293494
+  c2                     =      75.114934 ± 0.308177
+  neck                   =       0.103077 ± 0.005106
+  pole_ra                =      35.000000 (fixed)
+  pole_dec               =      40.000000 (fixed)
+  W0                     =      20.657960 ± 0.079472
+  period                 =       9.500000 (fixed)
+  derived:
+  offset_ra_1            =       0.187746 ± 0.006540
+  offset_dec_1           =      -0.112731 ± 0.009493
+  offset_ra_2            =       0.398133 ± 0.010685
+  offset_dec_2           =      -0.250437 ± 0.012797
+  offset_ra_3            =       0.586822 ± 0.010082
+  offset_dec_3           =      -0.376905 ± 0.016859
+  offset_ra_4            =       0.780874 ± 0.005765
+  offset_dec_4           =      -0.521037 ± 0.010615
+  volume_equivalent_radius =     120.108448 ± 0.118695
+  lobe1_volume_equivalent_radius =     103.525319 ± 0.162381
+  lobe2_volume_equivalent_radius =      86.010278 ± 0.124238
+  mass_ratio             =       0.573471 ± 0.003657
+  separation             =     206.207558 ± 0.553182
+  length                 =     436.113014 ± 0.790512
+  area_equivalent_radius_1 =     125.668756 ± 0.117179
+  aspect_1               =      56.375982 ± 0.000000
+  rotation_phase_1       =     158.142879 ± 0.079472
+  area_equivalent_radius_2 =     134.479871 ± 0.119101
+  aspect_2               =      56.374462 ± 0.000000
+  rotation_phase_2       =     237.721704 ± 0.079472
+  area_equivalent_radius_3 =     136.615428 ± 0.131415
+  aspect_3               =      56.373377 ± 0.000000
+  rotation_phase_3       =     294.563712 ± 0.079472
+  area_equivalent_radius_4 =     133.348327 ± 0.114419
+  aspect_4               =      55.885379 ± 0.000000
+  rotation_phase_4       =     130.857095 ± 0.079472
+
+fitted vs true:
+  a1                          129.543 ±  0.804   (truth  130.000)
+  b1                           99.841 ±  0.320   (truth  100.000)
+  c1                           85.786 ±  0.412   (truth   85.000)
+  a2                          100.362 ±  0.425   (truth  100.000)
+  b2                           84.402 ±  0.293   (truth   85.000)
+  c2                           75.115 ±  0.308   (truth   75.000)
+  neck                          0.103 ±  0.005   (truth    0.100)
+  volume_equivalent_radius    120.108 ±  0.119   (truth  120.049)
+  mass_ratio                    0.573 ±  0.004   (truth    0.577)</code></pre><h2 id="3.-the-pole-unknown"><a class="docs-heading-anchor" href="#3.-the-pole-unknown">3. the pole unknown</a><a id="3.-the-pole-unknown-1"></a><a class="docs-heading-anchor-permalink" href="#3.-the-pole-unknown" title="Permalink"></a></h2><p>The pole free, from a grid of starting poles (the fit is non-linear in the pole); the best solution is kept.</p><pre><code class="language-julia hljs">sols = map([(ra, dec) for ra in (0.0, 90.0, 180.0, 270.0) for dec in (-30.0, 30.0)]) do (pra, pdec)
+    p = LimbProblem(evs; model=ContactBinaryEllipsoids(), amplitudes=[amp],
+                    init=merge(Dict(zip(r1.names, r1.values)), Dict(:pole_ra =&gt; pra, :pole_dec =&gt; pdec)),
+                    bounds=Dict(:pole_dec =&gt; (-90.0, 90.0)))
+    r = fit(p; starts=2, rng=rng)
+    @printf(&quot;  start (%5.1f°, %+5.1f°): pole (%6.1f°, %+5.1f°), χ² = %8.2f\n&quot;, pra, pdec, r[:pole_ra][1], r[:pole_dec][1], r.chi2)
+    r
+end</code></pre><p>Most starts end far away (χ² of thousands); one other start finds a second, worse pole (Δχ² ≈ 14): with four events the pole is determined, but a grid of starts is needed to find it.</p><pre><code class="language-julia hljs">r2 = sols[argmin([r.chi2 for r in sols])]
+@printf(&quot;best: pole (%.1f ± %.1f°, %.1f ± %.1f°), truth (35°, 40°); χ² = %.2f for %d degrees of freedom\n&quot;,
+        r2[:pole_ra]..., r2[:pole_dec]..., r2.chi2, r2.dof)
+for (n, tv) in ((:a1, 130.0), (:b1, 100.0), (:c1, 85.0), (:a2, 100.0), (:b2, 85.0), (:c2, 75.0), (:neck, 0.1))
+    @printf(&quot;  %-6s %8.3f ± %6.3f   (truth %7.3f)\n&quot;, n, r2[n]..., tv)
+end</code></pre><pre><code class="language-text hljs">  start (  0.0°, -30.0°): pole (  42.5°, +34.5°), χ² = 16585.64
+  start (  0.0°, +30.0°): pole (  35.2°, +40.0°), χ² =    66.27
+  start ( 90.0°, -30.0°): pole ( 111.3°, +29.5°), χ² = 82927.64
+  start ( 90.0°, +30.0°): pole (  37.4°, +40.6°), χ² = 16829.15
+  start (180.0°, -30.0°): pole ( 143.6°, -12.7°), χ² =    79.76
+  start (180.0°, +30.0°): pole ( 143.5°, -10.4°), χ² = 65125.49
+  start (270.0°, -30.0°): pole ( 229.4°, -38.7°), χ² = 210920.83
+  start (270.0°, +30.0°): pole ( 259.4°, +14.2°), χ² = 143314.15
+best: pole (35.2 ± 0.2°, 40.0 ± 0.1°), truth (35°, 40°); χ² = 66.27 for 55 degrees of freedom
+  a1      129.716 ±  0.903   (truth 130.000)
+  b1       99.861 ±  0.333   (truth 100.000)
+  c1       85.627 ±  0.497   (truth  85.000)
+  a2      100.337 ±  0.425   (truth 100.000)
+  b2       84.424 ±  0.294   (truth  85.000)
+  c2       75.079 ±  0.315   (truth  75.000)
+  neck      0.106 ±  0.006   (truth   0.100)</code></pre><h2 id="4.-shape-model-and-3-D-views"><a class="docs-heading-anchor" href="#4.-shape-model-and-3-D-views">4. shape model and 3-D views</a><a id="4.-shape-model-and-3-D-views-1"></a><a class="docs-heading-anchor-permalink" href="#4.-shape-model-and-3-D-views" title="Permalink"></a></h2><pre><code class="language-julia hljs">sh = Occultations._shape(r1.problem.model, r1.values, r1.problem.setup)
+write_obj(joinpath(out, &quot;simcb3_fitted.obj&quot;), ellipsoid_mesh(sh; name=&quot;SimCB3 fitted contact binary&quot;))
+for k in 1:4
+    savefig(plot(r1; event=k, title=&quot;SimCB3 event $k&quot;, size=(1000, 750)), joinpath(out, &quot;contact_binary_3d_event$k.png&quot;))
+    CairoMakie.save(joinpath(out, &quot;contact_binary_3d_occview_event$k.png&quot;), occview(r1; event=k))
+end
+println(&quot;figures written to &quot;, out)</code></pre><p>The four events with the fitted silhouettes (the 1σ shape band from the covariance):</p><p><img src="../../assets/figures/contact_binary_3d_event1.png" alt="event 1"/> <img src="../../assets/figures/contact_binary_3d_event2.png" alt="event 2"/></p><p>The fitted body in the geometry of the first event, with its rotational light curve:</p><p><img src="../../assets/figures/contact_binary_3d_occview_event1.png" alt="occview"/></p><pre><code class="language-text hljs"></code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../sim_contact_binary/">« Synthetic: a contact binary in one event</a><a class="docs-footer-nextpage" href="../sim_rings/">Synthetic: a body with two narrow rings »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Tuesday 3 November 2026 01:29">Tuesday 3 November 2026</span>. Using Julia version 1.13.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>

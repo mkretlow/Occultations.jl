@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>2003 UY117, 2020 October 23 · Occultations.jl</title><meta name="title" content="2003 UY117, 2020 October 23 · Occultations.jl"/><meta property="og:title" content="2003 UY117, 2020 October 23 · Occultations.jl"/><meta property="twitter:title" content="2003 UY117, 2020 October 23 · Occultations.jl"/><meta name="description" content="Documentation for Occultations.jl."/><meta property="og:description" content="Documentation for Occultations.jl."/><meta property="twitter:description" content="Documentation for Occultations.jl."/><meta property="og:url" content="https://mkretlow.github.io/Occultations.jl/generated/2003uy117_2020/"/><meta property="twitter:url" content="https://mkretlow.github.io/Occultations.jl/generated/2003uy117_2020/"/><link rel="canonical" href="https://mkretlow.github.io/Occultations.jl/generated/2003uy117_2020/"/><script data-outdated-warner src="../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.63.2/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../search_index.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script><link href="../../assets/documentercitations/citations-hover.css" rel="stylesheet" type="text/css"/><link href="../../assets/documentercitations/citations.css" rel="stylesheet" type="text/css"/><link href="../../assets/citations.css" rel="stylesheet" type="text/css"/><script src="../../assets/documentercitations/citations-data.js"></script><script src="../../assets/documentercitations/citations-hover.js"></script><script src="../../assets/documentercitations/citations-backlinks.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../">Occultations.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><span class="tocitem">User guide</span><ul><li><a class="tocitem" href="../../guide/quickstart/">Quick start</a></li><li><a class="tocitem" href="../../guide/lightcurves/">Light curves and timing</a></li><li><a class="tocitem" href="../../guide/limbfits/">Limb fits</a></li><li><a class="tocitem" href="../../guide/binaries/">Binaries and contact binaries</a></li><li><a class="tocitem" href="../../guide/rings/">Ring systems</a></li><li><a class="tocitem" href="../../guide/atmospheres/">Atmospheres</a></li><li><a class="tocitem" href="../../guide/plots/">Plots and maps</a></li><li><a class="tocitem" href="../../guide/occview/">The occultation in 3-D</a></li><li><a class="tocitem" href="../../guide/design/">Package design and conventions</a></li></ul></li><li><span class="tocitem">Methods</span><ul><li><a class="tocitem" href="../../theory/limbfit/">The mathematics of the limb fit</a></li><li><a class="tocitem" href="../../theory/residuals/">Residuals along the chords or radial residuals?</a></li><li><a class="tocitem" href="../../theory/sigma_limb/">The limb allowance σ_limb</a></li><li><a class="tocitem" href="../../theory/uncertainty_bands/">Uncertainty of the limb in the plots</a></li></ul></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../../examples/">Overview</a></li><li><a class="tocitem" href="../tutorial/">Tutorial: an offline tour with synthetic data</a></li><li><a class="tocitem" href="../sim_binary/">Synthetic: a satellite and a binary system</a></li><li><a class="tocitem" href="../sim_contact_binary/">Synthetic: a contact binary in one event</a></li><li><a class="tocitem" href="../sim_contact_binary_3d/">Synthetic: a contact binary in 3-D</a></li><li><a class="tocitem" href="../sim_rings/">Synthetic: a body with two narrow rings</a></li><li><a class="tocitem" href="../sim_ring_pole/">Synthetic: a distant ring seen in three events</a></li><li><a class="tocitem" href="../huya_2019/">Huya, 2019 March 18</a></li><li><a class="tocitem" href="../2002kx14_2020_2023/">2002 KX14, five events 2020–2023</a></li><li class="is-active"><a class="tocitem" href>2003 UY117, 2020 October 23</a><ul class="internal"><li><a class="tocitem" href="#Event-and-geometry-(paper-values-in-parentheses)"><span>Event and geometry (paper values in parentheses)</span></a></li><li><a class="tocitem" href="#Apparent-limb-(Table-3)"><span>Apparent limb (Table 3)</span></a></li><li><a class="tocitem" href="#Astrometry-(Sect.-4.3)"><span>Astrometry (Sect. 4.3)</span></a></li><li><a class="tocitem" href="#Size,-albedo"><span>Size, albedo</span></a></li><li><a class="tocitem" href="#3-D-shape:-triaxial-ellipsoid-from-the-occultation-and-the-light-curve-amplitude"><span>3-D shape: triaxial ellipsoid from the occultation and the light-curve amplitude</span></a></li><li><a class="tocitem" href="#Figures"><span>Figures</span></a></li></ul></li><li><a class="tocitem" href="../2002xv93_2024/">2002 XV93, 2024 January 10</a></li><li><a class="tocitem" href="../1995sm55_2024/">1995 SM55, 2024 February 25</a></li><li><a class="tocitem" href="../huya_2023/">Huya, 2023 June 24, and its satellite</a></li><li><a class="tocitem" href="../huya_2023_satellite/">Huya and its satellite, 2023 June 24</a></li><li><a class="tocitem" href="../ixion_2020_2023/">Ixion, six events 2020–2023</a></li><li><a class="tocitem" href="../2007uk126_2014/">2007 UK126, 2014 November 15</a></li><li><a class="tocitem" href="../varda_2018/">Varda, 2018 September 10</a></li><li><a class="tocitem" href="../2002tc302_2018/">2002 TC302, 2018 January 28</a></li><li><a class="tocitem" href="../2003az84_2012_2014/">2003 AZ84, 2011–2014</a></li><li><a class="tocitem" href="../2003vs2_2019/">2003 VS2, 2019 October 22</a></li><li><a class="tocitem" href="../haumea_2017/">Haumea and its ring, 2017 January 21</a></li><li><a class="tocitem" href="../2002gz32_2017/">2002 GZ32, 2017 May 20</a></li><li><a class="tocitem" href="../makemake_2011/">Makemake, 2011 April 23</a></li><li><a class="tocitem" href="../bienor_2019_2023/">Bienor, 2019–2023</a></li><li><a class="tocitem" href="../chariklo_2017_2020/">Chariklo and its rings, 2017–2020</a></li><li><a class="tocitem" href="../2002ms4_2020/">2002 MS4, 2020 August 8</a></li><li><a class="tocitem" href="../quaoar_2011_2022/">Quaoar and its rings, 2011 and 2022</a></li><li><a class="tocitem" href="../chiron_2018_2019/">Chiron, 2018 and 2019</a></li><li><a class="tocitem" href="../../comparison/publications/">Occultations.jl compared with published reductions</a></li><li><a class="tocitem" href="../../comparison/sora/">Occultations.jl and SORA: the fitting methods compared</a></li></ul></li><li><a class="tocitem" href="../../validation/">Validation</a></li><li><a class="tocitem" href="../../api/">API reference</a></li><li><a class="tocitem" href="../../references/">References</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li class="is-active"><a href>2003 UY117, 2020 October 23</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>2003 UY117, 2020 October 23</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/mkretlow/Occultations.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/2003uy117_2020.jl" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="2003-UY117,-2020-October-23"><a class="docs-heading-anchor" href="#2003-UY117,-2020-October-23">2003 UY117, 2020 October 23</a><a id="2003-UY117,-2020-October-23-1"></a><a class="docs-heading-anchor-permalink" href="#2003-UY117,-2020-October-23" title="Permalink"></a></h1><p>The stellar occultation by (143707) 2003 UY117 on 2020 October 23, reduced from the published timings of <a href="../../references/#Kretlow2024" id="Kretlow2024-cite-2">Kretlow <em>et al.</em> (2024)</a>, A&amp;A 691, A31, &quot;Physical properties of trans-Neptunian object (143707) 2003 UY117 derived from stellar occultation and photometric observations&quot;: four positive chords from three sites in Spain (Table 2), 13 negative chords (Table A.1) and the rotational light curve (P = 12.376 h, Δm = 0.36 ± 0.13 mag).</p><p>The example covers the limb fit and the astrometry, and the <strong>3-D triaxial ellipsoid from the occultation plus the rotational light-curve amplitude and phase</strong>, with an isotropic prior on the unknown pole. The least-squares solutions form a valley of equally good fits, which the posterior describes.</p><table><tr><th style="text-align: right"></th><th style="text-align: right">a′ (km)</th><th style="text-align: right">b′ (km)</th><th style="text-align: right">φ′ (°)</th><th style="text-align: right">D_eq (km)</th><th style="text-align: right">χ²/dof</th></tr><tr><td style="text-align: right"><a href="../../references/#Kretlow2024" id="Kretlow2024-cite-3">Kretlow <em>et al.</em> (2024)</a></td><td style="text-align: right">141 ± 9</td><td style="text-align: right">94 ± 16</td><td style="text-align: right">−31 ± 11</td><td style="text-align: right">228 ± 21</td><td style="text-align: right">0.43</td></tr><tr><td style="text-align: right">radial residuals</td><td style="text-align: right">139.2 ± 9.6</td><td style="text-align: right">92.9 ± 12.9</td><td style="text-align: right">−27.3 ± 11.3</td><td style="text-align: right">227.4 ± 13.5</td><td style="text-align: right">0.41</td></tr></table><p>The data are transcribed in <a href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/2003uy117_20201023.jl"><code>examples/data/2003uy117_20201023.jl</code></a>, with the stored JPL Horizons ephemeris, so the script runs offline:</p><pre><code class="nohighlight hljs">julia --project=. examples/2003uy117_2020.jl [output_dir]      (default: examples/output/2003uy117_2020)</code></pre><div class="admonition is-info" id="Output-772c745b30b897"><header class="admonition-header">Output<a class="admonition-anchor" href="#Output-772c745b30b897" title="Permalink"></a></header><div class="admonition-body"><p>The code is not run when the manual is built. The output after each section is that of the last run of <a href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/2003uy117_2020.jl"><code>examples/2003uy117_2020.jl</code></a>, stored in <a href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/2003uy117_2020/output.txt"><code>examples/output/2003uy117_2020/output.txt</code></a>.</p></div></div><pre><code class="language-julia hljs">using Occultations, Random, Printf, Statistics
+using Occultations: offset_radec
+using Plots
+import CairoMakie                     # saves the GeoMakie maps (Makie figures)
+include(joinpath(@__DIR__, &quot;standard_figures.jl&quot;))
+include(joinpath(@__DIR__, &quot;data&quot;, &quot;2003uy117_20201023.jl&quot;))
+
+out = length(ARGS) &gt;= 1 ? ARGS[1] : mkpath(joinpath(@__DIR__, &quot;output&quot;, &quot;2003uy117_2020&quot;))
+rng = MersenneTwister(2020)
+P = UY117_PAPER
+q(x) = quantile(x, [0.15865525393145707, 0.5, 0.8413447460685429])
+pm(x) = (v = q(x); @sprintf(&quot;%.1f -%.1f +%.1f&quot;, v[2], v[2] - v[1], v[3] - v[2]))</code></pre><h2 id="Event-and-geometry-(paper-values-in-parentheses)"><a class="docs-heading-anchor" href="#Event-and-geometry-(paper-values-in-parentheses)">Event and geometry (paper values in parentheses)</a><a id="Event-and-geometry-(paper-values-in-parentheses)-1"></a><a class="docs-heading-anchor-permalink" href="#Event-and-geometry-(paper-values-in-parentheses)" title="Permalink"></a></h2><pre><code class="language-julia hljs">ev = uy117_event()
+D = ev.ca.dist_km
+@printf(&quot;%d positive and %d negative chords; distance %.2f au (%.2f), shadow velocity %.2f km/s (%.2f),\n&quot;,
+        count(ispositive, ev.chords), count(isnegative, ev.chords), D / 1.495978707e8, P.distance_au, ev.ca.vel, P.velocity)
+@printf(&quot;stellar diameter %.2f km (%.1f), Fresnel scale %.2f km at 0.7 µm (%.2f)\n&quot;,
+        apparent_diameter(ev.star, D), P.star_diameter_km, fresnel_scale(0.7, D), P.fresnel_km_700nm)</code></pre><pre><code class="language-text hljs">4 positive and 13 negative chords; distance 33.47 au (33.47), shadow velocity 21.80 km/s (21.80),
+stellar diameter 0.43 km (0.4), Fresnel scale 1.32 km at 0.7 µm (1.32)</code></pre><h2 id="Apparent-limb-(Table-3)"><a class="docs-heading-anchor" href="#Apparent-limb-(Table-3)">Apparent limb (Table 3)</a><a id="Apparent-limb-(Table-3)-1"></a><a class="docs-heading-anchor-permalink" href="#Apparent-limb-(Table-3)" title="Permalink"></a></h2><pre><code class="language-julia hljs">@printf(&quot;%-30s a′ = %5.1f ± %4.1f  b′ = %5.1f ± %4.1f  φ′ = %6.1f ± %4.1f  ε′ = %.2f ± %.2f  D_eq = %5.1f ± %4.1f  χ²/dof = %.2f\n&quot;,
+        &quot;published&quot;, P.a..., P.b..., P.position_angle..., P.oblateness..., P.D_eq..., P.chi2_pdf)
+fits = Dict{Symbol,Any}()
+for mode in (:radial, :chord)
+    r = fit_limb(ev; residual=mode, rng=rng)
+    fits[mode] = r
+    pa = mod(r[:position_angle][1] + 90, 180) - 90               # in (−90°, 90°] as in the paper
+    @printf(&quot;%-30s a′ = %5.1f ± %4.1f  b′ = %5.1f ± %4.1f  φ′ = %6.1f ± %4.1f  ε′ = %.2f ± %.2f  D_eq = %5.1f ± %4.1f  χ²/dof = %.2f\n&quot;,
+            mode === :radial ? &quot;radial residuals (as SORA)&quot; : &quot;residuals along the chords&quot;, r[:equatorial_radius]...,
+            r[:semi_minor_axis]..., pa, r[:position_angle][2], r[:oblateness]..., 2r[:equivalent_radius][1],
+            2r[:equivalent_radius][2], reduced_chi2(r))
+end
+r2 = fits[:radial]
+println(&quot;closest negative chords:&quot;)
+for x in first(check_negative_chords(r2), 4)
+    @printf(&quot;  %-15s %s, %5.1f km from the limb\n&quot;, x.chord, x.conflict ? &quot;CROSSES THE LIMB&quot; : &quot;consistent&quot;, x.distance)
+end
+println(&quot;(the fitted centre, &quot;, round.((r2[:center_f][1], r2[:center_g][1]); digits=1),
+        &quot; km, refers to the current JPL orbit; the paper&#39;s (119, −10) km to JPL#20)&quot;)</code></pre><pre><code class="language-text hljs">published                      a′ = 141.0 ±  9.0  b′ =  94.0 ± 16.0  φ′ =  -31.0 ± 11.0  ε′ = 0.33 ± 0.11  D_eq = 228.0 ± 21.0  χ²/dof = 0.43
+radial residuals (as SORA)     a′ = 139.2 ±  9.6  b′ =  92.9 ± 12.9  φ′ =  -27.3 ± 11.3  ε′ = 0.33 ± 0.12  D_eq = 227.4 ± 13.5  χ²/dof = 0.41
+residuals along the chords     a′ = 138.2 ±  5.2  b′ =  94.2 ±  7.2  φ′ =  -29.8 ±  6.4  ε′ = 0.32 ± 0.05  D_eq = 228.2 ± 10.4  χ²/dof = 2.10
+closest negative chords:
+  CAHA220         consistent,   7.9 km from the limb
+  Albox           consistent,   8.2 km from the limb
+  Ibiza           consistent,   9.1 km from the limb
+  Las Negras      consistent,  59.5 km from the limb
+(the fitted centre, (-91.6, 77.0) km, refers to the current JPL orbit; the paper&#39;s (119, −10) km to JPL#20)</code></pre><h2 id="Astrometry-(Sect.-4.3)"><a class="docs-heading-anchor" href="#Astrometry-(Sect.-4.3)">Astrometry (Sect. 4.3)</a><a id="Astrometry-(Sect.-4.3)-1"></a><a class="docs-heading-anchor-permalink" href="#Astrometry-(Sect.-4.3)" title="Permalink"></a></h2><pre><code class="language-julia hljs">t = Epoch(P.astrometry.epoch)
+a = astrometry(r2)
+for (label, star) in ((&quot;Gaia DR3 star position&quot;, ev.star),
+                      (&quot;Gaia DR2 star position&quot;, Star(&quot;03 23 26.2160&quot;, &quot;+22 47 19.195&quot;; epoch=ev.star.epoch)))
+    ra, dec, _ = ephem_radec(ev.body, t)
+    # the offset is measured relative to the star: a different star position shifts the body
+    dα = (parse_ra(&quot;03 23 26.2160&quot;) - parse_ra(&quot;03 23 26.2155&quot;)) * cosd(dec) * 3.6e6
+    dδ = (parse_dec(&quot;+22 47 19.195&quot;) - parse_dec(&quot;+22 47 19.194&quot;)) * 3.6e6
+    shift = star === ev.star ? (0.0, 0.0) : (dα, dδ)
+    r_, d_ = offset_radec(ra, dec, a.offset_ra + shift[1], a.offset_dec + shift[2])
+    @printf(&quot;  %s, %s UTC: RA %s  Dec %s  (σ %.2f, %.2f mas)\n&quot;, label, P.astrometry.epoch, format_ra(r_; digits=5),
+            format_dec(d_; digits=4), a.ra_err, a.dec_err)
+end
+@printf(&quot;  published:                               RA %s  Dec %s  (σ %.1f, %.1f mas)\n&quot;, P.astrometry.ra,
+        P.astrometry.dec, P.astrometry.ra_err, P.astrometry.dec_err)
+println(&quot;  (the published position matches the solution with the Gaia DR2 star position)&quot;)</code></pre><pre><code class="language-text hljs">  Gaia DR3 star position, 2020-10-23T22:19:21.8 UTC: RA 03 23 26.21358  Dec +22 47 19.3179  (σ 0.38, 0.40 mas)
+  Gaia DR2 star position, 2020-10-23T22:19:21.8 UTC: RA 03 23 26.21408  Dec +22 47 19.3189  (σ 0.38, 0.40 mas)
+  published:                               RA 03 23 26.21404  Dec +22 47 19.3184  (σ 0.3, 0.4 mas)
+  (the published position matches the solution with the Gaia DR2 star position)</code></pre><h2 id="Size,-albedo"><a class="docs-heading-anchor" href="#Size,-albedo">Size, albedo</a><a id="Size,-albedo-1"></a><a class="docs-heading-anchor-permalink" href="#Size,-albedo" title="Permalink"></a></h2><pre><code class="language-julia hljs">post2 = sample(r2; nsteps=4000, rng=rng)
+d2 = derived_samples(post2; n=4000, rng=rng)
+Deq = 2 .* d2.equivalent_radius
+pV = [(1330.2 / D_ * 10^(-(P.H_V[1] + P.H_V[2] * randn(rng)) / 5))^2 for D_ in Deq]
+@printf(&quot;area-equivalent diameter %s km (published %.0f ± %.0f), geometric albedo %s (%.3f ± %.3f)\n&quot;,
+        pm(Deq), P.D_eq..., replace(pm(100 .* pV), r&quot;(\d+\.\d) &quot; =&gt; s&quot;\1 &quot;) * &quot; %&quot;, P.albedo...)</code></pre><pre><code class="language-text hljs">area-equivalent diameter 231.8 -13.1 +17.2 km (published 228 ± 21), geometric albedo 13.4 -1.9 +1.9 % (0.139 ± 0.027)</code></pre><h2 id="3-D-shape:-triaxial-ellipsoid-from-the-occultation-and-the-light-curve-amplitude"><a class="docs-heading-anchor" href="#3-D-shape:-triaxial-ellipsoid-from-the-occultation-and-the-light-curve-amplitude">3-D shape: triaxial ellipsoid from the occultation and the light-curve amplitude</a><a id="3-D-shape:-triaxial-ellipsoid-from-the-occultation-and-the-light-curve-amplitude-1"></a><a class="docs-heading-anchor-permalink" href="#3-D-shape:-triaxial-ellipsoid-from-the-occultation-and-the-light-curve-amplitude" title="Permalink"></a></h2><p>The body rotates about its shortest axis (<code>principal=true</code>) with the period of the light curve. The pole is unknown: a flat prior in right ascension, isotropic in declination (∝ cos δ). The occultation fixes the apparent ellipse, and the amplitude Δm = 2.5 log(a/b) − 1.25 log[(a²cos²ψ + c²sin²ψ)/(b²cos²ψ + c²sin²ψ)] the elongation for the aspect ψ of the pole.</p><pre><code class="language-julia hljs">amp = RotationalAmplitude(ev.tref, P.amplitude...)
+prob3 = LimbProblem(ev; model=EllipsoidLimb(principal=true), amplitudes=[amp],
+                    init=Dict(:a =&gt; 160.0, :b =&gt; 110.0, :c =&gt; 90.0, :pole_ra =&gt; 337.0, :pole_dec =&gt; 62.0, :W0 =&gt; 30.0,
+                              :period =&gt; P.period_h, :center_f =&gt; r2[:center_f][1], :center_g =&gt; r2[:center_g][1]),
+                    priors=Dict(:pole_dec =&gt; isotropic_pole()),
+                    bounds=Dict(:a =&gt; (20.0, 400.0), :b =&gt; (20.0, 400.0), :c =&gt; (20.0, 400.0)))</code></pre><p>Least squares: one apparent ellipse and one amplitude cannot fix a, b, c and the pole. Fits from different starting points all reach the same minimum χ², along a valley of solutions:</p><pre><code class="language-julia hljs">println(&quot;least-squares solutions from different starts (all equally good):&quot;)
+sols = [fit(prob3; rng=MersenneTwister(k), starts=16) for k in 1:6]
+for r in sort(sols; by=r -&gt; r[:a][1])
+    @printf(&quot;  χ² = %.3f  a = %5.1f  b = %5.1f  c = %5.1f km  aspect %4.1f°  pole (%3.0f°, %+3.0f°)  D_eq,V = %5.1f km\n&quot;,
+            r.chi2, r[:a][1], r[:b][1], r[:c][1], r[:aspect][1], r[:pole_ra][1], r[:pole_dec][1], 2r[:volume_equivalent_radius][1])
+end
+@printf(&quot;published (grid search, conditional errors): a = %.0f ± %.0f, b = %.0f ± %.0f, c = %.0f ± %.0f km, aspect %.0f°, D_eq,V = %.0f ± %.0f km\n&quot;,
+        P.axes_3d[1]..., P.axes_3d[2]..., P.axes_3d[3]..., P.aspect, P.D_eq_volume...)
+r3 = sols[1]</code></pre><p>The Bayesian answer is the posterior over the whole valley, with the isotropic prior on the unknown pole:</p><pre><code class="language-julia hljs">post3 = sample(r3; nsteps=12000, nwalkers=40, burn=4000, rng=rng)
+d3 = derived_samples(post3; n=8000, rng=rng)
+# samples of a parameter; periodic ones (pole_ra, W0) centred on their circular mean
+function col(post, n)
+    k = findfirst(==(n), post.names)
+    x = samples(post)[:, k]
+    Occultations._periodic_center!(x, post, k)
+    return x
+end
+# the occultation and the amplitude are unchanged by a pole flip (ψ → 180° − ψ): only the
+# folded aspect min(ψ, 180° − ψ) is constrained
+fold(ψ) = min(ψ, 180 - ψ)
+function report(post, d, label)
+    println(label)
+    @printf(&quot;  a = %s, b = %s, c = %s km\n&quot;, pm(col(post, :a)), pm(col(post, :b)), pm(col(post, :c)))
+    @printf(&quot;  volume-equivalent diameter %s km, aspect (folded to 0–90°) %s°\n&quot;, pm(2 .* d.volume_equivalent_radius),
+            pm(fold.(d.aspect)))
+    @printf(&quot;  pole in the hemisphere towards the observer (ψ &lt; 90°) in %.0f %% of the samples\n&quot;, 100mean(d.aspect .&lt; 90))
+    @printf(&quot;  pole RA %s°, Dec %s°\n&quot;, pm(col(post, :pole_ra)), pm(col(post, :pole_dec)))
+    @printf(&quot;  (autocorrelation time ≤ %.0f steps; acceptance %.2f)\n&quot;, maximum(autocorrelation_time(post)), post.acceptance)
+end
+report(post3, d3, &quot;posterior, occultation + amplitude:&quot;)</code></pre><p>The rotational phase at the occultation: 0.63 rotations after the maximum of light (light curve phased to mid-occultation, ≈ 22:21:46 UTC). The paper gives no uncertainty; ±0.05 rotations is assumed here. For an ellipsoid both maxima are equal, so the constraint fixes the orientation of the long axis modulo 180°.</p><pre><code class="language-julia hljs">phase = RotationalPhase(&quot;2020-10-23T22:21:46&quot;, P.rotational_phase, 0.05)
+prob4 = LimbProblem(ev; model=EllipsoidLimb(principal=true), amplitudes=[amp], phases=[phase],
+                    init=Dict(:a =&gt; 160.0, :b =&gt; 110.0, :c =&gt; 90.0, :pole_ra =&gt; 337.0, :pole_dec =&gt; 62.0, :W0 =&gt; 30.0,
+                              :period =&gt; P.period_h, :center_f =&gt; r2[:center_f][1], :center_g =&gt; r2[:center_g][1]),
+                    priors=Dict(:pole_dec =&gt; isotropic_pole()),
+                    bounds=Dict(:a =&gt; (20.0, 400.0), :b =&gt; (20.0, 400.0), :c =&gt; (20.0, 400.0)))
+println(&quot;\nwith the rotational phase, least-squares solutions from different starts:&quot;)
+sols4 = [fit(prob4; rng=MersenneTwister(k), starts=16) for k in 1:6]
+for r in sort(sols4; by=r -&gt; r[:a][1])
+    @printf(&quot;  χ² = %.3f  a = %5.1f  b = %5.1f  c = %5.1f km  aspect %4.1f°  pole (%3.0f°, %+3.0f°)  D_eq,V = %5.1f km\n&quot;,
+            r.chi2, r[:a][1], r[:b][1], r[:c][1], r[:aspect][1], r[:pole_ra][1], r[:pole_dec][1], 2r[:volume_equivalent_radius][1])
+end
+r4 = sols4[argmin([r.chi2 for r in sols4])]
+post4 = sample(r4; nsteps=12000, nwalkers=40, burn=4000, rng=rng)
+d4 = derived_samples(post4; n=8000, rng=rng)
+report(post4, d4, &quot;posterior, occultation + amplitude + rotational phase:&quot;)
+@printf(&quot;published: a = %.0f ± %.0f, b = %.0f ± %.0f, c = %.0f ± %.0f km, D_eq,V = %.0f ± %.0f km, aspect %.0f°, pole (%.0f ± %.0f°, %.0f ± %.0f°)\n&quot;,
+        P.axes_3d[1]..., P.axes_3d[2]..., P.axes_3d[3]..., P.D_eq_volume..., P.aspect, P.pole[1]..., P.pole[2]...)</code></pre><pre><code class="language-text hljs">least-squares solutions from different starts (all equally good):
+  χ² = 6.296  a = 159.4  b = 104.5  c =  91.6 km  aspect 69.8°  pole (326°, +49°)  D_eq,V = 230.3 km
+  χ² = 6.296  a = 163.1  b = 102.9  c =  90.7 km  aspect 66.6°  pole (332°, +45°)  D_eq,V = 230.1 km
+  χ² = 6.296  a = 164.2  b = 101.7  c =  90.6 km  aspect 65.1°  pole (334°, +43°)  D_eq,V = 229.6 km
+  χ² = 6.296  a = 166.2  b =  98.6  c =  91.1 km  aspect 61.9°  pole ( 26°, +84°)  D_eq,V = 228.6 km
+  χ² = 6.296  a = 190.8  b = 133.7  c =  91.1 km  aspect 81.3°  pole (303°, +55°)  D_eq,V = 264.9 km
+  χ² = 6.296  a = 190.9  b = 109.2  c =  81.4 km  aspect 65.1°  pole (  2°, +87°)  D_eq,V = 238.5 km
+published (grid search, conditional errors): a = 166 ± 12, b = 108 ± 12, c = 90 ± 13 km, aspect 70°, D_eq,V = 235 ± 25 km
+posterior, occultation + amplitude:
+  a = 168.0 -21.9 +30.5, b = 118.8 -16.5 +18.6, c = 93.1 -18.1 +12.7 km
+  volume-equivalent diameter 242.8 -23.9 +33.3 km, aspect (folded to 0–90°) 70.7 -19.0 +13.8°
+  pole in the hemisphere towards the observer (ψ &lt; 90°) in 66 % of the samples
+  pole RA 305.3 -30.5 +51.0°, Dec 49.5 -23.3 +14.7°
+  (autocorrelation time ≤ 815 steps; acceptance 0.07)
+
+with the rotational phase, least-squares solutions from different starts:
+  χ² = 6.296  a = 160.3  b =  96.2  c =  92.9 km  aspect 61.4°  pole ( 16°, +83°)  D_eq,V = 225.4 km
+  χ² = 6.296  a = 160.6  b =  97.3  c =  92.4 km  aspect 62.3°  pole (  5°, +83°)  D_eq,V = 226.0 km
+  χ² = 6.296  a = 160.6  b =  97.3  c =  92.4 km  aspect 62.3°  pole (  5°, +83°)  D_eq,V = 226.0 km
+  χ² = 6.296  a = 160.6  b =  97.5  c =  92.3 km  aspect 62.5°  pole (  3°, +83°)  D_eq,V = 226.2 km
+  χ² = 6.296  a = 161.0  b =  98.8  c =  91.8 km  aspect 63.6°  pole (350°, +82°)  D_eq,V = 226.9 km
+  χ² = 6.296  a = 161.5  b = 103.0  c =  91.1 km  aspect 67.3°  pole (323°, +79°)  D_eq,V = 229.7 km
+posterior, occultation + amplitude + rotational phase:
+  a = 168.1 -20.3 +35.4, b = 113.9 -12.2 +17.3, c = 91.6 -20.1 +10.3 km
+  volume-equivalent diameter 240.9 -20.8 +19.9 km, aspect (folded to 0–90°) 69.0 -15.6 +12.8°
+  pole in the hemisphere towards the observer (ψ &lt; 90°) in 59 % of the samples
+  pole RA 292.6 -17.7 +83.2°, Dec 55.3 -33.9 +19.8°
+  (autocorrelation time ≤ 731 steps; acceptance 0.15)
+published: a = 166 ± 12, b = 108 ± 12, c = 90 ± 13 km, D_eq,V = 235 ± 25 km, aspect 70°, pole (337 ± 10°, 62 ± 5°)</code></pre><h2 id="Figures"><a class="docs-heading-anchor" href="#Figures">Figures</a><a id="Figures-1"></a><a class="docs-heading-anchor-permalink" href="#Figures" title="Permalink"></a></h2><pre><code class="language-julia hljs">savefig(cornerplot(post4; vars=[:a, :b, :c, :pole_ra, :pole_dec],
+                   axislabels=Dict(:a =&gt; &quot;a [km]&quot;, :b =&gt; &quot;b [km]&quot;, :c =&gt; &quot;c [km]&quot;, :pole_ra =&gt; &quot;pole α [°]&quot;,
+                                   :pole_dec =&gt; &quot;pole δ [°]&quot;),
+                   truths=Dict(:a =&gt; P.axes_3d[1][1], :b =&gt; P.axes_3d[2][1], :c =&gt; P.axes_3d[3][1],
+                               :pole_ra =&gt; P.pole[1][1], :pole_dec =&gt; P.pole[2][1]), truth_label=&quot;Kretlow et al. 2024&quot;),
+        joinpath(out, &quot;2003uy117_corner_3d.png&quot;))
+savefig(cornerplot(post2; vars=[:equatorial_radius, :oblateness, :position_angle],
+                   axislabels=Dict(:equatorial_radius =&gt; &quot;a′ [km]&quot;, :oblateness =&gt; &quot;ε′&quot;, :position_angle =&gt; &quot;φ′ [°]&quot;),
+                   truths=Dict(:equatorial_radius =&gt; P.a[1], :oblateness =&gt; P.oblateness[1],
+                               :position_angle =&gt; mod(P.position_angle[1], 180)), truth_label=&quot;Kretlow et al. 2024&quot;),
+        joinpath(out, &quot;2003uy117_corner_limb.png&quot;))
+h(x, lab; kw...) = histogram(x; bins=60, normalize=true, alpha=0.5, label=lab, kw...)
+pD = h(2 .* d3.volume_equivalent_radius, &quot;occultation + amplitude&quot;; xlabel=&quot;D_eq,V [km]&quot;, ylabel=&quot;probability density&quot;,
+       title=&quot;volume-equivalent diameter&quot;, titlefontsize=10)
+histogram!(pD, 2 .* d4.volume_equivalent_radius; bins=60, normalize=true, alpha=0.5, label=&quot;+ rotational phase&quot;)
+vline!(pD, [P.D_eq_volume[1]]; color=:black, linestyle=:dash, linewidth=2, label=&quot;Kretlow et al. 2024&quot;)
+pA = h(fold.(d3.aspect), &quot;occultation + amplitude&quot;; xlabel=&quot;aspect min(ψ, 180° − ψ) [°]&quot;, ylabel=&quot;probability density&quot;,
+       title=&quot;aspect angle of the pole (folded)&quot;, titlefontsize=10, xlims=(0, 90))
+histogram!(pA, fold.(d4.aspect); bins=60, normalize=true, alpha=0.5, label=&quot;+ rotational phase&quot;)
+vline!(pA, [P.aspect]; color=:black, linestyle=:dash, linewidth=2, label=&quot;Kretlow et al. 2024&quot;)
+savefig(plot(pD, pA; size=(1100, 420), legend=:topleft, left_margin=4Plots.mm, bottom_margin=5Plots.mm),
+        joinpath(out, &quot;2003uy117_3d_posterior.png&quot;))
+savefig(plot(r4; title=&quot;2003 UY117: apparent limb of the 3-D ellipsoid&quot;, size=(900, 650)),
+        joinpath(out, &quot;2003uy117_ellipsoid_limb.png&quot;))
+# the most probable ellipsoid of the posterior with the rotational phase, as an OBJ mesh [km]
+S4 = samples(post4); L4 = vec(post4.logp[post4.burn+1:end, :])
+best = Dict(zip(post4.names, S4[argmax(L4), :]))
+write_obj(joinpath(out, &quot;2003uy117_ellipsoid.obj&quot;),
+          ellipsoid_mesh(best[:a], best[:b], best[:c]; name=@sprintf(&quot;2003 UY117 most probable ellipsoid, pole (%.1f, %.1f)&quot;,
+                                                                 mod(best[:pole_ra], 360), best[:pole_dec])))
+# the most probable ellipsoid (with the rotational phase) as seen from the Earth
+t1, t2 = tdb_jd(ev.tref)
+b3 = Body(&quot;2003 UY117 (most probable ellipsoid)&quot;, ev.body.ephem;
+          frame=BodyFrame(best[:pole_ra], best[:pole_dec], P.period_h; W0=best[:W0], epoch=t1 + t2),
+          shape=Ellipsoid(best[:a], best[:b], best[:c]))
+CairoMakie.save(joinpath(out, &quot;2003uy117_ellipsoid_3d.png&quot;), meshview(b3, ev.tref))
+CairoMakie.save(joinpath(out, &quot;2003uy117_ellipsoid_body.png&quot;), meshview(b3.shape))
+# the occultation in 3-D: the posterior shapes with the chords, the Sun, the rotational light
+# curve; and an animation through one rotation
+CairoMakie.save(joinpath(out, &quot;2003uy117_occview.png&quot;), occview(post4; ndraw=24))
+occanimate(r4, joinpath(out, &quot;2003uy117_rotation.gif&quot;); frames=48, framerate=12, size=(1200, 760))
+# the standard figures: limb fits (default, 68.3 % region, as the paper), posterior, maps (prediction,
+# post-fit, comparison) and the globe
+standard_figures(&quot;2003uy117&quot;, r2; out=out, posterior=post2,
+                 projection=&quot;+proj=laea +lon_0=0 +lat_0=45&quot;, limits=(-20, 32, 26, 57), window=900, marks=60)
+println(&quot;figures written to &quot;, out)</code></pre><p>The limb fit with the default display (1σ shape band and centre ellipse) and in the style of the paper (pointwise band):</p><p><img src="../../assets/figures/2003uy117_limb_fit.png" alt="limb fit"/> <img src="../../assets/figures/2003uy117_limb_fit_paper.png" alt="limb fit, paper style"/></p><p>The marginal posteriors of the 3-D ellipsoid, with and without the rotational phase (explained in <a href="../../guide/plots/#3-D-posterior-histograms">3-D posterior histograms</a>):</p><p><img src="../../assets/figures/2003uy117_3d_posterior.png" alt="3-D posterior"/></p><p>The posterior shapes in the geometry of the occultation (<a href="../../guide/occview/#The-occultation-in-3-D">The occultation in 3-D</a>):</p><p><img src="../../assets/figures/2003uy117_occview.png" alt="occview"/></p><p>The prediction and the post-fit shadow path:</p><p><img src="../../assets/figures/2003uy117_geomap_comparison.png" alt="maps"/></p><p>The results are discussed in <a href="../../comparison/publications/#(143707)-2003-UY117,-2020-October-23">Comparison with published reductions</a>.</p><pre><code class="language-text hljs"></code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../2002kx14_2020_2023/">« 2002 KX14, five events 2020–2023</a><a class="docs-footer-nextpage" href="../2002xv93_2024/">2002 XV93, 2024 January 10 »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Tuesday 3 November 2026 01:29">Tuesday 3 November 2026</span>. Using Julia version 1.13.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>

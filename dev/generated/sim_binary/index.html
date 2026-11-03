@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Synthetic: a satellite and a binary system · Occultations.jl</title><meta name="title" content="Synthetic: a satellite and a binary system · Occultations.jl"/><meta property="og:title" content="Synthetic: a satellite and a binary system · Occultations.jl"/><meta property="twitter:title" content="Synthetic: a satellite and a binary system · Occultations.jl"/><meta name="description" content="Documentation for Occultations.jl."/><meta property="og:description" content="Documentation for Occultations.jl."/><meta property="twitter:description" content="Documentation for Occultations.jl."/><meta property="og:url" content="https://mkretlow.github.io/Occultations.jl/generated/sim_binary/"/><meta property="twitter:url" content="https://mkretlow.github.io/Occultations.jl/generated/sim_binary/"/><link rel="canonical" href="https://mkretlow.github.io/Occultations.jl/generated/sim_binary/"/><script data-outdated-warner src="../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.63.2/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../search_index.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script><link href="../../assets/documentercitations/citations-hover.css" rel="stylesheet" type="text/css"/><link href="../../assets/documentercitations/citations.css" rel="stylesheet" type="text/css"/><link href="../../assets/citations.css" rel="stylesheet" type="text/css"/><script src="../../assets/documentercitations/citations-data.js"></script><script src="../../assets/documentercitations/citations-hover.js"></script><script src="../../assets/documentercitations/citations-backlinks.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../">Occultations.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><span class="tocitem">User guide</span><ul><li><a class="tocitem" href="../../guide/quickstart/">Quick start</a></li><li><a class="tocitem" href="../../guide/lightcurves/">Light curves and timing</a></li><li><a class="tocitem" href="../../guide/limbfits/">Limb fits</a></li><li><a class="tocitem" href="../../guide/binaries/">Binaries and contact binaries</a></li><li><a class="tocitem" href="../../guide/rings/">Ring systems</a></li><li><a class="tocitem" href="../../guide/atmospheres/">Atmospheres</a></li><li><a class="tocitem" href="../../guide/plots/">Plots and maps</a></li><li><a class="tocitem" href="../../guide/occview/">The occultation in 3-D</a></li><li><a class="tocitem" href="../../guide/design/">Package design and conventions</a></li></ul></li><li><span class="tocitem">Methods</span><ul><li><a class="tocitem" href="../../theory/limbfit/">The mathematics of the limb fit</a></li><li><a class="tocitem" href="../../theory/residuals/">Residuals along the chords or radial residuals?</a></li><li><a class="tocitem" href="../../theory/sigma_limb/">The limb allowance σ_limb</a></li><li><a class="tocitem" href="../../theory/uncertainty_bands/">Uncertainty of the limb in the plots</a></li></ul></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../../examples/">Overview</a></li><li><a class="tocitem" href="../tutorial/">Tutorial: an offline tour with synthetic data</a></li><li class="is-active"><a class="tocitem" href>Synthetic: a satellite and a binary system</a><ul class="internal"><li><a class="tocitem" href="#1.-a-TNO-with-a-satellite"><span>1. a TNO with a satellite</span></a></li><li><a class="tocitem" href="#2.-only-two-chords-on-the-satellite"><span>2. only two chords on the satellite</span></a></li><li><a class="tocitem" href="#3.-a-binary-of-two-similar-bodies-(Patroclus–Menoetius-like)"><span>3. a binary of two similar bodies (Patroclus–Menoetius-like)</span></a></li><li><a class="tocitem" href="#4.-coverage-of-the-uncertainties-(100-simulations)"><span>4. coverage of the uncertainties (100 simulations)</span></a></li><li><a class="tocitem" href="#Figures"><span>Figures</span></a></li></ul></li><li><a class="tocitem" href="../sim_contact_binary/">Synthetic: a contact binary in one event</a></li><li><a class="tocitem" href="../sim_contact_binary_3d/">Synthetic: a contact binary in 3-D</a></li><li><a class="tocitem" href="../sim_rings/">Synthetic: a body with two narrow rings</a></li><li><a class="tocitem" href="../sim_ring_pole/">Synthetic: a distant ring seen in three events</a></li><li><a class="tocitem" href="../huya_2019/">Huya, 2019 March 18</a></li><li><a class="tocitem" href="../2002kx14_2020_2023/">2002 KX14, five events 2020–2023</a></li><li><a class="tocitem" href="../2003uy117_2020/">2003 UY117, 2020 October 23</a></li><li><a class="tocitem" href="../2002xv93_2024/">2002 XV93, 2024 January 10</a></li><li><a class="tocitem" href="../1995sm55_2024/">1995 SM55, 2024 February 25</a></li><li><a class="tocitem" href="../huya_2023/">Huya, 2023 June 24, and its satellite</a></li><li><a class="tocitem" href="../huya_2023_satellite/">Huya and its satellite, 2023 June 24</a></li><li><a class="tocitem" href="../ixion_2020_2023/">Ixion, six events 2020–2023</a></li><li><a class="tocitem" href="../2007uk126_2014/">2007 UK126, 2014 November 15</a></li><li><a class="tocitem" href="../varda_2018/">Varda, 2018 September 10</a></li><li><a class="tocitem" href="../2002tc302_2018/">2002 TC302, 2018 January 28</a></li><li><a class="tocitem" href="../2003az84_2012_2014/">2003 AZ84, 2011–2014</a></li><li><a class="tocitem" href="../2003vs2_2019/">2003 VS2, 2019 October 22</a></li><li><a class="tocitem" href="../haumea_2017/">Haumea and its ring, 2017 January 21</a></li><li><a class="tocitem" href="../2002gz32_2017/">2002 GZ32, 2017 May 20</a></li><li><a class="tocitem" href="../makemake_2011/">Makemake, 2011 April 23</a></li><li><a class="tocitem" href="../bienor_2019_2023/">Bienor, 2019–2023</a></li><li><a class="tocitem" href="../chariklo_2017_2020/">Chariklo and its rings, 2017–2020</a></li><li><a class="tocitem" href="../2002ms4_2020/">2002 MS4, 2020 August 8</a></li><li><a class="tocitem" href="../quaoar_2011_2022/">Quaoar and its rings, 2011 and 2022</a></li><li><a class="tocitem" href="../chiron_2018_2019/">Chiron, 2018 and 2019</a></li><li><a class="tocitem" href="../../comparison/publications/">Occultations.jl compared with published reductions</a></li><li><a class="tocitem" href="../../comparison/sora/">Occultations.jl and SORA: the fitting methods compared</a></li></ul></li><li><a class="tocitem" href="../../validation/">Validation</a></li><li><a class="tocitem" href="../../api/">API reference</a></li><li><a class="tocitem" href="../../references/">References</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li class="is-active"><a href>Synthetic: a satellite and a binary system</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Synthetic: a satellite and a binary system</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/mkretlow/Occultations.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/sim_binary.jl" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Synthetic:-a-satellite-and-a-binary-system"><a class="docs-heading-anchor" href="#Synthetic:-a-satellite-and-a-binary-system">Synthetic: a satellite and a binary system</a><a id="Synthetic:-a-satellite-and-a-binary-system-1"></a><a class="docs-heading-anchor-permalink" href="#Synthetic:-a-satellite-and-a-binary-system" title="Permalink"></a></h1><p>Simulated occultations by two-body systems, reduced with <a href="../../api/#Occultations.BinaryLimb"><code>BinaryLimb</code></a>. The truth is known and printed next to the fitted values:</p><ol><li>a trans-Neptunian object (740 × 660 km) with a satellite (radius 90 km) at 1216 km: thirteen stations, four of them on the satellite. The satellite is fitted as a circle (the default) and as an ellipse; the astrometry of the primary, the barycentre and the photocentre; the posterior;</li><li>the same with only two chords on the satellite: its radius from two chords and the visible segments of the chords, and why an ellipse cannot be fitted then;</li><li>a binary of two similar bodies (Patroclus–Menoetius-like, two ~110 km bodies 680 km apart, a Jupiter Trojan): several chords cross both bodies (two drops); an ellipse for each body;</li><li>coverage: the 1σ intervals of the satellite&#39;s radius and position over 100 simulations with different noise.</li></ol><p>The stations are placed on land and in the dark, spread along the track, each with its own equipment and timing accuracy (0.02–0.4 s; <a href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/sim_stations.jl"><code>examples/sim_stations.jl</code></a>). The contacts are simulated with Gaussian timing errors (the timing of light curves is shown in the <a href="../sim_contact_binary/">contact-binary example</a>). Run it with:</p><pre><code class="nohighlight hljs">julia --project=. examples/sim_binary.jl [output_dir]      (default: examples/output/sim_binary)</code></pre><div class="admonition is-info" id="Output-f3cb2ec15809b8ee"><header class="admonition-header">Output<a class="admonition-anchor" href="#Output-f3cb2ec15809b8ee" title="Permalink"></a></header><div class="admonition-body"><p>The code is not run when the manual is built. The output after each section is that of the last run of <a href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/sim_binary.jl"><code>examples/sim_binary.jl</code></a>, stored in <a href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/sim_binary/output.txt"><code>examples/output/sim_binary/output.txt</code></a>.</p></div></div><pre><code class="language-julia hljs">using Occultations, Random, Printf, Statistics
+using Plots
+import CairoMakie                     # saves the GeoMakie maps (Makie figures)
+include(joinpath(@__DIR__, &quot;standard_figures.jl&quot;))
+
+out = length(ARGS) &gt;= 1 ? ARGS[1] : mkpath(joinpath(@__DIR__, &quot;output&quot;, &quot;sim_binary&quot;))
+rng = MersenneTwister(7)</code></pre><h2 id="1.-a-TNO-with-a-satellite"><a class="docs-heading-anchor" href="#1.-a-TNO-with-a-satellite">1. a TNO with a satellite</a><a id="1.-a-TNO-with-a-satellite-1"></a><a class="docs-heading-anchor-permalink" href="#1.-a-TNO-with-a-satellite" title="Permalink"></a></h2><pre><code class="language-julia hljs">eph = EphemKeplerian(a=43.0, e=0.05, i=12.0, Ω=80.0, ω=150.0, M=10.0, epoch=Epoch(&quot;2023-01-01&quot;), name=&quot;SimTNO&quot;)
+body = Body(&quot;SimTNO&quot;, eph; radius=350.0)
+t0 = Epoch(&quot;2023-05-01T03:00:00&quot;)
+ra, dec, _ = ephem_radec(body, t0)
+star = Star(ra + 0.002 / 3600 / cosd(dec), dec; name=&quot;SimStar&quot;, ra_err=0.15, dec_err=0.12)
+# the direction of motion of the shadow and the cross-track direction (to its left)
+p = positionv(star, eph, GEOCENTER, Event(star, body, t0).tref)
+along = (p.vf, p.vg) ./ hypot(p.vf, p.vg)
+across = (-along[2], along[1])</code></pre><p>The true system: the primary, an ellipse of 370 × 330 km (position angle of the minor axis 30°), and the satellite, a circle of 90 km, 1100 km ahead along the track and 520 km to its left; the system is 25 km east and 12 km south of the ephemeris position.</p><pre><code class="language-julia hljs">center = (25.0, -12.0)
+sep = 1100.0 .* along .+ 520.0 .* across
+truth = CompositeOutline([EllipseOutline(370.0, 330.0, 30.0), EllipseOutline(90.0, 90.0, 0.0)],
+                         [(0.0, 0.0), sep])
+@printf(&quot;true separation %.1f km at PA %.1f° (Δf, Δg = %.1f, %.1f km)\n&quot;, hypot(sep...), mod(atand(sep...), 360), sep...)
+
+# The stations (examples/sim_stations.jl): on land and in the dark, spread along the track, each
+# with its own equipment and timing accuracy; their chords cross the shadow at the cross-track
+# `offsets` [km] from the centre of the primary
+include(joinpath(@__DIR__, &quot;sim_stations.jl&quot;))
+function simulate(star, body, t0, truth, center, offsets; rng, prefix=&quot;S&quot;, sites=nothing)
+    ev = Event(star, body, t0)
+    pv = positionv(star, body.ephem, GEOCENTER, ev.tref)
+    n = (-pv.vg, pv.vf) ./ hypot(pv.vf, pv.vg)
+    sites = something(sites, stations(star, body, ev.tref, offsets .+ (center[1] * n[1] + center[2] * n[2]);
+                                      rng=rng, prefix=prefix))
+    for st in sites
+        o, σ = st.observer, st.equipment[2]
+        span = (ev.tref + st.τ - 150, ev.tref + st.τ + 150)
+        pc = predicted_contacts(ev, o, truth; center=center, window=abs(st.τ) + 300, step=0.05)
+        cs = reduce(vcat, [[Contact(:immersion, a + σ * randn(rng), σ), Contact(:emersion, b + σ * randn(rng), σ)]
+                           for (a, b) in pc]; init=Contact[])
+        push!(ev, isempty(cs) ? Chord(o.name, o; span=span) : Chord(o.name, o; contacts=cs, span=span))
+    end
+    return ev, sites
+end
+function station_table(sites)
+    for st in sites
+        @printf(&quot;  %-4s lon %8.3f°  lat %7.3f°  %+6.1f s from the closest approach  %-22s σ = %.2f s\n&quot;,
+                st.observer.name, st.observer.lon, st.observer.lat, st.τ, st.equipment[1], st.equipment[2])
+    end
+end
+offsets = [-420, -300, -170, -40, 90, 210, 300, 380, 450, 495, 540, 580, 650]
+ev, sites = simulate(star, body, t0, truth, center, offsets; rng=rng)
+station_table(sites)
+display(ev)
+savefig(plot(ev; limb=truth, center=center, title=&quot;SimTNO and its satellite: chords and the true limb&quot;, size=(1000, 750)),
+        joinpath(out, &quot;binary_chords.png&quot;))</code></pre><p><strong>The default model</strong>: an ellipse for the primary, a circle for the satellite. The contacts carry no labels: each is matched to the nearest crossing of the same kind of either body, and the starting values come from the contacts split into two groups. The visible segments of the chords (the star seen before and after each drop) are constraints by default.</p><pre><code class="language-julia hljs">r1 = fit_limb(ev; model=BinaryLimb(), rng=rng)
+display(r1)
+row(n, tv) = @printf(&quot;  %-22s %9.2f ± %6.2f   (truth %8.2f)\n&quot;, n, r1[n]..., tv)
+println(&quot;fitted vs true:&quot;)
+row(:equatorial_radius, 370.0); row(:semi_minor_axis, 330.0); row(:position_angle, 30.0); row(:sec_radius, 90.0)
+row(:sep_f, sep[1]); row(:sep_g, sep[2]); row(:center_f, center[1]); row(:center_g, center[2])</code></pre><p><strong>The satellite as an ellipse</strong>: four chords give eight contacts for five parameters of the satellite. The ellipse is not needed (the satellite is a circle): its χ² is barely lower, and the Bayesian information criterion (χ² + k ln n) prefers the circle.</p><pre><code class="language-julia hljs">r2 = fit_limb(ev; model=BinaryLimb(EllipseLimb(), EllipseLimb()), rng=rng)
+bic(r) = r.chi2 + length(freenames(r)) * log(Occultations.nobs(r.problem))
+@printf(&quot;satellite as a circle:  χ² = %6.2f, %2d parameters, BIC = %6.2f\n&quot;, r1.chi2, length(freenames(r1)), bic(r1))
+@printf(&quot;satellite as an ellipse: χ² = %6.2f, %2d parameters, BIC = %6.2f   a = %.1f ± %.1f km, ε = %.3f ± %.3f\n&quot;,
+        r2.chi2, length(freenames(r2)), bic(r2), r2[:sec_equatorial_radius]..., r2[:sec_oblateness]...)</code></pre><p><strong>Astrometry</strong>: the fitted centre is that of the primary. The barycentre (equal densities: mass ratio = size ratio³) and the photocentre (equal albedos: area ratio) lie towards the satellite; for an orbit fit of the system, the barycentre is the reference.</p><pre><code class="language-julia hljs">for ref in (:center, :barycenter, :photocenter)
+    a = astrometry(r1; reference=ref)
+    @printf(&quot;  %-12s RA %s  Dec %s   offset (%+.3f, %+.3f) mas ± (%.3f, %.3f)\n&quot;, ref, a.ra_str, a.dec_str,
+            a.offset_ra, a.offset_dec, a.ra_err, a.dec_err)
+end
+@printf(&quot;separation %.1f ± %.1f km = %.2f ± %.2f mas at PA %.2f ± %.2f°, size ratio %.3f ± %.3f\n&quot;, r1[:separation]...,
+        r1[:separation_mas]..., r1[:separation_pa]..., r1[:size_ratio]...)</code></pre><p><strong>Posterior</strong>:</p><pre><code class="language-julia hljs">post = sample(r1; nsteps=3000, rng=rng)
+display(post)
+savefig(cornerplot(post; vars=[:equatorial_radius, :sec_radius, :sep_f, :sep_g],
+                   axislabels=Dict(:equatorial_radius =&gt; &quot;a [km]&quot;, :sec_radius =&gt; &quot;R₂ [km]&quot;, :sep_f =&gt; &quot;Δf [km]&quot;,
+                                   :sep_g =&gt; &quot;Δg [km]&quot;),
+                   truths=Dict(:equatorial_radius =&gt; 370.0, :sec_radius =&gt; 90.0, :sep_f =&gt; sep[1], :sep_g =&gt; sep[2]),
+                   truth_label=&quot;simulated truth&quot;), joinpath(out, &quot;binary_corner.png&quot;))
+savefig(plot(r1; title=&quot;SimTNO: BinaryLimb fit (ellipse + circle)&quot;, size=(1000, 750)), joinpath(out, &quot;binary_fit.png&quot;))</code></pre><pre><code class="language-text hljs">true separation 1216.7 km at PA 75.4° (Δf, Δg = 1177.2, 307.4 km)
+  S1   lon  -59.908°  lat -11.424°  +166.1 s from the closest approach  video, GPS-timed       σ = 0.02 s
+  S2   lon  -64.700°  lat  -8.681°  +186.6 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  S3   lon  -60.827°  lat  -8.738°  +173.1 s from the closest approach  video, GPS-timed       σ = 0.02 s
+  S4   lon  -53.588°  lat  -9.825°  +144.5 s from the closest approach  CCD, long cycle        σ = 0.25 s
+  S5   lon  -57.651°  lat  -7.303°  +163.2 s from the closest approach  CCD, long cycle        σ = 0.25 s
+  S6   lon  -58.463°  lat  -5.897°  +167.9 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  S7   lon  -50.747°  lat  -7.479°  +136.0 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  S8   lon  -54.109°  lat  -5.680°  +151.5 s from the closest approach  CCD, long cycle        σ = 0.25 s
+  S9   lon  -54.904°  lat  -4.762°  +155.6 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  S10  lon  -54.153°  lat  -4.573°  +152.8 s from the closest approach  video, GPS-timed       σ = 0.02 s
+  S11  lon  -62.992°  lat  -1.234°  +189.1 s from the closest approach  CMOS camera, NTP       σ = 0.10 s
+  S12  lon  -54.687°  lat  -3.594°  +156.0 s from the closest approach  visual / poorly timed  σ = 0.40 s
+  S13  lon  -56.599°  lat  -2.310°  +164.6 s from the closest approach  visual / poorly timed  σ = 0.40 s
+Event SimTNO, 2023-05-01T02:59:57: SimTNO occults Star(SimStar, RA=16 04 37.6090, Dec=-16 51 19.775)
+  closest approach 2023-05-01T02:59:57.470: 0.0004&quot; (10.7 km), PA 190.62°, 22.516 km/s, distance 39.9572 au
+  Chord(S1, negative)
+  Chord(S2, positive)
+  Chord(S3, positive)
+  Chord(S4, positive)
+  Chord(S5, positive)
+  Chord(S6, positive)
+  Chord(S7, positive)
+  Chord(S8, negative)
+  Chord(S9, positive)
+  Chord(S10, positive)
+  Chord(S11, positive)
+  Chord(S12, positive)
+  Chord(S13, negative)
+
+LimbProblem fit: χ² = 12.302, dof = 12, χ²/dof = 1.025
+  center_f               =      25.215088 ± 0.210310
+  center_g               =     -12.117153 ± 0.150061
+  equatorial_radius      =     369.821375 ± 0.325035
+  oblateness             =       0.106659 ± 0.001094
+  position_angle         =      29.642322 ± 0.298745
+  sec_radius             =      90.181244 ± 0.417244
+  sep_f                  =    1177.002812 ± 0.367359
+  sep_g                  =     308.113365 ± 0.839136
+  derived:
+  offset_ra              =       0.870092 ± 0.007257
+  offset_dec             =      -0.418124 ± 0.005178
+  equivalent_radius      =     349.543123 ± 0.142173
+  semi_minor_axis        =     330.376780 ± 0.183299
+  size_ratio             =       0.257997 ± 0.001198
+  mass_ratio             =       0.017173 ± 0.000239
+  system_equivalent_radius =     360.988991 ± 0.172675
+  separation             =    1216.663251 ± 0.472320
+  separation_mas         =      41.983147 ± 0.016298
+  separation_pa          =      75.330407 ± 0.036961
+  barycenter_offset_ra   =       1.555791 ± 0.011851
+  barycenter_offset_dec  =      -0.238623 ± 0.005826
+  photocenter_offset_ra  =       3.404792 ± 0.023361
+  photocenter_offset_dec =       0.245405 ± 0.008758
+
+fitted vs true:
+  equatorial_radius         369.82 ±   0.33   (truth   370.00)
+  semi_minor_axis           330.38 ±   0.18   (truth   330.00)
+  position_angle             29.64 ±   0.30   (truth    30.00)
+  sec_radius                 90.18 ±   0.42   (truth    90.00)
+  sep_f                    1177.00 ±   0.37   (truth  1177.24)
+  sep_g                     308.11 ±   0.84   (truth   307.41)
+  center_f                   25.22 ±   0.21   (truth    25.00)
+  center_g                  -12.12 ±   0.15   (truth   -12.00)
+satellite as a circle:  χ² =  12.30,  8 parameters, BIC =  36.27
+satellite as an ellipse: χ² =  11.92, 10 parameters, BIC =  41.88   a = 91.9 ± 2.9 km, ε = 0.018 ± 0.029
+  center       RA 16 04 37.60902  Dec -16 51 19.7758   offset (+0.870, -0.418) mas ± (0.150, 0.120)
+  barycenter   RA 16 04 37.60907  Dec -16 51 19.7756   offset (+1.556, -0.239) mas ± (0.150, 0.120)
+  photocenter  RA 16 04 37.60920  Dec -16 51 19.7751   offset (+3.405, +0.245) mas ± (0.152, 0.120)
+separation 1216.7 ± 0.5 km = 41.98 ± 0.02 mas at PA 75.33 ± 0.04°, size ratio 0.258 ± 0.001
+Posterior of LimbProblem: 32 walkers × 3000 steps (burn-in 1000), acceptance 0.46
+  center_f               =      25.216469  -0.218324 +0.209104
+  center_g               =     -12.118700  -0.142964 +0.148170
+  equatorial_radius      =     369.813199  -0.323856 +0.321217
+  oblateness             =       0.106576  -0.001100 +0.001114
+  position_angle         =      29.636439  -0.289120 +0.296578
+  sec_radius             =      90.168921  -0.424022 +0.424526
+  sep_f                  =    1176.994272  -0.356626 +0.376417
+  sep_g                  =     308.093026  -0.861278 +0.861871</code></pre><h2 id="2.-only-two-chords-on-the-satellite"><a class="docs-heading-anchor" href="#2.-only-two-chords-on-the-satellite">2. only two chords on the satellite</a><a id="2.-only-two-chords-on-the-satellite-1"></a><a class="docs-heading-anchor-permalink" href="#2.-only-two-chords-on-the-satellite" title="Permalink"></a></h2><p>Two of the four satellite chords removed. Four contacts still fix a circle (three parameters), but not an ellipse (five): the fit of an ellipse stops somewhere in a valley of equally good solutions, with a singular covariance (<code>converged = false</code>); its values mean nothing.</p><pre><code class="language-julia hljs">ev2 = deepcopy(ev)
+delete!(ev2, &quot;S10&quot;); delete!(ev2, &quot;S11&quot;)
+r3 = fit_limb(ev2; model=BinaryLimb(), rng=rng)
+@printf(&quot;circle: R₂ = %.1f ± %.1f km (truth 90), separation %.1f ± %.1f km\n&quot;, r3[:sec_radius]..., r3[:separation]...)
+r4 = fit_limb(ev2; model=BinaryLimb(EllipseLimb(), EllipseLimb()), rng=rng)
+@printf(&quot;ellipse: converged = %s, χ² = %.2f (circle: %.2f)\n&quot;, r4.converged, r4.chi2, r3.chi2)
+savefig(plot(r3; title=&quot;SimTNO, two chords on the satellite&quot;, size=(1000, 750)), joinpath(out, &quot;binary_two_chords.png&quot;))</code></pre><pre><code class="language-text hljs">circle: R₂ = 88.6 ± 1.9 km (truth 90), separation 1216.0 ± 1.3 km
+ellipse: converged = false, χ² = 3.47 (circle: 6.40)</code></pre><h2 id="3.-a-binary-of-two-similar-bodies-(Patroclus–Menoetius-like)"><a class="docs-heading-anchor" href="#3.-a-binary-of-two-similar-bodies-(Patroclus–Menoetius-like)">3. a binary of two similar bodies (Patroclus–Menoetius-like)</a><a id="3.-a-binary-of-two-similar-bodies-(Patroclus–Menoetius-like)-1"></a><a class="docs-heading-anchor-permalink" href="#3.-a-binary-of-two-similar-bodies-(Patroclus–Menoetius-like)" title="Permalink"></a></h2><pre><code class="language-julia hljs">ephT = EphemKeplerian(a=5.2, e=0.14, i=22.0, Ω=44.0, ω=307.0, M=50.0, epoch=Epoch(&quot;2023-01-01&quot;), name=&quot;SimTrojan&quot;)
+bodyT = Body(&quot;SimTrojan&quot;, ephT; radius=110.0)
+tT = Epoch(&quot;2023-12-16T19:00:00&quot;)
+raT, decT, _ = ephem_radec(bodyT, tT)
+starT = Star(raT + 0.01 / 3600 / cosd(decT), decT; name=&quot;SimStar T&quot;)
+pT = positionv(starT, ephT, GEOCENTER, Event(starT, bodyT, tT).tref)
+alT = (pT.vf, pT.vg) ./ hypot(pT.vf, pT.vg)
+acT = (-alT[2], alT[1])</code></pre><p>Two ellipses, 125 × 100 km and 115 × 92 km, 680 km apart: 670 km along the track and 110 km across it, so that the stations between them see both bodies (two drops).</p><pre><code class="language-julia hljs">sepT = 670.0 .* alT .+ 110.0 .* acT
+truthT = CompositeOutline([EllipseOutline(125.0, 100.0, 20.0), EllipseOutline(115.0, 92.0, 35.0)], [(0.0, 0.0), sepT])
+evT, sitesT = simulate(starT, bodyT, tT, truthT, (5.0, 3.0), collect(-140.0:25.0:260.0); rng=rng, prefix=&quot;T&quot;)
+station_table(sitesT)
+@printf(&quot;%.2f km/s; drops per chord: %s\n&quot;, evT.ca.vel, join([count(x -&gt; x.kind === :immersion, c.contacts) for c in evT.chords], &quot; &quot;))
+rT = fit_limb(evT; model=BinaryLimb(EllipseLimb(), EllipseLimb()), rng=rng)
+display(rT)
+@printf(&quot;primary   a = %.1f ± %.1f (125), b = %.1f ± %.1f (100), PA = %.1f ± %.1f (20)\n&quot;, rT[:equatorial_radius]...,
+        rT[:semi_minor_axis]..., rT[:position_angle]...)
+@printf(&quot;secondary a = %.1f ± %.1f (115), b = %.1f ± %.1f (92), PA = %.1f ± %.1f (35)\n&quot;, rT[:sec_equatorial_radius]...,
+        rT[:sec_semi_minor_axis]..., rT[:sec_position_angle]...)
+@printf(&quot;separation %.1f ± %.1f km (%.1f)\n&quot;, rT[:separation]..., hypot(sepT...))
+savefig(plot(rT; title=&quot;SimTrojan: two ellipses&quot;, size=(1000, 750)), joinpath(out, &quot;binary_trojan.png&quot;))</code></pre><pre><code class="language-text hljs">  T1   lon   74.573°  lat  39.904°   -10.3 s from the closest approach  visual / poorly timed  σ = 0.40 s
+  T2   lon   81.695°  lat  39.008°   -43.7 s from the closest approach  CCD, long cycle        σ = 0.25 s
+  T3   lon   71.904°  lat  40.663°    +2.6 s from the closest approach  CMOS camera, NTP       σ = 0.10 s
+  T4   lon   74.238°  lat  40.630°    -8.0 s from the closest approach  visual / poorly timed  σ = 0.40 s
+  T5   lon   74.210°  lat  40.861°    -7.7 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  T6   lon   77.102°  lat  40.703°   -20.8 s from the closest approach  CCD, long cycle        σ = 0.25 s
+  T7   lon   72.419°  lat  41.518°    +0.9 s from the closest approach  visual / poorly timed  σ = 0.40 s
+  T8   lon   78.394°  lat  40.966°   -26.3 s from the closest approach  CMOS camera, NTP       σ = 0.10 s
+  T9   lon   82.727°  lat  40.433°   -46.2 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  T10  lon   78.465°  lat  41.415°   -26.0 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  T11  lon   78.394°  lat  41.656°   -25.4 s from the closest approach  CCD, long cycle        σ = 0.25 s
+  T12  lon   82.562°  lat  41.162°   -44.4 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  T13  lon   82.280°  lat  41.448°   -42.7 s from the closest approach  video, GPS-timed       σ = 0.02 s
+  T14  lon   70.394°  lat  43.299°   +11.3 s from the closest approach  video, GPS-timed       σ = 0.02 s
+  T15  lon   70.566°  lat  43.511°   +10.7 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  T16  lon   72.844°  lat  43.520°    +0.8 s from the closest approach  visual / poorly timed  σ = 0.40 s
+  T17  lon   82.341°  lat  42.366°   -41.6 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+18.14 km/s; drops per chord: 0 0 1 1 1 1 1 2 2 2 1 1 1 1 0 0 0
+LimbProblem fit: χ² = 11.967, dof = 20, χ²/dof = 0.598
+  center_f               =       5.175263 ± 0.247708
+  center_g               =       2.951566 ± 0.253827
+  equatorial_radius      =     124.894725 ± 0.344459
+  oblateness             =       0.200514 ± 0.004245
+  position_angle         =      21.107678 ± 0.534728
+  sec_equatorial_radius  =     115.171713 ± 0.221415
+  sec_oblateness         =       0.202762 ± 0.002957
+  sec_position_angle     =      35.070565 ± 0.760920
+  sep_f                  =     678.585601 ± 0.302725
+  sep_g                  =      15.342343 ± 0.400388
+  derived:
+  offset_ra              =       1.691845 ± 0.080978
+  offset_dec             =       0.964896 ± 0.082979
+  equivalent_radius      =     111.673326 ± 0.179879
+  semi_minor_axis        =      99.851549 ± 0.341265
+  sec_equivalent_radius  =     102.834759 ± 0.219167
+  sec_semi_minor_axis    =      91.819314 ± 0.321615
+  size_ratio             =       0.920853 ± 0.002460
+  mass_ratio             =       0.780857 ± 0.006258
+  system_equivalent_radius =     151.808825 ± 0.198873
+  separation             =     678.759018 ± 0.301421
+  separation_mas         =     221.893055 ± 0.098538
+  separation_pa          =      88.704803 ± 0.033881
+  barycenter_offset_ra   =      98.961004 ± 0.443159
+  barycenter_offset_dec  =       3.164083 ± 0.063189
+  photocenter_offset_ra  =     103.484997 ± 0.301118
+  photocenter_offset_dec =       3.266368 ± 0.063445
+
+primary   a = 124.9 ± 0.3 (125), b = 99.9 ± 0.3 (100), PA = 21.1 ± 0.5 (20)
+secondary a = 115.2 ± 0.2 (115), b = 91.8 ± 0.3 (92), PA = 35.1 ± 0.8 (35)
+separation 678.8 ± 0.3 km (679.0)</code></pre><h2 id="4.-coverage-of-the-uncertainties-(100-simulations)"><a class="docs-heading-anchor" href="#4.-coverage-of-the-uncertainties-(100-simulations)">4. coverage of the uncertainties (100 simulations)</a><a id="4.-coverage-of-the-uncertainties-(100-simulations)-1"></a><a class="docs-heading-anchor-permalink" href="#4.-coverage-of-the-uncertainties-(100-simulations)" title="Permalink"></a></h2><p>The same system and stations, new timing errors each time: how often does the truth lie within the fitted 1σ interval (68.3 % expected; with 100 simulations ± 5 %)? The satellite&#39;s radius and position come from a few chords, some near its edge, where the contacts depend non-linearly on them: their covariance errors tend to be somewhat too small (the truth lies within 1σ in 55–60 % of the simulations). The posterior is then the better uncertainty.</p><pre><code class="language-julia hljs">hits = Dict(n =&gt; 0 for n in (:sec_radius, :sep_f, :sep_g, :equatorial_radius))
+tv = Dict(:sec_radius =&gt; 90.0, :sep_f =&gt; sep[1], :sep_g =&gt; sep[2], :equatorial_radius =&gt; 370.0)
+nsim = 100
+for k in 1:nsim
+    rk = MersenneTwister(1000 + k)
+    e, _ = simulate(star, body, t0, truth, center, offsets; rng=rk, sites=sites)
+    f = fit_limb(e; model=BinaryLimb(), starts=2, rng=rk)
+    for n in keys(hits)
+        abs(f[n][1] - tv[n]) &lt;= f[n][2] &amp;&amp; (hits[n] += 1)
+    end
+end
+for n in (:equatorial_radius, :sec_radius, :sep_f, :sep_g)
+    @printf(&quot;  %-18s truth within 1σ in %3d %% of the simulations\n&quot;, n, round(Int, 100 * hits[n] / nsim))
+end</code></pre><pre><code class="language-text hljs">  equatorial_radius  truth within 1σ in  64 % of the simulations
+  sec_radius         truth within 1σ in  58 % of the simulations
+  sep_f              truth within 1σ in  67 % of the simulations
+  sep_g              truth within 1σ in  55 % of the simulations</code></pre><h2 id="Figures"><a class="docs-heading-anchor" href="#Figures">Figures</a><a id="Figures-1"></a><a class="docs-heading-anchor-permalink" href="#Figures" title="Permalink"></a></h2><pre><code class="language-julia hljs"># the standard figures: limb fits (default, 68.3 % region, as the paper), posterior, maps (prediction,
+# post-fit, comparison) and the globe
+lon0, lat0 = mean(st.observer.lon for st in sites), mean(st.observer.lat for st in sites)
+standard_figures(&quot;binary&quot;, r1; out=out, posterior=post,
+                 projection=&quot;+proj=laea +lon_0=$(round(lon0)) +lat_0=$(round(lat0))&quot;,
+                 limits=(lon0 - 25, lon0 + 25, lat0 - 16, lat0 + 16), window=600, marks=60)
+println(&quot;figures written to &quot;, out)</code></pre><p>The chords with the true limb, and the fit with its 1σ shape band (the occupancy of the limbs drawn from the covariance: not star-shaped, the band of a two-body outline is the region covered by between 15.9 % and 84.1 % of the drawn limbs):</p><p><img src="../../assets/figures/binary_chords.png" alt="chords"/> <img src="../../assets/figures/binary_fit.png" alt="fit"/></p><p>The posterior, with the truth:</p><p><img src="../../assets/figures/binary_corner.png" alt="corner plot"/></p><p>Two chords on the satellite, and the binary of two similar bodies:</p><p><img src="../../assets/figures/binary_two_chords.png" alt="two chords"/> <img src="../../assets/figures/binary_trojan.png" alt="trojan"/></p><pre><code class="language-text hljs"></code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../tutorial/">« Tutorial: an offline tour with synthetic data</a><a class="docs-footer-nextpage" href="../sim_contact_binary/">Synthetic: a contact binary in one event »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Tuesday 3 November 2026 01:29">Tuesday 3 November 2026</span>. Using Julia version 1.13.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>

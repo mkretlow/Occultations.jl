@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Synthetic: a contact binary in one event · Occultations.jl</title><meta name="title" content="Synthetic: a contact binary in one event · Occultations.jl"/><meta property="og:title" content="Synthetic: a contact binary in one event · Occultations.jl"/><meta property="twitter:title" content="Synthetic: a contact binary in one event · Occultations.jl"/><meta name="description" content="Documentation for Occultations.jl."/><meta property="og:description" content="Documentation for Occultations.jl."/><meta property="twitter:description" content="Documentation for Occultations.jl."/><meta property="og:url" content="https://mkretlow.github.io/Occultations.jl/generated/sim_contact_binary/"/><meta property="twitter:url" content="https://mkretlow.github.io/Occultations.jl/generated/sim_contact_binary/"/><link rel="canonical" href="https://mkretlow.github.io/Occultations.jl/generated/sim_contact_binary/"/><script data-outdated-warner src="../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.63.2/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../search_index.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script><link href="../../assets/documentercitations/citations-hover.css" rel="stylesheet" type="text/css"/><link href="../../assets/documentercitations/citations.css" rel="stylesheet" type="text/css"/><link href="../../assets/citations.css" rel="stylesheet" type="text/css"/><script src="../../assets/documentercitations/citations-data.js"></script><script src="../../assets/documentercitations/citations-hover.js"></script><script src="../../assets/documentercitations/citations-backlinks.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../">Occultations.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><span class="tocitem">User guide</span><ul><li><a class="tocitem" href="../../guide/quickstart/">Quick start</a></li><li><a class="tocitem" href="../../guide/lightcurves/">Light curves and timing</a></li><li><a class="tocitem" href="../../guide/limbfits/">Limb fits</a></li><li><a class="tocitem" href="../../guide/binaries/">Binaries and contact binaries</a></li><li><a class="tocitem" href="../../guide/rings/">Ring systems</a></li><li><a class="tocitem" href="../../guide/atmospheres/">Atmospheres</a></li><li><a class="tocitem" href="../../guide/plots/">Plots and maps</a></li><li><a class="tocitem" href="../../guide/occview/">The occultation in 3-D</a></li><li><a class="tocitem" href="../../guide/design/">Package design and conventions</a></li></ul></li><li><span class="tocitem">Methods</span><ul><li><a class="tocitem" href="../../theory/limbfit/">The mathematics of the limb fit</a></li><li><a class="tocitem" href="../../theory/residuals/">Residuals along the chords or radial residuals?</a></li><li><a class="tocitem" href="../../theory/sigma_limb/">The limb allowance σ_limb</a></li><li><a class="tocitem" href="../../theory/uncertainty_bands/">Uncertainty of the limb in the plots</a></li></ul></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../../examples/">Overview</a></li><li><a class="tocitem" href="../tutorial/">Tutorial: an offline tour with synthetic data</a></li><li><a class="tocitem" href="../sim_binary/">Synthetic: a satellite and a binary system</a></li><li class="is-active"><a class="tocitem" href>Synthetic: a contact binary in one event</a><ul class="internal"><li><a class="tocitem" href="#1.-the-simulated-event"><span>1. the simulated event</span></a></li><li><a class="tocitem" href="#2.-light-curves-drops-timings"><span>2. light curves → drops → timings</span></a></li><li><a class="tocitem" href="#3.-a-single-ellipse"><span>3. a single ellipse</span></a></li><li><a class="tocitem" href="#4.-the-contact-binary-model"><span>4. the contact-binary model</span></a></li><li><a class="tocitem" href="#5.-joint-fit-of-the-light-curves"><span>5. joint fit of the light curves</span></a></li><li><a class="tocitem" href="#Figures"><span>Figures</span></a></li></ul></li><li><a class="tocitem" href="../sim_contact_binary_3d/">Synthetic: a contact binary in 3-D</a></li><li><a class="tocitem" href="../sim_rings/">Synthetic: a body with two narrow rings</a></li><li><a class="tocitem" href="../sim_ring_pole/">Synthetic: a distant ring seen in three events</a></li><li><a class="tocitem" href="../huya_2019/">Huya, 2019 March 18</a></li><li><a class="tocitem" href="../2002kx14_2020_2023/">2002 KX14, five events 2020–2023</a></li><li><a class="tocitem" href="../2003uy117_2020/">2003 UY117, 2020 October 23</a></li><li><a class="tocitem" href="../2002xv93_2024/">2002 XV93, 2024 January 10</a></li><li><a class="tocitem" href="../1995sm55_2024/">1995 SM55, 2024 February 25</a></li><li><a class="tocitem" href="../huya_2023/">Huya, 2023 June 24, and its satellite</a></li><li><a class="tocitem" href="../huya_2023_satellite/">Huya and its satellite, 2023 June 24</a></li><li><a class="tocitem" href="../ixion_2020_2023/">Ixion, six events 2020–2023</a></li><li><a class="tocitem" href="../2007uk126_2014/">2007 UK126, 2014 November 15</a></li><li><a class="tocitem" href="../varda_2018/">Varda, 2018 September 10</a></li><li><a class="tocitem" href="../2002tc302_2018/">2002 TC302, 2018 January 28</a></li><li><a class="tocitem" href="../2003az84_2012_2014/">2003 AZ84, 2011–2014</a></li><li><a class="tocitem" href="../2003vs2_2019/">2003 VS2, 2019 October 22</a></li><li><a class="tocitem" href="../haumea_2017/">Haumea and its ring, 2017 January 21</a></li><li><a class="tocitem" href="../2002gz32_2017/">2002 GZ32, 2017 May 20</a></li><li><a class="tocitem" href="../makemake_2011/">Makemake, 2011 April 23</a></li><li><a class="tocitem" href="../bienor_2019_2023/">Bienor, 2019–2023</a></li><li><a class="tocitem" href="../chariklo_2017_2020/">Chariklo and its rings, 2017–2020</a></li><li><a class="tocitem" href="../2002ms4_2020/">2002 MS4, 2020 August 8</a></li><li><a class="tocitem" href="../quaoar_2011_2022/">Quaoar and its rings, 2011 and 2022</a></li><li><a class="tocitem" href="../chiron_2018_2019/">Chiron, 2018 and 2019</a></li><li><a class="tocitem" href="../../comparison/publications/">Occultations.jl compared with published reductions</a></li><li><a class="tocitem" href="../../comparison/sora/">Occultations.jl and SORA: the fitting methods compared</a></li></ul></li><li><a class="tocitem" href="../../validation/">Validation</a></li><li><a class="tocitem" href="../../api/">API reference</a></li><li><a class="tocitem" href="../../references/">References</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li class="is-active"><a href>Synthetic: a contact binary in one event</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Synthetic: a contact binary in one event</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/mkretlow/Occultations.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/sim_contact_binary.jl" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Synthetic:-a-contact-binary-in-one-event"><a class="docs-heading-anchor" href="#Synthetic:-a-contact-binary-in-one-event">Synthetic: a contact binary in one event</a><a id="Synthetic:-a-contact-binary-in-one-event-1"></a><a class="docs-heading-anchor-permalink" href="#Synthetic:-a-contact-binary-in-one-event" title="Permalink"></a></h1><p>A simulated occultation by a bilobed trans-Neptunian object (two lobes of 260 and 200 km, 430 km long; Arrokoth-like, scaled up), reduced with <a href="../../api/#Occultations.ContactBinaryLimb"><code>ContactBinaryLimb</code></a>:</p><ol><li>sixteen stations on land with light curves (exposures of 0.04–0.5 s, diffraction, stellar diameter); the chords near the waist see two drops;</li><li>the drops are detected and timed in each light curve; chords with several drops; a second timing with the velocities normal to the fitted limb;</li><li>a single ellipse cannot reproduce two drops on one chord;</li><li>the contact-binary model: the lobes, the neck and the waist, with the posterior;</li><li>a joint fit of the light curves: the diffraction of the narrow gaps between the drops (complex amplitudes of the two opaque strips added) is modelled exactly, which a timing of each drop on its own is not.</li></ol><p>The truth is known and printed next to the fitted values. Run it with:</p><pre><code class="nohighlight hljs">julia --project=. examples/sim_contact_binary.jl [output_dir]      (default: examples/output/sim_contact_binary)</code></pre><div class="admonition is-info" id="Output-ed3548b65ecf3bf2"><header class="admonition-header">Output<a class="admonition-anchor" href="#Output-ed3548b65ecf3bf2" title="Permalink"></a></header><div class="admonition-body"><p>The code is not run when the manual is built. The output after each section is that of the last run of <a href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/sim_contact_binary.jl"><code>examples/sim_contact_binary.jl</code></a>, stored in <a href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/sim_contact_binary/output.txt"><code>examples/output/sim_contact_binary/output.txt</code></a>.</p></div></div><pre><code class="language-julia hljs">using Occultations, Random, Printf, Statistics
+using Plots
+
+out = length(ARGS) &gt;= 1 ? ARGS[1] : mkpath(joinpath(@__DIR__, &quot;output&quot;, &quot;sim_contact_binary&quot;))
+rng = MersenneTwister(11)</code></pre><h2 id="1.-the-simulated-event"><a class="docs-heading-anchor" href="#1.-the-simulated-event">1. the simulated event</a><a id="1.-the-simulated-event-1"></a><a class="docs-heading-anchor-permalink" href="#1.-the-simulated-event" title="Permalink"></a></h2><pre><code class="language-julia hljs">eph = EphemKeplerian(a=44.0, e=0.03, i=3.0, Ω=120.0, ω=40.0, M=300.0, epoch=Epoch(&quot;2024-01-01&quot;), name=&quot;SimCB&quot;)
+body = Body(&quot;SimCB&quot;, eph; radius=150.0)
+t0 = Epoch(&quot;2024-12-30T20:00:00&quot;)
+ra, dec, _ = ephem_radec(body, t0)
+star = Star(ra + 0.001 / 3600 / cosd(dec), dec; name=&quot;SimStar&quot;, mag=Dict(&quot;V&quot; =&gt; 13.0, &quot;K&quot; =&gt; 12.0), ra_err=0.1, dec_err=0.1)
+ev = Event(star, body, t0)
+D = ev.ca.dist_km
+sd = apparent_diameter(star, D)
+@printf(&quot;distance %.2f au, shadow velocity %.2f km/s, stellar diameter %.2f km, Fresnel scale %.2f km at 0.6 µm\n&quot;,
+        D / 1.495978707e8, ev.ca.vel, sd, fresnel_scale(0.6, D))</code></pre><p>The truth: lobe 1 with semi-axes 130 × 95 km, lobe 2 with 100 × 80 km, along an axis at position angle 255° (19° from the direction of motion, so that chords near the waist see two drops); the centres are <code>d = (a₁ + a₂)(1 − neck)</code> apart, <code>neck = 0.08</code> (the lobes overlap by 8 % of their length); the system is 8 km west and 14 km north of the ephemeris position.</p><pre><code class="language-julia hljs">a1, b1, a2, b2, neck, axis_pa = 130.0, 95.0, 100.0, 80.0, 0.08, 255.0
+center = (-8.0, 14.0)
+d = (a1 + a2) * (1 - neck)
+x1, x2 = -d * a2 * b2 / (a1 * b1 + a2 * b2), d * a1 * b1 / (a1 * b1 + a2 * b2)   # lobe centres, area-weighted centre at 0
+truth = CompositeOutline([EllipseOutline(a1, b1, axis_pa + 90), EllipseOutline(a2, b2, axis_pa + 90)],
+                         [(x1 * sind(axis_pa), x1 * cosd(axis_pa)), (x2 * sind(axis_pa), x2 * cosd(axis_pa))])
+println(&quot;true limb: &quot;, truth)
+@printf(&quot;area-equivalent diameter %.1f km\n&quot;, 2 * equivalent_radius(truth))</code></pre><pre><code class="language-text hljs">distance 42.36 au, shadow velocity 25.74 km/s, stellar diameter 0.48 km, Fresnel scale 1.38 km at 0.6 µm
+true limb: CompositeOutline(EllipseOutline(a = 130.000 km, b = 95.000 km, PA(minor) = 345.00°) at (80.35, 21.53) km, EllipseOutline(a = 100.000 km, b = 80.000 km, PA(minor) = 345.00°) at (-124.04, -33.24) km)
+area-equivalent diameter 283.4 km</code></pre><h2 id="2.-light-curves-drops-timings"><a class="docs-heading-anchor" href="#2.-light-curves-drops-timings">2. light curves → drops → timings</a><a id="2.-light-curves-drops-timings-1"></a><a class="docs-heading-anchor-permalink" href="#2.-light-curves-drops-timings" title="Permalink"></a></h2><p>Sixteen stations across the path, on land and in the dark, spread along the track (<a href="https://github.com/mkretlow/Occultations.jl/blob/main/examples/sim_stations.jl"><code>examples/sim_stations.jl</code></a>), each with its own camera: exposures of 0.04 to 0.5 s and different noise. Each light curve is simulated with all its drops. The drops are found as runs of points below half the baseline (a box search would find two deep drops with a short gap as one box), and each is timed in its own window (between the neighbouring drops) with the diffraction model.</p><pre><code class="language-julia hljs">include(joinpath(@__DIR__, &quot;sim_stations.jl&quot;))
+offsets = [-200.0, -170, -140, -110, -85, -62, -50, -20, 10, 28, 38, 65, 100, 130, 160, 190]
+pv = positionv(star, eph, GEOCENTER, ev.tref)
+n̂ = (-pv.vg, pv.vf) ./ hypot(pv.vf, pv.vg)
+sites = stations(star, body, ev.tref, offsets .+ (center[1] * n̂[1] + center[2] * n̂[2]); rng=rng,
+                 equipment=EQUIPMENT[1:4])                 # cameras only: every station records a light curve
+# the velocity of the shadow normal to a limb O (centre c) at the instant τ of a track
+function vnormal(tr, O, c, τ)
+    f, g = tr(τ)
+    nx, ny = limb_normal(O, f - c[1], g - c[2])
+    vf, vg = velocity(tr, τ)
+    return abs(vf * nx + vg * ny)
+end
+# the contacts of the drops `found` in a light curve, each drop timed in its own window with the
+# normal velocities vel(τ) at its edges
+function time_drops(lc, found, vel)
+    cs = Contact[]
+    for (k, x) in enumerate(found)
+        lo = k == 1 ? -Inf : (found[k-1].emersion + x.immersion) / 2
+        hi = k == length(found) ? Inf : (x.emersion + found[k+1].immersion) / 2
+        tf = fit_timing(lc; vel=vel(x.immersion), vel_emersion=vel(x.emersion), dist=D, star_diam=sd, tmin=lo, tmax=hi,
+                        immersion=x.immersion, emersion=x.emersion, rng=rng)
+        c = contact_times(tf)
+        push!(cs, Contact(:immersion, c.immersion, c.immersion_err), Contact(:emersion, c.emersion, c.emersion_err))
+    end
+    return cs
+end
+detections = Dict{String,Any}()
+for (j, st) in enumerate(sites)
+    obs = st.observer
+    _, _, texp, noise = st.equipment
+    drops = [(a - ev.tref, b - ev.tref) for (a, b) in predicted_contacts(ev, obs, truth; center=center,
+                                                                          window=abs(st.τ) + 200, step=0.02)]
+    # the velocity of the shadow normal to the limb at each contact sets the time scale of its diffraction fringes
+    tr = Track(star, body, obs, ev.tref, st.τ - 60, st.τ + 60)
+    t = collect(range(round(st.τ) - 30, round(st.τ) + 30; step=texp))
+    lc = simulate_lightcurve(t, drops; tref=ev.tref, vel=[vnormal(tr, truth, center, a) for (a, _) in drops],
+                             vel_emersion=[vnormal(tr, truth, center, b) for (_, b) in drops], dist=D, star_diam=sd,
+                             λ=0.6, σ=noise, exptime=texp, rng=rng, name=obs.name)
+    found = detect_occultations(lc; method=:threshold)
+    detections[obs.name] = found
+    # first pass: the normal velocities are not known yet; the shadow velocity is used
+    cs = time_drops(lc, found, τ -&gt; ev.ca.vel)
+    push!(ev, isempty(cs) ? Chord(obs.name, obs, lc) : Chord(obs.name, obs; contacts=cs, lightcurve=lc))
+    @printf(&quot;%-4s %7.2f° %6.2f°  %-18s %.2f s, σ %.2f  cross-track %+5.0f km: %d drop(s) simulated, %d detected  %s\n&quot;,
+            obs.name, obs.lon, obs.lat, st.equipment[1], texp, noise, offsets[j], length(drops), length(found),
+            join([@sprintf(&quot;[%.2f, %.2f] s&quot;, x.immersion, x.emersion) for x in found], &quot; &quot;))
+end
+display(ev)</code></pre><pre><code class="language-text hljs">S1     19.15°  18.27°  CMOS camera, GPS   0.10 s, σ 0.05  cross-track  -200 km: 0 drop(s) simulated, 0 detected
+S2     14.66°  17.70°  video, GPS-timed   0.04 s, σ 0.10  cross-track  -170 km: 0 drop(s) simulated, 0 detected
+S3      7.57°  16.41°  video, GPS-timed   0.04 s, σ 0.10  cross-track  -140 km: 0 drop(s) simulated, 0 detected
+S4     17.81°  18.86°  video, GPS-timed   0.04 s, σ 0.10  cross-track  -110 km: 1 drop(s) simulated, 1 detected  [146.62, 150.94] s
+S5     15.00°  18.55°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track   -85 km: 1 drop(s) simulated, 1 detected  [154.50, 160.90] s
+S6     22.18°  20.04°  CCD, long cycle    0.50 s, σ 0.03  cross-track   -62 km: 2 drop(s) simulated, 2 detected  [130.75, 138.25] s [139.25, 143.25] s
+S7     24.13°  20.44°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track   -50 km: 2 drop(s) simulated, 2 detected  [124.10, 131.50] s [131.90, 137.90] s
+S8     24.66°  20.79°  video, GPS-timed   0.04 s, σ 0.10  cross-track   -20 km: 1 drop(s) simulated, 1 detected  [122.50, 137.38] s
+S9      5.79°  17.37°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track   +10 km: 1 drop(s) simulated, 1 detected  [181.70, 196.50] s
+S10    21.98°  20.83°  CCD, long cycle    0.50 s, σ 0.03  cross-track   +28 km: 2 drop(s) simulated, 2 detected  [133.25, 137.25] s [137.75, 147.25] s
+S11     9.67°  18.56°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track   +38 km: 2 drop(s) simulated, 2 detected  [172.90, 174.70] s [176.30, 185.70] s
+S12    14.73°  19.88°  CMOS camera, GPS   0.10 s, σ 0.05  cross-track   +65 km: 1 drop(s) simulated, 1 detected  [161.55, 170.35] s
+S13    17.95°  20.82°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track  +100 km: 1 drop(s) simulated, 1 detected  [152.70, 159.10] s
+S14     9.01°  19.26°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track  +130 km: 0 drop(s) simulated, 0 detected
+S15     6.35°  18.91°  video, GPS-timed   0.04 s, σ 0.10  cross-track  +160 km: 0 drop(s) simulated, 0 detected
+S16    14.42°  20.98°  video, GPS-timed   0.04 s, σ 0.10  cross-track  +190 km: 0 drop(s) simulated, 0 detected
+Event SimCB, 2024-12-30T19:59:59: SimCB occults Star(SimStar, RA=06 35 33.9461, Dec=+22 02 51.553)
+  closest approach 2024-12-30T19:59:58.810: 0.0001&quot; (2.2 km), PA 184.08°, 25.743 km/s, distance 42.3622 au
+  Chord(S1, negative, with light curve)
+  Chord(S2, negative, with light curve)
+  Chord(S3, negative, with light curve)
+  Chord(S4, positive, with light curve)
+  Chord(S5, positive, with light curve)
+  Chord(S6, positive, 2 drops, with light curve)
+  Chord(S7, positive, 2 drops, with light curve)
+  Chord(S8, positive, with light curve)
+  Chord(S9, positive, with light curve)
+  Chord(S10, positive, 2 drops, with light curve)
+  Chord(S11, positive, 2 drops, with light curve)
+  Chord(S12, positive, with light curve)
+  Chord(S13, positive, with light curve)
+  Chord(S14, negative, with light curve)
+  Chord(S15, negative, with light curve)
+  Chord(S16, negative, with light curve)</code></pre><h2 id="3.-a-single-ellipse"><a class="docs-heading-anchor" href="#3.-a-single-ellipse">3. a single ellipse</a><a id="3.-a-single-ellipse-1"></a><a class="docs-heading-anchor-permalink" href="#3.-a-single-ellipse" title="Permalink"></a></h2><p>A convex limb gives at most one drop per chord: the second drop of a chord cannot be reproduced, whatever the ellipse. With the visible segments as constraints (the star seen between the drops) the fit is worse still.</p><pre><code class="language-julia hljs">r1 = fit_limb(ev; rng=rng)
+r1v = fit_limb(ev; visible=:soft, rng=rng)
+@printf(&quot;ellipse: χ²/dof = %.0f; with the visible segments χ²/dof = %.0f\n&quot;, reduced_chi2(r1), reduced_chi2(r1v))</code></pre><pre><code class="language-text hljs">ellipse: χ²/dof = 196692; with the visible segments χ²/dof = 196695</code></pre><h2 id="4.-the-contact-binary-model"><a class="docs-heading-anchor" href="#4.-the-contact-binary-model">4. the contact-binary model</a><a id="4.-the-contact-binary-model-1"></a><a class="docs-heading-anchor-permalink" href="#4.-the-contact-binary-model" title="Permalink"></a></h2><p>Two ellipses along a common axis; the starting values come from the ellipse of all the contacts (its major axis gives the axis of the lobes). Unlabelled contacts are matched to the nearest crossing of the same kind of the two-lobe outline, and the visible segments of the chords are constraints by default.</p><pre><code class="language-julia hljs">r2a = fit_limb(ev; model=ContactBinaryLimb(), rng=rng)
+@printf(&quot;first pass (timings with the shadow velocity): χ²/dof = %.2f, b₁ = %.2f ± %.2f km (truth %.0f)\n&quot;,
+        reduced_chi2(r2a), r2a[:b1]..., b1)</code></pre><p>The timings of the first pass assume the shadow velocity at every edge, while the time scale of the diffraction fringes is set by the velocity normal to the limb, slower at oblique edges: the contacts are slightly biased. Second pass: each drop is timed again with the normal velocities at its edges predicted by the fitted limb, and the limb is refitted.</p><pre><code class="language-julia hljs">(cf, Of) = outlines(r2a)[1]
+for c in filter(ispositive, collect(ev.chords))
+    tr = track(ev, c)
+    off = c.lightcurve.tref - ev.tref                      # light-curve time → time from ev.tref
+    cs = time_drops(c.lightcurve, detections[c.name], τ -&gt; vnormal(tr, Of, cf, τ + off))
+    replace_chord!(ev, Chord(c.name, c.observer; contacts=cs, lightcurve=c.lightcurve))
+end
+r2 = fit_limb(ev; model=ContactBinaryLimb(), rng=rng)
+display(r2)
+println(&quot;fitted vs true:&quot;)
+row(n, tv) = @printf(&quot;  %-22s %9.3f ± %6.3f   (truth %8.3f)\n&quot;, n, r2[n]..., tv)
+for (n, tv) in ((:a1, a1), (:b1, b1), (:a2, a2), (:b2, b2), (:axis_pa, axis_pa), (:neck, neck),
+                (:center_f, center[1]), (:center_g, center[2]))
+    row(n, tv)
+end
+w = 2 * Occultations._waist(a1, b1, x1, a2, b2, x2)          # the true width of the waist
+for (n, tv) in ((:equivalent_radius, equivalent_radius(truth)), (:length, max(x1 + a1, x2 + a2) - min(x1 - a1, x2 - a2)),
+                (:neck_width, w), (:size_ratio, sqrt(a2 * b2 / (a1 * b1))))
+    row(n, tv)
+end
+post = sample(r2; nsteps=3000, rng=rng)
+display(post)
+ds = derived_summary(post)
+@printf(&quot;posterior: D_eq = %.1f −%.1f +%.1f km, neck width %.1f −%.1f +%.1f km (truth %.1f), size ratio %.3f −%.3f +%.3f\n&quot;,
+        2ds.equivalent_radius.median, 2ds.equivalent_radius.minus, 2ds.equivalent_radius.plus, ds.neck_width.median,
+        ds.neck_width.minus, ds.neck_width.plus, w, ds.size_ratio.median, ds.size_ratio.minus, ds.size_ratio.plus)
+savefig(cornerplot(post; vars=[:a1, :a2, :axis_pa, :neck],
+                   axislabels=Dict(:a1 =&gt; &quot;a₁ [km]&quot;, :a2 =&gt; &quot;a₂ [km]&quot;, :axis_pa =&gt; &quot;axis PA [°]&quot;, :neck =&gt; &quot;neck&quot;),
+                   truths=Dict(:a1 =&gt; a1, :a2 =&gt; a2, :axis_pa =&gt; axis_pa, :neck =&gt; neck), truth_label=&quot;simulated truth&quot;),
+        joinpath(out, &quot;contact_binary_corner.png&quot;))</code></pre><pre><code class="language-text hljs">first pass (timings with the shadow velocity): χ²/dof = 2.79, b₁ = 95.13 ± 0.07 km (truth 95)
+LimbProblem fit: χ² = 33.225, dof = 20, χ²/dof = 1.661
+  center_f               =      -8.020172 ± 0.066745
+  center_g               =      14.017022 ± 0.045490
+  a1                     =     130.044382 ± 0.094011
+  b1                     =      94.956613 ± 0.066418
+  a2                     =     100.163297 ± 0.074128
+  b2                     =      80.008786 ± 0.040102
+  axis_pa                =     255.027249 ± 0.017836
+  neck                   =       0.081239 ± 0.000728
+  derived:
+  offset_ra              =      -0.261039 ± 0.002172
+  offset_dec             =       0.456223 ± 0.001481
+  equivalent_radius      =     141.725530 ± 0.033770
+  lobe1_equivalent_radius =     111.124138 ± 0.040809
+  lobe2_equivalent_radius =      89.520633 ± 0.029917
+  size_ratio             =       0.805591 ± 0.000397
+  mass_ratio             =       0.522810 ± 0.000773
+  separation             =     211.505798 ± 0.097496
+  length                 =     441.713476 ± 0.130721
+  neck_width             =      69.043391 ± 0.282668
+
+fitted vs true:
+  a1                       130.044 ±  0.094   (truth  130.000)
+  b1                        94.957 ±  0.066   (truth   95.000)
+  a2                       100.163 ±  0.074   (truth  100.000)
+  b2                        80.009 ±  0.040   (truth   80.000)
+  axis_pa                  255.027 ±  0.018   (truth  255.000)
+  neck                       0.081 ±  0.001   (truth    0.080)
+  center_f                  -8.020 ±  0.067   (truth   -8.000)
+  center_g                  14.017 ±  0.045   (truth   14.000)
+  equivalent_radius        141.726 ±  0.034   (truth  141.704)
+  length                   441.713 ±  0.131   (truth  441.600)
+  neck_width                69.043 ±  0.283   (truth   68.552)
+  size_ratio                 0.806 ±  0.000   (truth    0.805)
+Posterior of LimbProblem: 32 walkers × 3000 steps (burn-in 1000), acceptance 0.46
+  center_f               =      -8.021550  -0.066617 +0.070925
+  center_g               =      14.016003  -0.045005 +0.044851
+  a1                     =     130.058269  -0.095278 +0.093881
+  b1                     =      94.950198  -0.064330 +0.068008
+  a2                     =     100.162789  -0.075563 +0.070512
+  b2                     =      80.010286  -0.038514 +0.039948
+  axis_pa                =     255.028002  -0.018699 +0.016881
+  neck                   =       0.081300  -0.000707 +0.000715
+
+posterior: D_eq = 283.5 −0.1 +0.1 km, neck width 69.1 −0.3 +0.3 km (truth 68.6), size ratio 0.806 −0.000 +0.000</code></pre><h2 id="5.-joint-fit-of-the-light-curves"><a class="docs-heading-anchor" href="#5.-joint-fit-of-the-light-curves">5. joint fit of the light curves</a><a id="5.-joint-fit-of-the-light-curves-1"></a><a class="docs-heading-anchor-permalink" href="#5.-joint-fit-of-the-light-curves" title="Permalink"></a></h2><p>The light curves themselves against the two-lobe limb (diffraction, stellar disc, exposure), starting from the fit of the timings. Drops less than ~10 Fresnel scales apart are computed together: the light diffracted into a narrow gap is part of the model.</p><pre><code class="language-julia hljs">init = Dict(n =&gt; v for (n, v) in zip(r2.names, r2.values))
+r3 = fit_limb(ev; model=ContactBinaryLimb(), photometry=true, init=init, starts=1, rng=rng)
+@printf(&quot;χ²/dof = %.3f for %d light-curve points\n&quot;, reduced_chi2(r3), r3.dof + length(freenames(r3)))
+for (n, tv) in ((:a1, a1), (:b1, b1), (:a2, a2), (:b2, b2), (:axis_pa, axis_pa), (:neck, neck))
+    @printf(&quot;  %-8s timings %8.3f ± %5.3f   light curves %8.3f ± %5.3f   (truth %7.3f)\n&quot;, n, r2[n]..., r3[n]..., tv)
+end</code></pre><pre><code class="language-text hljs">χ²/dof = 0.997 for 12224 light-curve points
+  a1       timings  130.044 ± 0.094   light curves  130.121 ± 0.043   (truth 130.000)
+  b1       timings   94.957 ± 0.066   light curves   94.970 ± 0.027   (truth  95.000)
+  a2       timings  100.163 ± 0.074   light curves  100.096 ± 0.038   (truth 100.000)
+  b2       timings   80.009 ± 0.040   light curves   80.025 ± 0.019   (truth  80.000)
+  axis_pa  timings  255.027 ± 0.018   light curves  255.035 ± 0.011   (truth 255.000)
+  neck     timings    0.081 ± 0.001   light curves    0.081 ± 0.000   (truth   0.080)</code></pre><h2 id="Figures"><a class="docs-heading-anchor" href="#Figures">Figures</a><a id="Figures-1"></a><a class="docs-heading-anchor-permalink" href="#Figures" title="Permalink"></a></h2><pre><code class="language-julia hljs">savefig(plot(ev; limb=truth, center=center, title=&quot;SimCB: chords and the true limb&quot;, size=(1000, 750)),
+        joinpath(out, &quot;contact_binary_chords.png&quot;))
+savefig(plot(r2; title=&quot;SimCB: ContactBinaryLimb fit&quot;, size=(1000, 750)), joinpath(out, &quot;contact_binary_fit.png&quot;))
+savefig(plot(post; title=&quot;SimCB: posterior limbs&quot;, size=(1000, 750)), joinpath(out, &quot;contact_binary_posterior.png&quot;))
+savefig(plot(r1; title=&quot;SimCB: a single ellipse&quot;, size=(1000, 750)), joinpath(out, &quot;contact_binary_ellipse.png&quot;))
+# a light curve with two drops, and the model of the joint fit
+two = [c.name for c in ev.chords if count(x -&gt; x.kind === :immersion, c.contacts) == 2]
+for name in two[1:min(2, end)]
+    lc = ev[name].lightcurve
+    dd = detections[name]
+    savefig(plot(lc; model=model_lightcurve(r3, name)[2], title=&quot;$name: two drops&quot;,
+                 xlims=(dd[1].immersion - 5, dd[end].emersion + 5)),
+            joinpath(out, &quot;contact_binary_lc_$name.png&quot;))
+end
+println(&quot;figures written to &quot;, out)</code></pre><p>The chords with the true limb, and the fit of the two lobes with its 1σ shape band:</p><p><img src="../../assets/figures/contact_binary_chords.png" alt="chords"/> <img src="../../assets/figures/contact_binary_fit.png" alt="fit"/></p><p>The best single ellipse, and the posterior of the lobes:</p><p><img src="../../assets/figures/contact_binary_ellipse.png" alt="ellipse"/> <img src="../../assets/figures/contact_binary_corner.png" alt="corner plot"/></p><pre><code class="language-text hljs"></code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../sim_binary/">« Synthetic: a satellite and a binary system</a><a class="docs-footer-nextpage" href="../sim_contact_binary_3d/">Synthetic: a contact binary in 3-D »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Tuesday 3 November 2026 01:29">Tuesday 3 November 2026</span>. Using Julia version 1.13.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
