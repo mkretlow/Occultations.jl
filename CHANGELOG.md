@@ -28,8 +28,11 @@ First version.
   Horizons, SPICE, Gaia, SBDB, Keplerian orbits, closest approach and shadow paths.
 - **Plots and maps**: Plots.jl recipes (light curves, fits, chords, posterior limbs, corner
   plots), 3-D views (`meshview`, `occview`, `occanimate`), maps and globes with GeoMakie.
+  Limb plots draw the occulted parts of the positive chords; their tracks beyond the limb
+  only with `extend=true`.
 - **Examples**: re-reductions of 22 published studies (19 objects, 43 events), synthetic
-  examples (binaries, contact binaries, rings) and a tutorial, with their data and outputs;
+  examples (binaries, contact binaries, rings; stations at random offsets, on land and in the
+  dark, with their own equipment) and a tutorial, with their data and outputs;
   the comparison with the publications and with SORA in the manual.
 - **Comparison with SORA on the same data** (`examples/sora/`, outputs in
   `examples/output/sora/`): nine published events reduced with both packages (published –

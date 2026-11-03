@@ -84,6 +84,9 @@ curves to the fits.
   then the robust quantity.
 * **A faint ring is found only in the best light curves.** A ring without any detected dip has
   no data; leave it out of the model.
+* **Few, coarse light curves:** the covariance errors of the joint fit can be far too small
+  (in the example the ring radius is 0.28 km off at a formal error of 0.017 km); check them
+  with the posterior or with simulations.
 
 **Simulation.** [`simulate_lightcurve`](@ref)`(t, drops; opacity=[…])` simulates light curves
 with ring dips, and `predicted_contacts(event, observer, ring)` predicts ring crossings.

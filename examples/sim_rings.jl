@@ -6,9 +6,11 @@
 # an opening angle of 35°),
 # reduced with [`RingedLimb`](@ref):
 #
-# 1. eighteen stations on land, in the dark, spread along the track, with their own cameras
-#    (exposures 0.04–0.2 s); the light curves show the body and the dips of the rings, with
-#    diffraction (the rings are a few Fresnel scales wide) and the finite exposures;
+# 1. nine stations at random offsets, on land, in the dark, spread along the track, with their
+#    own equipment, from GPS-timed video to visual timings (exposures 0.04–1 s): as in a real
+#    campaign, some light curves are too noisy or too coarse to show the narrow rings; the light
+#    curves show the body and the dips of the rings, with diffraction (the rings are a few
+#    Fresnel scales wide) and the finite exposures;
 # 2. the body and the detectable ring dips are timed (the ring dips with their apparent
 #    opacity), each ring dip assigned to its ring;
 # 3. the fit of the timings: the body, the ring pole, the radii and widths of the rings;
@@ -54,12 +56,11 @@ for (k, rg) in enumerate(rings)
 end
 
 section("2. light curves → body and ring dips → timings")
-## eighteen stations across the path (the rings reach 405 km from the body), cameras only
-offsets = collect(range(-460.0, 460.0; length=18))
+## nine stations at random offsets across the path (the rings reach 405 km from the body)
+offsets = random_offsets(MersenneTwister(7), 9, -470.0, 470.0; mingap=20.0)
 pv = positionv(star, eph, GEOCENTER, ev.tref)
 n̂ = (-pv.vg, pv.vf) ./ hypot(pv.vf, pv.vg)
-sites = stations(star, body, ev.tref, offsets .+ (center[1] * n̂[1] + center[2] * n̂[2]); rng=rng,
-                 equipment=EQUIPMENT[1:3])
+sites = stations(star, body, ev.tref, offsets .+ (center[1] * n̂[1] + center[2] * n̂[2]); rng=rng)
 ## the velocity of the shadow normal to an outline o at the instant τ of a track
 function vnormal(tr, o, τ)
     f, g = tr(τ)
@@ -142,9 +143,11 @@ for (n, tv) in ((:equatorial_radius, 140.0), (:semi_minor_axis, 115.0), (:ring_p
 end
 println("(a single event fixes the ring ellipse – its radius, |B| and P – but leaves the pole with a")
 println(" twofold ambiguity: the pole tilted towards or away from the observer)")
-# The geometry of the rings comes out well; their widths less so: the timing of a short, partly
-# transparent dip trades its duration against its opacity, and its errors are underestimated
-# (χ²/dof above 1). The light curves themselves settle the widths and optical depths:
+# With this sparse campaign only the inner ring is detected, at two of its four crossings per
+# station; the faint outer ring is missed. The ring geometry comes out to 0.3 km and 0.1°, but
+# the timing of a short, partly transparent dip trades its duration against its opacity, and
+# its errors are underestimated (χ²/dof ≫ 1). The light curves themselves settle the width and
+# the optical depth:
 
 section("4. joint fit of the light curves")
 # The light curves against the body and the rings: the rings are partly transparent strips
@@ -180,6 +183,11 @@ standard_figures("rings", r1; out=out, projection="+proj=laea +lon_0=$(round(lon
 println("figures written to ", out)
 
 # The fit of the timings: the body and the two rings with the chords:
+#
+# **Bias.** The radius and the position angle of the ring deviate from the truth by 0.28 km and
+# 0.11°, many times their formal errors (0.017 km, 0.003°): with few, partly coarse light curves
+# the covariance errors of the joint fit are too small. They should be taken as lower limits
+# here; a posterior or a coverage test over several simulations would give realistic errors.
 #
 #md # ![fit](../assets/figures/rings_fit.png)
 #

@@ -2,6 +2,7 @@
 # night, with the star above 20°, spread along the track, each with its own equipment.
 #
 #   stations(star, body, tref, offsets; rng)   -> Vector of (observer, τ, equipment)
+#   random_offsets(rng, n, lo, hi; mingap)     -> n random cross-track offsets [km]
 #
 # For every cross-track offset (km, as in `shadow_path`) the station sits on the ground track of
 # that offset at a random instant τ (s from `tref`) within the longest stretch of the path over
@@ -28,6 +29,16 @@ function _inside(ring, x, y)
     return c
 end
 onland(lon, lat) = any(r -> _inside(r, mod(lon + 180, 360) - 180, lat), LAND)
+
+# Cross-track offsets of a campaign: random within [lo, hi], sorted, at least `mingap` km apart.
+# Real stations are not evenly spaced: some cluster, others leave gaps.
+function random_offsets(rng, n, lo, hi; mingap=5.0)
+    for _ in 1:10_000
+        x = sort(lo .+ (hi - lo) .* rand(rng, n))
+        all(diff(x) .>= mingap) && return x
+    end
+    error("no $n offsets at least $mingap km apart in [$lo, $hi]")
+end
 
 # typical equipment: name, timing accuracy of a contact [s], exposure [s], relative noise
 const EQUIPMENT = [("video, GPS-timed", 0.02, 0.04, 0.10), ("CMOS camera, GPS", 0.03, 0.1, 0.05),

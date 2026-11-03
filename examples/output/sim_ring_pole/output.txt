@@ -2,68 +2,68 @@
 ==============================================================================
 1. the simulated events
 ==============================================================================
-event 1 2023-06-20: B = -23.93°, P = 352.10°; 5 chords cross the body, 12 the ring
-event 2 2024-06-22: B = -23.79°, P = 351.19°; 5 chords cross the body, 12 the ring
-event 3 2025-06-25: B = -23.63°, P = 350.29°; 5 chords cross the body, 12 the ring
+event 1 2023-06-20: B = -23.93°, P = 352.10°; 4 chords cross the body, 13 the ring
+event 2 2024-06-22: B = -23.79°, P = 351.19°; 6 chords cross the body, 14 the ring
+event 3 2025-06-25: B = -23.63°, P = 350.29°; 2 chords cross the body, 13 the ring
 
 ==============================================================================
 2. each event alone
 ==============================================================================
-  event 1: pole (259.997 ± 0.003°, +49.998 ± 0.003°), χ² =  35.07; ring radius 4100.0 ± 0.4 km, B = -23.93°, P = 352.10°
-  event 1: pole (130.836 ± 0.008°, +78.619 ± 0.004°), χ² =  35.07; ring radius 4100.0 ± 0.4 km, B = +23.93°, P = 352.10°
-  event 2: pole (260.007 ± 0.003°, +49.999 ± 0.002°), χ² =  51.05; ring radius 4099.8 ± 0.3 km, B = -23.79°, P = 351.20°
-  event 2: pole (135.450 ± 0.009°, +78.120 ± 0.002°), χ² =  51.05; ring radius 4099.8 ± 0.3 km, B = +23.79°, P = 351.20°
-  event 3: pole (260.002 ± 0.003°, +50.001 ± 0.003°), χ² =  49.27; ring radius 4100.1 ± 0.2 km, B = -23.63°, P = 350.29°
-  event 3: pole (139.829 ± 0.009°, +77.583 ± 0.003°), χ² =  49.27; ring radius 4100.1 ± 0.2 km, B = +23.63°, P = 350.29°
+  event 1: pole (259.997 ± 0.003°, +49.997 ± 0.002°), χ² =  32.79; ring radius 4099.9 ± 0.3 km, B = -23.93°, P = 352.10°
+  event 1: pole (130.833 ± 0.008°, +78.618 ± 0.003°), χ² =  32.79; ring radius 4099.9 ± 0.3 km, B = +23.93°, P = 352.10°
+  event 2: pole (260.000 ± 0.004°, +49.998 ± 0.003°), χ² =  72.63; ring radius 4099.5 ± 0.3 km, B = -23.79°, P = 351.19°
+  event 2: pole (135.463 ± 0.010°, +78.117 ± 0.003°), χ² =  72.63; ring radius 4099.5 ± 0.3 km, B = +23.79°, P = 351.19°
+  event 3: pole (259.998 ± 0.003°, +50.001 ± 0.003°), χ² =  43.91; ring radius 4100.2 ± 0.3 km, B = -23.63°, P = 350.29°
+  event 3: pole (139.840 ± 0.006°, +77.581 ± 0.003°), χ² =  43.91; ring radius 4100.2 ± 0.3 km, B = +23.63°, P = 350.29°
 (truth: pole (260°, +50°), ring radius 4100 km)
 
 ==============================================================================
 3. the three events together
 ==============================================================================
-  pole (260.002 ± 0.002°, +50.000 ± 0.001°): χ² = 144.40 for 163 degrees of freedom
-  pole (134.585 ± 0.005°, +77.900 ± 0.001°): χ² = 695818.66 for 163 degrees of freedom
-LimbProblem fit: χ² = 144.400, dof = 163, χ²/dof = 0.886
-  center_f_1             =     -20.066530 ± 0.182949
-  center_g_1             =       5.049292 ± 0.051777
-  center_f_2             =      20.080328 ± 0.170469
-  center_g_2             =     -14.976026 ± 0.052405
-  center_f_3             =      59.898778 ± 0.157812
-  center_g_3             =     -34.930471 ± 0.053602
-  radius                 =     554.851674 ± 0.148558
-  ring_pole_ra           =     260.001865 ± 0.001674
-  ring_pole_dec          =      49.999784 ± 0.001343
-  ring1_radius           =    4100.070566 ± 0.150137
-  ring1_width            =       9.944942 ± 0.043015
+  pole (259.997 ± 0.002°, +49.997 ± 0.002°): χ² = 163.82 for 173 degrees of freedom
+  pole (136.269 ± 0.004°, +77.985 ± 0.002°): χ² = 1008236.02 for 173 degrees of freedom
+LimbProblem fit: χ² = 163.823, dof = 173, χ²/dof = 0.947
+  center_f_1             =     -19.886298 ± 0.160244
+  center_g_1             =       5.009702 ± 0.053899
+  center_f_2             =      20.128717 ± 0.157280
+  center_g_2             =     -14.928094 ± 0.073288
+  center_f_3             =      59.858733 ± 0.138773
+  center_g_3             =     -34.989015 ± 0.053781
+  radius                 =     554.986360 ± 0.142978
+  ring_pole_ra           =     259.996851 ± 0.001665
+  ring_pole_dec          =      49.997263 ± 0.001522
+  ring1_radius           =    4099.861056 ± 0.145660
+  ring1_width            =      10.044705 ± 0.116809
   ring1_tau              =       0.300000 (fixed)
   derived:
-  offset_ra_1            =      -0.660427 ± 0.006021
-  offset_dec_1           =       0.166182 ± 0.001704
-  offset_ra_2            =       0.661442 ± 0.005615
-  offset_dec_2           =      -0.493307 ± 0.001726
-  offset_ra_3            =       1.974688 ± 0.005203
-  offset_dec_3           =      -1.151556 ± 0.001767
-  ring1_equivalent_depth =       2.983483 ± 0.012905
-  ring_opening_1         =     -23.932378 ± 0.001278
-  ring_pa_1              =     352.100129 ± 0.001261
-  ring1_opacity_1        =       0.522666 ± 0.000018
-  ring1_equivalent_width_1 =       5.197883 ± 0.022480
-  ring_opening_2         =     -23.788162 ± 0.001270
-  ring_pa_2              =     351.194191 ± 0.001270
-  ring1_opacity_2        =       0.524676 ± 0.000018
-  ring1_equivalent_width_2 =       5.217876 ± 0.022566
-  ring_opening_3         =     -23.631158 ± 0.001261
-  ring_pa_3              =     350.292593 ± 0.001279
-  ring1_opacity_3        =       0.526884 ± 0.000018
-  ring1_equivalent_width_3 =       5.239831 ± 0.022661
+  offset_ra_1            =      -0.654495 ± 0.005274
+  offset_dec_1           =       0.164879 ± 0.001774
+  offset_ra_2            =       0.663036 ± 0.005181
+  offset_dec_2           =      -0.491728 ± 0.002414
+  offset_ra_3            =       1.973368 ± 0.004575
+  offset_dec_3           =      -1.153486 ± 0.001773
+  ring1_equivalent_depth =       3.013412 ± 0.035043
+  ring_opening_1         =     -23.934181 ± 0.001408
+  ring_pa_1              =     352.096110 ± 0.001331
+  ring1_opacity_1        =       0.522641 ± 0.000020
+  ring1_equivalent_width_1 =       5.249775 ± 0.061048
+  ring_opening_2         =     -23.789875 ± 0.001392
+  ring_pa_2              =     351.190129 ± 0.001349
+  ring1_opacity_2        =       0.524652 ± 0.000019
+  ring1_equivalent_width_2 =       5.269979 ± 0.061283
+  ring_opening_3         =     -23.632781 ± 0.001377
+  ring_pa_3              =     350.288493 ± 0.001366
+  ring1_opacity_3        =       0.526861 ± 0.000019
+  ring1_equivalent_width_3 =       5.292164 ± 0.061541
 
-  radius           554.852 ±  0.149   (truth  555.000)
-  ring1_radius    4100.071 ±  0.150   (truth 4100.000)
-  ring1_width        9.945 ±  0.043   (truth   10.000)
-  ring_pole_ra     260.002 ±  0.002   (truth  260.000)
-  ring_pole_dec     50.000 ±  0.001   (truth   50.000)
-Δχ² = 695674.3 between the two poles: the three events decide (> 3σ)
+  radius           554.986 ±  0.143   (truth  555.000)
+  ring1_radius    4099.861 ±  0.146   (truth 4100.000)
+  ring1_width       10.045 ±  0.117   (truth   10.000)
+  ring_pole_ra     259.997 ±  0.002   (truth  260.000)
+  ring_pole_dec     49.997 ±  0.002   (truth   50.000)
+Δχ² = 1008072.2 between the two poles: the three events decide (> 3σ)
 
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/sim_ring_pole
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/sim_ring_pole

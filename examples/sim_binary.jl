@@ -77,7 +77,9 @@ function station_table(sites)
                 st.observer.name, st.observer.lon, st.observer.lat, st.τ, st.equipment[1], st.equipment[2])
     end
 end
-offsets = [-420, -300, -170, -40, 90, 210, 300, 380, 450, 495, 540, 580, 650]
+## random offsets: eight across the primary, five across the region of the satellite
+offsets = [random_offsets(MersenneTwister(3), 8, -420.0, 400.0; mingap=20.0);
+           random_offsets(MersenneTwister(4), 5, 420.0, 660.0; mingap=15.0)]
 ev, sites = simulate(star, body, t0, truth, center, offsets; rng=rng)
 station_table(sites)
 display(ev)
@@ -126,12 +128,14 @@ savefig(cornerplot(post; vars=[:equatorial_radius, :sec_radius, :sep_f, :sep_g],
 savefig(plot(r1; title="SimTNO: BinaryLimb fit (ellipse + circle)", size=(1000, 750)), joinpath(out, "binary_fit.png"))
 
 section("2. only two chords on the satellite")
-# Two of the four satellite chords removed. Four contacts still fix a circle (three
+# All satellite chords but two removed. Four contacts still fix a circle (three
 # parameters), but not an ellipse (five): the fit of an ellipse stops somewhere in a valley of
 # equally good solutions, with a singular covariance (`converged = false`); its values mean
 # nothing.
 ev2 = deepcopy(ev)
-delete!(ev2, "S10"); delete!(ev2, "S11")
+sat = [st.observer.name for (st, o) in zip(sites, offsets) if o > 410 && ispositive(ev[st.observer.name])]
+println("satellite chords: ", join(sat, ", "), "; kept: ", sat[1], ", ", sat[end])
+foreach(n -> delete!(ev2, n), sat[2:end-1])
 r3 = fit_limb(ev2; model=BinaryLimb(), rng=rng)
 @printf("circle: R₂ = %.1f ± %.1f km (truth 90), separation %.1f ± %.1f km\n", r3[:sec_radius]..., r3[:separation]...)
 r4 = fit_limb(ev2; model=BinaryLimb(EllipseLimb(), EllipseLimb()), rng=rng)
@@ -151,7 +155,8 @@ acT = (-alT[2], alT[1])
 # 110 km across it, so that the stations between them see both bodies (two drops).
 sepT = 670.0 .* alT .+ 110.0 .* acT
 truthT = CompositeOutline([EllipseOutline(125.0, 100.0, 20.0), EllipseOutline(115.0, 92.0, 35.0)], [(0.0, 0.0), sepT])
-evT, sitesT = simulate(starT, bodyT, tT, truthT, (5.0, 3.0), collect(-140.0:25.0:260.0); rng=rng, prefix="T")
+evT, sitesT = simulate(starT, bodyT, tT, truthT, (5.0, 3.0), random_offsets(MersenneTwister(5), 17, -140.0, 260.0; mingap=8.0); rng=rng,
+                     prefix="T")
 station_table(sitesT)
 @printf("%.2f km/s; drops per chord: %s\n", evT.ca.vel, join([count(x -> x.kind === :immersion, c.contacts) for c in evT.chords], " "))
 rT = fit_limb(evT; model=BinaryLimb(EllipseLimb(), EllipseLimb()), rng=rng)

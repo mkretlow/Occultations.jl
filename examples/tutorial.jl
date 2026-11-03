@@ -43,13 +43,15 @@ truth = project(body, ev.tref)                      # the true apparent limb
 center = (25.0, -12.0)                              # ephemeris offset [km]
 println("true limb: ", truth, ", centre ", center)
 
-# Seven stations across the path (offsets from the body's centre, km), in central South America,
-# spread along the track by up to ±15 s, each with its own camera (`examples/sim_stations.jl`):
+# Seven stations at random offsets across the path (km from the body's centre), in central South
+# America, spread along the track by up to ±15 s, each with its own camera
+# (`examples/sim_stations.jl`). The second station that sees the occultation has a clock 0.9 s late:
 pv = positionv(star, eph, GEOCENTER, ev.tref)
 n̂ = (-pv.vg, pv.vf) ./ hypot(pv.vf, pv.vg)          # cross-track unit vector
-offsets = [-380.0, -260.0, -110.0, 30.0, 160.0, 240.0, 360.0]
+offsets = random_offsets(MersenneTwister(7), 7, -400.0, 400.0; mingap=20.0)
 sites = stations(star, body, ev.tref, offsets .+ (center[1] * n̂[1] + center[2] * n̂[2]); rng=rng, spread=30.0,
                  prefix="Station ", equipment=EQUIPMENT[1:3])
+npos, clocked = 0, ""
 for (j, st) in enumerate(sites)
     obs = st.observer
     _, _, texp, noise = st.equipment
@@ -61,7 +63,11 @@ for (j, st) in enumerate(sites)
         continue
     end
     ti, te = pc[1][1] - ev.tref, pc[1][2] - ev.tref
-    j == 2 && ((ti, te) = (ti + 0.9, te + 0.9))      # station 2: clock 0.9 s late
+    global npos += 1
+    if npos == 2                                     # this station's clock is 0.9 s late
+        ti, te = ti + 0.9, te + 0.9
+        global clocked = obs.name
+    end
     v = hypot(velocity(Track(star, body, obs, ev.tref, -60, 60), ti)...)
     lc = simulate_lightcurve(t, ti, te; tref=ev.tref, vel=v, dist=ev.ca.dist_km,
                              star_diam=apparent_diameter(star, ev.ca.dist_km), σ=noise, exptime=texp, rng=rng,
@@ -70,12 +76,13 @@ for (j, st) in enumerate(sites)
     c = contact_times(tf)
     @printf("%-10s immersion %s ± %.3f s   emersion %s ± %.3f s\n", obs.name, isot(c.immersion; digits=3),
             c.immersion_err, isot(c.emersion; digits=3), c.emersion_err)
-    j == 3 && savefig(plot(tf), joinpath(out, "timing_fit.png"))
+    npos == 1 && savefig(plot(tf), joinpath(out, "timing_fit.png"))
     push!(ev, Chord(obs.name, obs, tf))
 end
 
 section("2. limb fit: ellipse, negative chords, clock offset, uncertainties")
-fitE = fit_limb(ev; fit_dt=["Station 2"], rng=rng)
+println("clock 0.9 s late: ", clocked)
+fitE = fit_limb(ev; fit_dt=[clocked], rng=rng)
 display(fitE)
 println("\ncontact residuals [s]: ", [round(r.dt; digits=4) for r in contact_residuals(fitE)])
 println("clock offsets: ", clock_offsets(fitE))
@@ -87,15 +94,15 @@ post = sample(fitE; nsteps=2000, rng=rng)
 display(post)
 println("derived (posterior): ", derived_summary(post))
 println("autocorrelation times [steps]: ", round.(autocorrelation_time(post); digits=1))
-savefig(cornerplot(post; vars=[:equatorial_radius, :oblateness, :position_angle, Symbol("dt_Station 2")],
+savefig(cornerplot(post; vars=[:equatorial_radius, :oblateness, :position_angle, Symbol("dt_", clocked)],
                    axislabels=Dict(:equatorial_radius => "a [km]", :oblateness => "ε", :position_angle => "PA [°]",
-                                   Symbol("dt_Station 2") => "clock offset [s]"),
+                                   Symbol("dt_", clocked) => "clock offset [s]"),
                    truths=Dict(:equatorial_radius => truth.a, :oblateness => 1 - truth.b / truth.a,
-                               :position_angle => truth.pa, Symbol("dt_Station 2") => -0.9), truth_label="simulated truth"),
+                               :position_angle => truth.pa, Symbol("dt_", clocked) => -0.9), truth_label="simulated truth"),
         joinpath(out, "corner.png"))
 
 # A joint photometric fit: the light curves themselves against the limb.
-fitP = fit_limb(ev; photometry=true, fit_dt=["Station 2"], rng=rng, starts=3)
+fitP = fit_limb(ev; photometry=true, fit_dt=[clocked], rng=rng, starts=3)
 println("\njoint photometric fit: χ²/dof = ", round(reduced_chi2(fitP); digits=3),
         ", a = ", fitP[:equatorial_radius], ", ε = ", fitP[:oblateness])
 
@@ -118,8 +125,8 @@ for (k, dt) in enumerate([0.0, 1.0, 2.0] .* 86400)
     ck = (5.0k, -3.0k)
     pk = positionv(st, eph, GEOCENTER, e.tref)
     nk = (-pk.vg, pk.vf) ./ hypot(pk.vf, pk.vg)
-    for s in stations(st, body, e.tref, [-220.0, -80.0, 60.0, 200.0] .+ (ck[1] * nk[1] + ck[2] * nk[2]); rng=rng,
-                      prefix="E$k-S")
+    offs = random_offsets(MersenneTwister(10 + k), 5, -280.0, 280.0; mingap=20.0)
+    for s in stations(st, body, e.tref, offs .+ (ck[1] * nk[1] + ck[2] * nk[2]); rng=rng, prefix="E$k-S")
         o = s.observer
         pc = predicted_contacts(e, o, Ok; center=ck)
         isempty(pc) && continue

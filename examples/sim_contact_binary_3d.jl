@@ -47,7 +47,7 @@ for (k, dt) in enumerate([0.0, 2.1 * 3600, 3.6 * 3600, 30 * 86400 + 1.3 * 3600])
     pv = positionv(st, eph, GEOCENTER, e.tref)
     n̂ = (-pv.vg, pv.vf) ./ hypot(pv.vf, pv.vg)
     c = (6.0k, -4.0k)                                    # ephemeris offset of the event [km]
-    offs = collect(-200.0:40.0:200.0) .+ (c[1] * n̂[1] + c[2] * n̂[2])
+    offs = random_offsets(MersenneTwister(20 + k), 11, -200.0, 200.0; mingap=10.0) .+ (c[1] * n̂[1] + c[2] * n̂[2])
     for site in stations(st, body, e.tref, offs; rng=rng, prefix="E$k-S")
         o, σ = site.observer, site.equipment[2]
         pc = predicted_contacts(e, o, Ok; center=c, window=abs(site.τ) + 200, step=0.05)

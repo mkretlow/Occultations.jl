@@ -3,19 +3,19 @@
 1. a TNO with a satellite
 ==============================================================================
 true separation 1216.7 km at PA 75.4° (Δf, Δg = 1177.2, 307.4 km)
-  S1   lon  -59.908°  lat -11.424°  +166.1 s from the closest approach  video, GPS-timed       σ = 0.02 s
-  S2   lon  -64.700°  lat  -8.681°  +186.6 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
-  S3   lon  -60.827°  lat  -8.738°  +173.1 s from the closest approach  video, GPS-timed       σ = 0.02 s
-  S4   lon  -53.588°  lat  -9.825°  +144.5 s from the closest approach  CCD, long cycle        σ = 0.25 s
-  S5   lon  -57.651°  lat  -7.303°  +163.2 s from the closest approach  CCD, long cycle        σ = 0.25 s
-  S6   lon  -58.463°  lat  -5.897°  +167.9 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
-  S7   lon  -50.747°  lat  -7.479°  +136.0 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
-  S8   lon  -54.109°  lat  -5.680°  +151.5 s from the closest approach  CCD, long cycle        σ = 0.25 s
-  S9   lon  -54.904°  lat  -4.762°  +155.6 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
-  S10  lon  -54.153°  lat  -4.573°  +152.8 s from the closest approach  video, GPS-timed       σ = 0.02 s
-  S11  lon  -62.992°  lat  -1.234°  +189.1 s from the closest approach  CMOS camera, NTP       σ = 0.10 s
-  S12  lon  -54.687°  lat  -3.594°  +156.0 s from the closest approach  visual / poorly timed  σ = 0.40 s
-  S13  lon  -56.599°  lat  -2.310°  +164.6 s from the closest approach  visual / poorly timed  σ = 0.40 s
+  S1   lon  -59.770°  lat -11.076°  +166.1 s from the closest approach  video, GPS-timed       σ = 0.02 s
+  S2   lon  -64.374°  lat  -7.846°  +186.6 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  S3   lon  -60.831°  lat  -8.751°  +173.1 s from the closest approach  video, GPS-timed       σ = 0.02 s
+  S4   lon  -53.416°  lat  -9.294°  +144.5 s from the closest approach  CCD, long cycle        σ = 0.25 s
+  S5   lon  -57.761°  lat  -7.643°  +163.2 s from the closest approach  CCD, long cycle        σ = 0.25 s
+  S6   lon  -58.764°  lat  -6.851°  +167.9 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  S7   lon  -51.164°  lat  -8.901°  +136.0 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  S8   lon  -54.195°  lat  -5.984°  +151.5 s from the closest approach  CCD, long cycle        σ = 0.25 s
+  S9   lon  -54.943°  lat  -4.904°  +155.6 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  S10  lon  -54.149°  lat  -4.557°  +152.8 s from the closest approach  video, GPS-timed       σ = 0.02 s
+  S11  lon  -63.043°  lat  -1.430°  +189.1 s from the closest approach  CMOS camera, NTP       σ = 0.10 s
+  S12  lon  -54.742°  lat  -3.806°  +156.0 s from the closest approach  visual / poorly timed  σ = 0.40 s
+  S13  lon  -56.658°  lat  -2.542°  +164.6 s from the closest approach  visual / poorly timed  σ = 0.40 s
 Event SimTNO, 2023-05-01T02:59:57: SimTNO occults Star(SimStar, RA=16 04 37.6090, Dec=-16 51 19.775)
   closest approach 2023-05-01T02:59:57.470: 0.0004" (10.7 km), PA 190.62°, 22.516 km/s, distance 39.9572 au
   Chord(S1, negative)
@@ -32,126 +32,127 @@ Event SimTNO, 2023-05-01T02:59:57: SimTNO occults Star(SimStar, RA=16 04 37.6090
   Chord(S12, positive)
   Chord(S13, negative)
 
-LimbProblem fit: χ² = 12.302, dof = 12, χ²/dof = 1.025
-  center_f               =      25.215088 ± 0.210310
-  center_g               =     -12.117153 ± 0.150061
-  equatorial_radius      =     369.821375 ± 0.325035
-  oblateness             =       0.106659 ± 0.001094
-  position_angle         =      29.642322 ± 0.298745
-  sec_radius             =      90.181244 ± 0.417244
-  sep_f                  =    1177.002812 ± 0.367359
-  sep_g                  =     308.113365 ± 0.839136
+LimbProblem fit: χ² = 12.673, dof = 12, χ²/dof = 1.056
+  center_f               =      25.412179 ± 0.245101
+  center_g               =     -11.892673 ± 0.841812
+  equatorial_radius      =     369.640849 ± 0.358260
+  oblateness             =       0.103259 ± 0.007631
+  position_angle         =      30.103451 ± 2.139073
+  sec_radius             =      90.077473 ± 0.389605
+  sep_f                  =    1176.741435 ± 0.371147
+  sep_g                  =     307.535515 ± 0.998106
   derived:
-  offset_ra              =       0.870092 ± 0.007257
-  offset_dec             =      -0.418124 ± 0.005178
-  equivalent_radius      =     349.543123 ± 0.142173
-  semi_minor_axis        =     330.376780 ± 0.183299
-  size_ratio             =       0.257997 ± 0.001198
-  mass_ratio             =       0.017173 ± 0.000239
-  system_equivalent_radius =     360.988991 ± 0.172675
-  separation             =    1216.663251 ± 0.472320
-  separation_mas         =      41.983147 ± 0.016298
-  separation_pa          =      75.330407 ± 0.036961
-  barycenter_offset_ra   =       1.555791 ± 0.011851
-  barycenter_offset_dec  =      -0.238623 ± 0.005826
-  photocenter_offset_ra  =       3.404792 ± 0.023361
-  photocenter_offset_dec =       0.245405 ± 0.008758
+  offset_ra              =       0.876893 ± 0.008458
+  offset_dec             =      -0.410378 ± 0.029048
+  equivalent_radius      =     350.036589 ± 1.279442
+  semi_minor_axis        =     331.472059 ± 2.609786
+  size_ratio             =       0.257337 ± 0.001457
+  mass_ratio             =       0.017042 ± 0.000290
+  system_equivalent_radius =     361.440956 ± 1.242870
+  separation             =    1216.264156 ± 0.493820
+  separation_mas         =      41.969376 ± 0.017040
+  separation_pa          =      75.353623 ± 0.044444
+  barycenter_offset_ra   =       1.557279 ± 0.012614
+  barycenter_offset_dec  =      -0.232563 ± 0.026960
+  photocenter_offset_ra  =       3.398883 ± 0.026425
+  photocenter_offset_dec =       0.248731 ± 0.024096
 
 fitted vs true:
-  equatorial_radius         369.82 ±   0.33   (truth   370.00)
-  semi_minor_axis           330.38 ±   0.18   (truth   330.00)
-  position_angle             29.64 ±   0.30   (truth    30.00)
-  sec_radius                 90.18 ±   0.42   (truth    90.00)
-  sep_f                    1177.00 ±   0.37   (truth  1177.24)
-  sep_g                     308.11 ±   0.84   (truth   307.41)
-  center_f                   25.22 ±   0.21   (truth    25.00)
-  center_g                  -12.12 ±   0.15   (truth   -12.00)
-satellite as a circle:  χ² =  12.30,  8 parameters, BIC =  36.27
-satellite as an ellipse: χ² =  11.92, 10 parameters, BIC =  41.88   a = 91.9 ± 2.9 km, ε = 0.018 ± 0.029
-  center       RA 16 04 37.60902  Dec -16 51 19.7758   offset (+0.870, -0.418) mas ± (0.150, 0.120)
-  barycenter   RA 16 04 37.60907  Dec -16 51 19.7756   offset (+1.556, -0.239) mas ± (0.150, 0.120)
-  photocenter  RA 16 04 37.60920  Dec -16 51 19.7751   offset (+3.405, +0.245) mas ± (0.152, 0.120)
-separation 1216.7 ± 0.5 km = 41.98 ± 0.02 mas at PA 75.33 ± 0.04°, size ratio 0.258 ± 0.001
-Posterior of LimbProblem: 32 walkers × 3000 steps (burn-in 1000), acceptance 0.46
-  center_f               =      25.216469  -0.218324 +0.209104
-  center_g               =     -12.118700  -0.142964 +0.148170
-  equatorial_radius      =     369.813199  -0.323856 +0.321217
-  oblateness             =       0.106576  -0.001100 +0.001114
-  position_angle         =      29.636439  -0.289120 +0.296578
-  sec_radius             =      90.168921  -0.424022 +0.424526
-  sep_f                  =    1176.994272  -0.356626 +0.376417
-  sep_g                  =     308.093026  -0.861278 +0.861871
+  equatorial_radius         369.64 ±   0.36   (truth   370.00)
+  semi_minor_axis           331.47 ±   2.61   (truth   330.00)
+  position_angle             30.10 ±   2.14   (truth    30.00)
+  sec_radius                 90.08 ±   0.39   (truth    90.00)
+  sep_f                    1176.74 ±   0.37   (truth  1177.24)
+  sep_g                     307.54 ±   1.00   (truth   307.41)
+  center_f                   25.41 ±   0.25   (truth    25.00)
+  center_g                  -11.89 ±   0.84   (truth   -12.00)
+satellite as a circle:  χ² =  12.67,  8 parameters, BIC =  36.64
+satellite as an ellipse: χ² =  12.17, 10 parameters, BIC =  42.13   a = 93.9 ± 6.7 km, ε = 0.036 ± 0.058
+  center       RA 16 04 37.60902  Dec -16 51 19.7758   offset (+0.877, -0.410) mas ± (0.150, 0.123)
+  barycenter   RA 16 04 37.60907  Dec -16 51 19.7756   offset (+1.557, -0.233) mas ± (0.151, 0.123)
+  photocenter  RA 16 04 37.60920  Dec -16 51 19.7751   offset (+3.399, +0.249) mas ± (0.152, 0.122)
+separation 1216.3 ± 0.5 km = 41.97 ± 0.02 mas at PA 75.35 ± 0.04°, size ratio 0.257 ± 0.001
+Posterior of LimbProblem: 32 walkers × 3000 steps (burn-in 1000), acceptance 0.45
+  center_f               =      25.439936  -0.254533 +0.243733
+  center_g               =     -11.822626  -0.795470 +0.845147
+  equatorial_radius      =     369.656345  -0.343969 +0.371649
+  oblateness             =       0.102251  -0.007229 +0.008061
+  position_angle         =      30.375757  -2.057379 +2.334431
+  sec_radius             =      90.079880  -0.403739 +0.390112
+  sep_f                  =    1176.705008  -0.363615 +0.378574
+  sep_g                  =     307.436187  -0.948862 +0.975336
 
 
 ==============================================================================
 2. only two chords on the satellite
 ==============================================================================
-circle: R₂ = 88.6 ± 1.9 km (truth 90), separation 1216.0 ± 1.3 km
-ellipse: converged = false, χ² = 3.47 (circle: 6.40)
+satellite chords: S9, S10, S11, S12; kept: S9, S12
+circle: R₂ = 87.6 ± 3.5 km (truth 90), separation 1215.4 ± 1.8 km
+ellipse: converged = false, χ² = 3.56 (circle: 6.50)
 
 ==============================================================================
 3. a binary of two similar bodies (Patroclus–Menoetius-like)
 ==============================================================================
-  T1   lon   74.573°  lat  39.904°   -10.3 s from the closest approach  visual / poorly timed  σ = 0.40 s
-  T2   lon   81.695°  lat  39.008°   -43.7 s from the closest approach  CCD, long cycle        σ = 0.25 s
-  T3   lon   71.904°  lat  40.663°    +2.6 s from the closest approach  CMOS camera, NTP       σ = 0.10 s
-  T4   lon   74.238°  lat  40.630°    -8.0 s from the closest approach  visual / poorly timed  σ = 0.40 s
-  T5   lon   74.210°  lat  40.861°    -7.7 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
-  T6   lon   77.102°  lat  40.703°   -20.8 s from the closest approach  CCD, long cycle        σ = 0.25 s
-  T7   lon   72.419°  lat  41.518°    +0.9 s from the closest approach  visual / poorly timed  σ = 0.40 s
-  T8   lon   78.394°  lat  40.966°   -26.3 s from the closest approach  CMOS camera, NTP       σ = 0.10 s
-  T9   lon   82.727°  lat  40.433°   -46.2 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
-  T10  lon   78.465°  lat  41.415°   -26.0 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
-  T11  lon   78.394°  lat  41.656°   -25.4 s from the closest approach  CCD, long cycle        σ = 0.25 s
-  T12  lon   82.562°  lat  41.162°   -44.4 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
-  T13  lon   82.280°  lat  41.448°   -42.7 s from the closest approach  video, GPS-timed       σ = 0.02 s
-  T14  lon   70.394°  lat  43.299°   +11.3 s from the closest approach  video, GPS-timed       σ = 0.02 s
-  T15  lon   70.566°  lat  43.511°   +10.7 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
-  T16  lon   72.844°  lat  43.520°    +0.8 s from the closest approach  visual / poorly timed  σ = 0.40 s
-  T17  lon   82.341°  lat  42.366°   -41.6 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
-18.14 km/s; drops per chord: 0 0 1 1 1 1 1 2 2 2 1 1 1 1 0 0 0
-LimbProblem fit: χ² = 11.967, dof = 20, χ²/dof = 0.598
-  center_f               =       5.175263 ± 0.247708
-  center_g               =       2.951566 ± 0.253827
-  equatorial_radius      =     124.894725 ± 0.344459
-  oblateness             =       0.200514 ± 0.004245
-  position_angle         =      21.107678 ± 0.534728
-  sec_equatorial_radius  =     115.171713 ± 0.221415
-  sec_oblateness         =       0.202762 ± 0.002957
-  sec_position_angle     =      35.070565 ± 0.760920
-  sep_f                  =     678.585601 ± 0.302725
-  sep_g                  =      15.342343 ± 0.400388
+  T1   lon   80.865°  lat  39.005°   -40.0 s from the closest approach  visual / poorly timed  σ = 0.40 s
+  T2   lon   80.348°  lat  39.307°   -37.2 s from the closest approach  CCD, long cycle        σ = 0.25 s
+  T3   lon   73.505°  lat  40.444°    -4.9 s from the closest approach  CMOS camera, NTP       σ = 0.10 s
+  T4   lon   79.646°  lat  39.696°   -33.5 s from the closest approach  visual / poorly timed  σ = 0.40 s
+  T5   lon   82.271°  lat  39.352°   -45.8 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  T6   lon   71.207°  lat  41.462°    +6.3 s from the closest approach  CCD, long cycle        σ = 0.25 s
+  T7   lon   71.426°  lat  41.675°    +5.5 s from the closest approach  visual / poorly timed  σ = 0.40 s
+  T8   lon   72.582°  lat  41.985°    +0.6 s from the closest approach  CMOS camera, NTP       σ = 0.10 s
+  T9   lon   71.323°  lat  42.349°    +6.5 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  T10  lon   82.161°  lat  40.998°   -42.9 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  T11  lon   72.930°  lat  42.461°    -0.5 s from the closest approach  CCD, long cycle        σ = 0.25 s
+  T12  lon   73.132°  lat  42.526°    -1.3 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  T13  lon   78.336°  lat  41.977°   -24.8 s from the closest approach  video, GPS-timed       σ = 0.02 s
+  T14  lon   71.910°  lat  42.911°    +4.4 s from the closest approach  video, GPS-timed       σ = 0.02 s
+  T15  lon   73.352°  lat  42.873°    -2.0 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+  T16  lon   82.939°  lat  41.866°   -44.9 s from the closest approach  visual / poorly timed  σ = 0.40 s
+  T17  lon   73.543°  lat  43.527°    -2.2 s from the closest approach  CMOS camera, GPS       σ = 0.03 s
+18.14 km/s; drops per chord: 0 0 1 1 1 1 2 2 2 1 1 1 1 1 1 0 0
+LimbProblem fit: χ² = 21.564, dof = 22, χ²/dof = 0.980
+  center_f               =       5.216719 ± 0.263336
+  center_g               =       2.960780 ± 0.187070
+  equatorial_radius      =     124.354127 ± 0.624429
+  oblateness             =       0.196711 ± 0.005744
+  position_angle         =      20.311161 ± 0.625070
+  sec_equatorial_radius  =     115.309780 ± 0.415360
+  sec_oblateness         =       0.195145 ± 0.004918
+  sec_position_angle     =      35.256339 ± 1.297343
+  sep_f                  =     678.455560 ± 0.334210
+  sep_g                  =      14.686601 ± 0.572863
   derived:
-  offset_ra              =       1.691845 ± 0.080978
-  offset_dec             =       0.964896 ± 0.082979
-  equivalent_radius      =     111.673326 ± 0.179879
-  semi_minor_axis        =      99.851549 ± 0.341265
-  sec_equivalent_radius  =     102.834759 ± 0.219167
-  sec_semi_minor_axis    =      91.819314 ± 0.321615
-  size_ratio             =       0.920853 ± 0.002460
-  mass_ratio             =       0.780857 ± 0.006258
-  system_equivalent_radius =     151.808825 ± 0.198873
-  separation             =     678.759018 ± 0.301421
-  separation_mas         =     221.893055 ± 0.098538
-  separation_pa          =      88.704803 ± 0.033881
-  barycenter_offset_ra   =      98.961004 ± 0.443159
-  barycenter_offset_dec  =       3.164083 ± 0.063189
-  photocenter_offset_ra  =     103.484997 ± 0.301118
-  photocenter_offset_dec =       3.266368 ± 0.063445
+  offset_ra              =       1.705397 ± 0.086087
+  offset_dec             =       0.967908 ± 0.061155
+  equivalent_radius      =     111.454109 ± 0.203368
+  semi_minor_axis        =      99.892290 ± 0.264502
+  sec_equivalent_radius  =     103.448708 ± 0.504286
+  sec_semi_minor_axis    =      92.807698 ± 0.677032
+  size_ratio             =       0.928173 ± 0.004831
+  mass_ratio             =       0.799626 ± 0.012486
+  system_equivalent_radius =     152.064637 ± 0.374046
+  separation             =     678.614502 ± 0.332280
+  separation_mas         =     221.845811 ± 0.108626
+  separation_pa          =      88.759906 ± 0.048462
+  barycenter_offset_ra   =     100.254841 ± 0.860622
+  barycenter_offset_dec  =       3.101219 ± 0.073229
+  photocenter_offset_ra  =     104.351671 ± 0.580524
+  photocenter_offset_dec =       3.189903 ± 0.079529
 
-primary   a = 124.9 ± 0.3 (125), b = 99.9 ± 0.3 (100), PA = 21.1 ± 0.5 (20)
-secondary a = 115.2 ± 0.2 (115), b = 91.8 ± 0.3 (92), PA = 35.1 ± 0.8 (35)
-separation 678.8 ± 0.3 km (679.0)
+primary   a = 124.4 ± 0.6 (125), b = 99.9 ± 0.3 (100), PA = 20.3 ± 0.6 (20)
+secondary a = 115.3 ± 0.4 (115), b = 92.8 ± 0.7 (92), PA = 35.3 ± 1.3 (35)
+separation 678.6 ± 0.3 km (679.0)
 
 ==============================================================================
 4. coverage of the uncertainties (100 simulations)
 ==============================================================================
-  equatorial_radius  truth within 1σ in  64 % of the simulations
-  sec_radius         truth within 1σ in  58 % of the simulations
-  sep_f              truth within 1σ in  67 % of the simulations
-  sep_g              truth within 1σ in  55 % of the simulations
+  equatorial_radius  truth within 1σ in  71 % of the simulations
+  sec_radius         truth within 1σ in  61 % of the simulations
+  sep_f              truth within 1σ in  71 % of the simulations
+  sep_g              truth within 1σ in  65 % of the simulations
 
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/sim_binary
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/sim_binary

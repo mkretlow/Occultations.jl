@@ -33,7 +33,6 @@ body = Body("SimQ", eph; radius=555.0)
 R, ringR, ringW, pole = 555.0, 4100.0, 10.0, (260.0, 50.0)
 dates = ["2023-06-20T01:00:00", "2024-06-22T01:00:00", "2025-06-25T01:00:00"]
 ## cross-track offsets [km]: the ring (seen at B ≈ −24°) spans about ±1700 km across the track
-offs_km = [-1850.0, -1720, -1600, -1300, -900, -450, -200, 0, 250, 500, 950, 1350, 1650, 1780]
 evs = Event[]
 for (k, d) in enumerate(dates)
     t = Epoch(d)
@@ -45,6 +44,7 @@ for (k, d) in enumerate(dates)
     ring = project_ring(ringR, ringW, 0.1, pole..., u)
     pv = positionv(st, eph, GEOCENTER, e.tref)
     n̂ = (-pv.vg, pv.vf) ./ hypot(pv.vf, pv.vg)
+    offs_km = random_offsets(MersenneTwister(30 + k), 14, -1900.0, 1900.0; mingap=40.0)
     sites = stations(st, body, e.tref, offs_km .+ (c[1] * n̂[1] + c[2] * n̂[2]); rng=rng, prefix="E$k-S", spread=120.0,
                      skip=true)
     for s in sites

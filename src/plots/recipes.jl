@@ -73,7 +73,7 @@ end
 
 # chords of an event in the fundamental plane
 function _chord_series!(series, ev::Event; dts=Dict{String,Float64}(), numbers::Bool=true, ref=(0.0, 0.0),
-                        box=nothing)
+                        box=nothing, extend::Bool=false)
     nx = Float64[]; ny = Float64[]; nt = String[]
     for (i, c) in enumerate(ev.chords)
         dt = get(dts, c.name, 0.0)
@@ -84,9 +84,8 @@ function _chord_series!(series, ev::Event; dts=Dict{String,Float64}(), numbers::
             k = argmin(hypot.(f .- ref[1], g .- ref[2]))          # label next to the closest point
             push!(nx, f[k]); push!(ny, g[k]); push!(nt, string(i))
         else
-            f, g = chord_path(ev, c; dt=dt)
-            push!(series, (f, g, (linestyle=:dot, linecolor=:gray, label="")))
-            f0, g0 = f, g
+            f0, g0 = chord_path(ev, c; dt=dt)
+            extend && push!(series, (f0, g0, (linestyle=:dot, linecolor=:gray, label="")))   # the track beyond the limb
             f, g = chord_path(ev, c; segment=:occulted, dt=dt)
             if isempty(f)                                        # only ring mid-times: no occulted segment
                 push!(series, (f0, g0, (linestyle=:dot, linecolor=:gray, label=tag * c.name)))
@@ -123,7 +122,7 @@ function _chord_series!(series, ev::Event; dts=Dict{String,Float64}(), numbers::
     return series
 end
 
-RecipesBase.@recipe function f(ev::Event; limb=nothing, center=(0.0, 0.0), numbers=true)
+RecipesBase.@recipe function f(ev::Event; limb=nothing, center=(0.0, 0.0), numbers=true, extend=false)
     aspect_ratio --> :equal
     framestyle --> :box
     xguide --> "f (km, east)"
@@ -147,7 +146,7 @@ RecipesBase.@recipe function f(ev::Event; limb=nothing, center=(0.0, 0.0), numbe
         xlims --> (box[1], box[2])
         ylims --> (box[3], box[4])
     end
-    for (x, y, kw) in _chord_series!([], ev; numbers=numbers, ref=ref, box=box)
+    for (x, y, kw) in _chord_series!([], ev; numbers=numbers, ref=ref, box=box, extend=extend)
         @RecipesBase.series begin
             seriestype := :path
             for (k, v) in pairs(kw)
@@ -333,6 +332,7 @@ end
 
 
 RecipesBase.@recipe function f(r::LimbFit; event=1, uncertainty=:shape, nsigma=1, ndraw=100, numbers=true, dimensions=true,
+                              extend=false,
                               rng=Random.default_rng())
     p = r.problem
     k = _event_index(p, event)
@@ -427,7 +427,7 @@ RecipesBase.@recipe function f(r::LimbFit; event=1, uncertainty=:shape, nsigma=1
             end
         end
     end
-    for (x, y, kw) in _chord_series!([], ev; dts=dts, numbers=numbers, ref=c0, box=box)
+    for (x, y, kw) in _chord_series!([], ev; dts=dts, numbers=numbers, ref=c0, box=box, extend=extend)
         @RecipesBase.series begin
             seriestype := :path
             for (kk, v) in pairs(kw)
@@ -485,6 +485,7 @@ RecipesBase.@recipe function f(r::LimbFit; event=1, uncertainty=:shape, nsigma=1
 end
 
 RecipesBase.@recipe function f(post::LimbPosterior; event=1, uncertainty=:shape, nsigma=1, ndraw=400, numbers=true, dimensions=true,
+                                    extend=false,
                               rng=Random.default_rng())
     p = post.problem
     k = _event_index(p, event)
@@ -568,7 +569,7 @@ RecipesBase.@recipe function f(post::LimbPosterior; event=1, uncertainty=:shape,
             end
         end
     end
-    for (x, y, kw) in _chord_series!([], ev; numbers=numbers, ref=c0, box=box)
+    for (x, y, kw) in _chord_series!([], ev; numbers=numbers, ref=c0, box=box, extend=extend)
         @RecipesBase.series begin
             seriestype := :path
             for (kk, v) in pairs(kw)

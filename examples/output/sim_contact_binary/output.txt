@@ -9,35 +9,35 @@ area-equivalent diameter 283.4 km
 ==============================================================================
 2. light curves → drops → timings
 ==============================================================================
-S1     19.15°  18.27°  CMOS camera, GPS   0.10 s, σ 0.05  cross-track  -200 km: 0 drop(s) simulated, 0 detected  
-S2     14.66°  17.70°  video, GPS-timed   0.04 s, σ 0.10  cross-track  -170 km: 0 drop(s) simulated, 0 detected  
-S3      7.57°  16.41°  video, GPS-timed   0.04 s, σ 0.10  cross-track  -140 km: 0 drop(s) simulated, 0 detected  
-S4     17.81°  18.86°  video, GPS-timed   0.04 s, σ 0.10  cross-track  -110 km: 1 drop(s) simulated, 1 detected  [146.62, 150.94] s
-S5     15.00°  18.55°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track   -85 km: 1 drop(s) simulated, 1 detected  [154.50, 160.90] s
-S6     22.18°  20.04°  CCD, long cycle    0.50 s, σ 0.03  cross-track   -62 km: 2 drop(s) simulated, 2 detected  [130.75, 138.25] s [139.25, 143.25] s
-S7     24.13°  20.44°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track   -50 km: 2 drop(s) simulated, 2 detected  [124.10, 131.50] s [131.90, 137.90] s
-S8     24.66°  20.79°  video, GPS-timed   0.04 s, σ 0.10  cross-track   -20 km: 1 drop(s) simulated, 1 detected  [122.50, 137.38] s
-S9      5.79°  17.37°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track   +10 km: 1 drop(s) simulated, 1 detected  [181.70, 196.50] s
-S10    21.98°  20.83°  CCD, long cycle    0.50 s, σ 0.03  cross-track   +28 km: 2 drop(s) simulated, 2 detected  [133.25, 137.25] s [137.75, 147.25] s
-S11     9.67°  18.56°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track   +38 km: 2 drop(s) simulated, 2 detected  [172.90, 174.70] s [176.30, 185.70] s
-S12    14.73°  19.88°  CMOS camera, GPS   0.10 s, σ 0.05  cross-track   +65 km: 1 drop(s) simulated, 1 detected  [161.55, 170.35] s
-S13    17.95°  20.82°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track  +100 km: 1 drop(s) simulated, 1 detected  [152.70, 159.10] s
-S14     9.01°  19.26°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track  +130 km: 0 drop(s) simulated, 0 detected  
-S15     6.35°  18.91°  video, GPS-timed   0.04 s, σ 0.10  cross-track  +160 km: 0 drop(s) simulated, 0 detected  
-S16    14.42°  20.98°  video, GPS-timed   0.04 s, σ 0.10  cross-track  +190 km: 0 drop(s) simulated, 0 detected  
+S1     19.12°  18.48°  CMOS camera, GPS   0.10 s, σ 0.05  cross-track  -177 km: 0 drop(s) simulated, 0 detected  
+S2     14.58°  18.06°  video, GPS-timed   0.04 s, σ 0.10  cross-track  -130 km: 0 drop(s) simulated, 0 detected  
+S3      7.50°  16.72°  video, GPS-timed   0.04 s, σ 0.10  cross-track  -105 km: 1 drop(s) simulated, 1 detected  [177.46, 182.38] s
+S4     17.74°  19.20°  video, GPS-timed   0.04 s, σ 0.10  cross-track   -71 km: 2 drop(s) simulated, 2 detected  [145.54, 152.54] s [155.22, 156.70] s
+S5     14.96°  18.75°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track   -63 km: 2 drop(s) simulated, 2 detected  [154.30, 161.50] s [162.70, 166.70] s
+S6     22.16°  20.15°  CCD, long cycle    0.50 s, σ 0.03  cross-track   -49 km: 2 drop(s) simulated, 1 detected  [130.75, 144.75] s
+S7     24.11°  20.56°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track   -37 km: 1 drop(s) simulated, 1 detected  [124.30, 138.70] s
+S8     24.65°  20.85°  video, GPS-timed   0.04 s, σ 0.10  cross-track   -14 km: 1 drop(s) simulated, 1 detected  [122.62, 137.58] s
+S9      5.78°  17.40°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track   +14 km: 1 drop(s) simulated, 1 detected  [181.90, 196.50] s
+S10    21.97°  20.91°  CCD, long cycle    0.50 s, σ 0.03  cross-track   +36 km: 2 drop(s) simulated, 2 detected  [134.25, 136.25] s [137.75, 147.25] s
+S11     9.60°  18.81°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track   +66 km: 1 drop(s) simulated, 1 detected  [176.90, 185.70] s
+S12    14.68°  20.10°  CMOS camera, GPS   0.10 s, σ 0.05  cross-track   +90 km: 1 drop(s) simulated, 1 detected  [162.45, 169.95] s
+S13    17.93°  20.93°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track  +112 km: 1 drop(s) simulated, 1 detected  [153.50, 158.50] s
+S14     8.98°  19.37°  CMOS camera, NTP   0.20 s, σ 0.04  cross-track  +143 km: 0 drop(s) simulated, 0 detected  
+S15     6.36°  18.87°  video, GPS-timed   0.04 s, σ 0.10  cross-track  +155 km: 0 drop(s) simulated, 0 detected  
+S16    14.47°  20.79°  video, GPS-timed   0.04 s, σ 0.10  cross-track  +168 km: 0 drop(s) simulated, 0 detected  
 Event SimCB, 2024-12-30T19:59:59: SimCB occults Star(SimStar, RA=06 35 33.9461, Dec=+22 02 51.553)
   closest approach 2024-12-30T19:59:58.810: 0.0001" (2.2 km), PA 184.08°, 25.743 km/s, distance 42.3622 au
   Chord(S1, negative, with light curve)
   Chord(S2, negative, with light curve)
-  Chord(S3, negative, with light curve)
-  Chord(S4, positive, with light curve)
-  Chord(S5, positive, with light curve)
-  Chord(S6, positive, 2 drops, with light curve)
-  Chord(S7, positive, 2 drops, with light curve)
+  Chord(S3, positive, with light curve)
+  Chord(S4, positive, 2 drops, with light curve)
+  Chord(S5, positive, 2 drops, with light curve)
+  Chord(S6, positive, with light curve)
+  Chord(S7, positive, with light curve)
   Chord(S8, positive, with light curve)
   Chord(S9, positive, with light curve)
   Chord(S10, positive, 2 drops, with light curve)
-  Chord(S11, positive, 2 drops, with light curve)
+  Chord(S11, positive, with light curve)
   Chord(S12, positive, with light curve)
   Chord(S13, positive, with light curve)
   Chord(S14, negative, with light curve)
@@ -48,70 +48,70 @@ Event SimCB, 2024-12-30T19:59:59: SimCB occults Star(SimStar, RA=06 35 33.9461, 
 ==============================================================================
 3. a single ellipse
 ==============================================================================
-ellipse: χ²/dof = 196692; with the visible segments χ²/dof = 196695
+ellipse: χ²/dof = 253340; with the visible segments χ²/dof = 253344
 
 ==============================================================================
 4. the contact-binary model
 ==============================================================================
-first pass (timings with the shadow velocity): χ²/dof = 2.79, b₁ = 95.13 ± 0.07 km (truth 95)
-LimbProblem fit: χ² = 33.225, dof = 20, χ²/dof = 1.661
-  center_f               =      -8.020172 ± 0.066745
-  center_g               =      14.017022 ± 0.045490
-  a1                     =     130.044382 ± 0.094011
-  b1                     =      94.956613 ± 0.066418
-  a2                     =     100.163297 ± 0.074128
-  b2                     =      80.008786 ± 0.040102
-  axis_pa                =     255.027249 ± 0.017836
-  neck                   =       0.081239 ± 0.000728
+first pass (timings with the shadow velocity): χ²/dof = 5.29, b₁ = 95.30 ± 0.03 km (truth 95)
+LimbProblem fit: χ² = 48.978, dof = 20, χ²/dof = 2.449
+  center_f               =      -8.011877 ± 0.054594
+  center_g               =      13.977272 ± 0.031193
+  a1                     =     130.103543 ± 0.068942
+  b1                     =      95.092658 ± 0.040128
+  a2                     =      99.990561 ± 0.091453
+  b2                     =      80.059640 ± 0.059968
+  axis_pa                =     255.030283 ± 0.015494
+  neck                   =       0.080994 ± 0.000742
   derived:
-  offset_ra              =      -0.261039 ± 0.002172
-  offset_dec             =       0.456223 ± 0.001481
-  equivalent_radius      =     141.725530 ± 0.033770
-  lobe1_equivalent_radius =     111.124138 ± 0.040809
-  lobe2_equivalent_radius =      89.520633 ± 0.029917
-  size_ratio             =       0.805591 ± 0.000397
-  mass_ratio             =       0.522810 ± 0.000773
-  separation             =     211.505798 ± 0.097496
-  length                 =     441.713476 ± 0.130721
-  neck_width             =      69.043391 ± 0.282668
+  offset_ra              =      -0.260769 ± 0.001777
+  offset_dec             =       0.454929 ± 0.001015
+  equivalent_radius      =     141.780713 ± 0.027430
+  lobe1_equivalent_radius =     111.229005 ± 0.029002
+  lobe2_equivalent_radius =      89.471829 ± 0.034560
+  size_ratio             =       0.804393 ± 0.000375
+  mass_ratio             =       0.520481 ± 0.000727
+  separation             =     211.457762 ± 0.088605
+  length                 =     441.551865 ± 0.102278
+  neck_width             =      69.020037 ± 0.284004
 
 fitted vs true:
-  a1                       130.044 ±  0.094   (truth  130.000)
-  b1                        94.957 ±  0.066   (truth   95.000)
-  a2                       100.163 ±  0.074   (truth  100.000)
-  b2                        80.009 ±  0.040   (truth   80.000)
-  axis_pa                  255.027 ±  0.018   (truth  255.000)
+  a1                       130.104 ±  0.069   (truth  130.000)
+  b1                        95.093 ±  0.040   (truth   95.000)
+  a2                        99.991 ±  0.091   (truth  100.000)
+  b2                        80.060 ±  0.060   (truth   80.000)
+  axis_pa                  255.030 ±  0.015   (truth  255.000)
   neck                       0.081 ±  0.001   (truth    0.080)
-  center_f                  -8.020 ±  0.067   (truth   -8.000)
-  center_g                  14.017 ±  0.045   (truth   14.000)
-  equivalent_radius        141.726 ±  0.034   (truth  141.704)
-  length                   441.713 ±  0.131   (truth  441.600)
-  neck_width                69.043 ±  0.283   (truth   68.552)
-  size_ratio                 0.806 ±  0.000   (truth    0.805)
+  center_f                  -8.012 ±  0.055   (truth   -8.000)
+  center_g                  13.977 ±  0.031   (truth   14.000)
+  equivalent_radius        141.781 ±  0.027   (truth  141.704)
+  length                   441.552 ±  0.102   (truth  441.600)
+  neck_width                69.020 ±  0.284   (truth   68.552)
+  size_ratio                 0.804 ±  0.000   (truth    0.805)
 Posterior of LimbProblem: 32 walkers × 3000 steps (burn-in 1000), acceptance 0.46
-  center_f               =      -8.021550  -0.066617 +0.070925
-  center_g               =      14.016003  -0.045005 +0.044851
-  a1                     =     130.058269  -0.095278 +0.093881
-  b1                     =      94.950198  -0.064330 +0.068008
-  a2                     =     100.162789  -0.075563 +0.070512
-  b2                     =      80.010286  -0.038514 +0.039948
-  axis_pa                =     255.028002  -0.018699 +0.016881
-  neck                   =       0.081300  -0.000707 +0.000715
+  center_f               =      -8.013670  -0.054446 +0.055748
+  center_g               =      13.975792  -0.031297 +0.030451
+  a1                     =     130.100490  -0.066429 +0.070782
+  b1                     =      95.090449  -0.039811 +0.041929
+  a2                     =      99.993488  -0.093880 +0.090895
+  b2                     =      80.058783  -0.057469 +0.058949
+  axis_pa                =     255.030700  -0.015105 +0.015055
+  neck                   =       0.080995  -0.000753 +0.000752
 
-posterior: D_eq = 283.5 −0.1 +0.1 km, neck width 69.1 −0.3 +0.3 km (truth 68.6), size ratio 0.806 −0.000 +0.000
+posterior: D_eq = 283.6 −0.1 +0.1 km, neck width 69.0 −0.3 +0.3 km (truth 68.6), size ratio 0.804 −0.000 +0.000
 
 ==============================================================================
 5. joint fit of the light curves
 ==============================================================================
-χ²/dof = 0.997 for 12224 light-curve points
-  a1       timings  130.044 ± 0.094   light curves  130.121 ± 0.043   (truth 130.000)
-  b1       timings   94.957 ± 0.066   light curves   94.970 ± 0.027   (truth  95.000)
-  a2       timings  100.163 ± 0.074   light curves  100.096 ± 0.038   (truth 100.000)
-  b2       timings   80.009 ± 0.040   light curves   80.025 ± 0.019   (truth  80.000)
-  axis_pa  timings  255.027 ± 0.018   light curves  255.035 ± 0.011   (truth 255.000)
+χ²/dof = 1.003 for 12224 light-curve points
+  a1       timings  130.104 ± 0.069   light curves  130.072 ± 0.045   (truth 130.000)
+  b1       timings   95.093 ± 0.040   light curves   95.095 ± 0.030   (truth  95.000)
+  a2       timings   99.991 ± 0.091   light curves   99.979 ± 0.028   (truth 100.000)
+  b2       timings   80.060 ± 0.060   light curves   80.057 ± 0.007   (truth  80.000)
+  axis_pa  timings  255.030 ± 0.015   light curves  255.026 ± 0.009   (truth 255.000)
   neck     timings    0.081 ± 0.001   light curves    0.081 ± 0.000   (truth   0.080)
 
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/sim_contact_binary
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/sim_contact_binary

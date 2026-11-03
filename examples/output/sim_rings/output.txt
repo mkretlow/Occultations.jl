@@ -10,87 +10,66 @@ ring 2: ProjectedRing(r = 405.00 km, W = 3.40 km, p′ = 0.230, P = 60.00°, B =
 ==============================================================================
 2. light curves → body and ring dips → timings
 ==============================================================================
-S1     135.84°  -30.33°  video, GPS-timed   0.04 s, σ 0.10  body: –  ring dips: 0 of 0 detected
-S2     138.06°  -30.96°  CMOS camera, NTP   0.20 s, σ 0.04  body: –  ring dips: 0 of 0 detected
-S3     131.37°  -26.54°  video, GPS-timed   0.04 s, σ 0.10  body: –  ring dips: 0 of 0 detected
-S4     134.48°  -27.81°  CMOS camera, GPS   0.10 s, σ 0.05  body: –  ring dips: 2 of 2 detected
-S5     138.53°  -29.49°  video, GPS-timed   0.04 s, σ 0.10  body: –  ring dips: 4 of 4 detected
-S6     138.14°  -28.71°  CMOS camera, GPS   0.10 s, σ 0.05  body: –  ring dips: 4 of 4 detected
-S7     132.32°  -24.76°  CMOS camera, GPS   0.10 s, σ 0.05  body: yes  ring dips: 4 of 4 detected
-S8     139.23°  -28.15°  video, GPS-timed   0.04 s, σ 0.10  body: yes  ring dips: 2 of 4 detected
-S9     131.28°  -22.93°  CMOS camera, GPS   0.10 s, σ 0.05  body: yes  ring dips: 4 of 4 detected
-S10    132.63°  -23.19°  video, GPS-timed   0.04 s, σ 0.10  body: yes  ring dips: 2 of 4 detected
-S11    138.71°  -26.16°  video, GPS-timed   0.04 s, σ 0.10  body: yes  ring dips: 2 of 4 detected
-S12    141.71°  -27.18°  CMOS camera, GPS   0.10 s, σ 0.05  body: yes  ring dips: 4 of 4 detected
-S13    135.40°  -23.12°  CMOS camera, NTP   0.20 s, σ 0.04  body: –  ring dips: 2 of 4 detected
-S14    135.41°  -22.54°  CMOS camera, NTP   0.20 s, σ 0.04  body: –  ring dips: 4 of 4 detected
-S15    143.23°  -26.27°  CMOS camera, GPS   0.10 s, σ 0.05  body: –  ring dips: 2 of 2 detected
-S16    143.10°  -25.65°  video, GPS-timed   0.04 s, σ 0.10  body: –  ring dips: 0 of 0 detected
-S17    141.36°  -24.17°  CMOS camera, NTP   0.20 s, σ 0.04  body: –  ring dips: 0 of 0 detected
-S18    144.42°  -25.19°  CMOS camera, GPS   0.10 s, σ 0.05  body: –  ring dips: 0 of 0 detected
+S1     136.33°  -29.71°  video, GPS-timed   0.04 s, σ 0.10  body: –  ring dips: 0 of 0 detected
+S2     138.97°  -29.72°  CCD, long cycle    0.50 s, σ 0.03  body: –  ring dips: 2 of 4 detected
+S3     132.63°  -24.94°  video, GPS-timed   0.04 s, σ 0.10  body: yes  ring dips: 2 of 4 detected
+S4     135.77°  -26.10°  CMOS camera, NTP   0.20 s, σ 0.04  body: yes  ring dips: 2 of 4 detected
+S5     140.11°  -27.23°  video, GPS-timed   0.04 s, σ 0.10  body: yes  ring dips: 2 of 4 detected
+S6     139.67°  -26.53°  CMOS camera, NTP   0.20 s, σ 0.04  body: yes  ring dips: 2 of 4 detected
+S7     133.76°  -22.83°  CMOS camera, NTP   0.20 s, σ 0.04  body: yes  ring dips: 2 of 4 detected
+S8     140.72°  -25.94°  video, GPS-timed   0.04 s, σ 0.10  body: –  ring dips: 2 of 4 detected
+S9     133.66°  -19.60°  CCD, long cycle    0.50 s, σ 0.03  body: –  ring dips: 0 of 0 detected
 
 ==============================================================================
 3. fit of the timings
 ==============================================================================
-rings with detected dips: 2
-LimbProblem fit: χ² = 387.447, dof = 73, χ²/dof = 5.307
-  center_f               =      11.956476 ± 0.023745
-  center_g               =       6.977641 ± 0.016701
-  equatorial_radius      =     140.211098 ± 0.018967
-  oblateness             =       0.179823 ± 0.000334
-  position_angle         =     124.954047 ± 0.055329
-  ring_pole_ra           =     303.686446 ± 0.013227
-  ring_pole_dec          =      41.150350 ± 0.012485
-  ring1_radius           =     391.044464 ± 0.075861
-  ring1_width            =       6.544597 ± 0.101779
+rings with detected dips: 1
+LimbProblem fit: χ² = 902.337, dof = 29, χ²/dof = 31.115
+  center_f               =      11.977078 ± 0.030249
+  center_g               =       6.913330 ± 0.035608
+  equatorial_radius      =     140.163383 ± 0.040277
+  oblateness             =       0.179557 ± 0.000558
+  position_angle         =     124.849077 ± 0.062929
+  ring_pole_ra           =     303.729100 ± 0.022363
+  ring_pole_dec          =      41.073541 ± 0.036195
+  ring1_radius           =     391.277314 ± 0.156845
+  ring1_width            =       6.241045 ± 0.132657
   ring1_tau              =       0.300000 (fixed)
-  ring2_radius           =     404.998892 ± 0.068606
-  ring2_width            =       2.137582 ± 0.080268
-  ring2_tau              =       0.300000 (fixed)
   derived:
-  offset_ra              =       1.332122 ± 0.002646
-  offset_dec             =       0.777409 ± 0.001861
-  equivalent_radius      =     126.980224 ± 0.022187
-  semi_minor_axis        =     114.997867 ± 0.040764
-  ring1_equivalent_depth =       1.963379 ± 0.030534
-  ring2_equivalent_depth =       0.641275 ± 0.024081
-  ring_opening           =      34.976036 ± 0.010094
-  ring_pa                =      60.018278 ± 0.015105
-  ring1_opacity          =       0.407466 ± 0.000078
-  ring1_equivalent_width =       2.666699 ± 0.041483
-  ring2_opacity          =       0.407466 ± 0.000078
-  ring2_equivalent_width =       0.870992 ± 0.032710
+  offset_ra              =       1.334417 ± 0.003370
+  offset_dec             =       0.770243 ± 0.003967
+  equivalent_radius      =     126.957658 ± 0.027539
+  semi_minor_axis        =     114.996131 ± 0.056660
+  ring1_equivalent_depth =       1.872313 ± 0.039797
+  ring_opening           =      34.984992 ± 0.018319
+  ring_pa                =      60.119306 ± 0.043302
+  ring1_opacity          =       0.407397 ± 0.000142
+  ring1_equivalent_width =       2.542580 ± 0.054077
 
 fitted vs true:
-  equatorial_radius        140.211 ±  0.019   (truth  140.000)
-  semi_minor_axis          114.998 ±  0.041   (truth  115.000)
-  ring_pole_ra             303.686 ±  0.013   (truth  303.711)
-  ring_pole_dec             41.150 ±  0.012   (truth   41.172)
-  ring_opening              34.976 ±  0.010   (truth   35.000)
-  ring_pa                   60.018 ±  0.015   (truth   60.000)
-  ring1_radius             391.044 ±  0.076   (truth  391.000)
-  ring1_width                6.545 ±  0.102   (truth    6.200)
-  ring2_radius             404.999 ±  0.069   (truth  405.000)
-  ring2_width                2.138 ±  0.080   (truth    3.400)
+  equatorial_radius        140.163 ±  0.040   (truth  140.000)
+  semi_minor_axis          114.996 ±  0.057   (truth  115.000)
+  ring_pole_ra             303.729 ±  0.022   (truth  303.711)
+  ring_pole_dec             41.074 ±  0.036   (truth   41.172)
+  ring_opening              34.985 ±  0.018   (truth   35.000)
+  ring_pa                   60.119 ±  0.043   (truth   60.000)
+  ring1_radius             391.277 ±  0.157   (truth  391.000)
+  ring1_width                6.241 ±  0.133   (truth    6.200)
 (a single event fixes the ring ellipse – its radius, |B| and P – but leaves the pole with a
  twofold ambiguity: the pole tilted towards or away from the observer)
 
 ==============================================================================
 4. joint fit of the light curves
 ==============================================================================
-χ²/dof = 1.019 for 13232 light-curve points
-  ring1_radius             391.043 ±  0.011   (truth  391.000)
-  ring1_width                6.485 ±  0.024   (truth    6.200)
-  ring1_tau                  0.387 ±  0.009   (truth    0.400)
-  ring2_radius             405.016 ±  0.012   (truth  405.000)
-  ring2_width                2.402 ±  0.030   (truth    3.400)
-  ring2_tau                  0.196 ±  0.008   (truth    0.150)
-  ring1_equivalent_depth     2.510 ±  0.058   (truth    2.480)
-  ring2_equivalent_depth     0.470 ±  0.019   (truth    0.510)
-  ring_opening              34.978 ±  0.002   (truth   35.000)
-  ring_pa                   60.016 ±  0.002   (truth   60.000)
+χ²/dof = 1.020 for 5941 light-curve points
+  ring1_radius             391.283 ±  0.017   (truth  391.000)
+  ring1_width                6.136 ±  0.027   (truth    6.200)
+  ring1_tau                  0.425 ±  0.014   (truth    0.400)
+  ring1_equivalent_depth     2.608 ±  0.085   (truth    2.480)
+  ring_opening              34.984 ±  0.002   (truth   35.000)
+  ring_pa                   60.106 ±  0.003   (truth   60.000)
 
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/sim_rings
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/sim_rings

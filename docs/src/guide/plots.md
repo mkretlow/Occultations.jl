@@ -6,8 +6,8 @@
 plane as seen from the Earth: f towards east (drawn to the *left*, as on the sky), g towards
 north, in km at the body, relative to the ephemeris position. The black curve is the fitted
 limb and the cross its centre (the offset from the ephemeris, i.e. the astrometry). Coloured
-segments are the occulted parts of the positive chords, with dotted continuations; dashed
-gray lines are negative chords. The number at each chord is its index in the legend (colours
+segments are the occulted parts of the positive chords (`extend=true` adds their tracks
+beyond the limb as dotted gray lines); dashed gray lines are negative chords. The number at each chord is its index in the legend (colours
 repeat). The red segments at the chord ends ("contact-time uncertainty") are ±1σ of the
 contact times, converted to km with the shadow velocity: a limb passing within them fits
 that contact.

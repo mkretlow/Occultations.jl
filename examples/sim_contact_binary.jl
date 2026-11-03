@@ -58,7 +58,7 @@ section("2. light curves → drops → timings")
 # baseline (a box search would find two deep drops with a short gap as one box), and each is
 # timed in its own window (between the neighbouring drops) with the diffraction model.
 include(joinpath(@__DIR__, "sim_stations.jl"))
-offsets = [-200.0, -170, -140, -110, -85, -62, -50, -20, 10, 28, 38, 65, 100, 130, 160, 190]
+offsets = random_offsets(MersenneTwister(6), 16, -200.0, 190.0; mingap=8.0)
 pv = positionv(star, eph, GEOCENTER, ev.tref)
 n̂ = (-pv.vg, pv.vf) ./ hypot(pv.vf, pv.vg)
 sites = stations(star, body, ev.tref, offsets .+ (center[1] * n̂[1] + center[2] * n̂[2]); rng=rng,
