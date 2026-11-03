@@ -8,7 +8,6 @@ rng = MersenneTwister(2023)</code></pre><h2 id="1.-the-simulated-events"><a clas
 body = Body(&quot;SimQ&quot;, eph; radius=555.0)</code></pre><p>The truth: a spherical body of 555 km radius and a ring of 4100 km radius, 10 km wide, with the pole at RA 260°, Dec +50°; the ephemeris offsets differ from event to event.</p><pre><code class="language-julia hljs">R, ringR, ringW, pole = 555.0, 4100.0, 10.0, (260.0, 50.0)
 dates = [&quot;2023-06-20T01:00:00&quot;, &quot;2024-06-22T01:00:00&quot;, &quot;2025-06-25T01:00:00&quot;]
 # cross-track offsets [km]: the ring (seen at B ≈ −24°) spans about ±1700 km across the track
-offs_km = [-1850.0, -1720, -1600, -1300, -900, -450, -200, 0, 250, 500, 950, 1350, 1650, 1780]
 evs = Event[]
 for (k, d) in enumerate(dates)
     t = Epoch(d)
@@ -20,6 +19,7 @@ for (k, d) in enumerate(dates)
     ring = project_ring(ringR, ringW, 0.1, pole..., u)
     pv = positionv(st, eph, GEOCENTER, e.tref)
     n̂ = (-pv.vg, pv.vf) ./ hypot(pv.vf, pv.vg)
+    offs_km = random_offsets(MersenneTwister(30 + k), 14, -1900.0, 1900.0; mingap=40.0)
     sites = stations(st, body, e.tref, offs_km .+ (c[1] * n̂[1] + c[2] * n̂[2]); rng=rng, prefix=&quot;E$k-S&quot;, spread=120.0,
                      skip=true)
     for s in sites
@@ -44,9 +44,9 @@ for (k, d) in enumerate(dates)
             ring.pa, count(ch -&gt; any(x -&gt; x.body === :auto, ch.contacts), e.chords),
             count(ch -&gt; any(x -&gt; x.body === :ring1, ch.contacts), e.chords))
     push!(evs, e)
-end</code></pre><pre><code class="language-text hljs">event 1 2023-06-20: B = -23.93°, P = 352.10°; 5 chords cross the body, 12 the ring
-event 2 2024-06-22: B = -23.79°, P = 351.19°; 5 chords cross the body, 12 the ring
-event 3 2025-06-25: B = -23.63°, P = 350.29°; 5 chords cross the body, 12 the ring</code></pre><h2 id="2.-each-event-alone"><a class="docs-heading-anchor" href="#2.-each-event-alone">2. each event alone</a><a id="2.-each-event-alone-1"></a><a class="docs-heading-anchor-permalink" href="#2.-each-event-alone" title="Permalink"></a></h2><p>The ring of one event is an ellipse: its radius, |B| and P are determined, but two ring planes give the same ellipse: the plane and its mirror image about the sky plane (opening angle +B or −B, the pole tilted towards or away from the observer). Both are found by starting from either. (A pole and its antipode describe the same plane: the fitted pole is the northern one.)</p><pre><code class="language-julia hljs">model = RingedLimb(CircleLimb(); rings=1)
+end</code></pre><pre><code class="language-text hljs">event 1 2023-06-20: B = -23.93°, P = 352.10°; 4 chords cross the body, 13 the ring
+event 2 2024-06-22: B = -23.79°, P = 351.19°; 6 chords cross the body, 14 the ring
+event 3 2025-06-25: B = -23.63°, P = 350.29°; 2 chords cross the body, 13 the ring</code></pre><h2 id="2.-each-event-alone"><a class="docs-heading-anchor" href="#2.-each-event-alone">2. each event alone</a><a id="2.-each-event-alone-1"></a><a class="docs-heading-anchor-permalink" href="#2.-each-event-alone" title="Permalink"></a></h2><p>The ring of one event is an ellipse: its radius, |B| and P are determined, but two ring planes give the same ellipse: the plane and its mirror image about the sky plane (opening angle +B or −B, the pole tilted towards or away from the observer). Both are found by starting from either. (A pole and its antipode describe the same plane: the fitted pole is the northern one.)</p><pre><code class="language-julia hljs">model = RingedLimb(CircleLimb(); rings=1)
 single = map(enumerate(evs)) do (k, e)
     u = EventContext(e).u
     B0, P0 = ring_geometry(pole..., u)
@@ -61,12 +61,12 @@ single = map(enumerate(evs)) do (k, e)
     end
     sols
 end
-println(&quot;(truth: pole (260°, +50°), ring radius 4100 km)&quot;)</code></pre><pre><code class="language-text hljs">  event 1: pole (259.997 ± 0.003°, +49.998 ± 0.003°), χ² =  35.07; ring radius 4100.0 ± 0.4 km, B = -23.93°, P = 352.10°
-  event 1: pole (130.836 ± 0.008°, +78.619 ± 0.004°), χ² =  35.07; ring radius 4100.0 ± 0.4 km, B = +23.93°, P = 352.10°
-  event 2: pole (260.007 ± 0.003°, +49.999 ± 0.002°), χ² =  51.05; ring radius 4099.8 ± 0.3 km, B = -23.79°, P = 351.20°
-  event 2: pole (135.450 ± 0.009°, +78.120 ± 0.002°), χ² =  51.05; ring radius 4099.8 ± 0.3 km, B = +23.79°, P = 351.20°
-  event 3: pole (260.002 ± 0.003°, +50.001 ± 0.003°), χ² =  49.27; ring radius 4100.1 ± 0.2 km, B = -23.63°, P = 350.29°
-  event 3: pole (139.829 ± 0.009°, +77.583 ± 0.003°), χ² =  49.27; ring radius 4100.1 ± 0.2 km, B = +23.63°, P = 350.29°
+println(&quot;(truth: pole (260°, +50°), ring radius 4100 km)&quot;)</code></pre><pre><code class="language-text hljs">  event 1: pole (259.997 ± 0.003°, +49.997 ± 0.002°), χ² =  32.79; ring radius 4099.9 ± 0.3 km, B = -23.93°, P = 352.10°
+  event 1: pole (130.833 ± 0.008°, +78.618 ± 0.003°), χ² =  32.79; ring radius 4099.9 ± 0.3 km, B = +23.93°, P = 352.10°
+  event 2: pole (260.000 ± 0.004°, +49.998 ± 0.003°), χ² =  72.63; ring radius 4099.5 ± 0.3 km, B = -23.79°, P = 351.19°
+  event 2: pole (135.463 ± 0.010°, +78.117 ± 0.003°), χ² =  72.63; ring radius 4099.5 ± 0.3 km, B = +23.79°, P = 351.19°
+  event 3: pole (259.998 ± 0.003°, +50.001 ± 0.003°), χ² =  43.91; ring radius 4100.2 ± 0.3 km, B = -23.63°, P = 350.29°
+  event 3: pole (139.840 ± 0.006°, +77.581 ± 0.003°), χ² =  43.91; ring radius 4100.2 ± 0.3 km, B = +23.63°, P = 350.29°
 (truth: pole (260°, +50°), ring radius 4100 km)</code></pre><h2 id="3.-the-three-events-together"><a class="docs-heading-anchor" href="#3.-the-three-events-together">3. the three events together</a><a id="3.-the-three-events-together-1"></a><a class="docs-heading-anchor-permalink" href="#3.-the-three-events-together" title="Permalink"></a></h2><p>One body radius, one ring and one pole; a centre for every event. The line of sight changes by about a degree from year to year (the parallax of the Earth&#39;s orbit at 44 au, and the motion of the body), so the mirror solutions of the single events no longer coincide: the two poles are compared by χ².</p><pre><code class="language-julia hljs">sols = map(single[1]) do s
     init = Dict(:ring_pole_ra =&gt; s[:ring_pole_ra][1], :ring_pole_dec =&gt; s[:ring_pole_dec][1],
                 :ring1_radius =&gt; s[:ring1_radius][1])
@@ -83,48 +83,48 @@ for (n, tv) in ((:radius, R), (:ring1_radius, ringR), (:ring1_width, ringW), (:r
 end
 @printf(&quot;Δχ² = %.1f between the two poles: %s\n&quot;, abs(sols[1].chi2 - sols[2].chi2),
         abs(sols[1].chi2 - sols[2].chi2) &gt; 9 ? &quot;the three events decide (&gt; 3σ)&quot; :
-        &quot;the three events do not decide between them (the line of sight hardly changes)&quot;)</code></pre><pre><code class="language-text hljs">  pole (260.002 ± 0.002°, +50.000 ± 0.001°): χ² = 144.40 for 163 degrees of freedom
-  pole (134.585 ± 0.005°, +77.900 ± 0.001°): χ² = 695818.66 for 163 degrees of freedom
-LimbProblem fit: χ² = 144.400, dof = 163, χ²/dof = 0.886
-  center_f_1             =     -20.066530 ± 0.182949
-  center_g_1             =       5.049292 ± 0.051777
-  center_f_2             =      20.080328 ± 0.170469
-  center_g_2             =     -14.976026 ± 0.052405
-  center_f_3             =      59.898778 ± 0.157812
-  center_g_3             =     -34.930471 ± 0.053602
-  radius                 =     554.851674 ± 0.148558
-  ring_pole_ra           =     260.001865 ± 0.001674
-  ring_pole_dec          =      49.999784 ± 0.001343
-  ring1_radius           =    4100.070566 ± 0.150137
-  ring1_width            =       9.944942 ± 0.043015
+        &quot;the three events do not decide between them (the line of sight hardly changes)&quot;)</code></pre><pre><code class="language-text hljs">  pole (259.997 ± 0.002°, +49.997 ± 0.002°): χ² = 163.82 for 173 degrees of freedom
+  pole (136.269 ± 0.004°, +77.985 ± 0.002°): χ² = 1008236.02 for 173 degrees of freedom
+LimbProblem fit: χ² = 163.823, dof = 173, χ²/dof = 0.947
+  center_f_1             =     -19.886298 ± 0.160244
+  center_g_1             =       5.009702 ± 0.053899
+  center_f_2             =      20.128717 ± 0.157280
+  center_g_2             =     -14.928094 ± 0.073288
+  center_f_3             =      59.858733 ± 0.138773
+  center_g_3             =     -34.989015 ± 0.053781
+  radius                 =     554.986360 ± 0.142978
+  ring_pole_ra           =     259.996851 ± 0.001665
+  ring_pole_dec          =      49.997263 ± 0.001522
+  ring1_radius           =    4099.861056 ± 0.145660
+  ring1_width            =      10.044705 ± 0.116809
   ring1_tau              =       0.300000 (fixed)
   derived:
-  offset_ra_1            =      -0.660427 ± 0.006021
-  offset_dec_1           =       0.166182 ± 0.001704
-  offset_ra_2            =       0.661442 ± 0.005615
-  offset_dec_2           =      -0.493307 ± 0.001726
-  offset_ra_3            =       1.974688 ± 0.005203
-  offset_dec_3           =      -1.151556 ± 0.001767
-  ring1_equivalent_depth =       2.983483 ± 0.012905
-  ring_opening_1         =     -23.932378 ± 0.001278
-  ring_pa_1              =     352.100129 ± 0.001261
-  ring1_opacity_1        =       0.522666 ± 0.000018
-  ring1_equivalent_width_1 =       5.197883 ± 0.022480
-  ring_opening_2         =     -23.788162 ± 0.001270
-  ring_pa_2              =     351.194191 ± 0.001270
-  ring1_opacity_2        =       0.524676 ± 0.000018
-  ring1_equivalent_width_2 =       5.217876 ± 0.022566
-  ring_opening_3         =     -23.631158 ± 0.001261
-  ring_pa_3              =     350.292593 ± 0.001279
-  ring1_opacity_3        =       0.526884 ± 0.000018
-  ring1_equivalent_width_3 =       5.239831 ± 0.022661
+  offset_ra_1            =      -0.654495 ± 0.005274
+  offset_dec_1           =       0.164879 ± 0.001774
+  offset_ra_2            =       0.663036 ± 0.005181
+  offset_dec_2           =      -0.491728 ± 0.002414
+  offset_ra_3            =       1.973368 ± 0.004575
+  offset_dec_3           =      -1.153486 ± 0.001773
+  ring1_equivalent_depth =       3.013412 ± 0.035043
+  ring_opening_1         =     -23.934181 ± 0.001408
+  ring_pa_1              =     352.096110 ± 0.001331
+  ring1_opacity_1        =       0.522641 ± 0.000020
+  ring1_equivalent_width_1 =       5.249775 ± 0.061048
+  ring_opening_2         =     -23.789875 ± 0.001392
+  ring_pa_2              =     351.190129 ± 0.001349
+  ring1_opacity_2        =       0.524652 ± 0.000019
+  ring1_equivalent_width_2 =       5.269979 ± 0.061283
+  ring_opening_3         =     -23.632781 ± 0.001377
+  ring_pa_3              =     350.288493 ± 0.001366
+  ring1_opacity_3        =       0.526861 ± 0.000019
+  ring1_equivalent_width_3 =       5.292164 ± 0.061541
 
-  radius           554.852 ±  0.149   (truth  555.000)
-  ring1_radius    4100.071 ±  0.150   (truth 4100.000)
-  ring1_width        9.945 ±  0.043   (truth   10.000)
-  ring_pole_ra     260.002 ±  0.002   (truth  260.000)
-  ring_pole_dec     50.000 ±  0.001   (truth   50.000)
-Δχ² = 695674.3 between the two poles: the three events decide (&gt; 3σ)</code></pre><h2 id="Figures"><a class="docs-heading-anchor" href="#Figures">Figures</a><a id="Figures-1"></a><a class="docs-heading-anchor-permalink" href="#Figures" title="Permalink"></a></h2><pre><code class="language-julia hljs">for k in 1:3
+  radius           554.986 ±  0.143   (truth  555.000)
+  ring1_radius    4099.861 ±  0.146   (truth 4100.000)
+  ring1_width       10.045 ±  0.117   (truth   10.000)
+  ring_pole_ra     259.997 ±  0.002   (truth  260.000)
+  ring_pole_dec     49.997 ±  0.002   (truth   50.000)
+Δχ² = 1008072.2 between the two poles: the three events decide (&gt; 3σ)</code></pre><h2 id="Figures"><a class="docs-heading-anchor" href="#Figures">Figures</a><a id="Figures-1"></a><a class="docs-heading-anchor-permalink" href="#Figures" title="Permalink"></a></h2><pre><code class="language-julia hljs">for k in 1:3
     savefig(plot(rJ; event=k, title=&quot;SimQ event $k: body and ring&quot;, size=(1000, 900)), joinpath(out, &quot;ring_pole_event$k.png&quot;))
 end
-println(&quot;figures written to &quot;, out)</code></pre><p>The joint fit in the first event: the body and the ring with the chords:</p><p><img src="../../assets/figures/ring_pole_event1.png" alt="event 1"/></p><pre><code class="language-text hljs"></code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../sim_rings/">« Synthetic: a body with two narrow rings</a><a class="docs-footer-nextpage" href="../huya_2019/">Huya, 2019 March 18 »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Tuesday 3 November 2026 12:14">Tuesday 3 November 2026</span>. Using Julia version 1.13.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+println(&quot;figures written to &quot;, out)</code></pre><p>The joint fit in the first event: the body and the ring with the chords:</p><p><img src="../../assets/figures/ring_pole_event1.png" alt="event 1"/></p><pre><code class="language-text hljs"></code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../sim_rings/">« Synthetic: a body with two narrow rings</a><a class="docs-footer-nextpage" href="../huya_2019/">Huya, 2019 March 18 »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Tuesday 3 November 2026 19:38">Tuesday 3 November 2026</span>. Using Julia version 1.13.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
