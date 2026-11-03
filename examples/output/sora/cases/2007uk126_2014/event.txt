@@ -1,0 +1,7 @@
+# star: ra dec [deg] pmra pmdec [mas/yr] parallax [mas] epoch [Julian year]
+star 67.377565264785 -0.472462857773 -0.757200 -12.329700 1.022000 2016.00000000
+tref 2014-11-15T10:21:13.741
+# chord name | lon lat [deg] height [m] | kind time σ [s] ...
+chord|Schindler & Wolf|-119.41250000 37.07041667 1405.00|immersion 2014-11-15T10:19:24.3560 0.1590|emersion 2014-11-15T10:19:50.2490 0.1590
+chord|Olsen|-88.19619444 40.08677778 224.00|immersion 2014-11-15T10:18:05.4470 1.0320|emersion 2014-11-15T10:18:26.8020 1.0320
+chord|Bardecker|-119.67231111 38.88986944 1534.00|immersion 2014-11-15T10:19:29.1510 0.4520|emersion 2014-11-15T10:19:48.3700 0.4520

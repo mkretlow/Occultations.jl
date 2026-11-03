@@ -723,6 +723,9 @@ Findings:
 
 ## Summary
 
+* Nine of these fits were repeated with SORA on the same data; the two packages agree (see
+  [Occultations.jl and SORA](sora.md#The-same-events-reduced-with-both-packages)).
+
 * The package reproduces the published geometry (distances, velocities, stellar diameters,
   Fresnel scales) of the events, and the published limbs within their uncertainties in most
   cases. Exceptions: the 2002 KX14 minor axis and diameter (≈ 2σ larger with a joint

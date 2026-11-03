@@ -1,0 +1,18 @@
+Occultations.jl, Julia 1.13.2, 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz, threads 1
+1. event set-up (5 positive chords)          first    1.5502 s   median   0.00097 s  (n = 20)
+2. (f, g) of the 10 contacts                 first    0.4717 s   median   0.00001 s  (n = 20)
+3. ellipse fit (radial, LM + covariance)     first   11.8144 s   median   0.00096 s  (n = 20)
+   a = 383.4 ± 3.6 km, ε = 0.071 ± 0.054, PA = 72.4 ± 4.7°, χ² = 7.46
+4. posterior (20 walkers × 2000 steps)       first    1.4706 s   median   0.14111 s  (n = 5)
+Posterior of LimbProblem: 20 walkers × 2000 steps (burn-in 666), acceptance 0.21
+  center_f               =     186.828644  -3.726017 +4.057196
+  center_g               =    -301.897669  -2.156856 +2.118858
+  equatorial_radius      =     382.835630  -2.648403 +4.933918
+  oblateness             =       0.023789  -0.016225 +0.049338
+  position_angle         =      57.672001  -60.304874 +17.244855
+
+4b. χ² profiles of the 5 parameters          first    3.4297 s   median   0.05719 s  (n = 5)
+   center_f 185.326–192.597, center_g -303.533–-299.701, equatorial_radius 380.097–387.021, oblateness -0.138–0.121, position_angle 55.929–76.124
+5. ellipse fit with 6 negative chords        first    0.1145 s   median   0.04026 s  (n = 20)
+6. light-curve timing (diffraction model)    first    4.2937 s   median   0.03498 s  (n = 20)
+   immersion -31.741 ± 0.033 s, emersion +31.718 ± 0.035 s (truth −31.700, +31.700)

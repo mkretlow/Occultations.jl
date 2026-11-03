@@ -1,0 +1,14 @@
+SORA version: 0.3.3
+SORA 0.3.3, Python 3.14.8, NumPy 2.5.4
+1. event set-up (5 positive chords)          first    0.1990 s   median   0.13253 s  (n = 20)
+2. (f, g) of the 10 contacts                 first    0.5542 s   median   0.07707 s  (n = 20)
+3a. least squares only (trf)                 first    0.4135 s   median   0.19015 s  (n = 20)
+   χ²_min 8.761, 1 samples, 1 within Δχ² < 1: a = 381.1 ± 0.0, ε = 0.025 ± 0.000, PA = 63.2 ± 0.0
+3b. LS + Monte Carlo, dchi_min 10, 10^4      first    1.6049 s   median   1.59061 s  (n = 5)
+   χ²_min 7.891, 10006 samples, 16 within Δχ² < 1: a = 382.9 ± 2.2, ε = 0.064 ± 0.045, PA = 65.9 ± 8.4
+3c. LS + Monte Carlo, 1000 in Δχ² < 1        first    2.7736 s   median   2.71141 s  (n = 3)
+   χ²_min 7.816, 1004 samples, 36 within Δχ² < 1: a = 382.8 ± 2.4, ε = 0.054 ± 0.042, PA = 65.4 ± 10.8
+6. light-curve timing (chisqr)               first   85.3947 s   median  84.44564 s  (n = 3)
+   immersion [np.float64(-31.733203172435058), np.float64(0.08339020034030042)]  emersion [np.float64(31.713630039681444), np.float64(0.053398336625736675)] (truth −31.700, +31.700)
+6. light-curve timing (least_squares)        first   85.9071 s   median  85.99393 s  (n = 5)
+   immersion [np.float64(-31.720830376059563), np.float64(0.07897300821224817)]  emersion [np.float64(31.711816278750977), np.float64(0.06885669156289964)] (truth −31.700, +31.700)

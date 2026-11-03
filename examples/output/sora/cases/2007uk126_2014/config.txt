@@ -1,0 +1,10 @@
+model ellipse
+ellipse_error 0.0000
+oj_center_f 412.743654 4.746049
+oj_center_g -5.194275 15.994394
+oj_equatorial_radius 322.903448 4.100629
+oj_oblateness 0.078179 0.071273
+oj_position_angle 159.518308 19.244749
+oj_chi2 0.025587
+oj_dof 1
+oj_time 0.009741
