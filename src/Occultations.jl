@@ -75,6 +75,7 @@ include("photometry/timing.jl")
 include("event/chord.jl")
 include("event/track.jl")
 include("event/event.jl")
+include("event/cora_report.jl")
 include("limb/models.jl")
 include("limb/binary.jl")
 include("limb/rings.jl")
@@ -168,6 +169,7 @@ export Atmosphere, AtmosphereProfile, atmosphere_profile, atmosphere_flux, half_
        xv93_atmosphere, pluto_atmosphere
 export TimingProblem, fit_timing, contact_times, model_flux
 # events
+export CoraReport, read_cora_report, cora_chord
 export Contact, Chord, Event, Occultation, Track, EventContext, ispositive, iscomplete, isnegative, occulted_intervals,
        enable, disable, shift,
        replace_chord!, track, velocity, contact_points, chord_path

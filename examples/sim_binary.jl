@@ -55,8 +55,8 @@ truth = CompositeOutline([EllipseOutline(370.0, 330.0, 30.0), EllipseOutline(90.
 ## with its own equipment and timing accuracy; their chords cross the shadow at the cross-track
 ## `offsets` [km] from the centre of the primary
 include(joinpath(@__DIR__, "sim_stations.jl"))
-function simulate(star, body, t0, truth, center, offsets; rng, prefix="S", sites=nothing)
-    ev = Event(star, body, t0)
+function simulate(star, body, t0, truth, center, offsets; rng, prefix="S", sites=nothing, name="SimTNO")
+    ev = Event(star, body, t0; name=name)                 # simulated: no date in the plots
     pv = positionv(star, body.ephem, GEOCENTER, ev.tref)
     n = (-pv.vg, pv.vf) ./ hypot(pv.vf, pv.vg)
     sites = something(sites, stations(star, body, ev.tref, offsets .+ (center[1] * n[1] + center[2] * n[2]);
@@ -155,7 +155,7 @@ acT = (-alT[2], alT[1])
 # 110 km across it, so that the stations between them see both bodies (two drops).
 sepT = 670.0 .* alT .+ 110.0 .* acT
 truthT = CompositeOutline([EllipseOutline(125.0, 100.0, 20.0), EllipseOutline(115.0, 92.0, 35.0)], [(0.0, 0.0), sepT])
-evT, sitesT = simulate(starT, bodyT, tT, truthT, (5.0, 3.0), random_offsets(MersenneTwister(5), 17, -140.0, 260.0; mingap=8.0); rng=rng,
+evT, sitesT = simulate(starT, bodyT, tT, truthT, (5.0, 3.0), random_offsets(MersenneTwister(5), 17, -140.0, 260.0; mingap=8.0); rng=rng, name="SimTrojan",
                      prefix="T")
 station_table(sitesT)
 @printf("%.2f km/s; drops per chord: %s\n", evT.ca.vel, join([count(x -> x.kind === :immersion, c.contacts) for c in evT.chords], " "))
@@ -195,7 +195,7 @@ section("Figures")
 lon0, lat0 = mean(st.observer.lon for st in sites), mean(st.observer.lat for st in sites)
 standard_figures("binary", r1; out=out, posterior=post,
                  projection="+proj=laea +lon_0=$(round(lon0)) +lat_0=$(round(lat0))",
-                 limits=(lon0 - 25, lon0 + 25, lat0 - 16, lat0 + 16), window=600, marks=60)
+                 limits=(lon0 - 25, lon0 + 25, lat0 - 16, lat0 + 16), window=600, marks=0)
 println("figures written to ", out)
 
 # The chords with the true limb, and the fit with its 1σ shape band (the occupancy of the

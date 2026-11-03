@@ -152,11 +152,12 @@ function _occview(p::LimbProblem, v0::Vector{Float64}; event::Integer=1, explore
     fig = Figure(; size=size)
     Label(fig[0, 1:2], isempty(title) ? s.events[event].name : title; fontsize=18, font=:bold)
     ax3 = Axis3(fig[1, 1]; aspect=:data, xreversed=true, elevation=π / 2 - 0.001, azimuth=-π / 2,
-                xlabel="f (km, east)", ylabel="g (km, north)", zlabel="towards observer (km)",
+                xlabel="f (km)", ylabel="g (km)", zlabel="towards observer (km)",
                 title="as seen from the Earth (drag to rotate with GLMakie)")
     right = fig[1, 2] = GridLayout()
-    ax2 = Axis(right[1, 1]; aspect=DataAspect(), xreversed=true, xlabel="f (km, east)", ylabel="g (km, north)",
+    ax2 = Axis(right[1, 1]; aspect=DataAspect(), xreversed=true, xlabel="f (km)", ylabel="g (km)",
                title="sky plane")
+    Occultations.MeshViews._sky_compass!(ax2)
     axl = Axis(right[2, 1]; xlabel="rotational phase (0 = maximum before the event)", ylabel="Δmag (projected area; brighter ↑)",
                yreversed=true,
                title="rotational light curve")

@@ -30,6 +30,12 @@ end
 push!(ev, Chord("GAR", Observer("GAR", "-119 40 20.3", "38 53 23.5", 1502);
                 span=(day * "03:28", day * "03:42"), sensitivity=1.068))
 
+# or chords from observation reports in the CORA format (O+: timed contacts, O−: negative chord)
+# for f in readdir("reports"; join=true)
+#     c = cora_chord(read_cora_report(f))
+#     c === nothing || push!(ev, c)
+# end
+
 # your own light curve instead: timings from the diffraction model
 # lc = read_lightcurve("station.csv"; format=:pymovie, exptime=0.5, λ=0.6, Δλ=0.3)
 # tf = fit_timing(normalize(lc); vel=ev.ca.vel, dist=ev.ca.dist_km,

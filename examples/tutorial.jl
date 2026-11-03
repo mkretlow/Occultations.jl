@@ -35,7 +35,7 @@ t0 = Epoch("2023-05-01T05:00:00")
 ra, dec, _ = ephem_radec(body, t0)
 star = Star(ra + 0.002 / 3600 / cosd(dec), dec; name="SimStar", mag=Dict("V" => 14.0, "K" => 12.5),
             ra_err=0.15, dec_err=0.12)
-ev = Event(star, body, t0)
+ev = Event(star, body, t0; name="SimTNO")              # simulated: no date in the plots
 display(ev)
 path = shadow_path(star, body, ev.tref, ev.tref; offsets=[0.0])
 lon0, lat0 = path.lon[1, 1], path.lat[1, 1]
@@ -76,7 +76,7 @@ for (j, st) in enumerate(sites)
     c = contact_times(tf)
     @printf("%-10s immersion %s ± %.3f s   emersion %s ± %.3f s\n", obs.name, isot(c.immersion; digits=3),
             c.immersion_err, isot(c.emersion; digits=3), c.emersion_err)
-    npos == 1 && savefig(plot(tf), joinpath(out, "timing_fit.png"))
+    npos == 1 && savefig(plot(tf; xguide="time [s]"), joinpath(out, "timing_fit.png"))
     push!(ev, Chord(obs.name, obs, tf))
 end
 
@@ -165,7 +165,7 @@ bodyA = Body("XV93-like", ephA; radius=244.0, density=1500.0)
 tA = Epoch("2024-05-20T04:00:00")
 raA, decA, _ = ephem_radec(bodyA, tA)
 starA = Star(raA + 0.001 / 3600 / cosd(decA), decA; name="StarA", diameter=0.0032)
-evA = Event(starA, bodyA, tA)
+evA = Event(starA, bodyA, tA; name="XV93-like")
 ## a central chord, one halfway to the limb and a near miss through the atmosphere
 pvA = positionv(starA, ephA, GEOCENTER, evA.tref)
 nA = (-pvA.vg, pvA.vf) ./ hypot(pvA.vf, pvA.vg)
@@ -197,13 +197,13 @@ prof = atmosphere_profile(atm, fitA[:pressure][1], fitA[:radius][1], body_gm(bod
                           λ=0.6, star_diam=apparent_diameter(starA, evA.ca.dist_km))
 savefig(plot(prof; ρmax=400), joinpath(out, "atmosphere_profile.png"))
 lc1 = evA["A1"].lightcurve
-savefig(plot(lc1; model=model_lightcurve(fitA, "A1")[2]), joinpath(out, "atmosphere_lightcurve.png"))
+savefig(plot(lc1; model=model_lightcurve(fitA, "A1")[2], xguide="time [s]"), joinpath(out, "atmosphere_lightcurve.png"))
 
 section("6. maps")
 ## the standard figures: limb fits (default, 68.3 % region, as the paper), posterior, maps (prediction,
 ## post-fit, comparison) and the globe
 standard_figures("simtno", fitE; out=out, posterior=post, 
-                 projection="+proj=laea +lon_0=$(round(lon0)) +lat_0=$(round(lat0))", limits=(lon0 - 30, lon0 + 30, lat0 - 20, lat0 + 20), window=600, marks=60)
+                 projection="+proj=laea +lon_0=$(round(lon0)) +lat_0=$(round(lat0))", limits=(lon0 - 30, lon0 + 30, lat0 - 20, lat0 + 20), window=600, marks=0)
 println("\nfigures written to ", out)
 
 # The timing fit of station 3, and the posterior of the ellipse and the clock offset with the

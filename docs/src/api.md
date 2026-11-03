@@ -95,7 +95,7 @@ Private = false
 
 ```@autodocs
 Modules = [Occultations]
-Pages = ["event/event.jl", "event/chord.jl", "event/track.jl"]
+Pages = ["event/event.jl", "event/chord.jl", "event/track.jl", "event/cora_report.jl"]
 Private = false
 ```
 

@@ -3,8 +3,9 @@
 ## Limb fit
 
 `plot(fit; event=1, uncertainty=:region, numbers=true)`. The fundamental
-plane as seen from the Earth: f towards east (drawn to the *left*, as on the sky), g towards
-north, in km at the body, relative to the ephemeris position. The black curve is the fitted
+plane as seen from the Earth: f towards east, g towards north, in km at the body, relative to
+the ephemeris position. As on the sky, east is to the *left*: the f axis increases to the left.
+The compass in the lower right corner shows the directions (E, N; `compass=false` omits it). The black curve is the fitted
 limb and the cross its centre (the offset from the ephemeris, i.e. the astrometry). Coloured
 segments are the occulted parts of the positive chords (`extend=true` adds their tracks
 beyond the limb as dotted gray lines); dashed gray lines are negative chords. The number at each chord is its index in the legend (colours
@@ -23,9 +24,13 @@ The limb can be compared with the chords in three ways:
 * where no chord constrains the limb, the region widens and can be asymmetric. For example,
   if only the southern limb is observed, the size and centre trade off against each other.
 
-The fitted dimensions with 1σ errors (a, b and D_eq of an ellipse; R and D of a circle;
+The fitted dimensions with 1σ errors (the apparent semi-axes a′, b′ and D_eq of an ellipse; R
+and D of a circle; D_eq of the whole and of each lobe of a contact binary;
 median −/+ for a posterior) are printed in the right margin below the legend
 (`dimensions=false` omits them).
+
+`plot(event; limb=outline, center=(f₀, g₀))` draws the chords of an event with a given limb, e.g.
+the simulated truth or a published ellipse, and its dimensions (without errors).
 
 ## Posterior limbs
 

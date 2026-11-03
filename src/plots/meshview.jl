@@ -71,7 +71,7 @@ function meshview(b::Body, t; observer::AbstractObserver=GEOCENTER, color=:gray7
     V = S * (o.matrix' * m.vertices)
     fig = Figure(; size=size)
     ax = Axis3(fig[1, 1]; aspect=:data, title="$(b.name) – $(isot(t; digits=0)) UTC",
-               xlabel="f (east) [km]", ylabel="g (north) [km]", zlabel="towards observer [km]",
+               xlabel="f (km)", ylabel="g (km)", zlabel="towards observer [km]",
                xreversed=true, azimuth=-0.5π, elevation=0.5π - 0.35)
     _draw!(ax, V, m.faces; color=color, wireframe=wireframe, shading=shading)
     R = maximum(sqrt.(sum(abs2, V; dims=1)))
@@ -79,7 +79,7 @@ function meshview(b::Body, t; observer::AbstractObserver=GEOCENTER, color=:gray7
     _arrows!(ax, R, (B[:, 1], B[:, 2], B[:, 3]), ("x", "y", "pole"), (:red, :green, :blue))
     # projected limb as seen by the observer (east to the left, as on the sky)
     O = project(b.shape, o.matrix, u)
-    ax2 = Axis(fig[1, 2]; aspect=DataAspect(), xreversed=true, xlabel="f (east) [km]", ylabel="g (north) [km]",
+    ax2 = Axis(fig[1, 2]; aspect=DataAspect(), xreversed=true, xlabel="f (km)", ylabel="g (km)",
                title=@sprintf("seen from %s: sub-observer lat %.1f°, pole PA %.1f°", observer isa Occultations.Observer ?
                               observer.name : "observer", o.sub_observer_lat, o.pole_position_angle))
     x, y = outline_points(O)
@@ -87,7 +87,21 @@ function meshview(b::Body, t; observer::AbstractObserver=GEOCENTER, color=:gray7
     pp = B[:, 3]
     lines!(ax2, [0, 1.3R * pp[1]], [0, 1.3R * pp[2]]; color=:blue, linewidth=2)
     text!(ax2, 1.3R * pp[1], 1.3R * pp[2]; text=pp[3] > 0 ? "pole (towards us)" : "pole (away)", color=:blue)
+    _sky_compass!(ax2)
     return fig
+end
+
+# a compass in the lower right corner of a sky-plane axis (f reversed: east to the left), in
+# axis-relative coordinates
+function _sky_compass!(ax)
+    x0, y0, L = 0.9, 0.08, 0.08
+    lines!(ax, [x0, x0 - L], [y0, y0]; space=:relative, color=:black, linewidth=1.2)
+    lines!(ax, [x0, x0], [y0, y0 + L]; space=:relative, color=:black, linewidth=1.2)
+    scatter!(ax, [x0 - L, x0], [y0, y0 + L]; space=:relative, marker=[:ltriangle, :utriangle], color=:black,
+             markersize=8)
+    text!(ax, [x0 - 1.4L, x0], [y0, y0 + 1.45L]; text=["E", "N"], space=:relative, align=(:center, :center),
+          fontsize=12)
+    return ax
 end
 
 # rotation matrices about the world axes [deg]

@@ -3,6 +3,8 @@
 # ---------------------------------------------------------------------------
 
 RecipesBase.@recipe function f(lc::LightCurve; model=nothing)
+    left_margin --> (5, :mm)                      # room for the axis labels (an outer legend narrows the plot)
+    bottom_margin --> (3, :mm)
     framestyle --> :box
     xguide --> "time − $(isot(lc.tref; digits=2)) UTC [s]"
     yguide --> "flux"
@@ -28,6 +30,8 @@ RecipesBase.@recipe function f(lc::LightCurve; model=nothing)
 end
 
 RecipesBase.@recipe function f(r::FitResult{TimingProblem}; residuals=true)
+    left_margin --> (5, :mm)                      # room for the axis labels (an outer legend narrows the plot)
+    bottom_margin --> (3, :mm)
     framestyle --> :box
     p = r.problem
     lc = p.lc
@@ -72,8 +76,34 @@ RecipesBase.@recipe function f(r::FitResult{TimingProblem}; residuals=true)
 end
 
 # chords of an event in the fundamental plane
+# the plotted area: the axis limits in effect (given by the user or set by the recipe), or `box`
+function _plot_box(attr, box)
+    box === nothing && return nothing
+    xl = get(attr, :xlims, nothing); yl = get(attr, :ylims, nothing)
+    x = xl isa Tuple && length(xl) == 2 && all(isfinite, xl) ? xl : (box[1], box[2])
+    y = yl isa Tuple && length(yl) == 2 && all(isfinite, yl) ? yl : (box[3], box[4])
+    return (min(x...), max(x...), min(y...), max(y...))
+end
+
+# a compass in the lower right corner of the plotted area `box` (f grows to the left, as on the
+# sky): arrows towards east (+f) and north (+g), labelled E and N
+function _compass_series!(series, box)
+    w, h = box[2] - box[1], box[4] - box[3]
+    L = 0.09 * min(w, h)
+    f0, g0 = box[1] + 0.06w, box[3] + 0.06h
+    # shafts and heads as plain lines (GR's arrow heads ignore the flipped f axis)
+    k, b = 0.28L, 0.14L
+    x = [f0, f0 + L, NaN, f0 + L - k, f0 + L, f0 + L - k, NaN, f0, f0, NaN, f0 - b, f0, f0 + b]
+    y = [g0, g0, NaN, g0 - b, g0, g0 + b, NaN, g0, g0 + L, NaN, g0 + L - k, g0 + L, g0 + L - k]
+    push!(series, (x, y, (linecolor=:black, linewidth=1.2, label="")))
+    push!(series, ([f0 + 1.35L, f0], [g0, g0 + 1.35L],
+                   (seriestype=:scatter, markersize=0, markeralpha=0, label="",
+                    series_annotations=[("E", 9, :center, :black), ("N", 9, :center, :black)])))
+    return series
+end
+
 function _chord_series!(series, ev::Event; dts=Dict{String,Float64}(), numbers::Bool=true, ref=(0.0, 0.0),
-                        box=nothing, extend::Bool=false)
+                        box=nothing, extend::Bool=false, compass=nothing)
     nx = Float64[]; ny = Float64[]; nt = String[]
     for (i, c) in enumerate(ev.chords)
         dt = get(dts, c.name, 0.0)
@@ -119,14 +149,18 @@ function _chord_series!(series, ev::Event; dts=Dict{String,Float64}(), numbers::
         append!(ex, (a[1], b[1], NaN)); append!(ey, (a[2], b[2], NaN))
     end
     isempty(ex) || push!(series, (ex, ey, (linecolor=:red, linewidth=3, label="contact-time uncertainty")))
+    compass === nothing || _compass_series!(series, compass)
     return series
 end
 
-RecipesBase.@recipe function f(ev::Event; limb=nothing, center=(0.0, 0.0), numbers=true, extend=false)
+RecipesBase.@recipe function f(ev::Event; limb=nothing, center=(0.0, 0.0), numbers=true, extend=false, compass=true,
+                              dimensions=true)
+    left_margin --> (5, :mm)                      # room for the axis labels (an outer legend narrows the plot)
+    bottom_margin --> (3, :mm)
     aspect_ratio --> :equal
     framestyle --> :box
-    xguide --> "f (km, east)"
-    yguide --> "g (km, north)"
+    xguide --> "f (km)"
+    yguide --> "g (km)"
     xflip --> true
     title --> ev.name
     legend --> :outertopright
@@ -146,7 +180,8 @@ RecipesBase.@recipe function f(ev::Event; limb=nothing, center=(0.0, 0.0), numbe
         xlims --> (box[1], box[2])
         ylims --> (box[3], box[4])
     end
-    for (x, y, kw) in _chord_series!([], ev; numbers=numbers, ref=ref, box=box, extend=extend)
+    for (x, y, kw) in _chord_series!([], ev; numbers=numbers, ref=ref, box=box, extend=extend,
+                                     compass=compass ? _plot_box(plotattributes, box) : nothing)
         @RecipesBase.series begin
             seriestype := :path
             for (k, v) in pairs(kw)
@@ -170,6 +205,19 @@ RecipesBase.@recipe function f(ev::Event; limb=nothing, center=(0.0, 0.0), numbe
             linecolor --> :red
             label --> "limb"
             outline_points(limb; center=center)
+        end
+    end
+    # the dimensions of the given limb, in the right margin below the legend
+    if limb !== nothing && dimensions && box !== nothing
+        dl = _dims_lines(limb)
+        @RecipesBase.series begin
+            seriestype := :scatter
+            markersize := 0
+            markeralpha := 0
+            markerstrokewidth := 0
+            label := ""
+            series_annotations := [(l, 9, :left, :black) for l in dl]
+            _dims_xy(box, length(dl))
         end
     end
 end
@@ -235,8 +283,9 @@ end
 
 # band of limbs that are not star-shaped (composite outlines): the occupancy of a grid, i.e. the
 # fraction of the drawn limbs (centre, outline) covering each point; the band is where it lies
-# between the nσ quantiles (e.g. 15.9 % and 84.1 %). Returns (f, g, z) for a heatmap (z = 1 in
-# the band, NaN elsewhere).
+# between the nσ quantiles (e.g. 15.9 % and 84.1 %). Returns the band as polygons (x, y separated
+# by NaN): one rectangle per run of band cells in a row. (A heatmap would be simpler, but GR draws
+# heatmaps without the flip of the f axis.)
 function _occupancy_band(limbs, box; n::Integer=400, nsigma::Real=1)
     fs = range(box[1], box[2]; length=n)
     gs = range(box[3], box[4]; length=n)
@@ -245,8 +294,26 @@ function _occupancy_band(limbs, box; n::Integer=400, nsigma::Real=1)
         signed_distance(O, f - c[1], g - c[2]) < 0 && (cnt[j, i] += 1)
     end
     pl = (1 - SpecialFunctions.erf(nsigma / sqrt(2))) / 2
-    z = [pl <= q / length(limbs) <= 1 - pl ? 1.0 : NaN for q in cnt]
-    return collect(fs), collect(gs), z
+    inband = [pl <= q / length(limbs) <= 1 - pl for q in cnt]
+    df, dg = step(fs) / 2, step(gs) / 2
+    xs, ys = Float64[], Float64[]
+    for j in 1:n
+        i = 1
+        while i <= n
+            if inband[j, i]
+                k = i
+                while k < n && inband[j, k+1]
+                    k += 1
+                end
+                f1, f2, g1, g2 = fs[i] - df, fs[k] + df, gs[j] - dg, gs[j] + dg
+                append!(xs, (f1, f2, f2, f1, f1, NaN)); append!(ys, (g1, g1, g2, g2, g1, NaN))
+                i = k + 1
+            else
+                i += 1
+            end
+        end
+    end
+    return xs, ys
 end
 
 # `uncertainty` of the limb plots:
@@ -307,18 +374,38 @@ function _dims_lines(get)
     end
     out = String[]
     if a !== nothing && b !== nothing && req !== nothing
-        out = ["a = $(fmt(a)) km", "b = $(fmt(b)) km", "D_eq = $(fmt(req, 2.0)) km"]
+        out = ["a′ = $(fmt(a)) km", "b′ = $(fmt(b)) km", "D_eq = $(fmt(req, 2.0)) km"]
     elseif R !== nothing
         out = ["R = $(fmt(R)) km", "D = $(fmt(R, 2.0)) km"]
     end
     if sep !== nothing                                                # binary: the secondary
         sa, sr, sq = get(:sec_equatorial_radius), get(:sec_radius), get(:sec_equivalent_radius)
-        sa !== nothing && sq !== nothing && push!(out, "sec. a = $(fmt(sa)) km", "sec. D_eq = $(fmt(sq, 2.0)) km")
+        sa !== nothing && sq !== nothing && push!(out, "sec. a′ = $(fmt(sa)) km", "sec. D_eq = $(fmt(sq, 2.0)) km")
         sr !== nothing && push!(out, "sec. D = $(fmt(sr, 2.0)) km")
         push!(out, "separation = $(fmt(sep)) km")
     end
     return out
 end
+# the dimensions of a given outline (e.g. the simulated truth), without errors; of a composite
+# outline: two lobes if the parts overlap, otherwise a primary and its satellite
+_outer_radius(O::EllipseOutline) = O.a
+_outer_radius(O::Outline) = maximum(limb_radius(O, θ) for θ in range(0, 2π; length=181))
+function _dims_lines(O::Outline)
+    fm(x) = @sprintf("%.1f", x)
+    if O isa CompositeOutline && length(O.parts) == 2
+        (p1, p2), (o1, o2) = O.parts, O.offsets
+        d = hypot((o2 .- o1)...)
+        if d < _outer_radius(p1) + _outer_radius(p2)
+            return ["D_eq = $(fm(2equivalent_radius(O))) km", "lobe 1: D_eq = $(fm(2equivalent_radius(p1))) km",
+                    "lobe 2: D_eq = $(fm(2equivalent_radius(p2))) km"]
+        end
+        return [_dims_lines(p1); "sec. D_eq = $(fm(2equivalent_radius(p2))) km"; "separation = $(fm(d)) km"]
+    elseif O isa EllipseOutline
+        return ["a′ = $(fm(O.a)) km", "b′ = $(fm(O.b)) km", "D_eq = $(fm(2equivalent_radius(O))) km"]
+    end
+    return ["D_eq = $(fm(2equivalent_radius(O))) km"]
+end
+
 # the limb allowance of a limb problem, as an extra line (if > 0)
 _slimb_line(p) = p isa LimbProblem && p.σ_limb > 0 ? [@sprintf("σ_limb = %.1f km", p.σ_limb)] : String[]
 _dims_lines(r::FitResult) = (l = _dims_lines(n -> try r[n] catch; nothing end); isempty(l) ? l : [l; _slimb_line(r.problem)])
@@ -332,16 +419,18 @@ end
 
 
 RecipesBase.@recipe function f(r::LimbFit; event=1, uncertainty=:shape, nsigma=1, ndraw=100, numbers=true, dimensions=true,
-                              extend=false,
+                              extend=false, compass=true,
                               rng=Random.default_rng())
+    left_margin --> (5, :mm)                      # room for the axis labels (an outer legend narrows the plot)
+    bottom_margin --> (3, :mm)
     p = r.problem
     k = _event_index(p, event)
     ev = p.setup.events[k]
     dts = Dict(c => v[1] for (c, v) in clock_offsets(r))
     aspect_ratio --> :equal
     framestyle --> :box
-    xguide --> "f (km, east)"
-    yguide --> "g (km, north)"
+    xguide --> "f (km)"
+    yguide --> "g (km)"
     xflip --> true
     title --> ev.name
     legend --> :outertopright
@@ -349,7 +438,6 @@ RecipesBase.@recipe function f(r::LimbFit; event=1, uncertainty=:shape, nsigma=1
     rings = _rings(p.model, r.values, k, p.setup)
     box = _ring_box(_limb_box(c0, O0), c0, rings)
     comp = O0 isa CompositeOutline
-    comp && (colorbar := false)                 # the occupancy band is a heatmap
     xlims --> (box[1], box[2])
     ylims --> (box[3], box[4])
     if uncertainty !== false && uncertainty !== :none && all(isfinite, r.covariance)
@@ -385,20 +473,20 @@ RecipesBase.@recipe function f(r::LimbFit; event=1, uncertainty=:shape, nsigma=1
                     xs, ys
                 end
             elseif length(draws) >= 20 && comp
-                BF, BG, BZ = _occupancy_band(limbs, box; nsigma=nsigma)
+                BX, BY = _occupancy_band(limbs, box; nsigma=nsigma)
                 @RecipesBase.series begin
-                    seriestype := :heatmap
-                    seriescolor := :grays
-                    clims := (0.0, 2.0)
-                    colorbar := false
-                    seriesalpha --> 0.45
+                    seriestype := :shape
+                    fillcolor --> :gray45
+                    fillalpha --> 0.4
+                    linewidth --> 0
+                    linealpha --> 0
                     label := ""
-                    BF, BG, BZ
+                    BX, BY
                 end
                 @RecipesBase.series begin                      # its legend entry
                     seriestype := :shape
-                    fillcolor --> :gray60
-                    fillalpha --> 0.45
+                    fillcolor --> :gray45
+                    fillalpha --> 0.4
                     linewidth --> 0
                     linealpha --> 0
                     label --> _band_label(uncertainty, nsigma; composite=true)
@@ -407,8 +495,8 @@ RecipesBase.@recipe function f(r::LimbFit; event=1, uncertainty=:shape, nsigma=1
             elseif length(draws) >= 20
                 @RecipesBase.series begin
                     seriestype := :shape
-                    fillcolor --> :gray60
-                    fillalpha --> 0.45
+                    fillcolor --> :gray45
+                    fillalpha --> 0.4
                     linewidth --> 0
                     linealpha --> 0
                     label --> _band_label(uncertainty, nsigma)
@@ -427,7 +515,8 @@ RecipesBase.@recipe function f(r::LimbFit; event=1, uncertainty=:shape, nsigma=1
             end
         end
     end
-    for (x, y, kw) in _chord_series!([], ev; dts=dts, numbers=numbers, ref=c0, box=box, extend=extend)
+    for (x, y, kw) in _chord_series!([], ev; dts=dts, numbers=numbers, ref=c0, box=box, extend=extend,
+                                     compass=compass ? _plot_box(plotattributes, box) : nothing)
         @RecipesBase.series begin
             seriestype := :path
             for (kk, v) in pairs(kw)
@@ -485,16 +574,18 @@ RecipesBase.@recipe function f(r::LimbFit; event=1, uncertainty=:shape, nsigma=1
 end
 
 RecipesBase.@recipe function f(post::LimbPosterior; event=1, uncertainty=:shape, nsigma=1, ndraw=400, numbers=true, dimensions=true,
-                                    extend=false,
+                                    extend=false, compass=true,
                               rng=Random.default_rng())
+    left_margin --> (5, :mm)                      # room for the axis labels (an outer legend narrows the plot)
+    bottom_margin --> (3, :mm)
     p = post.problem
     k = _event_index(p, event)
     ev = p.setup.events[k]
     S = samples(post)
     aspect_ratio --> :equal
     framestyle --> :box
-    xguide --> "f (km, east)"
-    yguide --> "g (km, north)"
+    xguide --> "f (km)"
+    yguide --> "g (km)"
     xflip --> true
     title --> ev.name * " (posterior)"
     legend --> :outertopright
@@ -502,7 +593,6 @@ RecipesBase.@recipe function f(post::LimbPosterior; event=1, uncertainty=:shape,
     (c0, O0) = outlines(p, vmed)[k]
     box = _ring_box(_limb_box(c0, O0), c0, _rings(p.model, vmed, k, p.setup))
     comp = O0 isa CompositeOutline
-    comp && (colorbar := false)                 # the occupancy band is a heatmap
     xlims --> (box[1], box[2])
     ylims --> (box[3], box[4])
     # the maximum-posterior limb and centre (the cross): the shape draws and the centre
@@ -529,20 +619,20 @@ RecipesBase.@recipe function f(post::LimbPosterior; event=1, uncertainty=:shape,
             reduce(vcat, [[x; NaN] for (x, _) in draws]), reduce(vcat, [[y; NaN] for (_, y) in draws])
         end
     elseif uncertainty !== false && uncertainty !== :none && comp
-        BF, BG, BZ = _occupancy_band(limbs, box; nsigma=nsigma)
+        BX, BY = _occupancy_band(limbs, box; nsigma=nsigma)
         @RecipesBase.series begin
-            seriestype := :heatmap
-            seriescolor := :grays
-            clims := (0.0, 2.0)
-            colorbar := false
-            seriesalpha --> 0.45
+            seriestype := :shape
+            fillcolor --> :gray45
+            fillalpha --> 0.4
+            linewidth --> 0
+            linealpha --> 0
             label := ""
-            BF, BG, BZ
+            BX, BY
         end
         @RecipesBase.series begin                      # its legend entry
             seriestype := :shape
-            fillcolor --> :gray60
-            fillalpha --> 0.45
+            fillcolor --> :gray45
+            fillalpha --> 0.4
             linewidth --> 0
             linealpha --> 0
             label --> _band_label(uncertainty, nsigma; composite=true)
@@ -551,8 +641,8 @@ RecipesBase.@recipe function f(post::LimbPosterior; event=1, uncertainty=:shape,
     elseif uncertainty !== false && uncertainty !== :none
         @RecipesBase.series begin
             seriestype := :shape
-            fillcolor --> :gray60
-            fillalpha --> 0.45
+            fillcolor --> :gray45
+            fillalpha --> 0.4
             linewidth --> 0
             linealpha --> 0
             label --> _band_label(uncertainty, nsigma)
@@ -569,7 +659,8 @@ RecipesBase.@recipe function f(post::LimbPosterior; event=1, uncertainty=:shape,
             end
         end
     end
-    for (x, y, kw) in _chord_series!([], ev; numbers=numbers, ref=c0, box=box, extend=extend)
+    for (x, y, kw) in _chord_series!([], ev; numbers=numbers, ref=c0, box=box, extend=extend,
+                                     compass=compass ? _plot_box(plotattributes, box) : nothing)
         @RecipesBase.series begin
             seriestype := :path
             for (kk, v) in pairs(kw)
@@ -662,6 +753,8 @@ end
 
 RecipesBase.@recipe function f(cp::CornerPlot; vars=nothing, axislabels=Dict(), truths=Dict(), truth_label="reference",
                                bins=40, maxpoints=4000)
+    left_margin --> (5, :mm)                      # room for the axis labels (an outer legend narrows the plot)
+    bottom_margin --> (3, :mm)
     post = cp.args[1]
     names = vars === nothing ? post.names : collect(vars)
     S = samples(post)
@@ -832,6 +925,8 @@ RecipesBase.@recipe function f(cp::CornerPlot; vars=nothing, axislabels=Dict(), 
 end
 
 RecipesBase.@recipe function f(o::Outline; center=(0.0, 0.0))
+    left_margin --> (5, :mm)                      # room for the axis labels (an outer legend narrows the plot)
+    bottom_margin --> (3, :mm)
     framestyle --> :box
     aspect_ratio --> :equal
     xflip --> true
@@ -849,6 +944,8 @@ RecipesBase.@recipe function f(r::ProjectedRing; center=(0.0, 0.0))
 end
 
 RecipesBase.@recipe function f(p::AtmosphereProfile; ρmax=nothing)
+    left_margin --> (5, :mm)                      # room for the axis labels (an outer legend narrows the plot)
+    bottom_margin --> (3, :mm)
     framestyle --> :box
     xguide --> "distance from shadow centre [km]"
     yguide --> "flux"
@@ -865,6 +962,8 @@ RecipesBase.@recipe function f(p::AtmosphereProfile; ρmax=nothing)
 end
 
 RecipesBase.@recipe function f(p::ShadowPath; observers=Observer[])
+    left_margin --> (5, :mm)                      # room for the axis labels (an outer legend narrows the plot)
+    bottom_margin --> (3, :mm)
     framestyle --> :box
     xguide --> "longitude (deg)"
     yguide --> "latitude (deg)"

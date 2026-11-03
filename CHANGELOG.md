@@ -10,6 +10,7 @@ First version.
 
 ### Added
 
+- **Observation reports** in the CORA format: `read_cora_report`, `cora_chord`.
 - **Light curves**: readers (text, PyMovie, Tangra, AstroImageJ), normalisation, event
   detection; a physical model with Fresnel diffraction over the passband, the stellar disc,
   the exposure time, finite opacity and several drops per light curve; fitted timings.
@@ -29,7 +30,8 @@ First version.
 - **Plots and maps**: Plots.jl recipes (light curves, fits, chords, posterior limbs, corner
   plots), 3-D views (`meshview`, `occview`, `occanimate`), maps and globes with GeoMakie.
   Limb plots draw the occulted parts of the positive chords; their tracks beyond the limb
-  only with `extend=true`.
+  only with `extend=true`. The fundamental-plane plots have a compass (E, N; east to the left, as
+  on the sky); the dimensions of apparent ellipses are labelled a′, b′.
 - **Examples**: re-reductions of 22 published studies (19 objects, 43 events), synthetic
   examples (binaries, contact binaries, rings; stations at random offsets, on land and in the
   dark, with their own equipment) and a tutorial, with their data and outputs;

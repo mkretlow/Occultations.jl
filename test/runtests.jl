@@ -840,4 +840,41 @@ end
     @test mod(rr[:ring_pa][1] - (HAUMEA_PAPER.ring_pa[1] + 360) + 90, 180) - 90 ≈ 0 atol = 3
 end
 
+@testset "CORA observation reports" begin
+    dir = mktempdir()
+    report(result, extra) = """
+        Date         = 2023-02-02                {yyyy-mm-dd}
+        Object       = (447178) 2005 RO43        {object}
+        Star         = GDR2 2951529567657635072  {star}
+        Occultation  = $result                   {result}
+        Sitename     = Site $result              {site}
+        Latitude     = S 31 16 27.5              {latitude}
+        Longitude    = E 149:03:42.0             {longitude}
+        Altitude     = 1150                      {m}
+        UT1          = 23:50:00                  {start}
+        UT4          = 00:10:00                  {end}
+        $extra
+        Comment      =                           {comment}
+        """
+    fp = joinpath(dir, "pos.txt")
+    write(fp, report("O+", "UT2 = 23:59:58.50 {D}\nUT3 = 00:00:21.75 {R}\nUT2ERR = 0.05 {s}\nUT3ERR = 0.08 {s}"))
+    r = read_cora_report(fp)
+    @test r.result === :positive
+    @test r.site.lat ≈ -(31 + 16 / 60 + 27.5 / 3600)
+    @test r.site.lon ≈ 149 + 3 / 60 + 42 / 3600
+    @test r.site.height == 1150.0
+    @test r.emersion - r.immersion ≈ 23.25 atol = 1e-6            # across midnight
+    @test r.stop - r.start ≈ 1200.0 atol = 1e-6
+    c = cora_chord(r; sensitivity=0.5)
+    @test ispositive(c) && length(c.contacts) == 2 && c.contacts[2].σ == 0.08 && c.sensitivity == 0.5
+    fn = joinpath(dir, "neg.txt")
+    write(fn, report("O-", "UT2 = 00:00:01 {D}"))
+    rn = @test_logs (:warn,) read_cora_report(fn)
+    @test rn.result === :negative && rn.immersion === nothing
+    @test isnegative(cora_chord(rn))
+    fd = joinpath(dir, "nd.txt")
+    write(fd, report("ND", ""))
+    @test cora_chord(read_cora_report(fd)) === nothing
+end
+
 end

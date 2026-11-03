@@ -37,7 +37,7 @@ body = Body("SimRing", eph; radius=125.0)
 t0 = Epoch("2025-04-17T13:00:00")
 ra, dec, _ = ephem_radec(body, t0)
 star = Star(ra + 0.002 / 3600 / cosd(dec), dec; name="SimStar R", ra_err=0.1, dec_err=0.1)
-ev = Event(star, body, t0)
+ev = Event(star, body, t0; name="SimRing")              # simulated: no date in the plots
 D = ev.ca.dist_km
 sd = apparent_diameter(star, D)
 @printf("distance %.2f au, shadow velocity %.2f km/s, Fresnel scale %.2f km at 0.6 µm\n", D / 1.495978707e8, ev.ca.vel,
@@ -174,12 +174,13 @@ c = ev.chords[best]
 lc = c.lightcurve
 I = model_lightcurve(r2, c.name)[2]
 rt = [x.time - lc.tref for x in c.contacts if x.body in (:ring1, :ring2)]
-panels = [plot(lc; model=I, title="$(c.name): body and rings")]
-isempty(rt) || push!(panels, plot(lc; model=I, title="ring dips (ingress)", xlims=(minimum(rt) - 2, minimum(rt) + 4)))
+panels = [plot(lc; model=I, title="$(c.name): body and rings", xguide="time [s]")]
+isempty(rt) || push!(panels, plot(lc; model=I, title="ring dips (ingress)", xguide="time [s]",
+                                   xlims=(minimum(rt) - 2, minimum(rt) + 4)))
 savefig(plot(panels...; layout=(length(panels), 1), size=(900, 400length(panels))), joinpath(out, "rings_lightcurve.png"))
 lon0, lat0 = mean(st.observer.lon for st in sites), mean(st.observer.lat for st in sites)
 standard_figures("rings", r1; out=out, projection="+proj=laea +lon_0=$(round(lon0)) +lat_0=$(round(lat0))",
-                 limits=(lon0 - 20, lon0 + 20, lat0 - 14, lat0 + 14), window=300, marks=30)
+                 limits=(lon0 - 20, lon0 + 20, lat0 - 14, lat0 + 14), window=300, marks=0)
 println("figures written to ", out)
 
 # The fit of the timings: the body and the two rings with the chords:

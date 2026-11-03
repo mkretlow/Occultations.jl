@@ -2,7 +2,7 @@
 ==============================================================================
 1. light curves → timings → chords
 ==============================================================================
-Event SimTNO, 2023-05-01T04:59:57: SimTNO occults Star(SimStar, RA=16 04 37.2259, Dec=-16 51 18.739)
+Event SimTNO: SimTNO occults Star(SimStar, RA=16 04 37.2259, Dec=-16 51 18.739)
   closest approach 2023-05-01T04:59:57.472: 0.0004" (10.7 km), PA 190.64°, 22.532 km/s, distance 39.9567 au
 
 true limb: EllipseOutline(a = 331.810 km, b = 283.186 km, PA(minor) = 66.92°), centre (25.0, -12.0)
@@ -42,7 +42,7 @@ Posterior of LimbProblem: 24 walkers × 2000 steps (burn-in 666), acceptance 0.5
   position_angle         =      66.780292  -0.180654 +0.182464
   dt_Station 3           =      -0.899317  -0.005534 +0.005722
 
-derived (posterior): (offset_ra = (median = 0.8610737875767693, minus = 0.0018122119266636982, plus = 0.001893382756038342), offset_dec = (median = -0.4184098767304747, minus = 0.0037438017921721523, plus = 0.003729241544164541), equivalent_radius = (median = 306.47980249184417, minus = 0.09330567619770136, plus = 0.08912187727958099), semi_minor_axis = (median = 283.24336766267754, minus = 0.06501657160606555, plus = 0.06303393379965883))
+derived (posterior): (offset_ra = (median = 0.8611063159238858, minus = 0.0018361405609692572, plus = 0.0018925504623027445), offset_dec = (median = -0.41840495117054055, minus = 0.0038647923203068424, plus = 0.003773295810312771), equivalent_radius = (median = 306.483008693176, minus = 0.09416452497941918, plus = 0.09693143875051646), semi_minor_axis = (median = 283.2440051952935, minus = 0.06608056128345652, plus = 0.06350845763842017))
 autocorrelation times [steps]: [54.6, 51.4, 46.5, 47.2, 54.3, 51.8]
 
 joint photometric fit: χ²/dof = 0.995, a = (331.404891646818, 0.18751887777710954), ε = (0.1454898415396204, 0.000551953797635877)

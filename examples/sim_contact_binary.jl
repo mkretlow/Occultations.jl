@@ -3,8 +3,8 @@
 # A simulated occultation by a bilobed trans-Neptunian object (two lobes of 260 and 200 km,
 # 430 km long; Arrokoth-like, scaled up), reduced with [`ContactBinaryLimb`](@ref):
 #
-# 1. sixteen stations on land with light curves (exposures of 0.04–0.5 s, diffraction,
-#    stellar diameter); the chords near the waist see two drops;
+# 1. nine stations at random offsets, on land, with light curves (exposures of 0.04–1 s,
+#    diffraction, stellar diameter) and timing errors of 0.05–0.1 s; the chords near the waist see two drops;
 # 2. the drops are detected and timed in each light curve; chords with several drops; a
 #    second timing with the velocities normal to the fitted limb;
 # 3. a single ellipse cannot reproduce two drops on one chord;
@@ -31,7 +31,7 @@ body = Body("SimCB", eph; radius=150.0)
 t0 = Epoch("2024-12-30T20:00:00")
 ra, dec, _ = ephem_radec(body, t0)
 star = Star(ra + 0.001 / 3600 / cosd(dec), dec; name="SimStar", mag=Dict("V" => 13.0, "K" => 12.0), ra_err=0.1, dec_err=0.1)
-ev = Event(star, body, t0)
+ev = Event(star, body, t0; name="SimCB")                # simulated: no date in the plots
 D = ev.ca.dist_km
 sd = apparent_diameter(star, D)
 @printf("distance %.2f au, shadow velocity %.2f km/s, stellar diameter %.2f km, Fresnel scale %.2f km at 0.6 µm\n",
@@ -51,18 +51,20 @@ println("true limb: ", truth)
 @printf("area-equivalent diameter %.1f km\n", 2 * equivalent_radius(truth))
 
 section("2. light curves → drops → timings")
-# Sixteen stations across the path, on land and in the dark, spread along the track
-# ([`examples/sim_stations.jl`](https://github.com/mkretlow/Occultations.jl/blob/main/examples/sim_stations.jl)),
-# each with its own camera: exposures of 0.04 to 0.5 s and different noise. Each light curve
-# is simulated with all its drops. The drops are found as runs of points below half the
+# Nine stations at random offsets across the path, on land and in the dark, spread along the
+# track ([`examples/sim_stations.jl`](https://github.com/mkretlow/Occultations.jl/blob/main/examples/sim_stations.jl)),
+# each with its own equipment, from GPS-timed video to visual timing: exposures of 0.04 to 1 s
+# and different noise. Each station has a systematic timing error with σ of 0.05–0.1 s (GPS-
+# synchronised timing), unknown to the reduction; as in real reports, this accuracy is added in
+# quadrature to the error of each contact time. Each light
+# curve is simulated with all its drops. The drops are found as runs of points below half the
 # baseline (a box search would find two deep drops with a short gap as one box), and each is
 # timed in its own window (between the neighbouring drops) with the diffraction model.
 include(joinpath(@__DIR__, "sim_stations.jl"))
-offsets = random_offsets(MersenneTwister(6), 16, -200.0, 190.0; mingap=8.0)
+offsets = random_offsets(MersenneTwister(45), 9, -220.0, 210.0; mingap=12.0)
 pv = positionv(star, eph, GEOCENTER, ev.tref)
 n̂ = (-pv.vg, pv.vf) ./ hypot(pv.vf, pv.vg)
-sites = stations(star, body, ev.tref, offsets .+ (center[1] * n̂[1] + center[2] * n̂[2]); rng=rng,
-                 equipment=EQUIPMENT[1:4])                 # cameras only: every station records a light curve
+sites = stations(star, body, ev.tref, offsets .+ (center[1] * n̂[1] + center[2] * n̂[2]); rng=rng)
 ## the velocity of the shadow normal to a limb O (centre c) at the instant τ of a track
 function vnormal(tr, O, c, τ)
     f, g = tr(τ)
@@ -72,7 +74,7 @@ function vnormal(tr, O, c, τ)
 end
 ## the contacts of the drops `found` in a light curve, each drop timed in its own window with the
 ## normal velocities vel(τ) at its edges
-function time_drops(lc, found, vel)
+function time_drops(lc, found, vel; σt=0.0)
     cs = Contact[]
     for (k, x) in enumerate(found)
         lo = k == 1 ? -Inf : (found[k-1].emersion + x.immersion) / 2
@@ -80,15 +82,22 @@ function time_drops(lc, found, vel)
         tf = fit_timing(lc; vel=vel(x.immersion), vel_emersion=vel(x.emersion), dist=D, star_diam=sd, tmin=lo, tmax=hi,
                         immersion=x.immersion, emersion=x.emersion, rng=rng)
         c = contact_times(tf)
-        push!(cs, Contact(:immersion, c.immersion, c.immersion_err), Contact(:emersion, c.emersion, c.emersion_err))
+        push!(cs, Contact(:immersion, c.immersion, hypot(c.immersion_err, σt)),
+              Contact(:emersion, c.emersion, hypot(c.emersion_err, σt)))
     end
     return cs
 end
 detections = Dict{String,Any}()
+σclks = Dict{String,Float64}()                            # the timing accuracy of each station [s]
+dclocks = Dict{String,Float64}()                          # and its actual timing error
 for (j, st) in enumerate(sites)
     obs = st.observer
     _, _, texp, noise = st.equipment
-    drops = [(a - ev.tref, b - ev.tref) for (a, b) in predicted_contacts(ev, obs, truth; center=center,
+    σclock = 0.05 + 0.05rand(rng)                         # the timing accuracy of this station
+    dclock = σclock * randn(rng)                          # and its actual timing error
+    σclks[obs.name] = σclock
+    dclocks[obs.name] = dclock
+    drops = [(a - ev.tref + dclock, b - ev.tref + dclock) for (a, b) in predicted_contacts(ev, obs, truth; center=center,
                                                                           window=abs(st.τ) + 200, step=0.02)]
     ## the velocity of the shadow normal to the limb at each contact sets the time scale of its diffraction fringes
     tr = Track(star, body, obs, ev.tref, st.τ - 60, st.τ + 60)
@@ -96,13 +105,14 @@ for (j, st) in enumerate(sites)
     lc = simulate_lightcurve(t, drops; tref=ev.tref, vel=[vnormal(tr, truth, center, a) for (a, _) in drops],
                              vel_emersion=[vnormal(tr, truth, center, b) for (_, b) in drops], dist=D, star_diam=sd,
                              λ=0.6, σ=noise, exptime=texp, rng=rng, name=obs.name)
-    found = detect_occultations(lc; method=:threshold)
+    ## a drop must span at least three exposures: one or two low points are not a detection
+    found = filter(x -> x.emersion - x.immersion >= 3texp, detect_occultations(lc; method=:threshold))
     detections[obs.name] = found
     ## first pass: the normal velocities are not known yet; the shadow velocity is used
-    cs = time_drops(lc, found, τ -> ev.ca.vel)
+    cs = time_drops(lc, found, τ -> ev.ca.vel; σt=σclock)
     push!(ev, isempty(cs) ? Chord(obs.name, obs, lc) : Chord(obs.name, obs; contacts=cs, lightcurve=lc))
-    @printf("%-4s %7.2f° %6.2f°  %-18s %.2f s, σ %.2f  cross-track %+5.0f km: %d drop(s) simulated, %d detected  %s\n",
-            obs.name, obs.lon, obs.lat, st.equipment[1], texp, noise, offsets[j], length(drops), length(found),
+    @printf("%-4s %7.2f° %6.2f°  %-21s %.2f s, σ %.2f, timing error %+.2f s  cross-track %+5.0f km: %d drop(s) simulated, %d detected  %s\n",
+            obs.name, obs.lon, obs.lat, st.equipment[1], texp, noise, dclock, offsets[j], length(drops), length(found),
             join([@sprintf("[%.2f, %.2f] s", x.immersion, x.emersion) for x in found], " "))
 end
 display(ev)
@@ -131,10 +141,17 @@ r2a = fit_limb(ev; model=ContactBinaryLimb(), rng=rng)
 for c in filter(ispositive, collect(ev.chords))
     tr = track(ev, c)
     off = c.lightcurve.tref - ev.tref                      # light-curve time → time from ev.tref
-    cs = time_drops(c.lightcurve, detections[c.name], τ -> vnormal(tr, Of, cf, τ + off))
+    cs = time_drops(c.lightcurve, detections[c.name], τ -> vnormal(tr, Of, cf, τ + off); σt=σclks[c.name])
     replace_chord!(ev, Chord(c.name, c.observer; contacts=cs, lightcurve=c.lightcurve))
 end
-r2 = fit_limb(ev; model=ContactBinaryLimb(), rng=rng)
+# With these errors the chords still scatter more than expected: the short second drop of a
+# chord through the waist is timed less well than its formal error says (a few exposures, a
+# local minimum of the timing fit), and a gap narrower than an exposure merges two drops into
+# one. The errors of the fit are therefore scaled by √(χ²/dof) (`scale_errors=true`). (A limb
+# allowance `σ_limb=:auto` fails here: with so few chords a large allowance lets the two-lobe
+# limb wander to a different shape.)
+r2 = fit_limb(ev; model=ContactBinaryLimb(), scale_errors=true, rng=rng)
+@printf("χ²/dof = %.1f: the errors are scaled by √(χ²/dof)\n", reduced_chi2(r2))
 display(r2)
 println("fitted vs true:")
 row(n, tv) = @printf("  %-22s %9.3f ± %6.3f   (truth %8.3f)\n", n, r2[n]..., tv)
@@ -147,6 +164,8 @@ for (n, tv) in ((:equivalent_radius, equivalent_radius(truth)), (:length, max(x1
                 (:neck_width, w), (:size_ratio, sqrt(a2 * b2 / (a1 * b1))))
     row(n, tv)
 end
+# The posterior samples the likelihood with the timing errors as given, not the scaled ones:
+# it is narrower than the scaled covariance errors above and does not contain the excess scatter.
 post = sample(r2; nsteps=3000, rng=rng)
 display(post)
 ds = derived_summary(post)
@@ -162,12 +181,27 @@ section("5. joint fit of the light curves")
 # The light curves themselves against the two-lobe limb (diffraction, stellar disc, exposure),
 # starting from the fit of the timings. Drops less than ~10 Fresnel scales apart are computed
 # together: the light diffracted into a narrow gap is part of the model.
+# Each light curve carries the timing error of its station (0.05–0.1 s), which the photometric
+# model would otherwise take as exact time stamps: every positive station gets a time offset with
+# a Gaussian prior of its timing accuracy.
 init = Dict(n => v for (n, v) in zip(r2.names, r2.values))
-r3 = fit_limb(ev; model=ContactBinaryLimb(), photometry=true, init=init, starts=1, rng=rng)
+pos = [c.name for c in ev.chords if ispositive(c)]
+priors = Dict(Symbol("dt_", n) => (0.0, σclks[n]) for n in pos)
+r3 = fit_limb(ev; model=ContactBinaryLimb(), photometry=true, init=init, fit_dt=pos, priors=priors, starts=1, rng=rng)
 @printf("χ²/dof = %.3f for %d light-curve points\n", reduced_chi2(r3), r3.dof + length(freenames(r3)))
 for (n, tv) in ((:a1, a1), (:b1, b1), (:a2, a2), (:b2, b2), (:axis_pa, axis_pa), (:neck, neck))
     @printf("  %-8s timings %8.3f ± %5.3f   light curves %8.3f ± %5.3f   (truth %7.3f)\n", n, r2[n]..., r3[n]..., tv)
 end
+println("time offsets of the joint fit (correction; the timing error has the opposite sign):")
+for n in pos
+    @printf("  %-4s %+6.3f ± %5.3f s   (timing error %+6.3f s)\n", n, r3[Symbol("dt_", n)]..., dclocks[n])
+end
+
+# **The joint fit is overconfident here.** It reaches χ²/dof ≈ 1, but with nine stations, of
+# which five see the body, its formal errors (a few 0.01 km) are far smaller than its deviations
+# from the truth (up to 10 km in b₁), and the fitted time offsets do not recover the timing
+# errors. The fit of the timings with scaled errors is the reliable result of this campaign; a
+# joint fit needs more, and better sampled, light curves.
 
 section("Figures")
 savefig(plot(ev; limb=truth, center=center, title="SimCB: chords and the true limb", size=(1000, 750)),
@@ -180,7 +214,7 @@ two = [c.name for c in ev.chords if count(x -> x.kind === :immersion, c.contacts
 for name in two[1:min(2, end)]
     lc = ev[name].lightcurve
     dd = detections[name]
-    savefig(plot(lc; model=model_lightcurve(r3, name)[2], title="$name: two drops",
+    savefig(plot(lc; model=model_lightcurve(r3, name)[2], title="$name: two drops", xguide="time [s]",
                  xlims=(dd[1].immersion - 5, dd[end].emersion + 5)),
             joinpath(out, "contact_binary_lc_$name.png"))
 end

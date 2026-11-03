@@ -16,7 +16,7 @@ true separation 1216.7 km at PA 75.4° (Δf, Δg = 1177.2, 307.4 km)
   S11  lon  -63.043°  lat  -1.430°  +189.1 s from the closest approach  CMOS camera, NTP       σ = 0.10 s
   S12  lon  -54.742°  lat  -3.806°  +156.0 s from the closest approach  visual / poorly timed  σ = 0.40 s
   S13  lon  -56.658°  lat  -2.542°  +164.6 s from the closest approach  visual / poorly timed  σ = 0.40 s
-Event SimTNO, 2023-05-01T02:59:57: SimTNO occults Star(SimStar, RA=16 04 37.6090, Dec=-16 51 19.775)
+Event SimTNO: SimTNO occults Star(SimStar, RA=16 04 37.6090, Dec=-16 51 19.775)
   closest approach 2023-05-01T02:59:57.470: 0.0004" (10.7 km), PA 190.62°, 22.516 km/s, distance 39.9572 au
   Chord(S1, negative)
   Chord(S2, positive)
