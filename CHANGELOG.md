@@ -18,9 +18,15 @@ First version.
   where Δχ² does not reach the threshold.
 - Covariance from the singular value decomposition of the Jacobian instead of the
   pseudoinverse of JᵀJ: directions the data do not constrain get σ = `Inf` instead of 0.
+- Negative chords (and the visible segments of positive chords) are checked exactly, not only
+  at their 400 samples: a limb could cross a chord between two samples (up to 40 km apart).
+  The intervals where a crossing is possible follow from a bound on the rate of change of the
+  radial distance and are searched by golden section; also in `check_negative_chords`.
 
 ### Added
 
+- `sample(…; init)`: the starting positions of the walkers, as a matrix or a function that
+  draws one start (e.g. from broad ranges, to search for other modes).
 - **Observation reports** in the CORA format: `read_cora_report`, `cora_chord`.
 - **Light curves**: readers (text, PyMovie, Tangra, AstroImageJ), normalisation, event
   detection; a physical model with Fresnel diffraction over the passband, the stellar disc,

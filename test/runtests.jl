@@ -968,6 +968,26 @@ end
     I = model([-0.5, 0.5], 0.1)                                          # wholly inside
     @test I == [0.0, 0.0]
     @test model([-10.0, 10.0], 20.0; g=5.0) == [1.0, 1.0]                # the track misses the body
+    # negative chords: crossings between the samples (≈ 2 km apart) are found exactly
+    depth(g; R=(1.0, 1.0)) = begin
+        t = Track(t0, -400.0, 400.0, [Occultations._ChebSeg(-400.0, 400.0, [0.0, 400.0], [g])], 1e9, GEOCENTER)
+        ts = collect(range(-400.0, 400.0; length=400))
+        nd = Occultations._NegativeData(1, t, ts, reduce(hcat, [collect(t(τ)) for τ in ts]), 1.0, 0, "test")
+        Occultations._negative_depth(p, nd, [EllipseOutline(R[1], R[2], 0.0)], v)
+    end
+    @test depth(0.0) ≈ -1 atol = 1e-6                                    # through the centre
+    @test depth(0.99) ≈ -0.01 atol = 1e-6                                # grazing, 0.28 km long
+    @test depth(1.5) ≈ 0.5 atol = 1e-6
+    @test depth(0.49; R=(3.0, 0.5)) ≈ -0.01 atol = 1e-4                  # elongated (L = 3.08), 1.2 km inside
+    @test Occultations._lipschitz(EllipseOutline(3.0, 0.5, 0.0)) ≈ (9 + 0.25) / 3
+    # sampler starts given explicitly: a matrix, or a function drawing dispersed starts
+    r = fit(ToyProblem([Param(:x, 1.0; lower=0.0, upper=3.0)], :linear); starts=1)
+    @test_throws ArgumentError sample(r; init=zeros(4, 2))
+    post = sample(r; init=rng -> [3rand(rng)], nwalkers=16, nsteps=3000, rng=MersenneTwister(3))
+    @test 1.6 < median(samples(post)[:, 1]) < 2.0                         # N(2, 1) truncated to [0, 3]
+    @test size(sample(r; init=fill(2.5, 8, 1), nsteps=10).chain, 2) == 8
+    @test Occultations._lipschitz(CompositeOutline([EllipseOutline(2.0, 1.0, 0.0), EllipseOutline(1.0, 1.0, 0.0)],
+                                                   [(0.0, 0.0), (5.0, 0.0)])) ≈ 1.25
 end
 
 end

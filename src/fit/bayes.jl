@@ -92,11 +92,15 @@ Sample the posterior distribution `p(θ | data) ∝ exp(-χ²/2) · prior` of th
 parameters with the affine-invariant ensemble ("stretch move") sampler. Flat priors
 within the parameter bounds unless Gaussian priors are set ([`setparam!`](@ref),
 `priors=` of the problem constructors); hard constraints (e.g. negative chords with
-`negative=:hard`) have zero probability. The walkers start in a small Gaussian ball
-around the least-squares solution (from `fit`, computed if a problem is given).
+`negative=:hard`) have zero probability. By default (`init = nothing`) the walkers start in a
+small Gaussian ball around the least-squares solution (from `fit`, computed if a problem is
+given). A ball explores one mode only; to search for others, `init` gives the starts: a
+`nwalkers × nfree` matrix (columns in the order of `freenames(fit)`), or a function
+`rng -> x` that draws one start (drawn again where inadmissible), e.g. from broad ranges.
 """
 function sample(r::FitResult; nwalkers::Union{Nothing,Integer}=nothing, nsteps::Integer=2000,
-                burn::Integer=nsteps ÷ 3, a::Real=2.0, rng=Random.default_rng(), progress::Bool=false)
+                burn::Integer=nsteps ÷ 3, a::Real=2.0, init=nothing, rng=Random.default_rng(),
+                progress::Bool=false)
     prob = r.problem
     ps = parameters(prob)
     saved = [p.value for p in ps]
@@ -108,7 +112,9 @@ function sample(r::FitResult; nwalkers::Union{Nothing,Integer}=nothing, nsteps::
         p.value = saved[i]
     end
     nfree = length(F.idx)
-    nw = nwalkers === nothing ? max(16, 4nfree) : nwalkers
+    nw = init isa AbstractMatrix ? size(init, 1) : nwalkers === nothing ? max(16, 4nfree) : nwalkers
+    init isa AbstractMatrix && (size(init, 2) == nfree && iseven(nw) ||
+        throw(ArgumentError("init: need an even number of rows and $nfree columns (one per free parameter)")))
     iseven(nw) || (nw += 1)
     nw >= 2nfree || throw(ArgumentError("need at least 2 × (number of free parameters) walkers"))
     x0 = r.values[F.idx]
@@ -118,15 +124,17 @@ function sample(r::FitResult; nwalkers::Union{Nothing,Integer}=nothing, nsteps::
     X = zeros(nw, nfree)
     L = fill(-Inf, nw)
     for w in 1:nw
-        for k in 1:1000
-            x = x0 .+ 0.1 .* σ .* randn(rng, nfree)
+        for k in 1:(init isa AbstractMatrix ? 1 : 1000)
+            x = init === nothing ? x0 .+ 0.1 .* σ .* randn(rng, nfree) :
+                init isa AbstractMatrix ? collect(Float64, init[w, :]) : collect(Float64, init(rng))
             l = _logpost(prob, F, x)
             if isfinite(l)
                 X[w, :] .= x; L[w] = l
                 break
             end
         end
-        isfinite(L[w]) || error("sample: cannot initialise walker $w (no admissible point near the fit)")
+        isfinite(L[w]) || error("sample: cannot initialise walker $w (no admissible start",
+                                init === nothing ? " near the fit)" : ")")
     end
     chain = zeros(nsteps, nw, nfree)
     logp = zeros(nsteps, nw)

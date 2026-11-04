@@ -223,6 +223,35 @@ function crossing(o::Outline, x, y, vx, vy, entry::Bool; n::Integer=81)
     return s, max(hmin, 0.0)
 end
 
+# bound L on the rate of change of `signed_distance` along any path outside the outline (km per
+# km): |∇h| = √(1 + (R′/r)²) ≤ √(1 + (R′/R)²) for r ≥ R. Ellipse: max |R′/R| = (a² − b²)/(2ab).
+_lipschitz(e::EllipseOutline) = (e.a^2 + e.b^2) / (2 * e.a * e.b)
+function _lipschitz(o::PolarOutline)
+    n = length(o.r)
+    Δθ = 2π / n
+    m = maximum(abs(o.r[mod1(k + 1, n)] - o.r[k]) / (Δθ * min(o.r[k], o.r[mod1(k + 1, n)])) for k in 1:n)
+    return sqrt(1 + m^2)
+end
+_lipschitz(::Outline) = Inf                      # unknown: every interval is searched
+
+# smallest value of the signed distance h(τ) along a track sampled at τ (values hs, at most Δs km
+# apart) -> (τ, h). Outside the limb h changes by at most L km per km, so the track can enter the
+# limb between samples i and i+1 only if hs[i] + hs[i+1] ≤ L Δs: those intervals and the two
+# beside the smallest sample are searched by golden section.
+function _track_min(h, τ, hs, Δs, L)
+    n = length(τ)
+    j = argmin(hs)
+    τm, hm = τ[j], hs[j]
+    n == 1 && return τm, hm
+    lim = 1.001 * L * Δs
+    for i in 1:n-1
+        (i == j || i + 1 == j || hs[i] + hs[i+1] <= lim) || continue
+        t, ht = _golden_min(h, τ[i], τ[i+1]; tol=1e-6 * (τ[i+1] - τ[i]))
+        ht < hm && ((τm, hm) = (t, ht))
+    end
+    return τm, hm
+end
+
 _rmax(e::EllipseOutline) = max(e.a, e.b)
 _rmax(o::PolarOutline) = o.scale * maximum(o.r)
 

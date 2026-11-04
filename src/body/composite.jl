@@ -70,6 +70,7 @@ function limb_radius(c::CompositeOutline, θ::Real)
 end
 
 _rmax(c::CompositeOutline) = maximum(hypot(o...) + _rmax(p) for (p, o) in zip(c.parts, c.offsets))
+_lipschitz(c::CompositeOutline) = maximum(_lipschitz(p) for p in c.parts)   # the minimum over the parts
 
 # ---------------------------------------------------------------------------
 # intervals of a straight track inside an outline

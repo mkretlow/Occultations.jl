@@ -134,11 +134,11 @@ function check_negative_chords(ev::Event, O::Outline; center=(0.0, 0.0), n::Inte
         tr = track(ev, c)
         a, b = c.span[1] - ev.tref, c.span[2] - ev.tref
         h(τ) = ((f, g) = tr(τ); signed_distance(O, f - center[1], g - center[2]))
-        τs = range(a, b; length=max(n, 2))
+        τs = collect(range(a, b; length=max(n, 2)))
         hs = h.(τs)
-        i = argmin(hs)
-        τm, hm = _golden_min(h, τs[max(i - 1, 1)], τs[min(i + 1, end)]; tol=1e-4)
-        hm > hs[i] && ((τm, hm) = (τs[i], hs[i]))
+        ps = [tr(τ) for τ in τs]
+        Δs = maximum(hypot(ps[j+1][1] - ps[j][1], ps[j+1][2] - ps[j][2]) for j in 1:length(ps)-1)
+        τm, hm = _track_min(h, τs, hs, Δs, _lipschitz(O))
         function root(lo, hi)
             hlo = h(lo)
             for _ in 1:50

@@ -63,7 +63,11 @@ struct _NegativeData
     σ::Float64
     dt::Int
     chord::String
+    Δs::Float64                    # largest distance between consecutive samples [km]
 end
+_NegativeData(k, tr, τ, xy, σ, dt, chord) =
+    _NegativeData(k, tr, τ, xy, σ, dt, chord,
+                  maximum((hypot(xy[1, j+1] - xy[1, j], xy[2, j+1] - xy[2, j]) for j in 1:size(xy, 2)-1); init=0.0))
 
 struct _PhotData
     k::Int
@@ -352,22 +356,15 @@ function residuals(p::LimbProblem, v)
     return r
 end
 
-# smallest signed distance of a negative chord's track from the limb (< 0: the limb crosses it)
+# smallest signed distance of a negative chord's track from the limb (< 0: the limb crosses it),
+# exact between the samples (see `_track_min`)
 function _negative_depth(p::LimbProblem, d, O, v)
     O_ = O[d.k]
     cf, cg = v[p.centers[d.k][1]], v[p.centers[d.k][2]]
-    dmin = Inf
-    if d.dt == 0
-        @inbounds for j in axes(d.xy, 2)
-            dmin = min(dmin, signed_distance(O_, d.xy[1, j] - cf, d.xy[2, j] - cg))
-        end
-    else
-        for τ in d.τ
-            f, g = d.tr(τ + v[d.dt])
-            dmin = min(dmin, signed_distance(O_, f - cf, g - cg))
-        end
-    end
-    return dmin
+    dt = d.dt == 0 ? 0.0 : v[d.dt]
+    h(τ) = ((f, g) = d.tr(τ + dt); signed_distance(O_, f - cf, g - cg))
+    hs = d.dt == 0 ? [signed_distance(O_, d.xy[1, j] - cf, d.xy[2, j] - cg) for j in axes(d.xy, 2)] : h.(d.τ)
+    return _track_min(h, d.τ, hs, d.Δs, _lipschitz(O_))[2]
 end
 
 # the visible segments of a positive chord (before, between and after its drops), shortened

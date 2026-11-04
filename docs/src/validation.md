@@ -1,6 +1,6 @@
 # Validation
 
-`julia --project -e 'using Pkg; Pkg.test()'` runs the test suite (364 tests, ≈ 8 min). Among the tests:
+`julia --project -e 'using Pkg; Pkg.test()'` runs the test suite (373 tests, ≈ 8 min). Among the tests:
 
 * Tracks reproduce the full reduction to < 2 m; the analytic and numerical limb crossings
   agree to 1 ms.
@@ -24,7 +24,8 @@
   surface pressures for CH₄, N₂ and CO within about half their errors.
 * Generic engine: χ² profiles and confidence intervals at parameter bounds and for flat
   profiles; infinite σ for directions the data do not constrain; light curves with an event
-  between two exposures or wholly inside it.
+  between two exposures or wholly inside it; negative chords crossed between their samples;
+  sampler starts given explicitly.
 
 The live services (MPC codes, Horizons, SBDB; `using HTTP`) were checked by hand and are not
 part of the automated tests. The real-event atmosphere results come from the 2002 XV93
