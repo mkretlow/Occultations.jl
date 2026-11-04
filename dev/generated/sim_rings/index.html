@@ -107,37 +107,37 @@ for (n, tv) in ((:equatorial_radius, 140.0), (:semi_minor_axis, 115.0), (:ring_p
 end
 println(&quot;(a single event fixes the ring ellipse – its radius, |B| and P – but leaves the pole with a&quot;)
 println(&quot; twofold ambiguity: the pole tilted towards or away from the observer)&quot;)</code></pre><p>With this sparse campaign only the inner ring is detected, at two of its four crossings per station; the faint outer ring is missed. The ring geometry comes out to 0.3 km and 0.1°, but the timing of a short, partly transparent dip trades its duration against its opacity, and its errors are underestimated (χ²/dof ≫ 1). The light curves themselves settle the width and the optical depth:</p><pre><code class="language-text hljs">rings with detected dips: 1
-LimbProblem fit: χ² = 902.337, dof = 29, χ²/dof = 31.115
-  center_f               =      11.977078 ± 0.030249
-  center_g               =       6.913330 ± 0.035608
-  equatorial_radius      =     140.163383 ± 0.040277
-  oblateness             =       0.179557 ± 0.000558
-  position_angle         =     124.849077 ± 0.062929
-  ring_pole_ra           =     303.729100 ± 0.022363
-  ring_pole_dec          =      41.073541 ± 0.036195
-  ring1_radius           =     391.277314 ± 0.156845
-  ring1_width            =       6.241045 ± 0.132657
+LimbProblem fit: χ² = 28.970, dof = 29, χ²/dof = 0.999
+  center_f               =      12.008869 ± 0.030285
+  center_g               =       6.956865 ± 0.035754
+  equatorial_radius      =     140.215079 ± 0.040460
+  oblateness             =       0.180099 ± 0.000559
+  position_angle         =     124.823351 ± 0.062753
+  ring_pole_ra           =     303.694373 ± 0.022391
+  ring_pole_dec          =      41.156654 ± 0.036166
+  ring1_radius           =     391.028968 ± 0.155813
+  ring1_width            =       6.096541 ± 0.132499
   ring1_tau              =       0.300000 (fixed)
   derived:
-  offset_ra              =       1.334417 ± 0.003370
-  offset_dec             =       0.770243 ± 0.003967
-  equivalent_radius      =     126.957658 ± 0.027539
-  semi_minor_axis        =     114.996131 ± 0.056660
-  ring1_equivalent_depth =       1.872313 ± 0.039797
-  ring_opening           =      34.984992 ± 0.018319
-  ring_pa                =      60.119306 ± 0.043302
-  ring1_opacity          =       0.407397 ± 0.000142
-  ring1_equivalent_width =       2.542580 ± 0.054077
+  offset_ra              =       1.337959 ± 0.003374
+  offset_dec             =       0.775094 ± 0.003984
+  equivalent_radius      =     126.962454 ± 0.027545
+  semi_minor_axis        =     114.962419 ± 0.056676
+  ring1_equivalent_depth =       1.828962 ± 0.039750
+  ring_opening           =      34.983551 ± 0.018227
+  ring_pa                =      60.012971 ± 0.043324
+  ring1_opacity          =       0.407408 ± 0.000141
+  ring1_equivalent_width =       2.483777 ± 0.054012
 
 fitted vs true:
-  equatorial_radius        140.163 ±  0.040   (truth  140.000)
-  semi_minor_axis          114.996 ±  0.057   (truth  115.000)
-  ring_pole_ra             303.729 ±  0.022   (truth  303.711)
-  ring_pole_dec             41.074 ±  0.036   (truth   41.172)
-  ring_opening              34.985 ±  0.018   (truth   35.000)
-  ring_pa                   60.119 ±  0.043   (truth   60.000)
-  ring1_radius             391.277 ±  0.157   (truth  391.000)
-  ring1_width                6.241 ±  0.133   (truth    6.200)
+  equatorial_radius        140.215 ±  0.040   (truth  140.000)
+  semi_minor_axis          114.962 ±  0.057   (truth  115.000)
+  ring_pole_ra             303.694 ±  0.022   (truth  303.711)
+  ring_pole_dec             41.157 ±  0.036   (truth   41.172)
+  ring_opening              34.984 ±  0.018   (truth   35.000)
+  ring_pa                   60.013 ±  0.043   (truth   60.000)
+  ring1_radius             391.029 ±  0.156   (truth  391.000)
+  ring1_width                6.097 ±  0.132   (truth    6.200)
 (a single event fixes the ring ellipse – its radius, |B| and P – but leaves the pole with a
  twofold ambiguity: the pole tilted towards or away from the observer)</code></pre><h2 id="4.-joint-fit-of-the-light-curves"><a class="docs-heading-anchor" href="#4.-joint-fit-of-the-light-curves">4. joint fit of the light curves</a><a id="4.-joint-fit-of-the-light-curves-1"></a><a class="docs-heading-anchor-permalink" href="#4.-joint-fit-of-the-light-curves" title="Permalink"></a></h2><p>The light curves against the body and the rings: the rings are partly transparent strips (apparent opacity from the normal optical depth and the opening angle), with diffraction, the stellar disc and the exposure; all parameters free, from the fit of the timings. Where the exposures are comparable to the duration of a ring crossing, the width and the optical depth of a ring are correlated: their product, the equivalent depth W τ_N, is the robust quantity.</p><pre><code class="language-julia hljs">init = Dict(zip(r1.names, r1.values))
 r2 = fit_limb(ev; model=RingedLimb(EllipseLimb(); rings=nr), photometry=true, init=init, starts=1, rng=rng)
@@ -147,13 +147,13 @@ for (n, tv) in ((:ring1_radius, 391.0), (:ring1_width, 6.2), (:ring1_tau, 0.40),
                 (:ring2_equivalent_depth, 3.4 * 0.15), (:ring_opening, B), (:ring_pa, P))
     n in r2.names || haskey(r2.derived, n) || continue
     row(r2, n, tv)
-end</code></pre><pre><code class="language-text hljs">χ²/dof = 1.020 for 5941 light-curve points
-  ring1_radius             391.283 ±  0.017   (truth  391.000)
-  ring1_width                6.136 ±  0.027   (truth    6.200)
-  ring1_tau                  0.425 ±  0.014   (truth    0.400)
-  ring1_equivalent_depth     2.608 ±  0.085   (truth    2.480)
-  ring_opening              34.984 ±  0.002   (truth   35.000)
-  ring_pa                   60.106 ±  0.003   (truth   60.000)</code></pre><h2 id="Figures"><a class="docs-heading-anchor" href="#Figures">Figures</a><a id="Figures-1"></a><a class="docs-heading-anchor-permalink" href="#Figures" title="Permalink"></a></h2><pre><code class="language-julia hljs">savefig(plot(r1; title=&quot;SimRing: body and rings (fit of the timings)&quot;, size=(1000, 900)), joinpath(out, &quot;rings_fit.png&quot;))
+end</code></pre><pre><code class="language-text hljs">χ²/dof = 1.019 for 5941 light-curve points
+  ring1_radius             390.987 ±  0.016   (truth  391.000)
+  ring1_width                6.052 ±  0.027   (truth    6.200)
+  ring1_tau                  0.431 ±  0.014   (truth    0.400)
+  ring1_equivalent_depth     2.610 ±  0.085   (truth    2.480)
+  ring_opening              34.996 ±  0.002   (truth   35.000)
+  ring_pa                   60.002 ±  0.003   (truth   60.000)</code></pre><h2 id="Figures"><a class="docs-heading-anchor" href="#Figures">Figures</a><a id="Figures-1"></a><a class="docs-heading-anchor-permalink" href="#Figures" title="Permalink"></a></h2><pre><code class="language-julia hljs">savefig(plot(r1; title=&quot;SimRing: body and rings (fit of the timings)&quot;, size=(1000, 900)), joinpath(out, &quot;rings_fit.png&quot;))
 # a light curve that crosses both rings: the dips with the model of the joint fit
 best = argmax([2count(x -&gt; x.body === :ring2, c.contacts) + count(x -&gt; x.body === :ring1, c.contacts) for c in ev.chords])
 c = ev.chords[best]
@@ -167,4 +167,4 @@ savefig(plot(panels...; layout=(length(panels), 1), size=(900, 400length(panels)
 lon0, lat0 = mean(st.observer.lon for st in sites), mean(st.observer.lat for st in sites)
 standard_figures(&quot;rings&quot;, r1; out=out, projection=&quot;+proj=laea +lon_0=$(round(lon0)) +lat_0=$(round(lat0))&quot;,
                  limits=(lon0 - 20, lon0 + 20, lat0 - 14, lat0 + 14), window=300, marks=0)
-println(&quot;figures written to &quot;, out)</code></pre><p>The fit of the timings: the body and the two rings with the chords:</p><p><strong>Bias.</strong> The radius and the position angle of the ring deviate from the truth by 0.28 km and 0.11°, many times their formal errors (0.017 km, 0.003°): with few, partly coarse light curves the covariance errors of the joint fit are too small. They should be taken as lower limits here; a posterior or a coverage test over several simulations would give realistic errors.</p><p><img src="../../assets/figures/rings_fit.png" alt="fit"/></p><p>A light curve crossing both rings, with the model of the joint fit:</p><p><img src="../../assets/figures/rings_lightcurve.png" alt="light curve"/></p><pre><code class="language-text hljs"></code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../sim_contact_binary_3d/">« Synthetic: a contact binary in 3-D</a><a class="docs-footer-nextpage" href="../sim_ring_pole/">Synthetic: a distant ring seen in three events »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Tuesday 3 November 2026 20:45">Tuesday 3 November 2026</span>. Using Julia version 1.13.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+println(&quot;figures written to &quot;, out)</code></pre><p>The fit of the timings: the body and the two rings with the chords:</p><p><strong>Bias.</strong> The radius and the position angle of the ring deviate from the truth by 0.28 km and 0.11°, many times their formal errors (0.017 km, 0.003°): with few, partly coarse light curves the covariance errors of the joint fit are too small. They should be taken as lower limits here; a posterior or a coverage test over several simulations would give realistic errors.</p><p><img src="../../assets/figures/rings_fit.png" alt="fit"/></p><p>A light curve crossing both rings, with the model of the joint fit:</p><p><img src="../../assets/figures/rings_lightcurve.png" alt="light curve"/></p><pre><code class="language-text hljs"></code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../sim_contact_binary_3d/">« Synthetic: a contact binary in 3-D</a><a class="docs-footer-nextpage" href="../sim_ring_pole/">Synthetic: a distant ring seen in three events »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Wednesday 4 November 2026 21:01">Wednesday 4 November 2026</span>. Using Julia version 1.13.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>

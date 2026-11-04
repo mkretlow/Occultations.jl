@@ -73,25 +73,25 @@ tilt = mod.(180 .- φ .+ 90, 180) .- 90                 # the paper&#39;s ϕ: ma
 @printf(&quot;separation  %s mas   (paper %s)\n&quot;, pm(ds.star_sep_mas), ppm(P.sep_mas))
 @printf(&quot;PA secondary %s °    (paper %s)\n&quot;, pm(ds.star_pa), ppm(P.pa))
 @printf(&quot;Δmag        %s      (paper %s)\n&quot;, pm(ds.star_dmag; d=2), ppm(P.dmag; d=2))
-println(&quot;(the centre refers to the JPL ephemeris here, to the paper&#39;s CAHA-updated ephemeris there)&quot;)</code></pre><pre><code class="language-text hljs">Posterior of LimbProblem: 32 walkers × 4000 steps (burn-in 1500), acceptance 0.19
-  center_f               =    -147.596195  -10.384940 +13.774890
-  center_g               =    -622.017448  -27.775665 +12.995603
-  equatorial_radius      =     215.478008  -3.489622 +6.244048
-  oblateness             =       0.417727  -0.136094 +0.125502
-  position_angle         =     162.773731  -7.608811 +8.691805
-  star_f1                =       0.747642  -0.007187 +0.006387
-  star_x1                =    -307.045841  -9.153836 +7.446007
-  star_y1                =    -207.631834  -6.997212 +7.104859
+println(&quot;(the centre refers to the JPL ephemeris here, to the paper&#39;s CAHA-updated ephemeris there)&quot;)</code></pre><pre><code class="language-text hljs">Posterior of LimbProblem: 32 walkers × 4000 steps (burn-in 1500), acceptance 0.21
+  center_f               =    -148.204531  -11.046107 +10.757715
+  center_g               =    -623.932323  -26.831156 +15.000937
+  equatorial_radius      =     215.666315  -3.932167 +6.511555
+  oblateness             =       0.434003  -0.128798 +0.091407
+  position_angle         =     158.760594  -7.205277 +7.089388
+  star_f1                =       0.747216  -0.007119 +0.007019
+  star_x1                =    -308.487558  -10.010054 +9.527099
+  star_y1                =    -208.047632  -7.812405 +9.057068
 
-autocorrelation times ≤ 247 steps (2500 steps after the burn-in)
-a′          215.5 −3.5 +6.2 km    (paper 215.0 −7.0 +10.0)
-b′/a′       0.58 −0.13 +0.14       (paper 0.58 −0.16 +0.16)
-tilt ϕ      17.2 −8.7 +7.6 °     (paper 16.0 −11.0 +12.0)
-D_eq        329.4 −40.2 +37.2 km    (paper 330.0 −55.0 +56.0)
-f₁          0.748 −0.007 +0.006      (paper 0.748 −0.012 +0.011)
-x₁, y₁      -307.0 −9.2 +7.4, -207.6 −7.0 +7.1 km   (paper -305.0 −38.0 +31.0, -209.0 −146.0 +22.0)
-separation  57.0 −0.5 +0.6 mas   (paper 57.0 −11.0 +4.0)
-PA secondary 56.0 −0.8 +0.8 °    (paper 56.0 −17.0 +3.0)
+autocorrelation times ≤ 263 steps (2500 steps after the burn-in)
+a′          215.7 −3.9 +6.5 km    (paper 215.0 −7.0 +10.0)
+b′/a′       0.57 −0.09 +0.13       (paper 0.58 −0.16 +0.16)
+tilt ϕ      21.2 −7.1 +7.2 °     (paper 16.0 −11.0 +12.0)
+D_eq        325.9 −28.6 +37.4 km    (paper 330.0 −55.0 +56.0)
+f₁          0.747 −0.007 +0.007      (paper 0.748 −0.012 +0.011)
+x₁, y₁      -308.5 −10.0 +9.5, -208.0 −7.8 +9.1 km   (paper -305.0 −38.0 +31.0, -209.0 −146.0 +22.0)
+separation  57.0 −0.6 +0.7 mas   (paper 57.0 −11.0 +4.0)
+PA secondary 56.1 −0.7 +0.8 °    (paper 56.0 −17.0 +3.0)
 Δmag        1.18 −0.04 +0.04      (paper 1.18 −0.07 +0.07)
 (the centre refers to the JPL ephemeris here, to the paper&#39;s CAHA-updated ephemeris there)</code></pre><h2 id="Astrometry-(Table-5)"><a class="docs-heading-anchor" href="#Astrometry-(Table-5)">Astrometry (Table 5)</a><a id="Astrometry-(Table-5)-1"></a><a class="docs-heading-anchor-permalink" href="#Astrometry-(Table-5)" title="Permalink"></a></h2><p>At the epoch of Table 5 (the predicted closest approach, 10 s after the one computed here): the body from its ephemeris plus the fitted centre; the two stars from the photocentre of Table 1 and their offsets (x₁, y₁) and −f₁/(1 − f₁)·(x₁, y₁).</p><pre><code class="language-julia hljs">mas(x) = x / D * 206264806.247
 rb, db, _ = ephem_radec(ev.body, t)
@@ -145,4 +145,4 @@ savefig(cornerplot(post; vars=[:equatorial_radius, :oblateness, :star_f1, :star_
                    truths=Dict(:equatorial_radius =&gt; P.a[1], :oblateness =&gt; 1 - P.b_over_a[1], :star_f1 =&gt; P.f1[1],
                                :star_x1 =&gt; P.x1[1], :star_y1 =&gt; P.y1[1]), truth_label=&quot;Gómez-Limón et al. 2025&quot;),
         joinpath(out, &quot;2007oc10_corner.png&quot;))
-println(&quot;figures written to &quot;, out)</code></pre><p>The light curves of the thirteen stations with the model of the double star:</p><p><img src="../../assets/figures/2007oc10_lightcurves.png" alt="light curves"/></p><p>The exposures on the sky plane, darker for lower flux, with the limb as seen by each star (the paper&#39;s Fig. 4):</p><p><img src="../../assets/figures/2007oc10_skyplane.png" alt="sky plane"/></p><p>The posterior, with the values of the paper:</p><p><img src="../../assets/figures/2007oc10_corner.png" alt="corner"/></p><pre><code class="language-text hljs"></code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../quaoar_2011_2022/">« Quaoar and its rings, 2011 and 2022</a><a class="docs-footer-nextpage" href="../2002xv93_2024/">2002 XV93, 2024 January 10 »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Tuesday 3 November 2026 20:45">Tuesday 3 November 2026</span>. Using Julia version 1.13.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+println(&quot;figures written to &quot;, out)</code></pre><p>The light curves of the thirteen stations with the model of the double star:</p><p><img src="../../assets/figures/2007oc10_lightcurves.png" alt="light curves"/></p><p>The exposures on the sky plane, darker for lower flux, with the limb as seen by each star (the paper&#39;s Fig. 4):</p><p><img src="../../assets/figures/2007oc10_skyplane.png" alt="sky plane"/></p><p>The posterior, with the values of the paper:</p><p><img src="../../assets/figures/2007oc10_corner.png" alt="corner"/></p><pre><code class="language-text hljs"></code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../quaoar_2011_2022/">« Quaoar and its rings, 2011 and 2022</a><a class="docs-footer-nextpage" href="../2002xv93_2024/">2002 XV93, 2024 January 10 »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Wednesday 4 November 2026 21:01">Wednesday 4 November 2026</span>. Using Julia version 1.13.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>

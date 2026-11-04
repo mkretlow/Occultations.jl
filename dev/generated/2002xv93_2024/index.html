@@ -119,13 +119,13 @@ println(&quot;  Δχ²:    &quot;, join([@sprintf(&quot;%6.1f&quot;, x - fits[:C
 @printf(&quot;paper: R = %.0f ± %.0f km from the Kiso light curve alone, χ² %.1f for %d dof\n&quot;, P.radius_atm..., P.chi2_atm[:CH4],
         P.dof_atm)</code></pre><pre><code class="language-text hljs">188 light-curve points; 12 starting points
 airless (diffraction + stellar diameter):  R = 220.0 ± 0.9 km                       χ² =  229.0, dof = 179
-CH4  atmosphere: R = 235.2 ± 2.0 km, p = 129.3 ± 12.3 nbar (paper 124 +15 −12)   χ² =  171.3, dof = 178
-N2   atmosphere: R = 235.1 ± 1.9 km, p = 185.3 ± 19.9 nbar (paper 177 +18 −19)   χ² =  171.2, dof = 178
-CO   atmosphere: R = 235.1 ± 2.2 km, p = 166.1 ± 20.1 nbar (paper 159 +15 −17)   χ² =  171.1, dof = 178
+CH4  atmosphere: R = 236.1 ± 2.1 km, p = 129.0 ± 11.8 nbar (paper 124 +15 −12)   χ² =  171.4, dof = 178
+N2   atmosphere: R = 236.1 ± 2.1 km, p = 184.1 ± 17.4 nbar (paper 177 +18 −19)   χ² =  171.2, dof = 178
+CO   atmosphere: R = 236.2 ± 2.1 km, p = 163.7 ± 16.1 nbar (paper 159 +15 −17)   χ² =  171.1, dof = 178
 χ² profile in the radius (CH₄; centre and pressure refitted): the radius is only loosely constrained
   R [km]:    222   226   230   234   238   242   246   250
-  Δχ²:      46.3  13.7   2.7   0.3   0.8   0.8   0.1   2.2
-Δχ² airless − CH₄ = 57.7   (paper, Kiso alone: 89.2 − 28.7 = 60.5)
+  Δχ²:      42.6  14.9   3.1   0.4   0.4   0.4   0.4   1.4
+Δχ² airless − CH₄ = 57.6   (paper, Kiso alone: 89.2 − 28.7 = 60.5)
 paper: R = 244 ± 1 km from the Kiso light curve alone, χ² 28.7 for 29 dof</code></pre><h2 id="Test-for-an-atmosphere-(profile-likelihood-in-the-CH-surface-pressure)"><a class="docs-heading-anchor" href="#Test-for-an-atmosphere-(profile-likelihood-in-the-CH-surface-pressure)">Test for an atmosphere (profile likelihood in the CH₄ surface pressure)</a><a id="Test-for-an-atmosphere-(profile-likelihood-in-the-CH-surface-pressure)-1"></a><a class="docs-heading-anchor-permalink" href="#Test-for-an-atmosphere-(profile-likelihood-in-the-CH-surface-pressure)" title="Permalink"></a></h2><pre><code class="language-julia hljs">initt = Dict(:center_f =&gt; fits[:CH4][:center_f][1], :center_g =&gt; fits[:CH4][:center_g][1],
              :radius =&gt; fits[:CH4][:radius][1], :pressure =&gt; fits[:CH4][:pressure][1])
 inita = Dict(:center_f =&gt; r_air[:center_f][1], :center_g =&gt; r_air[:center_g][1], :radius =&gt; r_air[:radius][1])
@@ -134,8 +134,8 @@ t95 = atmosphere_test(evp; atmosphere=xv93_atmosphere(:CH4), init=initt, airless
         t95.pressure, t95.significance, t95.chi2_airless - t95.chi2_min, t95.interval...)
 t3 = atmosphere_test(evp; atmosphere=xv93_atmosphere(:CH4), confidence=0.99865, pressures=t95.pressures, init=initt,
                      airless_init=inita, rng=rng)
-@printf(&quot;3σ (one-sided 99.865 %%) interval %.0f – %.0f nbar\n&quot;, t3.interval...)</code></pre><pre><code class="language-text hljs">best p = 129 nbar; detection 8.1σ (Δχ² against p = 0: 64.9); 95 % interval 104 – 157 nbar
-3σ (one-sided 99.865 %) interval 81 – 176 nbar</code></pre><h2 id="Figures"><a class="docs-heading-anchor" href="#Figures">Figures</a><a id="Figures-1"></a><a class="docs-heading-anchor-permalink" href="#Figures" title="Permalink"></a></h2><pre><code class="language-julia hljs">pl = plot(; xlabel=&quot;distance from the body centre [km]&quot;, ylabel=&quot;normalised intensity&quot;, size=(950, 560), legend=:topleft,
+@printf(&quot;3σ (one-sided 99.865 %%) interval %.0f – %.0f nbar\n&quot;, t3.interval...)</code></pre><pre><code class="language-text hljs">best p = 129 nbar; detection 8.1σ (Δχ² against p = 0: 65.6); 95 % interval 104 – 158 nbar
+3σ (one-sided 99.865 %) interval 79 – 176 nbar</code></pre><h2 id="Figures"><a class="docs-heading-anchor" href="#Figures">Figures</a><a id="Figures-1"></a><a class="docs-heading-anchor-permalink" href="#Figures" title="Permalink"></a></h2><pre><code class="language-julia hljs">pl = plot(; xlabel=&quot;distance from the body centre [km]&quot;, ylabel=&quot;normalised intensity&quot;, size=(950, 560), legend=:topleft,
           title=&quot;2002 XV93: refraction models (R = 244 km, ρ = 1500 kg/m³)&quot;, xlims=(200, 320))
 for (gas, col) in ((:CH4, :red), (:N2, :blue), (:CO, :green))
     r, I, ours = cmp[gas]
@@ -143,6 +143,42 @@ for (gas, col) in ((:CH4, :red), (:N2, :blue), (:CO, :green))
     plot!(pl, r, ours; color=col, linestyle=:dash, label=&quot;$gas – this package&quot;)
 end
 savefig(pl, joinpath(out, &quot;2002xv93_model_profiles.png&quot;))
+# one figure per gas, as Fig. 3 of the paper: the flux of each light curve against the distance
+# from the centre of the circular solution (section 2), with the authors&#39; profile and this
+# package&#39;s at the authors&#39; pressure, and the atmosphere-free case
+obs = Dict(n =&gt; begin
+    lc = lcs[n]
+    t0 = lc.tref - ev.tref
+    tr = Track(star, body, xv93_station(n).observer, ev.tref, t0 + lc.time[1] - 1, t0 + lc.time[end] + 1)
+    d = [hypot((tr(t0 + t) .- c0)...) for t in lc.time]
+    τca = lc.time[argmin(d)]
+    (d=d, flux=lc.flux, σ=lc.σ, ingress=lc.time .&lt; τca)
+end for n in (&quot;Kiso&quot;, &quot;Kyoto&quot;, &quot;Fukushima&quot;))
+# Fukushima binned by three exposures, as in the paper&#39;s figure
+let o = obs[&quot;Fukushima&quot;], m = 3 * (length(o.d) ÷ 3), g(x) = vec(mean(reshape(x[1:m], 3, :); dims=1))
+    obs[&quot;Fukushima&quot;] = (d=g(o.d), flux=g(o.flux), σ=sqrt.(g(o.σ .^ 2) ./ 3), ingress=g(o.ingress) .&gt; 0.5)
+end
+gasname = Dict(:CH4 =&gt; &quot;CH₄&quot;, :N2 =&gt; &quot;N₂&quot;, :CO =&gt; &quot;CO&quot;)
+for gas in (:CH4, :N2, :CO)
+    r, I, ours = cmp[gas]
+    pg = plot(; xlabel=&quot;distance from the body centre [km]&quot;, ylabel=&quot;normalised intensity&quot;, size=(900, 560),
+              legend=:bottomright, xlims=(200, 320), ylims=(-0.4, 1.6), left_margin=5Plots.mm,
+              bottom_margin=3Plots.mm,
+              title=&quot;2002 XV93: $(gasname[gas]), $(Int(P.pressure[gas][1])) nbar (R = $(Int(R)) km, ρ = 1500 kg/m³)&quot;)
+    for (n, sel, lab, m, col) in ((&quot;Kiso&quot;, :ingress, &quot;Kiso ingress&quot;, :circle, :royalblue),
+                                  (&quot;Kiso&quot;, :egress, &quot;Kiso egress&quot;, :utriangle, :red),
+                                  (&quot;Fukushima&quot;, :all, &quot;Fukushima (3 exposures binned)&quot;, :rect, :green),
+                                  (&quot;Kyoto&quot;, :all, &quot;Kyoto&quot;, :xcross, :gray))
+        o = obs[n]
+        k = (sel === :ingress ? o.ingress : sel === :egress ? .!o.ingress : trues(length(o.d))) .&amp; (o.d .&lt; 320)
+        scatter!(pg, o.d[k], o.flux[k]; yerror=o.σ[k], marker=m, markersize=3, color=col, markerstrokecolor=col,
+                 label=lab)
+    end
+    plot!(pg, r, I; color=:black, linewidth=2, label=&quot;Arimatsu et al.&quot;)
+    plot!(pg, r, ours; color=:orange, linewidth=2, linestyle=:dash, label=&quot;Occultations.jl&quot;)
+    plot!(pg, [200, R, R, 320], [0, 0, 1, 1]; color=:black, linestyle=:dot, label=&quot;atmosphere-free&quot;)
+    savefig(pg, joinpath(out, &quot;2002xv93_profile_$(gas).png&quot;))
+end
 plots = map((&quot;Kiso&quot;, &quot;Kyoto&quot;, &quot;Fukushima&quot;)) do n
     lc = evp[n].lightcurve
     p = plot(lc; title=n, titlefontsize=10, legend=:bottomleft, markersize=3)
@@ -161,4 +197,4 @@ savefig(plot(rc; title=&quot;2002 XV93: chords and circular fit&quot;, size=(900
 # post-fit, comparison) and the globe
 standard_figures(&quot;2002xv93&quot;, rc; out=out, posterior=nothing,
                  projection=&quot;+proj=laea +lon_0=138 +lat_0=36&quot;, limits=(126, 150, 28, 45), window=600, marks=30)
-println(&quot;figures written to &quot;, out)</code></pre><p>The three light curves with the CH₄ atmosphere and the airless model, and the test for an atmosphere (both explained in <a href="../../guide/atmospheres/">Atmospheres</a>):</p><p><img src="../../assets/figures/2002xv93_lightcurves.png" alt="light curves"/> <img src="../../assets/figures/2002xv93_atmosphere_test.png" alt="atmosphere test"/></p><p>The refraction models of this package against the authors&#39; profiles:</p><p><img src="../../assets/figures/2002xv93_model_profiles.png" alt="model profiles"/></p><p>The results are discussed in <a href="../../comparison/publications/#(612533)-2002-XV93,-2024-January-10">Comparison with published reductions</a>.</p><pre><code class="language-text hljs"></code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../2007oc10_2022/">« 2007 OC10, 2022 August 22: an occultation of a double star</a><a class="docs-footer-nextpage" href="../2007uk126_2014/">2007 UK126, 2014 November 15 »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Tuesday 3 November 2026 20:45">Tuesday 3 November 2026</span>. Using Julia version 1.13.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+println(&quot;figures written to &quot;, out)</code></pre><p>The three light curves with the CH₄ atmosphere and the airless model, and the test for an atmosphere (both explained in <a href="../../guide/atmospheres/">Atmospheres</a>):</p><p><img src="../../assets/figures/2002xv93_lightcurves.png" alt="light curves"/> <img src="../../assets/figures/2002xv93_atmosphere_test.png" alt="atmosphere test"/></p><p>The refraction models of this package against the authors&#39; profiles:</p><p><img src="../../assets/figures/2002xv93_model_profiles.png" alt="model profiles"/></p><p>Each gas separately, as Fig. 3 of the paper: the flux of the light curves against the distance from the centre of the circular solution, with both profiles and the atmosphere-free case:</p><p><img src="../../assets/figures/2002xv93_profile_CH4.png" alt="CH₄ profile"/> <img src="../../assets/figures/2002xv93_profile_N2.png" alt="N₂ profile"/> <img src="../../assets/figures/2002xv93_profile_CO.png" alt="CO profile"/></p><p>The results are discussed in <a href="../../comparison/publications/#(612533)-2002-XV93,-2024-January-10">Comparison with published reductions</a>.</p><pre><code class="language-text hljs"></code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../2007oc10_2022/">« 2007 OC10, 2022 August 22: an occultation of a double star</a><a class="docs-footer-nextpage" href="../2007uk126_2014/">2007 UK126, 2014 November 15 »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Wednesday 4 November 2026 21:01">Wednesday 4 November 2026</span>. Using Julia version 1.13.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
