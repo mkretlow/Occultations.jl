@@ -31,9 +31,9 @@ published S2: a′ = 97 ± 24, b′ = 64 ± 4 km, PA = 61 ± 7°, D_eq = 160 ± 
 ==============================================================================
 2019 January 11: a close binary (the paper's scenario S3)
 ==============================================================================
-free orientation: primary a′ = 93 ± 26, b′ = 55 ± 8 km; secondary radius 57 ± 43 km; separation 93 km at PA 127°; χ² = 1.65 (1 dof)
+free orientation: primary a′ = 93 ± Inf, b′ = 55 ± Inf km; secondary radius 57 ± 43 km; separation 93 km at PA 127°; χ² = 1.65 (1 dof)
 projected rotation pole at PA 317° (paper: 300–340°)
-separation ⊥ pole: best χ² = 3.59 at 70 km (PA 227°); primary a′ = 147, b′ = 54 km; secondary radius 14 km
+separation ⊥ pole: best χ² = 3.94 at 80 km (PA 227°); primary a′ = 136, b′ = 55 km; secondary radius 3 km
 published S3: E1 84 × 57 km, E2 67 × 60 km, total D_eq = 188 ± 9 km
 
 ==============================================================================
@@ -59,4 +59,4 @@ Occ. B                   RA 06 06 16.68447  Dec +43 59 24.2190 at 2022-12-26T20:
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/bienor_2019_2023
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/bienor_2019_2023

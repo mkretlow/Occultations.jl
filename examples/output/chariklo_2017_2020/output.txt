@@ -44,4 +44,4 @@ Astrometry (the paper's Table 5, same star positions)
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/chariklo_2017_2020
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/chariklo_2017_2020

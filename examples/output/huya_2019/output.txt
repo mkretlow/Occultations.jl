@@ -58,7 +58,7 @@ Posterior of LimbProblem: 20 walkers × 3000 steps (burn-in 1000), acceptance 0.
   oblateness             =       0.101546  -0.020502 +0.019260
   position_angle         =      58.136775  -8.349527 +6.653581
 
-D_eq = 414.1 -4.6 +4.6 km, b = 196.6 -4.1 +3.7 km   (paper: D_eq = 411.0 ± 7.3 km)
+D_eq = 414.0 -4.6 +4.6 km, b = 196.4 -3.9 +3.6 km   (paper: D_eq = 411.0 ± 7.3 km)
 χ² profile 1σ interval of the position angle: (52.1, 66.0)
 
 ==============================================================================

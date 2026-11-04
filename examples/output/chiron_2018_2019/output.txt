@@ -11,7 +11,7 @@ Events and geometry (paper values in parentheses)
 least squares: a′ = 117 ± 58 km, ε′ = 0.26 ± 0.64, PA = 53 ± 33°, R_eq = 101 ± 7 km, χ² = 2.20 (2 dof)
 Paris clock offset +0.99 ± 0.59 s (paper: +0.9 s)
 negative chord Forcarei: outside, 27 km from the limb
-posterior: a′ = 119.2 −12.0 +20.5 km, ε′ = 0.3 −0.2 +0.2, R_eq = 102.7 −3.8 +4.0 km
+posterior: a′ = 117.5 −11.2 +22.3 km, ε′ = 0.3 −0.2 +0.2, R_eq = 102.0 −3.6 +3.8 km
 published (R_eq restricted to 98–111 km, Lellouch et al. 2017): a′ = 126 ± 22 km, ε′ = 0.27 ± 0.18, PA = 11 ± 33°, R_eq = 105 −7 +6 km
 
 ==============================================================================
@@ -30,4 +30,4 @@ Astrometry (the paper's Table 7, same star positions)
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/chiron_2018_2019
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/chiron_2018_2019

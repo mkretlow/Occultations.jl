@@ -42,7 +42,7 @@ Posterior of LimbProblem: 24 walkers × 2000 steps (burn-in 666), acceptance 0.5
   position_angle         =      66.774649  -0.170296 +0.184678
   dt_Station 3           =      -0.899701  -0.005660 +0.005674
 
-derived (posterior): (offset_ra = (median = 0.8612147977399679, minus = 0.002236153826435938, plus = 0.0019204024203528514), offset_dec = (median = -0.41863715830131865, minus = 0.0037220373714904054, plus = 0.0037164937668849873), equivalent_radius = (median = 306.4863392909596, minus = 0.09228431355671773, plus = 0.0920131401420008), semi_minor_axis = (median = 283.2440076959069, minus = 0.06144539495437584, plus = 0.06254729676527404))
+derived (posterior): (offset_ra = (median = 0.8611354604597807, minus = 0.0020198299153963983, plus = 0.0019089302709572875), offset_dec = (median = -0.418714288205676, minus = 0.0035904530059999717, plus = 0.0038420848514599815), equivalent_radius = (median = 306.48500607040876, minus = 0.08926826712973934, plus = 0.09134937202043147), semi_minor_axis = (median = 283.2431592819995, minus = 0.06058267354472946, plus = 0.06087139230413641))
 autocorrelation times [steps]: [47.0, 56.2, 53.1, 52.3, 50.8, 53.1]
 
 joint photometric fit: χ²/dof = 0.995, a = (331.404891646818, 0.1875188777771221), ε = (0.1454898415396204, 0.0005519537976359251)

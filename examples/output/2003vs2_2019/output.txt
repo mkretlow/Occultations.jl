@@ -39,14 +39,14 @@ Negative chords
 ==============================================================================
 Posterior, diameter and albedo
 ==============================================================================
-area-equivalent diameter 516.4 −6.9 +6.3 km (published 519 ± 10), geometric albedo 0.133 ± 0.009 (0.134 ± 0.010)
-mean area-equivalent diameter 541.7 −7.2 +6.6 km (published 545 ± 13)
+area-equivalent diameter 515.8 −6.6 +6.7 km (published 519 ± 10), geometric albedo 0.133 ± 0.009 (0.134 ± 0.010)
+mean area-equivalent diameter 541.1 −6.9 +7.1 km (published 545 ± 13)
 
 ==============================================================================
 3-D shape: occultation + light-curve amplitude + rotational phase
 ==============================================================================
 least squares: a = 355.6  b = 226.9  c = 223.2 km, aspect 54°, D_eq,V = 524.2 km  (χ² = 16.00)
-posterior: a = 365.3 −17.2 +33.4, b = 266.3 −25.2 +13.5, c = 215.5 −27.7 +13.4 km, D_eq,V = 547.8 −21.7 +17.4 km, aspect (folded) 70.2 −11.1 +13.4°
+posterior: a = 364.9 −17.2 +31.1, b = 264.4 −24.5 +14.1, c = 214.4 −24.9 +14.0 km, D_eq,V = 544.7 −20.5 +18.1 km, aspect (folded) 67.9 −9.4 +14.8°
 published (Table 7): a = 339 ± 5, b = 235 ± 6, c = 226 ± 8 km, D_eq,V = 524 ± 7 km, aspect 59 ± 2°
 
 ==============================================================================
@@ -58,4 +58,4 @@ RA 05 30 38.04561  Dec +33 07 01.8375 at 2019-10-22T20:35:42.3 UTC (σ 0.10, 0.1
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/2003vs2_2019
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/2003vs2_2019

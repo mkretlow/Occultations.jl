@@ -39,70 +39,70 @@ ellipse: χ²/dof = 3174; with the visible segments χ²/dof = 3175
 ==============================================================================
 4. the contact-binary model
 ==============================================================================
-first pass (timings with the shadow velocity): χ²/dof = 2419.31, b₁ = 102.71 ± 6.15 km (truth 95)
-χ²/dof = 5.9: the errors are scaled by √(χ²/dof)
-LimbProblem fit: χ² = 35.474, dof = 6, χ²/dof = 5.912
-  center_f               =      -6.298851 ± 14.869164
-  center_g               =      15.347643 ± 18.625165
-  a1                     =     137.576822 ± 12.474936
-  b1                     =      94.458152 ± 21.254384
-  a2                     =      99.657397 ± 3.685825
-  b2                     =      77.860835 ± 1.827140
-  axis_pa                =     254.355025 ± 5.646651
-  neck                   =       0.103023 ± 0.042186
+first pass (timings with the shadow velocity): χ²/dof = 3316.14, b₁ = 82.08 ± 1.28 km (truth 95)
+χ²/dof = 73.5: the errors are scaled by √(χ²/dof)
+LimbProblem fit: χ² = 440.746, dof = 6, χ²/dof = 73.458
+  center_f               =      -9.185760 ± 60.983695
+  center_g               =      19.039403 ± 69.787761
+  a1                     =     141.791505 ± 47.636773
+  b1                     =      95.358053 ± 81.897935
+  a2                     =      91.337413 ± 10.452889
+  b2                     =      88.191343 ± 9.484171
+  axis_pa                =     256.338747 ± 22.851015
+  neck                   =       0.108133 ± 0.105928
   derived:
-  offset_ra              =      -0.205014 ± 0.483958
-  offset_dec             =       0.499532 ± 0.606208
-  equivalent_radius      =     142.670767 ± 14.127626
-  lobe1_equivalent_radius =     113.996721 ± 17.886667
-  lobe2_equivalent_radius =      88.087503 ± 1.825835
-  size_ratio             =       0.772720 ± 0.110879
-  mass_ratio             =       0.461387 ± 0.198616
-  separation             =     212.793692 ± 5.748706
-  length                 =     450.027911 ± 19.251231
-  neck_width             =      76.208869 ± 22.277305
+  offset_ra              =      -0.298976 ± 1.984883
+  offset_dec             =       0.619690 ± 2.271436
+  equivalent_radius      =     145.341770 ± 53.641478
+  lobe1_equivalent_radius =     116.279671 ± 69.133532
+  lobe2_equivalent_radius =      89.750594 ± 5.882629
+  size_ratio             =       0.771851 ± 0.450355
+  mass_ratio             =       0.459834 ± 0.804903
+  separation             =     207.919998 ± 29.875667
+  length                 =     441.048916 ± 77.040034
+  neck_width             =      83.520953 ± 72.132439
 
 fitted vs true:
-  a1                       137.577 ± 12.475   (truth  130.000)
-  b1                        94.458 ± 21.254   (truth   95.000)
-  a2                        99.657 ±  3.686   (truth  100.000)
-  b2                        77.861 ±  1.827   (truth   80.000)
-  axis_pa                  254.355 ±  5.647   (truth  255.000)
-  neck                       0.103 ±  0.042   (truth    0.080)
-  center_f                  -6.299 ± 14.869   (truth   -8.000)
-  center_g                  15.348 ± 18.625   (truth   14.000)
-  equivalent_radius        142.671 ± 14.128   (truth  141.704)
-  length                   450.028 ± 19.251   (truth  441.600)
-  neck_width                76.209 ± 22.277   (truth   68.552)
-  size_ratio                 0.773 ±  0.111   (truth    0.805)
-Posterior of LimbProblem: 32 walkers × 3000 steps (burn-in 1000), acceptance 0.17
-  center_f               =      -9.576703  -4.382994 +27.766607
-  center_g               =      13.426048  -6.326985 +16.679677
-  a1                     =     130.873140  -12.289864 +4.408883
-  b1                     =      92.438535  -7.494074 +10.790042
-  a2                     =      98.086852  -1.659368 +1.456347
-  b2                     =      77.295447  -0.789699 +1.091030
-  axis_pa                =     256.316001  -3.487523 +2.701165
-  neck                   =       0.097185  -0.013555 +0.151928
+  a1                       141.792 ± 47.637   (truth  130.000)
+  b1                        95.358 ± 81.898   (truth   95.000)
+  a2                        91.337 ± 10.453   (truth  100.000)
+  b2                        88.191 ±  9.484   (truth   80.000)
+  axis_pa                  256.339 ± 22.851   (truth  255.000)
+  neck                       0.108 ±  0.106   (truth    0.080)
+  center_f                  -9.186 ± 60.984   (truth   -8.000)
+  center_g                  19.039 ± 69.788   (truth   14.000)
+  equivalent_radius        145.342 ± 53.641   (truth  141.704)
+  length                   441.049 ± 77.040   (truth  441.600)
+  neck_width                83.521 ± 72.132   (truth   68.552)
+  size_ratio                 0.772 ±  0.450   (truth    0.805)
+Posterior of LimbProblem: 32 walkers × 3000 steps (burn-in 1000), acceptance 0.18
+  center_f               =     -15.395052  -5.623872 +3.480807
+  center_g               =       9.229531  -7.697395 +9.866354
+  a1                     =     129.336016  -43.932872 +4.192862
+  b1                     =      86.491616  -8.491701 +28.859034
+  a2                     =      95.976247  -10.040042 +25.946323
+  b2                     =      78.448703  -4.430552 +4.538566
+  axis_pa                =     256.014150  -165.396592 +2.336721
+  neck                   =       0.083804  -0.014971 +0.155723
 
-posterior: D_eq = 273.4 −2.7 +7.5 km, neck width 73.7 −8.1 +42.0 km (truth 68.6), size ratio 0.788 −0.033 +0.039
+posterior: D_eq = 267.9 −5.9 +6.9 km, neck width 66.4 −9.5 +41.4 km (truth 68.6), size ratio 0.842 −0.061 +0.130
 
 ==============================================================================
 5. joint fit of the light curves
 ==============================================================================
-χ²/dof = 1.025 for 5271 light-curve points
-  a1       timings  137.577 ± 12.475   light curves  136.228 ± 0.065   (truth 130.000)
-  b1       timings   94.458 ± 21.254   light curves  104.891 ± 0.332   (truth  95.000)
-  a2       timings   99.657 ± 3.686   light curves  100.929 ± 0.031   (truth 100.000)
-  b2       timings   77.861 ± 1.827   light curves   79.472 ± 0.089   (truth  80.000)
-  axis_pa  timings  254.355 ± 5.647   light curves  252.295 ± 0.077   (truth 255.000)
-  neck     timings    0.103 ± 0.042   light curves    0.096 ± 0.000   (truth   0.080)
+χ²/dof = 1.023 for 5271 light-curve points
+  a1       timings  141.792 ± 47.637   light curves  135.344 ± 0.042   (truth 130.000)
+  b1       timings   95.358 ± 81.898   light curves  101.921 ± 0.009   (truth  95.000)
+  a2       timings   91.337 ± 10.453   light curves  101.052 ± 0.026   (truth 100.000)
+  b2       timings   88.191 ± 9.484   light curves   78.517 ± 0.039   (truth  80.000)
+  axis_pa  timings  256.339 ± 22.851   light curves  252.974 ± 0.007   (truth 255.000)
+  neck     timings    0.108 ± 0.106   light curves    0.092 ± 0.000   (truth   0.080)
 time offsets of the joint fit (correction; the timing error has the opposite sign):
-  S2   +0.101 ± 0.033 s   (timing error -0.217 s)
-  S3   -0.026 ± 0.032 s   (timing error -0.039 s)
-  S4   +0.022 ± 0.032 s   (timing error -0.076 s)
-  S5   -0.000 ± 0.034 s   (timing error -0.017 s)
-  S6   -0.062 ± 0.033 s   (timing error +0.095 s)
+  S2   +0.072 ± 0.032 s   (timing error -0.217 s)
+  S3   -0.042 ± 0.032 s   (timing error -0.039 s)
+  S4   +0.012 ± 0.032 s   (timing error -0.076 s)
+  S5   +0.010 ± 0.033 s   (timing error -0.017 s)
+  S6   -0.019 ± 0.033 s   (timing error +0.095 s)
 
 ==============================================================================
 Figures

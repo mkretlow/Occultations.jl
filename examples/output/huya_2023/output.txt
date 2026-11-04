@@ -15,21 +15,21 @@ negative chords crossed by this limb:
   San Marcello Pistoiese crossed by 10.9 km
   Belesta      crossed by 5.4 km
   IOTA Scorpii crossed by 1.1 km
-free, negative chords hard           a′ =  223.2 ±  10.0  b′ =  185.8 ±  11.5  PA =  12.0 ± 12.6  R_eq =  203.6 ±   5.7  χ²/dof =  0.950
-PA prior 53.7 ± 2.2°, negatives hard a′ =  247.8 ±  11.0  b′ =  174.9 ±   8.7  PA =  26.1 ±  2.1  R_eq =  208.2 ±   5.3  χ²/dof = 10.648
+free, negative chords hard           a′ =  223.2 ±  10.0  b′ =  185.8 ±  11.5  PA =  12.0 ± 12.6  R_eq =  203.6 ±   5.7  χ²/dof =  0.951
+PA prior 53.7 ± 2.2°, negatives hard a′ =  247.8 ±  11.0  b′ =  174.8 ±   8.7  PA =  25.9 ±  2.1  R_eq =  208.1 ±   5.3  χ²/dof = 10.805
 The paper filtered its solutions with the Belesta negative only; the Guirguillano chord
 (cycle 10 s) lies between Montsec (positive) and Belesta and cuts limbs with PA ≈ 30°.
 
 ==============================================================================
 Posterior of the free fit
 ==============================================================================
-R_eq = 201.5 -5.0 +4.9 km, b′ = 181.4 -6.5 +6.8 km
+R_eq = 201.9 -5.1 +4.8 km, b′ = 182.0 -7.2 +6.9 km
 
 ==============================================================================
 Astrometry (Table 4)
 ==============================================================================
   free       2023-06-24T00:58:10.9 UTC: RA 17 16 43.653349  Dec -07 00 20.11884  (σ 0.38, 0.44 mas)
-  PA prior   2023-06-24T00:58:10.9 UTC: RA 17 16 43.653357  Dec -07 00 20.11901  (σ 0.42, 0.42 mas)
+  PA prior   2023-06-24T00:58:10.9 UTC: RA 17 16 43.653356  Dec -07 00 20.11901  (σ 0.42, 0.42 mas)
   published                             RA 17 16 43.653342  Dec -07 00 20.11836  (σ 0.51, 0.72 mas)
 
 ==============================================================================
@@ -52,4 +52,4 @@ they are ≈ 15 times too small.
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/huya_2023
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/huya_2023

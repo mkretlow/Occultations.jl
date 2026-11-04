@@ -183,6 +183,42 @@ for (gas, col) in ((:CH4, :red), (:N2, :blue), (:CO, :green))
     plot!(pl, r, ours; color=col, linestyle=:dash, label="$gas – this package")
 end
 savefig(pl, joinpath(out, "2002xv93_model_profiles.png"))
+## one figure per gas, as Fig. 3 of the paper: the flux of each light curve against the distance
+## from the centre of the circular solution (section 2), with the authors' profile and this
+## package's at the authors' pressure, and the atmosphere-free case
+obs = Dict(n => begin
+    lc = lcs[n]
+    t0 = lc.tref - ev.tref
+    tr = Track(star, body, xv93_station(n).observer, ev.tref, t0 + lc.time[1] - 1, t0 + lc.time[end] + 1)
+    d = [hypot((tr(t0 + t) .- c0)...) for t in lc.time]
+    τca = lc.time[argmin(d)]
+    (d=d, flux=lc.flux, σ=lc.σ, ingress=lc.time .< τca)
+end for n in ("Kiso", "Kyoto", "Fukushima"))
+## Fukushima binned by three exposures, as in the paper's figure
+let o = obs["Fukushima"], m = 3 * (length(o.d) ÷ 3), g(x) = vec(mean(reshape(x[1:m], 3, :); dims=1))
+    obs["Fukushima"] = (d=g(o.d), flux=g(o.flux), σ=sqrt.(g(o.σ .^ 2) ./ 3), ingress=g(o.ingress) .> 0.5)
+end
+gasname = Dict(:CH4 => "CH₄", :N2 => "N₂", :CO => "CO")
+for gas in (:CH4, :N2, :CO)
+    r, I, ours = cmp[gas]
+    pg = plot(; xlabel="distance from the body centre [km]", ylabel="normalised intensity", size=(900, 560),
+              legend=:bottomright, xlims=(200, 320), ylims=(-0.4, 1.6), left_margin=5Plots.mm,
+              bottom_margin=3Plots.mm,
+              title="2002 XV93: $(gasname[gas]), $(Int(P.pressure[gas][1])) nbar (R = $(Int(R)) km, ρ = 1500 kg/m³)")
+    for (n, sel, lab, m, col) in (("Kiso", :ingress, "Kiso ingress", :circle, :royalblue),
+                                  ("Kiso", :egress, "Kiso egress", :utriangle, :red),
+                                  ("Fukushima", :all, "Fukushima (3 exposures binned)", :rect, :green),
+                                  ("Kyoto", :all, "Kyoto", :xcross, :gray))
+        o = obs[n]
+        k = (sel === :ingress ? o.ingress : sel === :egress ? .!o.ingress : trues(length(o.d))) .& (o.d .< 320)
+        scatter!(pg, o.d[k], o.flux[k]; yerror=o.σ[k], marker=m, markersize=3, color=col, markerstrokecolor=col,
+                 label=lab)
+    end
+    plot!(pg, r, I; color=:black, linewidth=2, label="Arimatsu et al.")
+    plot!(pg, r, ours; color=:orange, linewidth=2, linestyle=:dash, label="Occultations.jl")
+    plot!(pg, [200, R, R, 320], [0, 0, 1, 1]; color=:black, linestyle=:dot, label="atmosphere-free")
+    savefig(pg, joinpath(out, "2002xv93_profile_$(gas).png"))
+end
 plots = map(("Kiso", "Kyoto", "Fukushima")) do n
     lc = evp[n].lightcurve
     p = plot(lc; title=n, titlefontsize=10, legend=:bottomleft, markersize=3)
@@ -212,5 +248,12 @@ println("figures written to ", out)
 # The refraction models of this package against the authors' profiles:
 #
 #md # ![model profiles](../assets/figures/2002xv93_model_profiles.png)
+#
+# Each gas separately, as Fig. 3 of the paper: the flux of the light curves against the distance
+# from the centre of the circular solution, with both profiles and the atmosphere-free case:
+#
+#md # ![CH₄ profile](../assets/figures/2002xv93_profile_CH4.png)
+#md # ![N₂ profile](../assets/figures/2002xv93_profile_N2.png)
+#md # ![CO profile](../assets/figures/2002xv93_profile_CO.png)
 #
 # The results are discussed in [Comparison with published reductions](@ref "(612533) 2002 XV93, 2024 January 10").

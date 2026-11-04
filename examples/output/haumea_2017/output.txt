@@ -37,4 +37,4 @@ RA 14 12 03.19774  Dec +16 33 58.6681 at 2017-01-21T03:06:08.0 UTC (σ 0.52, 0.3
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/haumea_2017
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/haumea_2017

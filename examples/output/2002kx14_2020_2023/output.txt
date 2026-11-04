@@ -61,10 +61,10 @@ contact residuals [s]:
 ==============================================================================
 Posterior, diameter and albedo
 ==============================================================================
-  equatorial_radius  =  245.859  -4.108 +4.492
+  equatorial_radius  =  246.105  -4.164 +4.723
   oblateness         =    0.309  -0.014 +0.013
-  position_angle     =   28.643  -2.315 +2.448
-  D_eq = 408.8 -6.5 +7.0 km (paper 389.2 ± 8.7)
+  position_angle     =   28.784  -2.315 +2.425
+  D_eq = 409.1 -6.4 +7.8 km (paper 389.2 ± 8.7)
   pV   = 0.108 -0.005 +0.005    (paper 0.119 ± 0.007)
   autocorrelation times [steps]: 126.0 (max)
   (the likelihood uses the timing errors only: χ²/dof ≈ 7.8, so these
@@ -83,4 +83,4 @@ Astrometry of the five events (offsets from the JPL Horizons ephemeris)
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/2002kx14_2020_2023
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/2002kx14_2020_2023

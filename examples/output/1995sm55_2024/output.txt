@@ -32,7 +32,7 @@ closest negative chords:
 ==============================================================================
 Diameter and albedo (posterior; H_V = 4.55 ± 0.03)
 ==============================================================================
-area-equivalent diameter 182.9 -11.1 +10.7 km (published 186.7 ± 1.8), geometric albedo 81.6 -8.8 +10.9 % (80 ± 4 %)
+area-equivalent diameter 182.9 -11.6 +11.2 km (published 186.7 ± 1.8), geometric albedo 81.6 -9.3 +11.8 % (80 ± 4 %)
 
 ==============================================================================
 Astrometry (Sect. 4.3)
@@ -45,10 +45,10 @@ Astrometry (Sect. 4.3)
 3-D shape: occultation + light-curve amplitude + rotational phase
 ==============================================================================
 least squares: a = 101.8  b = 93.7  c = 88.8 km  aspect 51°  D_eq,V = 189.2 km  (χ² = 9.64)
-posterior: a = 102.6 -6.5 +9.7, b = 92.2 -6.9 +5.4, c = 76.5 -27.9 +11.4 km, D_eq,V = 176.9 -18.6 +12.2 km, aspect (folded) 45.1 -14.4 +22.0°
+posterior: a = 104.0 -6.9 +12.5, b = 93.3 -6.9 +6.5, c = 75.1 -34.7 +13.0 km, D_eq,V = 175.8 -22.5 +14.7 km, aspect (folded) 47.0 -14.9 +20.5°
 published (grid search, conditional errors): a = 106 ± 2, b = 92 ± 12, c = 76 ± 10 km, D_eq,V = 181 ± 12 km, aspect 52 +38 −28°
 
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/1995sm55_2024
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/1995sm55_2024

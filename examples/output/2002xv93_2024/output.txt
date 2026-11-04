@@ -34,22 +34,22 @@ CO   ρ = 1000 kg/m³, 163 nbar: rms Δ = 0.0414, max |Δ| = 0.454; shadow edge 
 ==============================================================================
 188 light-curve points; 12 starting points
 airless (diffraction + stellar diameter):  R = 220.0 ± 0.9 km                       χ² =  229.0, dof = 179
-CH4  atmosphere: R = 235.2 ± 2.0 km, p = 129.3 ± 12.3 nbar (paper 124 +15 −12)   χ² =  171.3, dof = 178
-N2   atmosphere: R = 235.1 ± 1.9 km, p = 185.3 ± 19.9 nbar (paper 177 +18 −19)   χ² =  171.2, dof = 178
-CO   atmosphere: R = 235.1 ± 2.2 km, p = 166.1 ± 20.1 nbar (paper 159 +15 −17)   χ² =  171.1, dof = 178
+CH4  atmosphere: R = 236.1 ± 2.1 km, p = 129.0 ± 11.8 nbar (paper 124 +15 −12)   χ² =  171.4, dof = 178
+N2   atmosphere: R = 236.1 ± 2.1 km, p = 184.1 ± 17.4 nbar (paper 177 +18 −19)   χ² =  171.2, dof = 178
+CO   atmosphere: R = 236.2 ± 2.1 km, p = 163.7 ± 16.1 nbar (paper 159 +15 −17)   χ² =  171.1, dof = 178
 χ² profile in the radius (CH₄; centre and pressure refitted): the radius is only loosely constrained
   R [km]:    222   226   230   234   238   242   246   250
-  Δχ²:      46.3  13.7   2.7   0.3   0.8   0.8   0.1   2.2
-Δχ² airless − CH₄ = 57.7   (paper, Kiso alone: 89.2 − 28.7 = 60.5)
+  Δχ²:      42.6  14.9   3.1   0.4   0.4   0.4   0.4   1.4
+Δχ² airless − CH₄ = 57.6   (paper, Kiso alone: 89.2 − 28.7 = 60.5)
 paper: R = 244 ± 1 km from the Kiso light curve alone, χ² 28.7 for 29 dof
 
 ==============================================================================
 Test for an atmosphere (profile likelihood in the CH₄ surface pressure)
 ==============================================================================
-best p = 129 nbar; detection 8.1σ (Δχ² against p = 0: 64.9); 95 % interval 104 – 157 nbar
-3σ (one-sided 99.865 %) interval 81 – 176 nbar
+best p = 129 nbar; detection 8.1σ (Δχ² against p = 0: 65.6); 95 % interval 104 – 158 nbar
+3σ (one-sided 99.865 %) interval 79 – 176 nbar
 
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/2002xv93_2024
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/2002xv93_2024

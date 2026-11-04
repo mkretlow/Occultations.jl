@@ -51,4 +51,4 @@ lower limit: D ≥ 183 km (the chord, 179 ± 14 km; the paper quotes D ≥ 165 k
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/huya_2023_satellite
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/huya_2023_satellite

@@ -29,13 +29,13 @@ Near misses
 Posterior (along the chords with σ_limb)
 ==============================================================================
 Posterior of LimbProblem: 20 walkers × 4000 steps (burn-in 1333), acceptance 0.53
-  center_f               =      58.982347  -8.610387 +9.226442
-  center_g               =    -244.270635  -5.240186 +5.973243
-  equatorial_radius      =     270.998343  -8.397548 +9.119133
-  oblateness             =       0.144584  -0.028252 +0.025990
-  position_angle         =       4.423906  -7.202750 +9.525174
+  center_f               =      58.467316  -8.337555 +9.440553
+  center_g               =    -244.810929  -4.982708 +5.819917
+  equatorial_radius      =     271.295567  -8.291637 +8.511285
+  oblateness             =       0.142949  -0.027438 +0.027358
+  position_angle         =       3.764129  -6.857650 +8.899099
 
-D_eq = 502.9 −13.6 +11.2 km (published 499.6 km), b′ = 232.2 −6.2 +5.8 km
+D_eq = 503.1 −12.4 +10.9 km (published 499.6 km), b′ = 232.8 −6.3 +5.3 km
 
 ==============================================================================
 Astrometry
@@ -45,4 +45,4 @@ RA 02 21 49.44338  Dec +28 24 13.4122 at 2018-01-28T21:53:36.6 UTC (σ 0.46, 0.3
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/2002tc302_2018
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/2002tc302_2018

@@ -41,4 +41,4 @@ Astrometry (2022)
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/quaoar_2011_2022
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/quaoar_2011_2022

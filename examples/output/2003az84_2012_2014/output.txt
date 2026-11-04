@@ -14,7 +14,7 @@ fit: χ² = 2.08 for 1 degree(s) of freedom
   PA       44.0 ±  10.5°     (41 −5 +8)
   R_eq    352.0 ±  17.0 km   (346 ± 6)
 posterior (median and 68 % interval):
-  a′ 415 −12 +24 km, ε′ 0.191 −0.12 +0.093, PA 66.6 −23 +21°, R_eq 380 −20 +15 km
+  a′ 412 −10 +14 km, ε′ 0.183 −0.1 +0.11, PA 59.2 −19 +20°, R_eq 374 −22 +20 km
   closest negative chord: Liverpool Tel.     consistent, 137 km from the limb
   closest negative chord: Alicante           consistent, 179 km from the limb
 
@@ -27,13 +27,13 @@ fit: χ² = 0.01 for 1 degree(s) of freedom
   PA       46.5 ±   1.8°     (36 ± 4)
   R_eq    384.4 ±   0.2 km   (382 ± 3)
 posterior (median and 68 % interval):
-  a′ 394 −0.59 +0.66 km, ε′ 0.0489 −0.0035 +0.0037, PA 46.3 −1.9 +1.8°, R_eq 384 −0.18 +0.18 km
+  a′ 394 −0.61 +0.63 km, ε′ 0.0492 −0.0035 +0.0036, PA 46.5 −1.9 +1.7°, R_eq 384 −0.18 +0.17 km
   closest negative chord: Hamamatsu          consistent, 24 km from the limb
 
 ==============================================================================
 The apparent oblateness changed between 2012 and 2014
 ==============================================================================
-ε′ (2012) = 0.191 −0.12 +0.093, ε′ (2014) = 0.0489 −0.0035 +0.0037; P(ε′2012 ≤ ε′2014) = 0.104
+ε′ (2012) = 0.183 −0.1 +0.11, ε′ (2014) = 0.0492 −0.0035 +0.0036; P(ε′2012 ≤ ε′2014) = 0.083
 
 ==============================================================================
 The single-chord events of 2011 and 2013
@@ -58,4 +58,4 @@ Astrometry (the paper's corrected positions, same star positions)
 ==============================================================================
 Figures
 ==============================================================================
-figures written to examples/output/2003az84_2012_2014
+figures written to /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/2003az84_2012_2014

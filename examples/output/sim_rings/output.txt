@@ -24,50 +24,50 @@ S9     133.66°  -19.60°  CCD, long cycle    0.50 s, σ 0.03  body: –  ring d
 3. fit of the timings
 ==============================================================================
 rings with detected dips: 1
-LimbProblem fit: χ² = 902.337, dof = 29, χ²/dof = 31.115
-  center_f               =      11.977078 ± 0.030249
-  center_g               =       6.913330 ± 0.035608
-  equatorial_radius      =     140.163383 ± 0.040277
-  oblateness             =       0.179557 ± 0.000558
-  position_angle         =     124.849077 ± 0.062929
-  ring_pole_ra           =     303.729100 ± 0.022363
-  ring_pole_dec          =      41.073541 ± 0.036195
-  ring1_radius           =     391.277314 ± 0.156845
-  ring1_width            =       6.241045 ± 0.132657
+LimbProblem fit: χ² = 28.970, dof = 29, χ²/dof = 0.999
+  center_f               =      12.008869 ± 0.030285
+  center_g               =       6.956865 ± 0.035754
+  equatorial_radius      =     140.215079 ± 0.040460
+  oblateness             =       0.180099 ± 0.000559
+  position_angle         =     124.823351 ± 0.062753
+  ring_pole_ra           =     303.694373 ± 0.022391
+  ring_pole_dec          =      41.156654 ± 0.036166
+  ring1_radius           =     391.028968 ± 0.155813
+  ring1_width            =       6.096541 ± 0.132499
   ring1_tau              =       0.300000 (fixed)
   derived:
-  offset_ra              =       1.334417 ± 0.003370
-  offset_dec             =       0.770243 ± 0.003967
-  equivalent_radius      =     126.957658 ± 0.027539
-  semi_minor_axis        =     114.996131 ± 0.056660
-  ring1_equivalent_depth =       1.872313 ± 0.039797
-  ring_opening           =      34.984992 ± 0.018319
-  ring_pa                =      60.119306 ± 0.043302
-  ring1_opacity          =       0.407397 ± 0.000142
-  ring1_equivalent_width =       2.542580 ± 0.054077
+  offset_ra              =       1.337959 ± 0.003374
+  offset_dec             =       0.775094 ± 0.003984
+  equivalent_radius      =     126.962454 ± 0.027545
+  semi_minor_axis        =     114.962419 ± 0.056676
+  ring1_equivalent_depth =       1.828962 ± 0.039750
+  ring_opening           =      34.983551 ± 0.018227
+  ring_pa                =      60.012971 ± 0.043324
+  ring1_opacity          =       0.407408 ± 0.000141
+  ring1_equivalent_width =       2.483777 ± 0.054012
 
 fitted vs true:
-  equatorial_radius        140.163 ±  0.040   (truth  140.000)
-  semi_minor_axis          114.996 ±  0.057   (truth  115.000)
-  ring_pole_ra             303.729 ±  0.022   (truth  303.711)
-  ring_pole_dec             41.074 ±  0.036   (truth   41.172)
-  ring_opening              34.985 ±  0.018   (truth   35.000)
-  ring_pa                   60.119 ±  0.043   (truth   60.000)
-  ring1_radius             391.277 ±  0.157   (truth  391.000)
-  ring1_width                6.241 ±  0.133   (truth    6.200)
+  equatorial_radius        140.215 ±  0.040   (truth  140.000)
+  semi_minor_axis          114.962 ±  0.057   (truth  115.000)
+  ring_pole_ra             303.694 ±  0.022   (truth  303.711)
+  ring_pole_dec             41.157 ±  0.036   (truth   41.172)
+  ring_opening              34.984 ±  0.018   (truth   35.000)
+  ring_pa                   60.013 ±  0.043   (truth   60.000)
+  ring1_radius             391.029 ±  0.156   (truth  391.000)
+  ring1_width                6.097 ±  0.132   (truth    6.200)
 (a single event fixes the ring ellipse – its radius, |B| and P – but leaves the pole with a
  twofold ambiguity: the pole tilted towards or away from the observer)
 
 ==============================================================================
 4. joint fit of the light curves
 ==============================================================================
-χ²/dof = 1.020 for 5941 light-curve points
-  ring1_radius             391.283 ±  0.017   (truth  391.000)
-  ring1_width                6.136 ±  0.027   (truth    6.200)
-  ring1_tau                  0.425 ±  0.014   (truth    0.400)
-  ring1_equivalent_depth     2.608 ±  0.085   (truth    2.480)
-  ring_opening              34.984 ±  0.002   (truth   35.000)
-  ring_pa                   60.106 ±  0.003   (truth   60.000)
+χ²/dof = 1.019 for 5941 light-curve points
+  ring1_radius             390.987 ±  0.016   (truth  391.000)
+  ring1_width                6.052 ±  0.027   (truth    6.200)
+  ring1_tau                  0.431 ±  0.014   (truth    0.400)
+  ring1_equivalent_depth     2.610 ±  0.085   (truth    2.480)
+  ring_opening              34.996 ±  0.002   (truth   35.000)
+  ring_pa                   60.002 ±  0.003   (truth   60.000)
 
 ==============================================================================
 Figures
