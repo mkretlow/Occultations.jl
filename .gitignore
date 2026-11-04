@@ -6,3 +6,12 @@ Manifest.toml
 work/
 references/*.pdf
 references/**/*.pdf
+
+# Local AI instructions, status, review and Memo's
+AGENTS.md
+CLAUDE.md
+CLAUDE-PROGRESS.md
+CODEX-REPRODUCTION.md
+CODEX-PROGRESS.md
+CODEX-REVIEW.md
+MEMO
