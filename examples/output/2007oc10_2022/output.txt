@@ -37,25 +37,25 @@ best fit (double star):
 ==============================================================================
 Posterior
 ==============================================================================
-Posterior of LimbProblem: 32 walkers × 4000 steps (burn-in 1500), acceptance 0.19
-  center_f               =    -147.596195  -10.384940 +13.774890
-  center_g               =    -622.017448  -27.775665 +12.995603
-  equatorial_radius      =     215.478008  -3.489622 +6.244048
-  oblateness             =       0.417727  -0.136094 +0.125502
-  position_angle         =     162.773731  -7.608811 +8.691805
-  star_f1                =       0.747642  -0.007187 +0.006387
-  star_x1                =    -307.045841  -9.153836 +7.446007
-  star_y1                =    -207.631834  -6.997212 +7.104859
+Posterior of LimbProblem: 32 walkers × 4000 steps (burn-in 1500), acceptance 0.21
+  center_f               =    -148.204531  -11.046107 +10.757715
+  center_g               =    -623.932323  -26.831156 +15.000937
+  equatorial_radius      =     215.666315  -3.932167 +6.511555
+  oblateness             =       0.434003  -0.128798 +0.091407
+  position_angle         =     158.760594  -7.205277 +7.089388
+  star_f1                =       0.747216  -0.007119 +0.007019
+  star_x1                =    -308.487558  -10.010054 +9.527099
+  star_y1                =    -208.047632  -7.812405 +9.057068
 
-autocorrelation times ≤ 247 steps (2500 steps after the burn-in)
-a′          215.5 −3.5 +6.2 km    (paper 215.0 −7.0 +10.0)
-b′/a′       0.58 −0.13 +0.14       (paper 0.58 −0.16 +0.16)
-tilt ϕ      17.2 −8.7 +7.6 °     (paper 16.0 −11.0 +12.0)
-D_eq        329.4 −40.2 +37.2 km    (paper 330.0 −55.0 +56.0)
-f₁          0.748 −0.007 +0.006      (paper 0.748 −0.012 +0.011)
-x₁, y₁      -307.0 −9.2 +7.4, -207.6 −7.0 +7.1 km   (paper -305.0 −38.0 +31.0, -209.0 −146.0 +22.0)
-separation  57.0 −0.5 +0.6 mas   (paper 57.0 −11.0 +4.0)
-PA secondary 56.0 −0.8 +0.8 °    (paper 56.0 −17.0 +3.0)
+autocorrelation times ≤ 263 steps (2500 steps after the burn-in)
+a′          215.7 −3.9 +6.5 km    (paper 215.0 −7.0 +10.0)
+b′/a′       0.57 −0.09 +0.13       (paper 0.58 −0.16 +0.16)
+tilt ϕ      21.2 −7.1 +7.2 °     (paper 16.0 −11.0 +12.0)
+D_eq        325.9 −28.6 +37.4 km    (paper 330.0 −55.0 +56.0)
+f₁          0.747 −0.007 +0.007      (paper 0.748 −0.012 +0.011)
+x₁, y₁      -308.5 −10.0 +9.5, -208.0 −7.8 +9.1 km   (paper -305.0 −38.0 +31.0, -209.0 −146.0 +22.0)
+separation  57.0 −0.6 +0.7 mas   (paper 57.0 −11.0 +4.0)
+PA secondary 56.1 −0.7 +0.8 °    (paper 56.0 −17.0 +3.0)
 Δmag        1.18 −0.04 +0.04      (paper 1.18 −0.07 +0.07)
 (the centre refers to the JPL ephemeris here, to the paper's CAHA-updated ephemeris there)
 
