@@ -33,6 +33,16 @@ function add_chords!(ev, O, center, lon0, lat0, dlats; σt=0.05, rng, shifts=Dic
     return ev
 end
 
+# minimal problems for the generic engine: linear, stationary (zero Jacobian), saturating (flat profile)
+struct ToyProblem <: AbstractProblem
+    ps::Vector{Param}
+    mode::Symbol
+end
+Occultations.parameters(p::ToyProblem) = p.ps
+Occultations.residuals(p::ToyProblem, v) = p.mode === :stationary ? [v[1]^2 - 1] :
+                                           p.mode === :tanh ? [tanh(v[1] - 2)] : [v[1] - 2]
+Occultations.derived(p::ToyProblem, v) = length(v) == 1 ? (twice=2v[1],) : (twice=2v[1], sum=v[1] + v[2])
+
 @testset "Occultations.jl" begin
 
 @testset "time, angles, star" begin
@@ -912,6 +922,52 @@ end
     @test r[:equatorial_radius][1] ≈ 160 atol = 4r[:equatorial_radius][2] + 5
     @test r[:star_dmag][1] ≈ 2.5log10(3) atol = 0.1
     @test_throws ArgumentError LimbProblem(ev; double_star=true, photometry=false)
+end
+
+@testset "profiles, singular covariance, short events in light curves" begin
+    # profile of the only free parameter: χ² evaluated directly; bounds respected
+    r = fit(ToyProblem([Param(:x, 1.0; lower=0.0, upper=3.0)], :linear); starts=1)
+    @test r[:x][1] ≈ 2 && r[:x][2] ≈ 1
+    vals, χ = profile(r, :x; values=[-1.0, 1.0, 2.0, 4.0])
+    @test χ[1] == Inf && χ[4] == Inf && χ[2] ≈ 1 && abs(χ[3]) < 1e-12
+    lo, hi = confidence_interval(r, :x)
+    @test isapprox(lo, 1; atol=1e-6) && isapprox(hi, 3; atol=1e-6)
+    r = fit(ToyProblem([Param(:x, 1.0; lower=0.0, upper=2.5)], :linear); starts=1)
+    @test confidence_interval(r, :x)[2] ≈ 2.5 atol = 1e-6               # truncated at the bound
+    # a fixed profiled value outside the bounds is excluded, also with other free parameters
+    r = fit(ToyProblem([Param(:x, 1.0; lower=0.0, upper=3.0), Param(:y, 0.0)], :linear); starts=1)
+    @test all(==(Inf), profile(r, :x; values=[-1.0, 4.0])[2])
+    # Δχ² never reaches 1: unbounded
+    r = fit(ToyProblem([Param(:x, 1.0)], :tanh); starts=1)
+    @test confidence_interval(r, :x) == (-Inf, Inf)
+    # unconstrained directions: σ = Inf, not 0; constrained quantities keep their errors
+    @test errors(r).x > 0                                                # (tanh: constrained)
+    s = fit(ToyProblem([Param(:x, 0.0)], :stationary); starts=1)
+    @test !s.converged && s[:x][2] == Inf && s[:twice][2] == Inf
+    @test_throws ArgumentError confidence_interval(s, :x)
+    r2 = fit(ToyProblem([Param(:x, 1.0), Param(:y, 0.0)], :linear); starts=1)
+    @test !r2.converged && r2[:x][2] ≈ 1 && r2[:y][2] == Inf
+    @test r2[:twice][2] ≈ 2 && r2[:sum][2] == Inf
+    @test isnan(r2.covariance[1, 2]) && r2.covariance[1, 1] ≈ 1
+    # direct photometry: a 2-s event between two 20-s exposures, and a window wholly inside
+    include(joinpath(@__DIR__, "..", "examples", "data", "varda_20180910.jl"))
+    p = LimbProblem(varda_event(negatives=:none); model=CircleLimb())
+    v = [q.value for q in parameters(p)]
+    v[1:3] = [0.0, 0.0, 1.0]                                             # unit circle at the origin
+    O = Occultations._outlines(p, v)
+    t0 = p.setup.events[1].tref
+    model(times, texp; g=0.0) = begin                                    # straight track f = t (km, s), g
+        t = Track(t0, -400.0, 400.0, [Occultations._ChebSeg(-400.0, 400.0, [0.0, 400.0], [g])], 1e9, GEOCENTER)
+        lc = LightCurve(times, ones(length(times)); tref=t.t0, σ=0.01, exptime=texp)
+        pd = Occultations._PhotData(1, t, "test", lc, 0.0, 0, 0.0, Occultations._cached_profile(1e9, 0.0, 0.7, 0.3))
+        Occultations._phot_model(p, pd, O[1], v)[1]
+    end
+    I = model([-10.0, 10.0], 20.0)
+    @test all(x -> 0.9 < x < 0.99, I)                                    # 1 s of each exposure occulted
+    @test all(x -> 0.9 < x < 0.99, model([-0.5, 0.5], 20.0))
+    I = model([-0.5, 0.5], 0.1)                                          # wholly inside
+    @test I == [0.0, 0.0]
+    @test model([-10.0, 10.0], 20.0; g=5.0) == [1.0, 1.0]                # the track misses the body
 end
 
 end

@@ -8,6 +8,17 @@ All notable changes to Occultations.jl are documented here. The format follows
 
 First version.
 
+### Fixed
+
+- Direct light-curve fits: an event shorter than the sampling, lying between two exposure
+  midpoints, was missed (model flux 1); a light curve wholly inside the occultation gave NaN.
+- `profile` of the only free parameter returned NaN, and `confidence_interval` then reported a
+  vanishing interval; profiled values outside the parameter bounds got a finite χ². Now:
+  `Inf` outside the bounds, `NaN` for a failed refit, intervals limited by the bounds, `±Inf`
+  where Δχ² does not reach the threshold.
+- Covariance from the singular value decomposition of the Jacobian instead of the
+  pseudoinverse of JᵀJ: directions the data do not constrain get σ = `Inf` instead of 0.
+
 ### Added
 
 - **Observation reports** in the CORA format: `read_cora_report`, `cora_chord`.

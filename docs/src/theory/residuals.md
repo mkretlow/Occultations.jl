@@ -24,12 +24,15 @@ into a point in the sky plane.
   ellipse centre.
 * It is divided by the same σ_t·v.
 
-The error, however, lies along the chord, not along the radius. If the chord meets the limb at
-an angle θ to the limb normal, a timing error ε moves the point radially by only about
-v·ε·cos θ. Each normalised residual is therefore understated by the factor cos θ:
-* central chords (cos θ ≈ 1): the two definitions agree;
-* grazing contacts (cos θ → 0): their misfit almost vanishes, however wrong the timing, and
-  they get much less weight.
+The error, however, lies along the chord, not along the radius. Let **u** be the direction of
+the chord, **n** the limb normal at the contact and **e**ᵣ the radial direction. A timing error ε
+changes the radial residual by v·ε·(**n**·**u**)/(**n**·**e**ᵣ), since the gradient of
+h(**x**) = |**x**| − r(arg **x**) is **n**/(**n**·**e**ᵣ). For a circle **n** = **e**ᵣ and the factor
+is cos θ, θ the angle between chord and normal; for an ellipse the denominator matters where
+the normal departs from the radius, and the factor can exceed 1. So:
+* central chords (**n**·**u** ≈ **n**·**e**ᵣ): the two definitions agree;
+* grazing contacts (**n**·**u** → 0): their misfit almost vanishes, however wrong the timing,
+  and they get much less weight.
 
 Consequences:
 

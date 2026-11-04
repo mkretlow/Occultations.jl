@@ -532,13 +532,16 @@ function _phot_model1(p::LimbProblem, d::_PhotData, O::Outline, v, rings; shift=
                              lc.optics.Δλ, [q[5] for q in strips])
         return I, w
     end
-    # contacts predicted by the limb along the light curve
-    τs = d.off .+ lc.time .+ dt
+    # contacts predicted by the limb along the light curve, searched from one exposure before
+    # the first to one after the last sample (the exposures cover that interval)
+    texp = exptime(lc)
+    τ0 = d.off .+ lc.time .+ dt
+    n = length(τ0)
+    τs = texp > 0 ? vcat(τ0[1] - texp, τ0, τ0[end] + texp) : τ0
     h(τ) = ((f, g) = d.tr(τ); signed_distance(O, f - cf, g - cg))
     hs = h.(τs)
-    n = length(τs)
-    ie = findfirst(i -> hs[i] >= 0 && hs[i+1] < 0, 1:n-1)
-    ix = findlast(i -> hs[i] < 0 && hs[i+1] >= 0, 1:n-1)
+    ie = findfirst(i -> hs[i] >= 0 && hs[i+1] < 0, 1:length(τs)-1)
+    ix = findlast(i -> hs[i] < 0 && hs[i+1] >= 0, 1:length(τs)-1)
     function root(i)
         lo, hi = τs[i], τs[i+1]
         hlo = hs[i]
@@ -557,9 +560,18 @@ function _phot_model1(p::LimbProblem, d::_PhotData, O::Outline, v, rings; shift=
     end
     τi = ie === nothing ? (hs[1] < 0 ? -Inf : NaN) : root(ie)
     τe = ix === nothing ? (hs[end] < 0 ? Inf : NaN) : root(ix)
-    if isnan(τi) || isnan(τe)                  # no event along this light curve
-        return ones(n), w
+    if isnan(τi) || isnan(τe)
+        # no sample inside the limb: an event shorter than the sampling can still lie between two
+        # samples; its contacts on the (locally straight) track at the sample nearest to the limb
+        j = argmin(hs)
+        f0, g0 = d.tr(τs[j])
+        vf, vg = velocity(d.tr, τs[j])
+        iv = intervals(O, f0 - cf, g0 - cg, vf, vg)
+        isempty(iv) && return ones(n), w
+        τi, τe = τs[j] + iv[1][1], τs[j] + iv[1][2]
+        (τe < τs[1] || τi > τs[end]) && return ones(n), w
     end
+    isinf(τi) && isinf(τe) && return zeros(n), w     # the whole window inside the limb
     vi = isfinite(τi) ? vn(τi) : vn(τe)
     ve = isfinite(τe) ? vn(τe) : vi
     ti, te = τi - d.off - dt, τe - d.off - dt

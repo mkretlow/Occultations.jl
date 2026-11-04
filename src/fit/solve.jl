@@ -194,7 +194,9 @@ Least-squares (maximum a posteriori with Gaussian priors) solution: Levenberg–
 from the initial values and from `starts - 1` random starting points around them (within
 ±2 parameter `scale`s); the best solution is refined once more. The covariance is
 `(JᵀJ)⁻¹` of the normalised residuals at the minimum (multiplied by χ²/dof if
-`scale_errors`). The uncertainties of the derived quantities follow by linear
+`scale_errors`). If the data do not constrain some direction of the parameters (singular
+`J`), the fit is not `converged` and the parameters and derived quantities along that
+direction get σ = `Inf` (their covariances `NaN`). The uncertainties of the derived quantities follow by linear
 propagation. See [`sample`](@ref) for the full posterior.
 
 The Jacobian is computed by forward-mode automatic differentiation (ForwardDiff) if the
@@ -238,20 +240,46 @@ function fit(prob::AbstractProblem; starts::Integer=8, maxiter::Integer=200, rng
     end
     r = res(x)
     J = _jacobian(res, x, r, scale; ad=useAD)
-    H = Symmetric(J' * J)
-    ok = rank(Matrix(H)) == nfree
-    C = Matrix(pinv(Matrix(H)))
+    C, N = _covariance(J)
+    ok = size(N, 2) == 0
     n = nobs(prob)
     dof = n - nfree
     scale_errors && dof > 0 && (C .*= c / dof)
     v = _full(F, x)
-    d, de, dC = _propagate(prob, F, x, C, scale)
+    d, de, dC = _propagate(prob, F, x, C, scale; null=N)
+    _unconstrained!(C, N)
     return FitResult(prob, [p.name for p in ps], v, [p.free for p in ps], C, c, dof, conv && ok,
                      residuals(prob, v), d, de, dC)
 end
 
-# derived quantities and their linearly propagated uncertainties
-function _propagate(prob, F::_Free, x, C, scale)
+# covariance (JᵀJ)⁻¹ from the singular value decomposition of J (not of JᵀJ, which squares its
+# condition number), and an orthonormal basis N of the directions the data do not constrain
+# (singular values ≤ √(n eps) of the largest; empty if J has full rank)
+function _covariance(J)
+    m = size(J, 2)
+    size(J, 1) == 0 && return zeros(m, m), Matrix{Float64}(I, m, m)
+    S = svd(J; full=true)
+    k = count(>(sqrt(m * eps()) * S.S[1]), S.S)
+    Vk = S.V[:, 1:k]
+    return Vk * Diagonal(1 ./ S.S[1:k] .^ 2) * Vk', S.V[:, k+1:end]
+end
+
+# unconstrained parameters (a component along the null directions N): infinite variance,
+# undefined covariances
+function _unconstrained!(C, N)
+    size(N, 2) == 0 && return C
+    for k in axes(C, 1)
+        norm(N[k, :]) > 1e-6 || continue
+        C[k, :] .= NaN
+        C[:, k] .= NaN
+        C[k, k] = Inf
+    end
+    return C
+end
+
+# derived quantities and their linearly propagated uncertainties (infinite for a quantity
+# that changes along a null direction of the fit)
+function _propagate(prob, F::_Free, x, C, scale; null=zeros(length(x), 0))
     d = derived(prob, _full(F, x))
     isempty(d) && return d, d, zeros(0, 0)
     f(x) = collect(Float64, values(derived(prob, _full(F, x))))
@@ -264,6 +292,13 @@ function _propagate(prob, F::_Free, x, C, scale)
         G[:, k] = (f(xp) .- f(xm)) ./ (2h)
     end
     DC = G * C * G'
+    GN = G * null
+    for j in axes(G, 1)
+        norm(GN[j, :]) > 1e-6 * norm(G[j, :]) || continue
+        DC[j, :] .= NaN
+        DC[:, j] .= NaN
+        DC[j, j] = Inf
+    end
     σ = sqrt.(max.(diag(DC), 0.0))
     return d, NamedTuple{keys(d)}(Tuple(σ)), DC
 end
@@ -274,6 +309,8 @@ end
 Profile χ² of parameter `name`: for each value (default `n` values within ±`width` σ of the
 best fit) the parameter is fixed and all others are refitted. The interval where
 `Δχ² ≤ 1` is the 1σ confidence interval (asymmetric errors are revealed this way).
+Values outside the parameter's bounds, and inadmissible values of a problem without other
+free parameters, give `Inf`; a refit that fails gives `NaN`.
 """
 function profile(r::FitResult, name::Symbol; values=nothing, n::Integer=21, width::Real=4.0)
     prob = r.problem
@@ -290,10 +327,17 @@ function profile(r::FitResult, name::Symbol; values=nothing, n::Integer=21, widt
                 p.value = r.values[j]
             end
             ps[i].value, ps[i].free = v, false
-            out[k] = try
-                fit(prob; starts=1).chi2
-            catch
-                NaN
+            out[k] = if !_inbounds(ps[i], v)
+                Inf                                         # excluded by the bounds
+            elseif !any(p -> p.free, ps)                    # nothing to refit: χ² at this value
+                rr = _total_residuals(prob, _Free(ps), Float64[])
+                rr === nothing ? Inf : sum(abs2, rr)
+            else
+                try
+                    fit(prob; starts=1).chi2
+                catch
+                    NaN
+                end
             end
         end
     finally
@@ -308,21 +352,31 @@ end
     confidence_interval(fit, name; level=1) -> (lower, upper)
 
 `level`-σ confidence interval of a parameter from its χ² profile (`Δχ² ≤ level²`),
-found by bisection on each side.
+found by bisection on each side (`(value, value)` for a fixed parameter). A side is `±Inf` if Δχ² stays below `level²` out to
+`maxwidth × level` σ (unbounded there), `NaN` if a refit of the profile fails, and at most
+the parameter's bound. The search needs a finite σ of the fit.
 """
 function confidence_interval(r::FitResult, name::Symbol; level::Real=1, maxwidth::Real=10)
     v0, σ = r[name]
-    σ > 0 || return (v0, v0)
+    i = findfirst(==(name), r.names)
+    i !== nothing && !r.free[i] && return (v0, v0)                # a fixed parameter
+    isfinite(σ) && σ > 0 || throw(ArgumentError("confidence_interval: σ($name) = $σ; the fit does not constrain it"))
     target = r.chi2 + level^2
     χ(v) = profile(r, name; values=[v])[2][1]
     function edge(dir)
         lo, hi = 0.0, level * σ
-        while χ(v0 + dir * hi) < target && hi < maxwidth * level * σ
+        c = χ(v0 + dir * hi)
+        while c < target && hi < maxwidth * level * σ
             lo, hi = hi, 2hi
+            c = χ(v0 + dir * hi)
         end
+        isnan(c) && return NaN
+        c < target && return dir * Inf                 # not bracketed: unbounded within maxwidth
         for _ in 1:25
             m = (lo + hi) / 2
-            χ(v0 + dir * m) < target ? (lo = m) : (hi = m)
+            cm = χ(v0 + dir * m)
+            isnan(cm) && return NaN
+            cm < target ? (lo = m) : (hi = m)
         end
         return v0 + dir * (lo + hi) / 2
     end
