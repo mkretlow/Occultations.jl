@@ -14,6 +14,13 @@ Fit of the contact times of one light curve with the diffraction model
 body), passband and exposure of `lc`, shadow velocities normal to the limb `vel`,
 `vel_emersion` [km/s] and distance `dist` [km].
 
+The fitted immersion and emersion are geometric contacts: the stellar centre crosses
+into and out of the projected limb. They locate the diffraction pattern before stellar-disc
+and exposure averaging; they are not defined by a fixed observed flux threshold. For an
+isolated opaque straight edge, a monochromatic point source and zero exposure averaging,
+the intensity at contact is 0.25 of the unocculted stellar intensity. Use
+[`contact_times`](@ref) to convert the fitted offsets to absolute Epochs.
+
 Parameters (seconds from `lc.tref`): `immersion`, `emersion` (`edges = :both`,
 `:immersion` or `:emersion` for a single edge) and optionally `opacity`. The flux levels
 outside/inside the event are solved for linearly at every evaluation (profiled) when

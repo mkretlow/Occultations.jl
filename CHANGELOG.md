@@ -8,6 +8,11 @@ All notable changes to Occultations.jl are documented here. The format follows
 
 First version.
 
+### Added
+
+- Synthetic diffraction timing example with passband, stellar-disc and exposure smoothing
+  comparisons, fitted contacts and residuals; figures exported as PNG and vector PDF.
+
 ### Fixed
 
 - Direct light-curve fits: an event shorter than the sampling, lying between two exposure

@@ -22,6 +22,28 @@ stellar disc and the exposure time, with the flux levels profiled (fitted at eac
 linear least squares). The result has the covariance of the times; `sample` gives their
 posterior. Short (grazing) events and partial transparency are part of the model.
 
+### Meaning of immersion and emersion
+
+The fitted times are **geometric contacts**: immersion is when the stellar centre crosses
+into the body’s projected limb, and emersion is when it crosses out. The model places the
+diffraction pattern relative to these contacts and then averages over the passband,
+projected stellar disc and exposure. The times are inferred from the full model profile,
+rather than from a fixed observed flux threshold.
+
+For an ideal monochromatic point source at an isolated, opaque straight edge, with no
+exposure averaging, the intensity at geometric contact is **25% of the unocculted stellar
+intensity**. Finite stellar diameter, exposure integration, partial transparency and
+interference between nearby edges can change the intensity at contact. Background or
+body light also changes the corresponding fraction of the measured total flux. The 25%
+value therefore should not be used as a general threshold for measured light curves.
+
+`fit[:immersion]` and `fit[:emersion]` give the fitted offsets and their local covariance
+standard errors in seconds, relative to `lc.tref`. Use `contact_times(fit)` to obtain the
+contacts as absolute `Epoch`s and their errors in seconds.
+
+The [diffraction timing example](../generated/diffraction_timing.md) shows the geometric
+contacts, diffraction fringes and the effects of smoothing on a synthetic light curve.
+
 ## Reading the timing-fit plot
 
 `plot(fit_timing(lc; ...))`:

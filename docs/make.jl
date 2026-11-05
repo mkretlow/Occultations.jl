@@ -17,7 +17,7 @@ const REPO = "https://github.com/mkretlow/Occultations.jl/blob/main/"
 
 # the examples, in the order of the manual: synthetic, then the published events grouped by the
 # kind of analysis (as in docs/src/examples.md and the paper)
-const SYNTHETIC = ["tutorial", "sim_binary", "sim_contact_binary", "sim_contact_binary_3d", "sim_rings", "sim_ring_pole"]
+const SYNTHETIC = ["tutorial", "diffraction_timing", "sim_binary", "sim_contact_binary", "sim_contact_binary_3d", "sim_rings", "sim_ring_pole"]
 const REPRODUCED = ["makemake_2011", "varda_2018", "huya_2019", "2003vs2_2019",      # one event
                     "2002ms4_2020",                                                  # a large campaign
                     "bienor_2019_2023", "ixion_2020_2023",                           # several events

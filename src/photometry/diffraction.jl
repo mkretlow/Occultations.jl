@@ -249,6 +249,11 @@ stellar flux blocked by the body. Events shorter than about ten Fresnel scales a
 computed as the diffraction pattern of an opaque strip. Use `t_imm = -Inf` or
 `t_emm = Inf` for a single edge.
 
+`t_imm` and `t_emm` are geometric contacts of the stellar centre with the projected
+limb, before stellar-disc and exposure averaging. At an isolated opaque straight edge,
+a monochromatic point source with zero exposure averaging has intensity 0.25 at contact;
+this is not a general threshold for the averaged or partly transparent light curve.
+
     occultation_flux(t, drops; vel, kwargs...) -> normalised flux
 
 Several drops (a binary system, the lobes of a contact binary): `drops = [(t_imm, t_emm), …]`

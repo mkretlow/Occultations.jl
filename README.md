@@ -131,6 +131,7 @@ analysis (as in the manual). Each example writes its figures and printed results
 | [`quickstart.ipynb`](examples/quickstart.ipynb) | Varda 2018 | Souami et al. 2020 | Jupyter notebook: prediction, chords, limb fit, astrometry, posterior, maps |
 | ***Synthetic events*** | | | *known truth; the stations, their equipment and timing errors are simulated* |
 | [`tutorial.jl`](examples/tutorial.jl) | synthetic | – | all features, offline |
+| [`diffraction_timing.jl`](examples/diffraction_timing.jl) | synthetic | – | Fresnel fringes, passband/star/exposure smoothing and a timing fit |
 | [`sim_binary.jl`](examples/sim_binary.jl) | synthetic | – | a satellite (circle or ellipse), a binary of similar bodies, barycentre, coverage |
 | [`sim_contact_binary.jl`](examples/sim_contact_binary.jl) | synthetic | – | a contact binary: light curves with two drops, joint light-curve fit |
 | [`sim_contact_binary_3d.jl`](examples/sim_contact_binary_3d.jl) | synthetic, 4 events | – | a contact binary in 3-D: two rotating ellipsoids, unknown pole |

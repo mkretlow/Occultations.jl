@@ -23,6 +23,7 @@ chords, limb fit, astrometry, posterior and maps.
 | Example | Event | Publication | Shows |
 |---|---|---|---|
 | [Tutorial](generated/tutorial.md) | synthetic | – | all features, offline |
+| [Diffraction and timing](generated/diffraction_timing.md) | synthetic | – | Fresnel fringes, passband/star/exposure smoothing and a timing fit |
 | [A satellite and a binary](generated/sim_binary.md) | synthetic | – | `BinaryLimb`: satellite as circle or ellipse, two drops per chord, barycentre, coverage |
 | [A contact binary](generated/sim_contact_binary.md) | synthetic | – | `ContactBinaryLimb`: light curves with two drops, visible segments, joint light-curve fit |
 | [A contact binary in 3-D](generated/sim_contact_binary_3d.md) | synthetic, 4 events | – | `ContactBinaryEllipsoids`: two rotating ellipsoids, light-curve amplitude, unknown pole |

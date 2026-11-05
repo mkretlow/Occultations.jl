@@ -1,0 +1,16 @@
+
+==============================================================================
+1. Physical scales and smoothing of a single edge
+==============================================================================
+Distance 40 au; normal velocity 20.0 km/s; wavelength 0.70 µm
+Fresnel scale 1.4472 km; Fresnel time 0.0724 s
+Passband 0.55–0.85 µm; projected stellar diameter 0.50 km; exposure 0.020 s
+
+==============================================================================
+2. Recovering the contact times with fit_timing
+==============================================================================
+Immersion: truth -0.65000 s; fit -0.65058 ± 0.00077 s
+Emersion:  truth +0.65000 s; fit +0.65068 ± 0.00077 s
+χ²/dof = 0.9169
+Uncertainties are local covariance standard errors, conditional on the supplied physical inputs.
+Figures saved as PNG and vector PDF in /home/mike/Astronomy/Julia/Occultations3.jl/examples/output/diffraction_timing
