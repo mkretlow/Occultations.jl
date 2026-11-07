@@ -188,3 +188,13 @@ The papers whose data are used in the examples are listed, with their DOIs, in
 
 
 The maps use Natural Earth data (public domain) through GeoMakie.
+
+## Development
+
+Run the tests with `julia --project=. -e 'using Pkg; Pkg.test()'`. Build the manual with
+`julia --project=docs docs/make.jl`; it reads stored example outputs rather than running
+the examples. See [CHANGELOG.md](CHANGELOG.md) for changes.
+
+AI contributors read `AGENTS.md` and `STATUS.md` before working; dated review and
+reproduction evidence is kept in `REVIEW.md`, with Claude-specific instructions in
+`CLAUDE.md`. These local working documents may be absent from public clones.
