@@ -14,7 +14,13 @@
   the posterior widths agree with the covariance and with χ² profiles.
 * Ray tracing: the bending angle of an isothermal atmosphere agrees with
   `ω ≈ −ν √(2πr/H)` to 2 % (the expected O(H/r) correction); the free-molecular-flow limit
-  `ω = −πν` is exact.
+  `ω = −πν` is exact. For a constant scale height the flux agrees with the Baum & Code solution
+  [BaumCode1953](@citep) to about 10⁻³, and the half-light pressure with Eq. (31) of
+  [Sicardy2022](@citet) to 1 %. The Triton model of [MarquesOliveira2022](@citet) reproduces their
+  p_surf/p₁₄₀₀ = 12.0, the primary and secondary flux at La Palma and the altitude of the flash
+  layer; the central flash height equals Sicardy's Eq. (34). A synthetic Triton-like joint fit
+  with Triton's flux as a free zero level recovers the pressure. See
+  [Atmosphere models compared](comparison/atmospheres.md).
 * Real events: the Huya occultation of 2019 March 18 reproduces the published ellipse
   [SantosSanz2022](@citep) within its uncertainties; the five 2002 KX14 events
   [Rizos2025](@citep) reproduce the published geometry, semi-major axis and diameter within 1–2σ; the
@@ -37,7 +43,8 @@ reductions (e.g. SORA, Occult) before relying on new results.
 ## Not implemented (yet)
 
 Eccentric or inclined rings and radial ring profiles; central flashes beyond the
-spherical, transparent atmosphere model (haze, oblate atmospheres); limb topography models;
+spherical, transparent atmosphere model (haze, oblate atmospheres, diffraction of the flash);
+Abel inversion of light curves; limb topography models;
 light-curve readers for other programs (LiMovie, Occular); prediction services
 (occultation catalogue queries, Occult Watcher export); automatic differentiation of the
 atmosphere fits (these use finite differences).

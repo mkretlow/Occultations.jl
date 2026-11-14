@@ -220,7 +220,7 @@ function model_lightcurve(r::LimbFit, name::AbstractString)
     i === nothing && throw(ArgumentError("chord $name is not part of the photometric fit"))
     d = p.photometry[i]
     I, w = _phot_model(p, d, _outlines(p, v)[d.k], v)
-    ft, fb = _flux_levels(I, d.lc.flux, w, 1.0, 0.0, true, p.atmosphere === nothing && count(<(0.1), I) >= 3)
+    ft, fb = _flux_levels(I, d.lc.flux, w, 1.0, 0.0, true, _fit_bottom(p, I))
     return d.lc.time, fb .+ (ft - fb) .* I
 end
 

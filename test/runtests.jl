@@ -460,6 +460,90 @@ end
     @test plot(q) isa Plots.Plot
 end
 
+@testset "atmosphere: temperature templates, Baum & Code, Triton" begin
+    # DO15 template (Dias-Oliveira et al. 2015, Table 3): the conic implies dT/dr(r3) = -0.206 K/km
+    pl = DO15Temperature(1190.4, 36.0, 16.9, 1217.3, 109.7, 1302.4, 95.5, 1392.0, 80.6)
+    @test pl.dTdr3 ≈ -0.206 atol = 0.001
+    tp = triton_atmosphere().temperature
+    @test tp(1353.0) ≈ 38 && tp(1363.0) ≈ 49.8 && tp(1375.0) ≈ 48.2 && tp(1403.0) ≈ 49.3
+    @test tp(1453.0) ≈ 54.5 atol = 0.1                       # boundary condition of Marques Oliveira et al. (2022)
+    dT(r) = Occultations.ForwardDiff.derivative(tp, r)
+    @test dT(1353.0 + 1e-9) ≈ 5 && abs(dT(1363.0)) < 1e-8 && dT(1403.0 + 1e-9) ≈ 0.105
+    for r in (1375.0, 1403.0)                                  # continuous in T and dT/dr
+        @test tp(r - 1e-7) ≈ tp(r + 1e-7) atol = 1e-6
+        @test dT(r - 1e-7) ≈ dT(r + 1e-7) atol = 1e-5
+    end
+    @test_throws ArgumentError DO15Temperature(1.0, 1.0, 1.0, 3.0, 2.0, 2.0, 1.0, 4.0, 1.0)
+    # Triton, 2017-10-05, p1400 = 1.18 µbar: primary + secondary flux at La Palma (closest approach
+    # 685 km) 0.061 + 0.0072, and p_surf = 12.0 p1400 (Marques Oliveira et al. 2022, Sect. 4.2, App. B.3)
+    R, GM, D = 1353.0, 1428.0, 4.3506e9
+    p = atmosphere_profile(triton_atmosphere(), 1180.0, R, GM, D; λ=0.7, Δλ=0.0, star_diam=0.65)
+    @test issorted(p.y) && p.y_surface < 0                    # rays from the surface pass the shadow centre
+    @test _refracted_flux(p, 685.0) ≈ 0.068 atol = 0.002
+    @test p.surface_pressure / 1180 ≈ 12.0 atol = 0.3
+    # stellar disc near the central flash: φ ∝ 1/ρ averages to 2φ(a)/1 over a disc of radius a
+    a = p.star_radius
+    @test atmosphere_flux(p, 0.0) ≈ 2 * _refracted_flux(p, a) rtol = 0.01
+    @test atmosphere_flux(p, 50.0) ≈ _refracted_flux(p, 50.0) rtol = 1e-3
+    # rescaling to another observer distance is exact
+    q = atmosphere_profile(triton_atmosphere(), 1180.0, R, GM, D + 5000; λ=0.7, Δλ=0.0, star_diam=0.65)
+    qs = Occultations._rescale(p, D + 5000, q.edge)
+    @test maximum(abs.(qs.y .- q.y)) < 1e-6 && maximum(abs.(qs.dydr .- q.dydr)) < 1e-9
+    # Baum & Code (1953): (1/φ − 2) + ln(1/φ − 1) = −Δz/H for a constant scale height
+    # (T ∝ r⁻², near-limb flux without limb focusing), and the half-light pressure, Eq. (31) of Sicardy (2022)
+    function bc(dz, H)
+        lo, hi = 1e-12, 1 - 1e-15
+        for _ in 1:200
+            m = (lo + hi) / 2
+            (1 / m - 2) + log(1 / m - 1) + dz / H > 0 ? (lo = m) : (hi = m)
+        end
+        (lo + hi) / 2
+    end
+    nearlimb(p, y) = 1 / Occultations._interp_lin(p.y, p.dydr, y)
+    R, GM, D = 25000.0, 6.84e6, 29.0 * AU_KM
+    μ = 28.0134 * AMU
+    H = 50.0
+    T0 = H * 1e3 * μ * (GM * 1e9 / (R * 1e3)^2) / K_BOLTZMANN
+    atm = Atmosphere(:N2; temperature=r -> T0 * (R / r)^2, ztop=60H)
+    p = atmosphere_profile(atm, 1e6, R, GM, D; λ=0.7, Δλ=0.0, nr=4000)
+    yh = (lo = p.y_surface + 1; hi = p.y[end] - 1;
+          for _ in 1:100; m = (lo + hi) / 2; nearlimb(p, m) < 0.5 ? (lo = m) : (hi = m); end; (lo + hi) / 2)
+    Hd = 1 / (1 / H - 2 / R)                                   # density scale height
+    @test maximum(abs(nearlimb(p, yh + x * Hd) - bc(x * Hd, Hd)) for x in -10:0.5:5) < 1e-3
+    rh = Occultations._interp_lin(p.y, p.r, yh)
+    P31 = GM * 1e9 * μ / (_refractivity_K(atm, 0.7) * D * 1e3) * sqrt((Hd * 1e3)^5 / (2π * (rh * 1e3)^5))
+    @test 100 * exp(-(rh - R) / H) ≈ P31 rtol = 0.01           # model pressure p₀ e^(−(r−R)/H), p₀ = 1 mbar
+    # joint fit of synthetic Triton-like light curves with Triton's flux as a free zero level
+    rng = MersenneTwister(5)
+    eph = EphemKeplerian(a=30.0, e=0.01, i=2.0, Ω=130.0, ω=270.0, M=300.0, epoch=Epoch("2024-01-01"))
+    body = Body("Triton-like", eph; radius=1353.0, density=2062.0)
+    t0 = Epoch("2024-09-20T00:00:00")
+    ra, dec, _ = ephem_radec(body, t0)
+    ev = Event(Star(ra + 0.0005 / 3600 / cosd(dec), dec; diameter=0.0001), body, t0)
+    pth = shadow_path(ev.star, body, ev.tref, ev.tref; offsets=[0.0])
+    for (j, dlat) in enumerate([0.0, 3.0, 7.0, 10.0])
+        t = collect(-150:1.0:150.0)
+        push!(ev, Chord("S$j", Observer("S$j", pth.lon[1, 1], pth.lat[1, 1] + dlat, 0.0),
+                        LightCurve(t, ones(length(t)); tref=ev.tref, σ=0.02, exptime=1.0, λ=0.65, Δλ=0.3)))
+    end
+    truth = Dict(:center_f => 15.0, :center_g => -20.0, :radius => 1353.0, :pressure => 1180.0)
+    pr = LimbProblem(ev; model=CircleLimb(), photometry=true, atmosphere=triton_atmosphere(), background=:free,
+                     init=truth, fix=[:radius])
+    v = [x.value for x in parameters(pr)]
+    for d in pr.photometry
+        I, _ = Occultations._phot_model(pr, d, Occultations._outlines(pr, v)[1], v)
+        d.lc.flux .= 0.35 .+ 0.65 .* I .+ 0.02 .* randn(rng, length(I))     # φ₀ = 0.35
+    end
+    r = fit(LimbProblem(ev; model=CircleLimb(), photometry=true, atmosphere=triton_atmosphere(), background=:free,
+                        fix=[:radius], init=Dict(:center_f => 10.0, :center_g => -10.0, :pressure => 1000.0)); starts=1)
+    @test 0.9 < reduced_chi2(r) < 1.1
+    @test r[:pressure][1] ≈ 1180 atol = 3r[:pressure][2]
+    @test r[:center_g][1] ≈ -20 atol = 3r[:center_g][2]
+    _, m = model_lightcurve(r, "S2")
+    @test minimum(m) ≈ 0.35 + 0.65 * 0.07 atol = 0.02      # Triton's flux is the zero level of the model
+    @test_throws ArgumentError LimbProblem(ev; model=CircleLimb(), photometry=true, background=:maybe)
+end
+
 @testset "fundamental-plane ephemeris (CORA / Besselian elements)" begin
     body, star, ev, lon0, lat0 = scene()
     p = positionv(star, body, GEOCENTER, T0; dt=2.0)

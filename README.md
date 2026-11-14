@@ -7,9 +7,12 @@ Reduction and analysis of stellar occultations by solar-system bodies in Julia:
   stellar disc, the exposure time, finite opacity and the diffraction of short (grazing)
   events; fitted timings with profiled flux levels, covariance, χ² profiles or posterior;
 * **atmospheres** – hydrostatic, spherically symmetric atmospheres (N₂, CH₄, CO; isothermal,
-  Pluto-like inversion layer, free molecular flow) ray-traced to the refracted flux in the
-  shadow (near and far limb, limb-curvature focusing, surface edge), e.g. Pluto or
-  (612533) 2002 XV93 (Arimatsu et al. 2026); the surface pressure is a fit parameter;
+  Pluto-like inversion layer, free molecular flow, or any temperature profile T(r) such as the
+  Dias-Oliveira et al. 2015 template) ray-traced to the refracted flux in the shadow (near and
+  far limb, limb-curvature focusing, central flash with the stellar disc, surface edge), e.g.
+  Pluto, Triton (Marques Oliveira et al. 2022) or (612533) 2002 XV93 (Arimatsu et al. 2026);
+  the pressure at the surface or a reference radius is a fit parameter, the flux of the body
+  itself can be fitted per light curve;
 * **limb fits** – one or several events; a 2-D ellipse (default), circle, triaxial
   **3-D ellipsoid** with pole and rotation phase (the apparent ellipse of every event follows
   from the body orientation at that epoch), or the silhouette of a **triangle mesh** (OBJ
@@ -51,7 +54,8 @@ The manual is at **<https://mkretlow.github.io/Occultations.jl/dev/>**:
   atmospheres, plots and maps, the occultation in 3-D;
 * the methods: the mathematics of the limb fit, residuals along the chords or radial, the
   limb allowance σ_limb, the uncertainty bands of the plots;
-* the examples, compared with the publications and with SORA;
+* the examples, compared with the publications and with SORA; the atmosphere model compared
+  with Baum & Code, Sicardy and Arimatsu et al.;
 * the validation and the API reference.
 
 The sources of the manual are in [`docs/src/`](docs/src/); `julia --project=docs docs/make.jl`

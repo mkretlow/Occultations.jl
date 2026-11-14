@@ -88,7 +88,7 @@ end
 """
     LimbProblem(events; model=EllipseLimb(), residual=:chord, negative=:hard, visible=:auto,
                 σ_limb=0, σ_ring=σ_limb, fit_dt=(), photometry=false, atmosphere=nothing, double_star=false,
-                amplitudes=(), phases=(), fix=(), init=Dict(), priors=Dict(), bounds=Dict())
+                background=:auto, amplitudes=(), phases=(), fix=(), init=Dict(), priors=Dict(), bounds=Dict())
 
 Fit of the apparent limb to one event or a vector of events (multi-event fit).
 
@@ -122,7 +122,11 @@ or [`setparam!`](@ref).
   fitted with the model flux predicted by the limb — diffraction, stellar diameter,
   passband, exposure (contacts of these chords are not used separately), or the
   refractive flux of the `atmosphere` ([`Atmosphere`](@ref)) whose surface pressure is
-  then fitted; the flux levels are profiled per light curve. With `double_star = true` the
+  then fitted; the flux levels are profiled per light curve: the unocculted level always, the
+  zero level (`background`) with `:free` — the flux of the body itself or of a nearby planet,
+  e.g. Triton's contribution φ₀ in Marques Oliveira et al. 2022 — fixed at zero with `:zero`;
+  `:auto` (default) profiles it for airless fits whose model reaches zero flux and fixes it
+  with an `atmosphere`. With `double_star = true` the
   star is a pair of point sources: the primary with the fraction `star_f1` of the flux at
   (`star_x1`, `star_y1`) [km, f and g at the body] from the photocentre, the secondary at
   −f₁/(1 − f₁)·(x₁, y₁), each occulted by the limb (as Gómez-Limón et al. 2025); derived are
@@ -153,7 +157,12 @@ struct LimbProblem{M<:LimbModel} <: AbstractProblem
     pressure::Int
     atm_cache::Dict{NTuple{5,Float64},AtmosphereProfile}
     double_star::NTuple{3,Int}         # indices of star_f1, star_x1, star_y1 (zeros: a single star)
+    background::Symbol                 # zero level of the light curves: :auto, :free or :zero
 end
+
+# is the zero level (the flux of the body, or of light from other sources) of a light curve profiled?
+_fit_bottom(p::LimbProblem, I) = p.background === :free ||
+                                 (p.background === :auto && p.atmosphere === nothing && count(<(0.1), I) >= 3)
 
 parameters(p::LimbProblem) = p.ps
 events(p::LimbProblem) = p.setup.events
@@ -162,12 +171,13 @@ LimbProblem(ev::Event; kw...) = LimbProblem([ev]; kw...)
 
 function LimbProblem(evs::AbstractVector{Event}; model::LimbModel=EllipseLimb(), residual::Symbol=:chord,
                      negative::Symbol=:hard, visible::Symbol=:auto, σ_limb::Real=0.0, σ_ring::Real=NaN, fit_dt=(), photometry=false,
-                     atmosphere::Union{Nothing,Atmosphere}=nothing, double_star::Bool=false, amplitudes=(), phases=(),
-                     fix=(), init=Dict(),
+                     atmosphere::Union{Nothing,Atmosphere}=nothing, double_star::Bool=false, background::Symbol=:auto,
+                     amplitudes=(), phases=(), fix=(), init=Dict(),
                      priors=Dict(), bounds=Dict(), epoch=nothing)
     residual in (:chord, :radial) || throw(ArgumentError("residual must be :chord or :radial"))
     negative in (:soft, :hard, :none) || throw(ArgumentError("negative must be :soft, :hard or :none"))
     visible in (:auto, :soft, :hard, :none) || throw(ArgumentError("visible must be :auto, :soft, :hard or :none"))
+    background in (:auto, :free, :zero) || throw(ArgumentError("background must be :auto, :free or :zero"))
     visible === :auto && (visible = _composite(model) ? :soft : :none)
     evs = collect(Event, evs)
     nev = length(evs)
@@ -285,7 +295,8 @@ function LimbProblem(evs::AbstractVector{Event}; model::LimbModel=EllipseLimb(),
                        Float64(isnan(σ_ring) ? σ_limb : σ_ring),
                        atmosphere, centers, atmosphere === nothing ? 0 : setup.index[:pressure],
                        Dict{NTuple{5,Float64},AtmosphereProfile}(),
-                       double_star ? (setup.index[:star_f1], setup.index[:star_x1], setup.index[:star_y1]) : (0, 0, 0))
+                       double_star ? (setup.index[:star_f1], setup.index[:star_x1], setup.index[:star_y1]) : (0, 0, 0),
+                       background)
 end
 
 # outlines of all events for the values v
@@ -336,7 +347,7 @@ function residuals(p::LimbProblem, v)
         m === nothing && return nothing
         I, w = m
         lc = d.lc
-        ft, fb = _flux_levels(I, lc.flux, w, 1.0, 0.0, true, p.atmosphere === nothing && count(<(0.1), I) >= 3)
+        ft, fb = _flux_levels(I, lc.flux, w, 1.0, 0.0, true, _fit_bottom(p, I))
         append!(r, @. (lc.flux - fb - (ft - fb) * I) / lc.σ)
     end
     # rotational amplitudes and phases
@@ -475,27 +486,37 @@ function _phot_model1(p::LimbProblem, d::_PhotData, O::Outline, v, rings; shift=
     if p.atmosphere !== nothing
         R = equivalent_radius(O)
         v[p.pressure] >= 0 || return nothing
-        key = (Float64(v[p.pressure]), Float64(R), d.tr.dist, lc.optics.λ, lc.optics.Δλ)
-        prof = get(p.atm_cache, key, nothing)
-        if prof === nothing
-            length(p.atm_cache) > 16 && empty!(p.atm_cache)
-            prof = atmosphere_profile(p.atmosphere, key[1], R, body_gm(p.setup.events[d.k].body), d.tr.dist;
-                                      λ=lc.optics.λ, Δλ=lc.optics.Δλ, star_diam=d.star_diam)
-            p.atm_cache[key] = prof
+        # one ray tracing per event, pressure and passband (at the geocentric distance), rescaled
+        # exactly to the distance of each observer
+        D0 = p.setup.contexts[d.k].dist
+        key = (Float64(v[p.pressure]), Float64(R), D0, lc.optics.λ, lc.optics.Δλ)
+        prof0 = get(p.atm_cache, key, nothing)
+        if prof0 === nothing
+            length(p.atm_cache) > 16 + 4length(p.photometry) && empty!(p.atm_cache)
+            prof0 = atmosphere_profile(p.atmosphere, key[1], R, body_gm(p.setup.events[d.k].body), D0;
+                                       λ=lc.optics.λ, Δλ=lc.optics.Δλ, star_diam=d.star_diam)
+            p.atm_cache[key] = prof0
         end
+        prof = _rescale(prof0, d.tr.dist, d.profile)
         texp = exptime(lc)
-        # sub-sample the exposure finely enough to resolve the diffraction at the surface edge
         speed = hypot(velocity(d.tr, d.off + lc.time[end ÷ 2 + 1])...)
         F = fresnel_scale(lc.optics.λ, d.tr.dist)
-        ns = texp > 0 ? clamp(ceil(Int, speed * texp / (F / 3)), 3, 128) : 1
+        L = speed * texp                                          # length of an exposure in the shadow [km]
+        ρell(τ) = ((f, g) = d.tr(τ); x = f - cf; y = g - cg; hypot(x, y) * R / limb_radius(O, x, y))
+        # sub-sample the exposure finely enough to resolve the diffraction at the surface edge; if the
+        # rays from the surface are bent past the shadow centre (no surface edge), finely only near the
+        # central flash (steps of half the stellar radius) and coarsely elsewhere (a tenth of the scale height)
+        ns_edge = texp > 0 ? clamp(ceil(Int, L / (F / 3)), 3, 128) : 1
+        ns_flash = texp > 0 ? clamp(ceil(Int, L / max(prof.star_radius / 2, 0.02)), 3, 512) : 1
+        ns_smooth = texp > 0 ? clamp(ceil(Int, L / (prof.scale_height / 10)), 3, 128) : 1
+        flash_zone = 20 * max(prof.star_radius, F)
         I = map(lc.time) do t
+            τ0 = d.off + t + dt
+            ns = prof.y_surface > 0 ? ns_edge : ρell(τ0) - L / 2 < flash_zone ? ns_flash : ns_smooth
             acc = 0.0
             for j in 1:ns
-                τ = d.off + t + dt + (ns == 1 ? 0.0 : texp * ((j - 0.5) / ns - 0.5))
-                f, g = d.tr(τ)
-                x, y = f - cf, g - cg
-                ρ = hypot(x, y) * R / limb_radius(O, x, y)        # elliptical distance scaled to R
-                acc += atmosphere_flux(prof, ρ)
+                τ = τ0 + (ns == 1 ? 0.0 : texp * ((j - 0.5) / ns - 0.5))
+                acc += atmosphere_flux(prof, ρell(τ))             # elliptical distance scaled to R
             end
             acc / ns
         end

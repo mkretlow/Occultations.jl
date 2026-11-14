@@ -20,6 +20,39 @@ t.significance, t.interval, t.upper_limit                                   # σ
 atmosphere_test(ev; atmosphere=atm, confidence=0.99865)                     # 3σ limits
 ```
 
+## Temperature profiles, reference pressure, background flux
+
+Any temperature profile `T(r)` (radius in km) can replace the parametric model, for example
+the template of [DiasOliveira2015](@citet) used by the Sicardy group for Pluto and
+Triton (a conic from the surface to the inflection point, a cubic above, then a straight line):
+
+```julia
+tp  = DO15Temperature(1353, 38, 5.0, 1363, 49.8, 1375, 48.2, 1403, 49.3, 0.105)   # Triton, 2017
+atm = Atmosphere(:N2; temperature=tp, rref=1400)    # = triton_atmosphere(): the pressure is p₁₄₀₀
+prof = atmosphere_profile(atm, 1180.0, 1353.0, 1428.0, 4.3506e9; λ=0.7, star_diam=0.65)
+prof.surface_pressure                                # nbar, ≈ 12 p₁₄₀₀
+atm2 = Atmosphere(:N2; temperature=r -> 100 * (1200 / r)^2)   # any function of r
+```
+
+The profile is fixed in radius: use it with a fixed body radius (`fix=[:radius]`). With
+`rref`, the fitted `pressure` is the pressure at that radius. Light from the occulting body
+itself (Triton, about a third of the total flux in [MarquesOliveira2022](@citet)) or
+from a nearby planet sets the zero level of the stellar flux: `background=:free` in
+[`LimbProblem`](@ref) / [`fit_limb`](@ref) profiles that level per light curve, as their φ₀:
+
+```julia
+r = fit_limb(ev; model=CircleLimb(), photometry=true, atmosphere=triton_atmosphere(),
+             background=:free, fix=[:radius], init=Dict(:radius => 1353.0, :pressure => 1000.0, ...), starts=1)
+```
+
+Start such fits close to the solution (e.g. from a scan of the centre across the track): a
+central flash makes the χ² surface rugged in the centre coordinates.
+
+Near the shadow centre the refracted flux of a spherical atmosphere diverges as `1/ρ` (the
+central flash); within 20 stellar radii of the centre the flux is averaged over the stellar
+disc in two dimensions, which keeps the flash finite. Diffraction of the flash itself
+([SicardyDettwiller2026](@citet)) is not modelled, nor is any absorption by haze.
+
 The bending angle is computed by integrating the refractivity gradient along the ray
 (`ω(r) = 4r ∫ ν′(r+u²)/√(2r+u²) du`); the free-molecular-flow tail `n ∝ r⁻²`, which
 dominates the bending of tenuous extended atmospheres, is integrated analytically to
@@ -29,6 +62,13 @@ spurious jump of the refracted flux (φ ∝ 1/(1 + D dω/dr)). The diffraction b
 edge multiplies the refracted flux (an approximation valid when the refractive scale is
 much larger than the Fresnel scale). Start atmospheric fits from an airless photometric
 fit: the χ² surface has local minima far from the solution.
+
+The altitude step of the density table is at most 1/50 of the smallest density scale height,
+and the rays are spaced evenly in density e-folds (models without the free-molecular-flow
+tail), so that thin inversion layers above an extended atmosphere are resolved. The model
+agrees with the analytic solution of [BaumCode1953](@citet) for a constant scale height
+to 10⁻³ in flux, and with the half-light pressure of [Sicardy2022](@citet), Eq. (31), to 1 %
+(see the tests).
 
 ## Reading the plots
 

@@ -7,9 +7,12 @@ Reduction and analysis of stellar occultations by solar-system bodies in Julia:
   stellar disc, the exposure time, finite opacity and the diffraction of short (grazing)
   events; fitted timings with profiled flux levels, covariance, χ² profiles or posterior;
 * **atmospheres** – hydrostatic, spherically symmetric atmospheres (N₂, CH₄, CO; isothermal,
-  Pluto-like inversion layer, free molecular flow) ray-traced to the refracted flux in the
-  shadow (near and far limb, limb-curvature focusing, surface edge), e.g. Pluto or
-  (612533) 2002 XV93 [Arimatsu2026](@citep); the surface pressure is a fit parameter;
+  Pluto-like inversion layer, free molecular flow, or any temperature profile T(r) such as the
+  Dias-Oliveira et al. 2015 template) ray-traced to the refracted flux in the shadow (near and
+  far limb, limb-curvature focusing, central flash with the stellar disc, surface edge), e.g.
+  Pluto, Triton [MarquesOliveira2022](@citep) or (612533) 2002 XV93 [Arimatsu2026](@citep);
+  the pressure at the surface or a reference radius is a fit parameter, the flux of the body
+  itself can be fitted per light curve;
 * **limb fits** – one or several events; a 2-D ellipse (default), circle, triaxial
   **3-D ellipsoid** with pole and rotation phase (the apparent ellipse of every event follows
   from the body orientation at that epoch), or the silhouette of a **triangle mesh** (OBJ
@@ -64,7 +67,8 @@ display or save maps (`CairoMakie` for files, `GLMakie` for interactive windows)
   [the uncertainty of the limb in the plots](theory/uncertainty_bands.md).
 * **[Examples](examples.md):** ten examples, nine of them published occultations reduced
   again, and their [comparison with the publications](comparison/publications.md) and
-  [with SORA](comparison/sora.md).
+  [with SORA](comparison/sora.md); the atmosphere model compared with Baum & Code, Sicardy
+  and Arimatsu et al. ([Atmosphere models compared](comparison/atmospheres.md)).
 * **[Validation](validation.md)**, the [API reference](api.md) and the
   [reference papers](references.md).
 

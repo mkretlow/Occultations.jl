@@ -145,6 +145,7 @@ makedocs(;
             "Published: with differences" => ["generated/$name.md" for name in DIFFERENCES],
             "comparison/publications.md",
             "comparison/sora.md",
+            "comparison/atmospheres.md",
         ],
         "validation.md",
         "api.md",

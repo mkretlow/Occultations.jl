@@ -43,3 +43,26 @@ Papers without data that could be used (local copies in `references/unusable/`):
 | E. Meza et al. 2019, *Lower atmosphere and pressure evolution on Pluto from ground-based stellar occultations, 1988–2016*, A&A 625, A42, [doi:10.1051/0004-6361/201834281](https://doi.org/10.1051/0004-6361/201834281) | no light curves or timings published | `unusable/Pluto_2019_Meza.pdf` |
 | J. L. Ortiz et al. 2023, *Changing material around (2060) Chiron revealed by an occultation on December 15, 2022*, A&A 676, L12, [doi:10.1051/0004-6361/202347025](https://doi.org/10.1051/0004-6361/202347025) | no timings tabulated | `unusable/Chiron_2023_Ortiz.pdf` |
 | K. Arimatsu et al. 2019, *New constraint on the atmosphere of (50000) Quaoar from a stellar occultation*, AJ 158, 236, [doi:10.3847/1538-3881/ab5058](https://doi.org/10.3847/1538-3881/ab5058) | only the duration of the single chord, no absolute times | `unusable/Quaoar_2019_Arimatsu.pdf` |
+
+## Wanted light curves (planned examples)
+
+Papers on refractive occultations that would make valuable examples (status 2026-11). Most need light curves to be
+requested from the authors; two need nothing (Triton 2017 via CDS, and the model tests).
+
+| Reference | Why | Status |
+|---|---|---|
+| A. Dias-Oliveira et al. 2015, *Pluto's atmosphere from stellar occultations in 2012 and 2013*, ApJ 811, 53, [doi:10.1088/0004-637X/811/1/53](https://doi.org/10.1088/0004-637X/811/1/53) | the "DO15" reference model of the Sicardy group's ray-tracing code; multi-chord fit; needs a general T(r) profile in `Atmosphere` | to request |
+| J. Marques Oliveira et al. 2022, *Constraints on the structure and seasonal variations of Triton's atmosphere from the 5 October 2017 stellar occultation and previous observations*, A&A 659, A136, [doi:10.1051/0004-6361/202141443](https://doi.org/10.1051/0004-6361/202141443) | central flash, 90 light curves, a transparent spherical N₂ atmosphere (p₁₄₀₀ = 1.18 ± 0.03 µbar); the Sicardy group's ray-tracing code; needs a T(r) template (their Table B.1) and a 2D stellar disc near the flash | **no request needed**: light curves at CDS (`J/A+A/659/A136`, per the paper; not yet downloaded), circumstances in Table A.1; PDF here (`Triton_2022_MarquesOliveira.pdf`). **Next example** |
+| E. Meza et al. 2019, A&A 625, A42 (Pluto 1988–2016, 45 light curves) | multi-epoch fit with one model, pressure evolution | `unusable/` until light curves are available |
+| B. Sicardy et al. 2024, *Constraints on Triton atmospheric evolution from occultations: 1989–2022*, A&A (arXiv:2402.02476) | multi-event pressure evolution | to request |
+| B. Sicardy et al. 2016, ApJL 819, L38 (Pluto 2015 June 29) | central flash; comparison with New Horizons | to request |
+| B. Sicardy et al. 2021, ApJL 923, L31 (Pluto 2020 June 6, Devasthal) | one high-quality chord, pressure plateau; simple test case | to request |
+| B. Sicardy et al. 2006, JGR 111, E11S91 (Titan 2003 November 14) | central flash with haze: tests an opacity term e^(−τ) | to request |
+| B. Sicardy et al. 2011, Nature 478, 493 (Eris 2010 November 6) | atmosphere upper limit for a TNO | timings in the SI; light curves to request |
+| B. Sicardy et al. 2006, Nature 439, 52 (Charon 2005 July 11) | radius and atmosphere limit | to request |
+| J. L. Ortiz et al. 2012 (Makemake 2011), F. Braga-Ribas et al. 2013 (Quaoar 2011) | examples exist from timings; light curves would reproduce their atmosphere limits | to request |
+| B. Sicardy & L. Dettwiller 2026, A&A 707, A208 (central flashes: diffraction, stellar diameter) | no data needed: synthetic flash curves as a model test | PDF to add |
+| B. Sicardy 2022, C. R. Physique 23 (S1), 213 (review of the formalism) | no data needed: Baum & Code solution for isothermal atmospheres (Fig. 5, Eq. 27) and half-light pressures (Table 1, Eq. 31) as a quick model test | PDF: `~/Astronomy/Occultations/Workspace/2002 XV93/Sicardy2022_CRPhys23_213.pdf` (open access) |
+
+Reference for the formalism: B. Sicardy 2022, C. R. Physique 23 (S1), 213–241,
+[doi:10.5802/crphys.109](https://doi.org/10.5802/crphys.109).

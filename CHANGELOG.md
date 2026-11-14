@@ -4,7 +4,36 @@ All notable changes to Occultations.jl are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the package uses
 [semantic versioning](https://semver.org/).
 
-## [0.1.0] – unreleased
+## [Unreleased]
+
+### Added
+
+- **Atmospheres**: any temperature profile `T(r)` (`Atmosphere(...; temperature=f)`), the
+  template of Dias-Oliveira et al. (2015) (`DO15Temperature`), the pressure at a reference
+  radius (`rref`, e.g. Triton's p₁₄₀₀), Triton's 2017 model of Marques Oliveira et al. (2022)
+  (`triton_atmosphere`), the surface pressure of a profile (`surface_pressure`); the stellar
+  disc is averaged in two dimensions near the central flash; `background=:free` in joint
+  light-curve fits profiles the zero level of each light curve (the flux of the occulting body,
+  e.g. Triton). Tests against the Baum & Code (1953) solution and the half-light pressure of
+  Sicardy (2022).
+- Manual page comparing the atmosphere model with Baum & Code, Sicardy and Arimatsu et al.
+- Data of the Triton occultation of 2017 October 5 (stations, star, ephemeris; light curves
+  pending).
+
+### Fixed
+
+- Atmospheres without a free-molecular-flow tail: the altitude grid could be far too coarse
+  for thin layers above an extended atmosphere (2002 XV93-like bodies: flux at the surface
+  edge 0.63 instead of ≈ 0.44); the step is now at most 1/50 of the smallest density scale
+  height and the rays are spaced evenly in density e-folds. The bending integral resolves the
+  deepest scale height also for a high model top.
+- Dispersion of the N₂ refractivity: K = 1.091×10⁻²⁹ + 6.282×10⁻³²/λ² m³ (Washburn 1930, as
+  used by Dias-Oliveira et al. 2015); the dispersion term was 9 % too large (0.1 % in K).
+- Joint light-curve fits with an atmosphere: one ray tracing per event and passband, rescaled
+  exactly to each observer's distance (previously one per chord, and the cache was cleared on
+  every call with more than 16 light curves).
+
+## [0.1.0] – 2026-11-07
 
 First version.
 
