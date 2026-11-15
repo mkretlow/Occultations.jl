@@ -56,3 +56,10 @@ through one rotation (GIF, MP4, WebM).
 
 The views are static with CairoMakie (`CairoMakie.save("view.png", occview(fit))`) and
 interactive with GLMakie (`using GLMakie; display(occview(fit; explore=true))`).
+
+A ready-to-run interactive session is
+[`examples/occview_demo.jl`](https://github.com/mkretlow/Occultations.jl/blob/main/examples/occview_demo.jl)
+(needs GLMakie and a display; `julia --project=. examples/occview_demo.jl`). It fits the
+triaxial ellipsoid of 2003 UY117 as in the [2003 UY117 example](../generated/2003uy117_2020.md),
+opens the fit with `explore = true`, and shows the posterior silhouettes in a second window.
+It writes no output files.

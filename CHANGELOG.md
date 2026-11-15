@@ -19,6 +19,7 @@ All notable changes to Occultations.jl are documented here. The format follows
 - Manual page comparing the atmosphere model with Baum & Code, Sicardy and Arimatsu et al.
 - Data of the Triton occultation of 2017 October 5 (stations, star, ephemeris; light curves
   pending).
+- The 3-D guide page points to the interactive demo `examples/occview_demo.jl`.
 
 ### Fixed
 
