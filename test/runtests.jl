@@ -370,6 +370,11 @@ end
     @test r2[:equatorial_radius][1] ≈ 333 atol = 3r2[:equatorial_radius][2] + 0.5
     @test r2[:center_f][1] ≈ 10 atol = 3r2[:center_f][2] + 0.5
     @test isempty(check_negative_chords(r2))                    # its light curves are not negative chords
+    # plot: the light curves crossed by the fitted limb are drawn as positive (occulted) segments
+    pl = plot(r2)
+    labs = [string(get(x.plotattributes, :label, "")) for x in pl.series_list]
+    @test count(l -> occursin("(light curve)", l), labs) == length(lcs)
+    @test !any(l -> occursin("(−", l) && any(n -> occursin(n, l), keys(lcs)), labs)
     # a light-curve chord with a drop that is not fitted photometrically: used as a negative chord, with a warning
     names2 = sort(collect(keys(lcs)))
     @test_logs (:warn, r"used as a negative chord") match_mode = :any LimbProblem(ev2; photometry=names2[2:end])

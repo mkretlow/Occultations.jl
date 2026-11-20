@@ -102,15 +102,49 @@ function _compass_series!(series, box)
     return series
 end
 
+# light curves of a photometric limb fit: the occulted intervals [s from ev.tref] predicted by the
+# fitted outline O at centre c (they have no timed contacts, so `isnegative` cannot tell)
+function _phot_intervals(p, ev::Event, k, c, O)
+    out = Dict{String,Vector{Tuple{Float64,Float64}}}()
+    for d in p.photometry
+        d.k == k || continue
+        ch = ev[d.chord]
+        a, b = ch.span[1] - ev.tref, ch.span[2] - ev.tref
+        w = max(abs(a), abs(b)) + 60
+        st = clamp(exptime(ch.lightcurve) / 4, 0.01, 0.5)
+        pc = try predicted_contacts(ev, ch.observer, O; center=c, window=w, step=st) catch; Tuple{Epoch,Epoch}[] end
+        out[d.chord] = [(x - ev.tref, y - ev.tref) for (x, y) in pc if (y - ev.tref) >= a && (x - ev.tref) <= b]
+    end
+    return out
+end
+
 function _chord_series!(series, ev::Event; dts=Dict{String,Float64}(), numbers::Bool=true, ref=(0.0, 0.0),
-                        box=nothing, extend::Bool=false, compass=nothing)
+                        box=nothing, extend::Bool=false, compass=nothing, phot=Dict{String,Vector{Tuple{Float64,Float64}}}())
     nx = Float64[]; ny = Float64[]; nt = String[]
     for (i, c) in enumerate(ev.chords)
         dt = get(dts, c.name, 0.0)
         tag = numbers ? "$i  " : ""
-        if isnegative(c)
+        if isnegative(c) && !isempty(get(phot, c.name, ()))
+            # a light curve fitted photometrically that the fitted limb crosses: its occulted segments
+            tr = track(ev, c)
+            f0, g0 = chord_path(ev, c; dt=dt)
+            extend && push!(series, (f0, g0, (linestyle=:dot, linecolor=:gray, label="")))
+            f = Float64[]; g = Float64[]
+            for (a, b) in phot[c.name]
+                for τ in range(a, b; length=60)
+                    q = tr(τ); push!(f, q[1]); push!(g, q[2])
+                end
+                push!(f, NaN); push!(g, NaN)
+            end
+            push!(series, (f, g, (linewidth=2, label=tag * c.name * " (light curve)")))
+            L = hypot(f[end-1] - f[1], g[end-1] - g[1])
+            u = L > 0 ? ((f[1] - f[end-1]) / L, (g[1] - g[end-1]) / L) : (0.0, 0.0)
+            δ = max(0.08L, 8.0)
+            push!(nx, f[1] + δ * u[1]); push!(ny, g[1] + δ * u[2]); push!(nt, string(i))
+        elseif isnegative(c)
             f, g = chord_path(ev, c; dt=dt)
-            push!(series, (f, g, (linestyle=:dash, linecolor=:gray, label=tag * c.name * " (−)")))
+            push!(series, (f, g, (linestyle=:dash, linecolor=:gray,
+                                  label=tag * c.name * (haskey(phot, c.name) ? " (−, light curve)" : " (−)"))))
             k = argmin(hypot.(f .- ref[1], g .- ref[2]))          # label next to the closest point
             push!(nx, f[k]); push!(ny, g[k]); push!(nt, string(i))
         else
@@ -516,7 +550,8 @@ RecipesBase.@recipe function f(r::LimbFit; event=1, uncertainty=:shape, nsigma=1
         end
     end
     for (x, y, kw) in _chord_series!([], ev; dts=dts, numbers=numbers, ref=c0, box=box, extend=extend,
-                                     compass=compass ? _plot_box(plotattributes, box) : nothing)
+                                     compass=compass ? _plot_box(plotattributes, box) : nothing,
+                                     phot=_phot_intervals(p, ev, k, c0, O0))
         @RecipesBase.series begin
             seriestype := :path
             for (kk, v) in pairs(kw)
@@ -660,7 +695,8 @@ RecipesBase.@recipe function f(post::LimbPosterior; event=1, uncertainty=:shape,
         end
     end
     for (x, y, kw) in _chord_series!([], ev; numbers=numbers, ref=c0, box=box, extend=extend,
-                                     compass=compass ? _plot_box(plotattributes, box) : nothing)
+                                     compass=compass ? _plot_box(plotattributes, box) : nothing,
+                                     phot=_phot_intervals(p, ev, k, cb, Ob))
         @RecipesBase.series begin
             seriestype := :path
             for (kk, v) in pairs(kw)

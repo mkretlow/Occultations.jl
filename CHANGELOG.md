@@ -53,6 +53,11 @@ All notable changes to Occultations.jl are documented here. The format follows
 
 ### Fixed
 
+- Plots of photometric limb fits (`plot(fit)`, `plot(posterior)`): light curves without timed
+  contacts were drawn as negative chords (dashed, "(−)") even where the fitted limb crosses them;
+  they are now drawn as positive segments between the contacts predicted by the fitted limb
+  ("(light curve)"), and as negative chords only where the limb misses them.
+
 - `TimingProblem`: the bottom flux level is profiled only while the model has at least three deep
   points (as in `LimbProblem`), not merely because the start had them; a solution that barely
   dimmed any exposure could fit a drop with an absurd bottom level (e.g. −900) and a good χ².
