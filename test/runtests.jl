@@ -752,6 +752,15 @@ end
     @test rc[:neck_width][1] > 0
     @test reduced_chi2(fit_limb(ev; rng=rng)) > 10reduced_chi2(rc)                   # a single ellipse cannot fit
     @test plot(rc) isa Plots.Plot
+    # staged search of `fit` (relax): never worse than the plain search from the same starts; only
+    # for problems with constraints and without light curves
+    pc = LimbProblem(ev; model=ContactBinaryLimb())
+    @test Occultations.relaxed(pc, 1.0) isa LimbProblem
+    @test Occultations.relaxed(LimbProblem(ev; model=ContactBinaryLimb(), negative=:none, visible=:none), 1.0) === nothing
+    rq = fit_limb(ev; model=ContactBinaryLimb(), rng=MersenneTwister(5), starts=3, relax=false)
+    rr = fit_limb(ev; model=ContactBinaryLimb(), rng=MersenneTwister(5), starts=3)
+    @test rr.chi2 <= rq.chi2 + 1e-6 * max(rq.chi2, 1.0)
+    @test isfinite(rr.chi2) && all(isfinite, rr.values)
 
     # --- a contact binary in 3-D: outlines, derived quantities, amplitude
     body, star, ev, lon0, lat0 = scene(; radius=150.0, pole=(35.0, 40.0), rotation_period=9.5, W0=20.0,

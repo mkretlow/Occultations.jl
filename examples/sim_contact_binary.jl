@@ -130,13 +130,25 @@ section("4. the contact-binary model")
 # contacts (its major axis gives the axis of the lobes). Unlabelled contacts are matched to
 # the nearest crossing of the same kind of the two-lobe outline, and the visible segments of
 # the chords are constraints by default.
-r2a = fit_limb(ev; model=ContactBinaryLimb(), rng=rng)
+#
+# The negative chords are soft constraints here (`negative=:soft`: a penalty in units of the
+# exposure time times the speed). Several stations have exposures of 0.5 s, 13 km along the
+# track, and as hard constraints the negative chords split the parameter space of the two-lobe
+# limb into pieces: a lobe cannot pass through a negative chord on its way to the solution, and
+# the fit stops in one of the pieces far from the truth. For the same reason the fit is done
+# in two steps: first the contacts and the negative chords alone, then from that solution
+# with the visible segments as well (their penalties are steep, 1–3 km per unit, and trap the
+# fit from random starts; at the solution they are zero).
+cb_init(r) = Dict(n => v for (n, v) in zip(r.names, r.values))
+r2s = fit_limb(ev; model=ContactBinaryLimb(), negative=:soft, visible=:none, rng=rng)
+r2a = fit_limb(ev; model=ContactBinaryLimb(), negative=:soft, init=cb_init(r2s), starts=1, rng=rng)
 @printf("first pass (timings with the shadow velocity): χ²/dof = %.2f, b₁ = %.2f ± %.2f km (truth %.0f)\n",
         reduced_chi2(r2a), r2a[:b1]..., b1)
 # The timings of the first pass assume the shadow velocity at every edge, while the time scale
 # of the diffraction fringes is set by the velocity normal to the limb, slower at oblique
 # edges: the contacts are slightly biased. Second pass: each drop is timed again with the
-# normal velocities at its edges predicted by the fitted limb, and the limb is refitted.
+# normal velocities at its edges predicted by the fitted limb, and the limb is refitted,
+# starting from the first pass.
 (cf, Of) = outlines(r2a)[1]
 for c in filter(ispositive, collect(ev.chords))
     tr = track(ev, c)
@@ -144,13 +156,14 @@ for c in filter(ispositive, collect(ev.chords))
     cs = time_drops(c.lightcurve, detections[c.name], τ -> vnormal(tr, Of, cf, τ + off); σt=σclks[c.name])
     replace_chord!(ev, Chord(c.name, c.observer; contacts=cs, lightcurve=c.lightcurve))
 end
-# With these errors the chords still scatter more than expected: the short second drop of a
-# chord through the waist is timed less well than its formal error says (a few exposures, a
-# local minimum of the timing fit), and a gap narrower than an exposure merges two drops into
-# one. The errors of the fit are therefore scaled by √(χ²/dof) (`scale_errors=true`). (A limb
-# allowance `σ_limb=:auto` fails here: with so few chords a large allowance lets the two-lobe
-# limb wander to a different shape.)
-r2 = fit_limb(ev; model=ContactBinaryLimb(), scale_errors=true, rng=rng)
+# With these errors the chords still scatter more than expected: the short second drop of
+# S3, a chord through the waist (0.6 s, six exposures), is timed wrongly in both passes, by up
+# to 0.8 s (a local minimum of the timing fit of a short drop with oblique, slow edges), while
+# all other contacts agree with the truth to a few 0.01 s; and a gap narrower than an exposure
+# merges two drops into one. The errors of the fit are therefore scaled by √(χ²/dof)
+# (`scale_errors=true`). (A limb allowance `σ_limb=:auto` fails here: with so few chords a
+# large allowance lets the two-lobe limb wander to a different shape.)
+r2 = fit_limb(ev; model=ContactBinaryLimb(), negative=:soft, init=cb_init(r2a), starts=1, scale_errors=true, rng=rng)
 @printf("χ²/dof = %.1f: the errors are scaled by √(χ²/dof)\n", reduced_chi2(r2))
 display(r2)
 println("fitted vs true:")
@@ -184,10 +197,11 @@ section("5. joint fit of the light curves")
 # Each light curve carries the timing error of its station (0.05–0.1 s), which the photometric
 # model would otherwise take as exact time stamps: every positive station gets a time offset with
 # a Gaussian prior of its timing accuracy.
-init = Dict(n => v for (n, v) in zip(r2.names, r2.values))
+init = cb_init(r2)
 pos = [c.name for c in ev.chords if ispositive(c)]
 priors = Dict(Symbol("dt_", n) => (0.0, σclks[n]) for n in pos)
-r3 = fit_limb(ev; model=ContactBinaryLimb(), photometry=true, init=init, fit_dt=pos, priors=priors, starts=1, rng=rng)
+r3 = fit_limb(ev; model=ContactBinaryLimb(), negative=:soft, photometry=true, init=init, fit_dt=pos, priors=priors,
+              starts=1, rng=rng)
 @printf("χ²/dof = %.3f for %d light-curve points\n", reduced_chi2(r3), r3.dof + length(freenames(r3)))
 for (n, tv) in ((:a1, a1), (:b1, b1), (:a2, a2), (:b2, b2), (:axis_pa, axis_pa), (:neck, neck))
     @printf("  %-8s timings %8.3f ± %5.3f   light curves %8.3f ± %5.3f   (truth %7.3f)\n", n, r2[n]..., r3[n]..., tv)
@@ -197,9 +211,9 @@ for n in pos
     @printf("  %-4s %+6.3f ± %5.3f s   (timing error %+6.3f s)\n", n, r3[Symbol("dt_", n)]..., dclocks[n])
 end
 
-# **The joint fit is overconfident here.** It reaches χ²/dof ≈ 1, but with nine stations, of
-# which five see the body, its formal errors (a few 0.01 km) are far smaller than its deviations
-# from the truth (up to 10 km in b₁), and the fitted time offsets do not recover the timing
+# **The joint fit is overconfident here.** It reaches χ²/dof ≈ 1.6, but with nine stations, of
+# which five see the body, its formal errors (0.03–0.3 km) are far smaller than its deviations
+# from the truth (up to 11 km in b₁), and the fitted time offsets do not recover the timing
 # errors. The fit of the timings with scaled errors is the reliable result of this campaign; a
 # joint fit needs more, and better sampled, light curves.
 

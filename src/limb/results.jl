@@ -225,21 +225,24 @@ function model_lightcurve(r::LimbFit, name::AbstractString)
 end
 
 """
-    fit_limb(events; starts=8, rng, σ_limb=0, kwargs...) -> FitResult
+    fit_limb(events; starts=8, rng, σ_limb=0, relax=true, kwargs...) -> FitResult
 
-Shortcut for `fit(LimbProblem(events; kwargs...); starts, rng)`.
+Shortcut for `fit(LimbProblem(events; kwargs...); starts, rng, relax)` (`relax`: the staged
+search for problems with negative chords or visible segments, see [`fit`](@ref)).
 
 `σ_limb = :auto` determines the limb uncertainty allowance [km] (added in quadrature to every
 contact, see [`LimbProblem`](@ref)) for which χ²/dof = 1, as SORA's `ellipse_error`: the
 excess scatter of the contacts (limb topography, unmodelled timing errors) is then reflected
 in the uncertainties. The value used is `fit.problem.σ_limb`.
 """
-function fit_limb(evs; starts::Integer=8, rng=Random.default_rng(), scale_errors::Bool=false, σ_limb=0.0, kw...)
-    σ_limb === :auto || return fit(LimbProblem(evs; σ_limb=σ_limb, kw...); starts=starts, rng=rng, scale_errors=scale_errors)
-    r = fit(LimbProblem(evs; σ_limb=0.0, kw...); starts=starts, rng=rng)
+function fit_limb(evs; starts::Integer=8, rng=Random.default_rng(), scale_errors::Bool=false, σ_limb=0.0, relax::Bool=true,
+                  kw...)
+    σ_limb === :auto || return fit(LimbProblem(evs; σ_limb=σ_limb, kw...); starts=starts, rng=rng, scale_errors=scale_errors,
+                                  relax=relax)
+    r = fit(LimbProblem(evs; σ_limb=0.0, kw...); starts=starts, rng=rng, relax=relax)
     reduced_chi2(r) <= 1 && return r
     init = Dict(n => v for (n, v) in zip(r.names, r.values))
-    f(σ) = fit(LimbProblem(evs; σ_limb=σ, kw..., init=init); starts=1, rng=rng)
+    f(σ) = fit(LimbProblem(evs; σ_limb=σ, kw..., init=init); starts=1, rng=rng, relax=relax)
     lo, hi = 0.0, 1.0
     while reduced_chi2(f(hi)) > 1
         lo, hi = hi, 2hi
@@ -250,7 +253,7 @@ function fit_limb(evs; starts::Integer=8, rng=Random.default_rng(), scale_errors
         reduced_chi2(f(m)) > 1 ? (lo = m) : (hi = m)
         hi - lo < 1e-3 * hi && break
     end
-    return fit(LimbProblem(evs; σ_limb=hi, kw..., init=init); starts=starts, rng=rng, scale_errors=scale_errors)
+    return fit(LimbProblem(evs; σ_limb=hi, kw..., init=init); starts=starts, rng=rng, scale_errors=scale_errors, relax=relax)
 end
 
 """

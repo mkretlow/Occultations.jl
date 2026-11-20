@@ -155,6 +155,9 @@ NamedTuple.
 derived(::AbstractProblem, values) = NamedTuple()
 # map equivalent parameter values to a canonical representation (e.g. swapped ellipse axes)
 canonical(::AbstractProblem, values) = values
+# the problem with its constraints (hard exclusions, soft penalties) as penalties of strength w
+# (w → ∞: the problem itself), for a staged search in `fit`; `nothing` if there is none
+relaxed(::AbstractProblem, w) = nothing
 nobs(prob::AbstractProblem) = length(something(residuals(prob, [p.value for p in parameters(prob)]), Float64[]))
 
 """

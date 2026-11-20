@@ -167,6 +167,23 @@ _fit_bottom(p::LimbProblem, I) = p.background === :free ||
 parameters(p::LimbProblem) = p.ps
 events(p::LimbProblem) = p.setup.events
 
+# The negative chords and visible segments as penalties of strength w, for the staged search of
+# `fit`: hard constraints become soft with σ = max(σ, 1 km)/w, soft ones are weakened by min(w, 1).
+# With hard constraints the admissible region of a limb can fall apart into pieces (a lobe cannot
+# pass through a negative chord), and steep soft penalties trap a search from far away; weak
+# penalties let the limb pass first. Not for light-curve fits (each pass costs a full model).
+function relaxed(p::LimbProblem, w)
+    isempty(p.negatives) && isempty(p.visibles) && return nothing
+    isempty(p.photometry) || return nothing
+    sc(ds, mode) = mode === :hard ?
+        [_NegativeData(d.k, d.tr, d.τ, d.xy, max(d.σ, 1.0) / w, d.dt, d.chord, d.Δs) for d in ds] :
+        [_NegativeData(d.k, d.tr, d.τ, d.xy, d.σ / min(w, 1.0), d.dt, d.chord, d.Δs) for d in ds]
+    soft(mode) = mode === :hard ? :soft : mode
+    return LimbProblem(p.setup, p.model, p.ps, p.contacts, sc(p.negatives, p.negative), sc(p.visibles, p.visible),
+                       p.photometry, p.amplitudes, p.phases, p.residual, soft(p.negative), soft(p.visible), p.σ_limb,
+                       p.σ_ring, p.atmosphere, p.centers, p.pressure, p.atm_cache, p.double_star, p.background)
+end
+
 LimbProblem(ev::Event; kw...) = LimbProblem([ev]; kw...)
 
 function LimbProblem(evs::AbstractVector{Event}; model::LimbModel=EllipseLimb(), residual::Symbol=:chord,

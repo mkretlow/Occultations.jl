@@ -187,8 +187,21 @@ end
 
 _starts_rng(rng) = rng === nothing ? Random.default_rng() : rng
 
+const _RELAX_STEPS = (0.01, 0.1, 1.0, 10.0, 100.0, 1000.0)
+
+# a point between x (possibly inadmissible) and the admissible point a, as close to x as possible
+function _admissible_towards(res, x, a)
+    res(x) === nothing || return x
+    res(a) === nothing && return nothing
+    for δ in (1e-8, 1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 0.03, 0.1, 0.3, 1.0)
+        xt = x .+ δ .* (a .- x)
+        res(xt) === nothing || return xt
+    end
+    return nothing
+end
+
 """
-    fit(problem; starts=8, maxiter=200, rng=Random.default_rng(), scale_errors=false, ad=true) -> FitResult
+    fit(problem; starts=8, maxiter=200, rng=Random.default_rng(), scale_errors=false, ad=true, relax=true) -> FitResult
 
 Least-squares (maximum a posteriori with Gaussian priors) solution: Levenberg–Marquardt
 from the initial values and from `starts - 1` random starting points around them (within
@@ -201,9 +214,16 @@ propagation. See [`sample`](@ref) for the full posterior.
 
 The Jacobian is computed by forward-mode automatic differentiation (ForwardDiff) if the
 problem supports it, otherwise (or with `ad = false`) by central finite differences.
+
+With `relax = true` (the default), a problem with constraints (negative chords, visible
+segments of a limb fit, but not light-curve fits) is also solved by a staged search from
+every start: the constraints as weak penalties first, tightened in steps, then the problem
+itself from the nearest admissible point. Hard constraints can split the admissible
+parameters into pieces (a lobe of a contact binary cannot pass through a negative chord),
+and steep penalties trap a search from far away; the better of the two solutions is kept.
 """
 function fit(prob::AbstractProblem; starts::Integer=8, maxiter::Integer=200, rng=Random.default_rng(),
-             scale_errors::Bool=false, ad::Bool=true)
+             scale_errors::Bool=false, ad::Bool=true, relax::Bool=true)
     ps = parameters(prob)
     F = _Free(ps)
     nfree = length(F.idx)
@@ -213,6 +233,7 @@ function fit(prob::AbstractProblem; starts::Integer=8, maxiter::Integer=200, rng
     x0 = F.base[F.idx]
     best = (x=x0, c=Inf, J=zeros(0, nfree), conv=false)
     useAD = Ref(ad)                         # switched off for good if the problem does not support AD
+    relaxable = relax && relaxed(prob, 1.0) !== nothing
     for s in 1:max(starts, 1)
         xs = s == 1 ? x0 : x0 .+ 2 .* scale .* (2 .* rand(rng, nfree) .- 1)
         xs = [clamp(xs[k], ps[i].lower, ps[i].upper) for (k, i) in enumerate(F.idx)]
@@ -226,6 +247,20 @@ function fit(prob::AbstractProblem; starts::Integer=8, maxiter::Integer=200, rng
         end
         x, c, J, conv, _ = levenberg_marquardt(res, xs, scale; maxiter=maxiter, ad=useAD)
         c < best.c && (best = (x=x, c=c, J=J, conv=conv))
+        # staged search from the same start: the constraints as weak penalties first, tightened step
+        # by step; then back towards the start until admissible, and the problem itself from there
+        if relaxable
+            xr = xs
+            for w in _RELAX_STEPS
+                rw = relaxed(prob, w)
+                xr = levenberg_marquardt(z -> _total_residuals(rw, F, z), xr, scale; maxiter=maxiter, ad=useAD)[1]
+            end
+            xa = _admissible_towards(res, xr, xs)
+            if xa !== nothing
+                x, c, J, conv, _ = levenberg_marquardt(res, xa, scale; maxiter=maxiter, ad=useAD)
+                c < best.c && (best = (x=x, c=c, J=J, conv=conv))
+            end
+        end
     end
     isfinite(best.c) || error("fit: no admissible solution found (check the initial values and constraints)")
     xb = canonical(prob, _full(F, best.x))[F.idx]
