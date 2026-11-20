@@ -18,14 +18,14 @@ const REPO = "https://github.com/mkretlow/Occultations.jl/blob/main/"
 # the examples, in the order of the manual: synthetic, then the published events grouped by the
 # kind of analysis (as in docs/src/examples.md and the paper)
 const SYNTHETIC = ["tutorial", "diffraction_timing", "sim_binary", "sim_contact_binary", "sim_contact_binary_3d", "sim_rings", "sim_ring_pole"]
-const REPRODUCED = ["makemake_2011", "varda_2018", "huya_2019", "2003vs2_2019",      # one event
+const REPRODUCED = ["makemake_2011", "varda_2018", "huya_2019", "2003vs2_2019", "2002gz32_2017",  # one event
                     "2002ms4_2020",                                                  # a large campaign
                     "bienor_2019_2023", "ixion_2020_2023",                           # several events
                     "2003uy117_2020",                                                # three-dimensional shape
                     "haumea_2017", "chariklo_2017_2020", "quaoar_2011_2022",         # rings
                     "2007oc10_2022",                                                 # double star
                     "2002xv93_2024"]                                                 # atmosphere
-const DIFFERENCES = ["2007uk126_2014", "2002gz32_2017", "2002tc302_2018", "chiron_2018_2019", "1995sm55_2024",  # few chords
+const DIFFERENCES = ["2007uk126_2014", "2002tc302_2018", "chiron_2018_2019", "1995sm55_2024",  # few chords
                      "huya_2023", "huya_2023_satellite",                             # negative chords, satellite
                      "2003az84_2012_2014", "2002kx14_2020_2023"]                     # several events
 const EXAMPLES = [SYNTHETIC; REPRODUCED; DIFFERENCES]

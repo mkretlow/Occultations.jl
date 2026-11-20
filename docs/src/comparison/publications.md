@@ -13,6 +13,7 @@ first the cases the package reproduces, then those with differences from the pub
 | (174567) Varda | 2018-09-10 | [Souami2020](@citet), A&A 643, A125 | [script](https://github.com/mkretlow/Occultations.jl/blob/main/examples/varda_2018.jl) · [data](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/varda_20180910.jl) · [output](https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/varda_2018/output.txt) |
 | (38628) Huya | 2019-03-18 | [SantosSanz2022](@citet), A&A 664, A130 | [script](https://github.com/mkretlow/Occultations.jl/blob/main/examples/huya_2019.jl) · [data](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/huya_20190318.jl) · [output](https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/huya_2019/output.txt) |
 | (84922) 2003 VS2 | 2019-10-22 | [VaraLubiano2022](@citet), A&A 663, A121 | [script](https://github.com/mkretlow/Occultations.jl/blob/main/examples/2003vs2_2019.jl) · [data](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/2003vs2_20191022.jl) · [output](https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/2003vs2_2019/output.txt) |
+| (95626) 2002 GZ32 | 2017-05-20 | [SantosSanz2021](@citet), MNRAS 501, 6062 | [script](https://github.com/mkretlow/Occultations.jl/blob/main/examples/2002gz32_2017.jl) · [data](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/2002gz32_20170520.jl) · [output](https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/2002gz32_2017/output.txt) |
 | ***Reproduced: a large campaign*** | | | |
 | (307261) 2002 MS4 | 2020-08-08 | [Rommel2023](@citet), A&A 678, A167 (stations at the CDS) | [script](https://github.com/mkretlow/Occultations.jl/blob/main/examples/2002ms4_2020.jl) · [data](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/2002ms4_20200808.jl) · [output](https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/2002ms4_2020/output.txt) |
 | ***Reproduced: several events*** | | | |
@@ -30,7 +31,6 @@ first the cases the package reproduces, then those with differences from the pub
 | (612533) 2002 XV93 | 2024-01-10 | [Arimatsu2026](@citet), Nature Astronomy | [script](https://github.com/mkretlow/Occultations.jl/blob/main/examples/2002xv93_2024.jl) · [data](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/2002xv93_20240110.jl) · [data 2](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/2002xv93_zenodo/README.md) · [output](https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/2002xv93_2024/output.txt) |
 | ***With differences: one event, few chords*** | | | |
 | (229762) 2007 UK126 | 2014-11-15 | [Schindler2017](@citet), A&A 600, A12 | [script](https://github.com/mkretlow/Occultations.jl/blob/main/examples/2007uk126_2014.jl) · [data](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/2007uk126_20141115.jl) · [output](https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/2007uk126_2014/output.txt) |
-| (95626) 2002 GZ32 | 2017-05-20 | [SantosSanz2021](@citet), MNRAS 501, 6062 | [script](https://github.com/mkretlow/Occultations.jl/blob/main/examples/2002gz32_2017.jl) · [data](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/2002gz32_20170520.jl) · [output](https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/2002gz32_2017/output.txt) |
 | (84522) 2002 TC302 | 2018-01-28 | [Ortiz2020](@citet), A&A 639, A134 | [script](https://github.com/mkretlow/Occultations.jl/blob/main/examples/2002tc302_2018.jl) · [data](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/2002tc302_20180128.jl) · [output](https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/2002tc302_2018/output.txt) |
 | (2060) Chiron | 2018-11-28 and 2019-09-08 | [BragaRibas2023](@citet), A&A 676, A72 | [script](https://github.com/mkretlow/Occultations.jl/blob/main/examples/chiron_2018_2019.jl) · [data](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/chiron_2018_2019.jl) · [output](https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/chiron_2018_2019/output.txt) |
 | (24835) 1995 SM55 | 2024-02-25 | [Ortiz2025](@citet), A&A 703, A147 | [script](https://github.com/mkretlow/Occultations.jl/blob/main/examples/1995sm55_2024.jl) · [data](https://github.com/mkretlow/Occultations.jl/blob/main/examples/data/1995sm55_20240225.jl) · [output](https://github.com/mkretlow/Occultations.jl/blob/main/examples/output/1995sm55_2024/output.txt) |
@@ -185,6 +185,34 @@ Findings:
   does not constrain the 3-D shape as tightly as the paper's errors suggest.
 * Astrometry agrees with the current JPL orbit to 0.2 mas; the paper's offsets refer to JPL#33.
 * The star's declination in the paper is misprinted (01.0748″ for 01.748″).
+
+### (95626) 2002 GZ32, 2017 May 20
+
+Five chords used for the limb, a sixth (La Hita 40 cm) with an unknown time offset, and two
+close negative chords [SantosSanz2021](@citep). Shadow velocity 20.95 km/s (21.19).
+
+| Fit | a′ [km] | b′ [km] | PA [°] | D_eq [km] | χ² |
+|---|---|---|---|---|---|
+| **Paper**, original chords | 146 ± 12 | 73.0 ± 4.6 | 318 ± 3 | 206 ± 15 | 29.5 |
+| **Paper**, chords aligned | 152.6 ± 8.4 | 73.0 ± 4.2 | 322 ± 3 | 211 ± 12 | 4.0 |
+| Radial residuals | 139.9 ± 9.8 | 68.4 ± 5.0 | 143.6 ± 6.2 | 195.7 ± 12.8 | 43.3 |
+| Along the chords | 152.0 ± 15.0 | 69.8 ± 3.4 | 140.8 ± 4.3 | 206.0 ± 14.1 | 43.3 |
+| Clock offsets, N(0, 0.5 s) | 161.6 ± 31.2 | 68.3 ± 6.1 | 139.7 ± 6.2 | 210.1 ± 26.6 | 4.1 |
+| Along the chords, σ_limb = 8.3 km | 151.8 ± 20.8 | 70.7 ± 5.0 | 142.1 ± 6.1 | 207.2 ± 18.2 | 5.0 |
+
+The paper's P′ of 318–322° is the same orientation as 138–142° here.
+
+Findings:
+
+* The chords scatter beyond their timing errors (χ²/dof ≈ 9). With the timing errors only,
+  radial residuals and residuals along the chords give nearly the same limb (b′ = 68 and
+  70 km; paper 73 km).
+* Area-equivalent diameter (posterior) 204.4 −9.1 +8.9 km (211 ± 12), albedo 0.044 ± 0.005
+  (0.043 ± 0.007), axis ratio 2.1 ± 0.2 (2.09 ± 0.24).
+* The negative chord at Sant Esteve passes 2.5 km from the limb and bounds the major axis.
+* The fitted clock offsets (prior 0.5 s, none larger than 0.7 s) do not reproduce the paper's
+  +2 s shift of the Athens chord: with its large timing errors it needs no shift.
+* The shadow velocity from the current ephemeris is 1 % lower than the paper's.
 
 ## Reproduced: a large campaign
 
@@ -584,34 +612,6 @@ Findings:
 * The paper's Fig. 4 shows a "planar 68.3 % confidence region" of the ellipse, i.e. a region
   containing the true ellipse with 68.3 % probability. This corresponds to `:region` here,
   not to SORA's pointwise envelope (`examples/output/2007uk126_2014/2007uk126_limb_fit_paper.png`).
-
-### (95626) 2002 GZ32, 2017 May 20
-
-Five chords used for the limb, a sixth (La Hita 40 cm) with an unknown time offset, and two
-close negative chords [SantosSanz2021](@citep). Shadow velocity 20.95 km/s (21.19).
-
-| Fit | a′ [km] | b′ [km] | PA [°] | D_eq [km] | χ² |
-|---|---|---|---|---|---|
-| **Paper**, original chords | 146 ± 12 | 73.0 ± 4.6 | 318 ± 3 | 206 ± 15 | 29.5 |
-| **Paper**, chords aligned | 152.6 ± 8.4 | 73.0 ± 4.2 | 322 ± 3 | 211 ± 12 | 4.0 |
-| Radial residuals | 184.3 ± 24.8 | 40.4 ± 1.9 | 163.7 ± 1.0 | 172.5 ± 8.4 | 41.6 |
-| Along the chords | 163.7 ± 22.9 | 71.1 ± 4.1 | 139.1 ± 4.7 | 215.7 ± 20.6 | 42.9 |
-| Clock offsets, N(0, 0.5 s) | 160.7 ± 29.7 | 67.9 ± 5.9 | 140.1 ± 6.1 | 208.9 ± 25.3 | 4.1 |
-| Along the chords, σ_limb = 8.3 km | 151.8 ± 20.8 | 70.7 ± 5.0 | 142.1 ± 6.1 | 207.2 ± 18.2 | 5.0 |
-
-The paper's P′ of 318–322° is the same orientation as 138–142° here.
-
-Findings:
-
-* With the timing errors only, **radial residuals** run into a different, flatter solution
-  (b′ = 40 km, PA 164°): for a very elongated limb the radial distance is a poor measure of
-  the misfit. Residuals along the chords give the paper's shape.
-* Area-equivalent diameter (posterior) 205.2 −9.5 +8.6 km (211 ± 12), albedo 0.044 ± 0.005
-  (0.043 ± 0.007), axis ratio 2.1 ± 0.2 (2.09 ± 0.24).
-* The negative chord at Sant Esteve passes 2.5 km from the limb and bounds the major axis.
-* The fitted clock offsets do not reproduce the paper's +2 s shift of the Athens chord: with
-  its large timing errors it needs no shift.
-* The shadow velocity from the current ephemeris is 1 % lower than the paper's.
 
 ### (84522) 2002 TC302, 2018 January 28
 

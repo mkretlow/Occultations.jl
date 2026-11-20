@@ -146,6 +146,7 @@ analysis (as in the manual). Each example writes its figures and printed results
 | [`varda_2018.jl`](examples/varda_2018.jl) | (174567) Varda, 2018-09-10 | Souami et al. 2020 | limb and astrometry |
 | [`huya_2019.jl`](examples/huya_2019.jl) | (38628) Huya, 2019-03-18 | Santos-Sanz et al. 2022 | σ_limb, clock priors, posterior |
 | [`2003vs2_2019.jl`](examples/2003vs2_2019.jl) | (84922) 2003 VS2, 2019-10-22 | Vara-Lubiano et al. 2022 | clock offset of a chord, 3-D ellipsoid |
+| [`2002gz32_2017.jl`](examples/2002gz32_2017.jl) | (95626) 2002 GZ32, 2017-05-20 | Santos-Sanz et al. 2021 | an elongated centaur |
 | ***Reproduced: a large campaign*** | | | *many chords, selected chords, topography* |
 | [`2002ms4_2020.jl`](examples/2002ms4_2020.jl) | (307261) 2002 MS4, 2020-08-08 | Rommel et al. 2023 | 59 chords, global ellipse, topography |
 | ***Reproduced: several events*** | | | *one shape with a centre per event, clock offsets, a triaxial ellipsoid from several events* |
@@ -161,9 +162,8 @@ analysis (as in the manual). Each example writes its figures and printed results
 | [`2007oc10_2022.jl`](examples/2007oc10_2022.jl) | (470316) 2007 OC10, 2022 | Gómez-Limón et al. 2025 | a double star: light curves fitted directly, posterior |
 | ***Reproduced: an atmosphere*** | | | *light curves fitted directly, ray-traced refraction* |
 | [`2002xv93_2024.jl`](examples/2002xv93_2024.jl) | (612533) 2002 XV93, 2024-01-10 | Arimatsu et al. 2026 | light-curve fits, atmosphere detection |
-| ***With differences: one event, few chords*** | | | *error estimates, residuals along the chords, star positions* |
+| ***With differences: one event, few chords*** | | | *error estimates, star positions* |
 | [`2007uk126_2014.jl`](examples/2007uk126_2014.jl) | (229762) 2007 UK126, 2014-11-15 | Schindler et al. 2017 | three chords, non-Gaussian posterior |
-| [`2002gz32_2017.jl`](examples/2002gz32_2017.jl) | (95626) 2002 GZ32, 2017-05-20 | Santos-Sanz et al. 2021 | an elongated centaur |
 | [`2002tc302_2018.jl`](examples/2002tc302_2018.jl) | 2002 TC302, 2018-01-28 | Ortiz et al. 2020 | σ_limb, clock offsets, star position |
 | [`chiron_2018_2019.jl`](examples/chiron_2018_2019.jl) | (2060) Chiron, 2018 and 2019 | Braga-Ribas et al. 2023 | few chords, clock offset |
 | [`1995sm55_2024.jl`](examples/1995sm55_2024.jl) | (24835) 1995 SM55, 2024-02-25 | Ortiz et al. 2025 | albedo, 3-D ellipsoid, inconsistent timings |

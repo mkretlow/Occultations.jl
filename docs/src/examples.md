@@ -40,6 +40,7 @@ chords, limb fit, astrometry, posterior and maps.
 | [Varda](generated/varda_2018.md) | (174567) Varda, 2018-09-10 | [Souami2020](@citet) | limb and astrometry |
 | [Huya 2019](generated/huya_2019.md) | (38628) Huya, 2019-03-18 | [SantosSanz2022](@citet) | σ_limb, clock priors, posterior |
 | [2003 VS2](generated/2003vs2_2019.md) | (84922) 2003 VS2, 2019-10-22 | [VaraLubiano2022](@citet) | a clock off by a minute, 3-D ellipsoid with amplitude and phase |
+| [2002 GZ32](generated/2002gz32_2017.md) | (95626) 2002 GZ32, 2017-05-20 | [SantosSanz2021](@citet) | an elongated centaur, aligned chords as clock offsets |
 
 ## Reproduced: a large campaign
 
@@ -94,12 +95,11 @@ chords, limb fit, astrometry, posterior and maps.
 
 ## With differences: one event, few chords
 
-*Error estimates, residuals along the chords, star positions.*
+*Error estimates, star positions.*
 
 | Example | Event | Publication | Shows |
 |---|---|---|---|
 | [2007 UK126](generated/2007uk126_2014.md) | (229762) 2007 UK126, 2014-11-15 | [Schindler2017](@citet) | three chords, non-Gaussian posterior |
-| [2002 GZ32](generated/2002gz32_2017.md) | (95626) 2002 GZ32, 2017-05-20 | [SantosSanz2021](@citet) | an elongated centaur, aligned chords as clock offsets |
 | [2002 TC302](generated/2002tc302_2018.md) | 2002 TC302, 2018-01-28 | [Ortiz2020](@citet) | star position of the paper at J2000.0, σ_limb, clock offsets |
 | [Chiron](generated/chiron_2018_2019.md) | (2060) Chiron, 2018 and 2019 | [BragaRibas2023](@citet) | three effective chords, a clock offset, a single chord |
 | [1995 SM55](generated/1995sm55_2024.md) | (24835) 1995 SM55, 2024-02-25 | [Ortiz2025](@citet) | albedo, 3-D ellipsoid, inconsistent timings |

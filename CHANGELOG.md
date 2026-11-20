@@ -21,6 +21,20 @@ All notable changes to Occultations.jl are documented here. The format follows
   pending).
 - The 3-D guide page points to the interactive demo `examples/occview_demo.jl`.
 
+### Changed
+
+- `fit`: for problems with constraints (negative chords and visible segments of limb fits,
+  not light-curve fits) every start is also solved by a staged search (`relax=true`, the
+  default): the constraints as weak penalties first, tightened in steps, then the problem itself
+  from the nearest admissible point; the better solution is kept. Since negative chords are
+  checked exactly, hard constraints can split the admissible parameters of composite limbs into
+  pieces that a local search from a random start cannot leave (the synthetic contact binary:
+  χ²/dof 3316 → 1.8 in its first pass). `relax=false` restores the previous search.
+- Example `sim_contact_binary`: soft negative chords, a two-step contact-binary fit (without,
+  then with the visible segments), the second pass started from the first.
+- 2002 GZ32 moved to the reproduced examples (one event); its comparison updated (radial
+  residuals and residuals along the chords now give the same limb).
+
 ### Fixed
 
 - Atmospheres without a free-molecular-flow tail: the altitude grid could be far too coarse
