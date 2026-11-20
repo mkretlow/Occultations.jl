@@ -234,6 +234,33 @@ end
     # magnitude drop
     Δm, fb = magnitude_drop(12.0, 12.0)
     @test fb ≈ 0.5 && Δm ≈ 2.5log10(2)
+    # sparse light curve: 5 s exposures every 7.5 s, one exposure inside an 8 s event. From poor start
+    # values the fit must not end in a degenerate event between two exposures (the joint grid start;
+    # the bottom level is not profiled for a model without deep points); with one point in the event
+    # the contacts are only bounded: the event covers the exposure at t = 0 and barely the neighbours
+    ts = collect(-60:7.5:60.0)
+    for (σ, seed) in ((0.03, 3), (0.08, 3), (0.08, 5))
+        lcs = simulate_lightcurve(ts, -4.0, 4.0; tref=T0, σ=σ, vel=20.0, dist=6e9, exptime=5.0, rng=MersenneTwister(seed))
+        for kw in ((immersion=-20.0, emersion=17.0), NamedTuple())
+            rs = fit_timing(lcs; vel=20.0, dist=6e9, starts=1, kw...)
+            t1, t2 = rs[:immersion][1], rs[:emersion][1]
+            @test !Occultations._degenerate(rs.problem, rs.values)
+            @test (min(t2, 2.5) - max(t1, -2.5)) / 5 > 0.8 && t1 > -6.0 && t2 < 6.0
+            for (e, τ) in ((contact_gaps(rs).immersion, t1), (contact_gaps(rs).emersion, t2))
+                @test e.in_gap ? (e.lo <= τ <= e.hi && e.hi - e.lo ≈ 2.5) : (e.lo == e.hi == τ)
+            end
+            # profile intervals: finite and reproducible, although refits far out start inadmissibly
+            # (an emersion fixed before the immersion), which once gave NaN depending on the RNG state
+            ci = confidence_interval(rs, :emersion)
+            @test all(isfinite, ci) && ci == confidence_interval(rs, :emersion) && ci[1] <= t2 <= ci[2]
+        end
+    end
+    @test !contact_gaps(r).immersion.in_gap                   # well sampled: contact within an exposure
+    @test contact_gaps(r1).emersion === nothing
+    # a degenerate solution (event between two exposures) is detected
+    lcs = simulate_lightcurve(ts, -4.0, 4.0; tref=T0, σ=0.03, vel=20.0, dist=6e9, exptime=5.0, rng=MersenneTwister(3))
+    rs = fit_timing(lcs; vel=20.0, dist=6e9, starts=1)
+    @test Occultations._degenerate(rs.problem, [3.0, 4.5, 1.0])
 end
 
 @testset "ellipse limb: clock offset, negatives, uncertainties" begin

@@ -20,6 +20,8 @@ All notable changes to Occultations.jl are documented here. The format follows
 - Data of the Triton occultation of 2017 October 5 (stations, star, ephemeris; light curves
   pending).
 - The 3-D guide page points to the interactive demo `examples/occview_demo.jl`.
+- `contact_gaps(timing_fit)`: whether each fitted contact falls in a gap between exposures, and
+  the gap bounds (the honest interval there; the covariance error is not meaningful).
 
 ### Changed
 
@@ -34,9 +36,20 @@ All notable changes to Occultations.jl are documented here. The format follows
   then with the visible segments), the second pass started from the first.
 - 2002 GZ32 moved to the reproduced examples (one event); its comparison updated (radial
   residuals and residuals along the chords now give the same limb).
+- `fit_timing` / `TimingProblem`: the starting values are also searched on a joint (t₁, t₂) grid
+  (±4 exposure times), solutions whose event dims no exposure are excluded from the start, and a
+  warning is issued if the fit ends in such a degenerate solution. Sparse light curves (one point
+  in the event, long dead times) could end with both edges in one gap between exposures.
 
 ### Fixed
 
+- `TimingProblem`: the bottom flux level is profiled only while the model has at least three deep
+  points (as in `LimbProblem`), not merely because the start had them; a solution that barely
+  dimmed any exposure could fit a drop with an absurd bottom level (e.g. −900) and a good χ².
+- `confidence_interval`: profile values whose refit fails (an inadmissible start far from the
+  best fit, e.g. an emersion fixed before the immersion) are treated as beyond the domain and the
+  search backs off towards the best fit, instead of returning `NaN`; the result could depend on
+  the state of the random number generator through the replacement of inadmissible starts.
 - Atmospheres without a free-molecular-flow tail: the altitude grid could be far too coarse
   for thin layers above an extended atmosphere (2002 XV93-like bodies: flux at the surface
   edge 0.63 instead of ≈ 0.44); the step is now at most 1/50 of the smallest density scale

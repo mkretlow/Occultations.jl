@@ -167,7 +167,7 @@ export LightCurve, Optics, read_lightcurve, read_pymovie, read_tangra, read_astr
        magnitude_drop, fresnel_scale, occultation_flux
 export Atmosphere, AtmosphereProfile, atmosphere_profile, atmosphere_flux, half_light_radius,
        xv93_atmosphere, pluto_atmosphere, triton_atmosphere, DO15Temperature
-export TimingProblem, fit_timing, contact_times, model_flux
+export TimingProblem, fit_timing, contact_times, contact_gaps, model_flux
 # events
 export CoraReport, read_cora_report, cora_chord
 export Contact, Chord, Event, Occultation, Track, EventContext, ispositive, iscomplete, isnegative, occulted_intervals,

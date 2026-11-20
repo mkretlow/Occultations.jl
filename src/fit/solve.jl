@@ -388,8 +388,10 @@ end
 
 `level`-σ confidence interval of a parameter from its χ² profile (`Δχ² ≤ level²`),
 found by bisection on each side (`(value, value)` for a fixed parameter). A side is `±Inf` if Δχ² stays below `level²` out to
-`maxwidth × level` σ (unbounded there), `NaN` if a refit of the profile fails, and at most
-the parameter's bound. The search needs a finite σ of the fit.
+`maxwidth × level` σ (unbounded there), and at most the parameter's bound. Profile values whose
+refit fails (e.g. from an inadmissible start far from the best fit) are treated as beyond the
+domain and the search backs off towards the best fit; a side is `NaN` only if Δχ² stays below
+`level²` up to such values. The search needs a finite σ of the fit.
 """
 function confidence_interval(r::FitResult, name::Symbol; level::Real=1, maxwidth::Real=10)
     v0, σ = r[name]
@@ -398,11 +400,23 @@ function confidence_interval(r::FitResult, name::Symbol; level::Real=1, maxwidth
     isfinite(σ) && σ > 0 || throw(ArgumentError("confidence_interval: σ($name) = $σ; the fit does not constrain it"))
     target = r.chi2 + level^2
     χ(v) = profile(r, name; values=[v])[2][1]
+    # A refit that fails (NaN), typically from an inadmissible start far from the best fit (e.g. an
+    # emersion fixed before the immersion of a timing fit), is treated as beyond the domain: the
+    # search backs off towards the best fit (`wall`), and in the bisection counts as above `target`.
     function edge(dir)
-        lo, hi = 0.0, level * σ
+        lo, hi, wall = 0.0, level * σ, Inf
         c = χ(v0 + dir * hi)
-        while c < target && hi < maxwidth * level * σ
-            lo, hi = hi, 2hi
+        for _ in 1:60
+            if isnan(c)
+                wall = hi
+                hi = (lo + hi) / 2
+                hi - lo < 1e-9 * σ && return NaN
+            elseif c < target && hi < maxwidth * level * σ
+                lo, hi = hi, min(2hi, (hi + wall) / 2)
+                hi - lo < 1e-9 * σ && return NaN       # Δχ² stays below target up to the failing region
+            else
+                break
+            end
             c = χ(v0 + dir * hi)
         end
         isnan(c) && return NaN
@@ -410,8 +424,7 @@ function confidence_interval(r::FitResult, name::Symbol; level::Real=1, maxwidth
         for _ in 1:25
             m = (lo + hi) / 2
             cm = χ(v0 + dir * m)
-            isnan(cm) && return NaN
-            cm < target ? (lo = m) : (hi = m)
+            (isnan(cm) || cm >= target) ? (hi = m) : (lo = m)
         end
         return v0 + dir * (lo + hi) / 2
     end
