@@ -108,7 +108,7 @@ function _prepare!(m::BinaryLimb, s::_Setup)
     est2 = similar(s.estimates)
     for (k, ev) in enumerate(s.events)
         R0 = isfinite(ev.body.radius) ? ev.body.radius : 100.0
-        f, g, grp = _split_points(filter(q -> !_isring(q.body), contact_points(ev)))
+        f, g, grp = _split_points(_points(s, k))
         e1 = _point_estimate(f[grp.==1], g[grp.==1], R0)
         e1 === nothing && (e1 = s.estimates[k])
         e2 = _point_estimate(f[grp.==2], g[grp.==2], e1.radius / 4)
@@ -235,7 +235,7 @@ function _model_params(m::ContactBinaryLimb, s::_Setup)
     function axis0(k)
         e = est[k].ellipse
         e !== nothing && return e.equatorial_radius, e.equatorial_radius * (1 - e.oblateness), mod(e.position_angle + 90, 360)
-        f, g, grp = _split_points(contact_points(s.events[k]))
+        f, g, grp = _split_points(_points(s, k))
         (count(==(1), grp) > 0 && count(==(2), grp) > 0) || return est[k].radius, est[k].radius, 0.0
         c1 = (mean(f[grp.==1]), mean(g[grp.==1])); c2 = (mean(f[grp.==2]), mean(g[grp.==2]))
         return est[k].radius, 0.7est[k].radius, mod(atand(c2[1] - c1[1], c2[2] - c1[2]), 360)

@@ -116,7 +116,7 @@ function clock_offsets(r::LimbFit)
 end
 
 """
-    check_negative_chords(event, outline; center=(0, 0), n=400) -> Vector{NamedTuple}
+    check_negative_chords(event, outline; center=(0, 0), n=400, exclude=()) -> Vector{NamedTuple}
     check_negative_chords(fit; event=1)
 
 Check the negative chords of an event against a limb (any [`Outline`](@ref): a fitted one,
@@ -126,11 +126,16 @@ negative chord: `(chord, conflict, distance, epoch, immersion, emersion, duratio
 whether the chord enters the limb, its smallest signed distance from it [km] (negative:
 inside) at `epoch`, and for a conflict the predicted, unobserved contacts and duration [s].
 Sorted by distance (worst first).
+
+Negative chords are the chords without timed contacts, which includes chords made from a light
+curve alone (`Chord(name, observer, lc)`): name those used as positive light curves in
+`exclude`. The method for a fit excludes the light curves fitted photometrically.
 """
-function check_negative_chords(ev::Event, O::Outline; center=(0.0, 0.0), n::Integer=400)
+function check_negative_chords(ev::Event, O::Outline; center=(0.0, 0.0), n::Integer=400, exclude=())
     out = NamedTuple[]
+    ex = Set(String.(collect(exclude)))
     for c in ev.chords
-        isnegative(c) || continue
+        (isnegative(c) && !(c.name in ex)) || continue
         tr = track(ev, c)
         a, b = c.span[1] - ev.tref, c.span[2] - ev.tref
         h(τ) = ((f, g) = tr(τ); signed_distance(O, f - center[1], g - center[2]))
@@ -164,7 +169,8 @@ end
 function check_negative_chords(r::LimbFit; event=1, n::Integer=400)
     k = _event_index(r.problem, event)
     c, O = outlines(r)[k]
-    return check_negative_chords(r.problem.setup.events[k], O; center=c, n=n)
+    phot = [d.chord for d in r.problem.photometry if d.k == k]     # light curves of the fit are not negatives
+    return check_negative_chords(r.problem.setup.events[k], O; center=c, n=n, exclude=phot)
 end
 
 """

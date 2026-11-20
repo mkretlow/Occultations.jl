@@ -40,6 +40,16 @@ All notable changes to Occultations.jl are documented here. The format follows
   (±4 exposure times), solutions whose event dims no exposure are excluded from the start, and a
   warning is issued if the fit ends in such a degenerate solution. Sparse light curves (one point
   in the event, long dead times) could end with both edges in one gap between exposures.
+- `LimbProblem` with `photometry`: if an event has fewer than three timed contacts and `init`
+  gives no centre, light curves without timed contacts give starting values from their main drop
+  (`detect_occultations`, SNR ≥ 5; not with an atmosphere or a double star), also for `BinaryLimb`
+  and `ContactBinaryLimb`; before, such fits started at (0, 0) with the body radius and could
+  stop with every chord missing the limb. Fits with contacts or a given centre are unchanged.
+- `LimbProblem`: a warning when a light-curve chord without contacts that is not fitted
+  photometrically (hence a negative chord) shows a clear drop. `check_negative_chords(fit)`
+  skips the light curves of the fit; `check_negative_chords(event, outline; exclude=…)`.
+- Docstring of `LimbProblem`: `dt_<chord>` is the correction added to the recorded times (minus
+  the clock error).
 
 ### Fixed
 

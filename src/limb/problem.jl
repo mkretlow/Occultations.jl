@@ -95,7 +95,7 @@ Fit of the apparent limb to one event or a vector of events (multi-event fit).
 **Parameters**: the centre of each event (`center_f`, `center_g` [km] in the fundamental
 plane relative to the ephemeris; suffix `_k` for event `k` in multi-event fits), the
 parameters of the `model` ([`LimbModel`](@ref)), a clock offset `dt_<chord>` [s] for every
-chord in `fit_dt`, and `pressure` [nbar] with an `atmosphere`. Change their settings with
+chord in `fit_dt` (the correction added to the recorded times, i.e. minus the clock error), and `pressure` [nbar] with an `atmosphere`. Change their settings with
 `fix`, `init`, `priors` (`name => Gaussian(μ, σ)` or `(μ, σ)`), `bounds` (`name => (lo, hi)`)
 or [`setparam!`](@ref).
 
@@ -126,7 +126,11 @@ or [`setparam!`](@ref).
   zero level (`background`) with `:free` — the flux of the body itself or of a nearby planet,
   e.g. Triton's contribution φ₀ in Marques Oliveira et al. 2022 — fixed at zero with `:zero`;
   `:auto` (default) profiles it for airless fits whose model reaches zero flux and fixes it
-  with an `atmosphere`. With `double_star = true` the
+  with an `atmosphere`. Without timed contacts (fewer than three) and without a centre in
+  `init`, starting values come from the main drop of the light curves ([`detect_occultations`](@ref),
+  signal-to-noise ratio ≥ 5; not with an `atmosphere` or a `double_star`). A light-curve
+  chord that is not fitted photometrically and has no contacts is a negative chord (a warning
+  is issued if its light curve shows a clear drop). With `double_star = true` the
   star is a pair of point sources: the primary with the fraction `star_f1` of the flux at
   (`star_x1`, `star_y1`) [km, f and g at the body] from the photocentre, the secondary at
   −f₁/(1 − f₁)·(x₁, y₁), each occulted by the limb (as Gómez-Limón et al. 2025); derived are
@@ -186,6 +190,37 @@ end
 
 LimbProblem(ev::Event; kw...) = LimbProblem([ev]; kw...)
 
+# signal-to-noise ratio of a light-curve drop above which it seeds the starting estimates of a
+# photometric limb fit, and above which a light-curve chord used as negative chord is reported
+const _PHOT_SEED_SNR = 5.0
+
+# points (f, g) for the starting estimates of an event: its timed contacts (the body, not ring
+# dips) and, if there are fewer than three, for light curves fitted photometrically without timed
+# contacts the edges of the main drop found by `detect_occultations` (box search) if its SNR
+# exceeds _PHOT_SEED_SNR
+function _estimate_points(ev::Event, photchords)
+    pts = NamedTuple[q for q in contact_points(ev) if !_isring(q.body)]
+    length(pts) >= 3 && return pts                     # the timed contacts suffice
+    for c in ev.chords
+        (c.name in photchords && isnegative(c) && c.lightcurve !== nothing) || continue
+        lc = c.lightcurve
+        d = try detect_occultations(lc; n=1, snr_limit=_PHOT_SEED_SNR) catch; NamedTuple[] end
+        isempty(d) && continue
+        tr = track(ev, c; margin=120.0)
+        for (kind, τ) in ((:immersion, d[1].immersion), (:emersion, d[1].emersion))
+            t = (lc.tref + τ) - ev.tref
+            f, g = tr(t)
+            vf, vg = velocity(tr, t)
+            push!(pts, (chord=c.name, kind=kind, epoch=lc.tref + τ, f=f, g=g, vf=vf, vg=vg, σ_t=d[1].time_err,
+                        σ=d[1].time_err * hypot(vf, vg), body=:auto))
+        end
+    end
+    return pts
+end
+# the points of event k for the starting estimates (stored by LimbProblem; contacts otherwise)
+_points(s::_Setup, k) = haskey(s.aux, :points) ? s.aux[:points][k] :
+                        NamedTuple[q for q in contact_points(s.events[k]) if !_isring(q.body)]
+
 function LimbProblem(evs::AbstractVector{Event}; model::LimbModel=EllipseLimb(), residual::Symbol=:chord,
                      negative::Symbol=:hard, visible::Symbol=:auto, σ_limb::Real=0.0, σ_ring::Real=NaN, fit_dt=(), photometry=false,
                      atmosphere::Union{Nothing,Atmosphere}=nothing, double_star::Bool=false, background::Symbol=:auto,
@@ -202,9 +237,13 @@ function LimbProblem(evs::AbstractVector{Event}; model::LimbModel=EllipseLimb(),
     ctxs = [EventContext(e) for e in evs]
     photchords = photometry === true ? Set(c.name for e in evs for c in e.chords if c.lightcurve !== nothing) :
                  photometry === false ? Set{String}() : Set(String.(collect(photometry)))
-    # starting estimates of each event from its contact points
-    ests = map(evs) do ev
-        pts = filter(q -> !_isring(q.body), contact_points(ev))      # the body only, not its rings
+    # starting estimates of each event from its contact points (the body only, not its rings) and
+    # from the main drop of each light curve fitted photometrically without timed contacts
+    # (only where needed and reliable: no atmosphere or double star, whose drops are gradual or
+    # stepped, no centre given in `init`, and fewer than three timed contacts in the event)
+    seed = atmosphere === nothing && !double_star && !any(k -> startswith(string(k), "center_"), keys(init))
+    allpts = [_estimate_points(ev, seed ? photchords : Set{String}()) for ev in evs]
+    ests = map(zip(evs, allpts)) do (ev, pts)
         f = [p.f for p in pts]; g = [p.g for p in pts]
         R0 = isfinite(ev.body.radius) ? ev.body.radius : 100.0
         if length(f) >= 3
@@ -221,6 +260,7 @@ function LimbProblem(evs::AbstractVector{Event}; model::LimbModel=EllipseLimb(),
     ref = epoch !== nothing ? _epoch(epoch) :
           (hasproperty(model, :epoch) && model.epoch !== nothing) ? model.epoch : evs[1].tref
     setup = _Setup(evs, ctxs, ests, Dict{Symbol,Int}(), ref)
+    setup.aux[:points] = allpts
     _prepare!(model, setup)
     ests = setup.estimates                  # possibly updated by the model (e.g. a binary: the primary)
     ps = Param[]
@@ -282,6 +322,15 @@ function LimbProblem(evs::AbstractVector{Event}; model::LimbModel=EllipseLimb(),
         end
         if isnegative(c)
             negative === :none && continue
+            # a light-curve chord that is not fitted photometrically is a negative chord; warn if its
+            # light curve shows a clear drop (it was probably meant for `photometry` or for timing)
+            if c.lightcurve !== nothing
+                d = try detect_occultations(c.lightcurve; n=1, snr_limit=_PHOT_SEED_SNR) catch; NamedTuple[] end
+                isempty(d) || @warn "LimbProblem: chord $(c.name) has no timed contacts and is not fitted photometrically, " *
+                                    "so it is used as a negative chord, but its light curve shows a drop (SNR " *
+                                    "$(round(d[1].snr; digits=1)) at $(round(d[1].immersion; digits=1))–" *
+                                    "$(round(d[1].emersion; digits=1)) s). Add it to `photometry` or give its contacts."
+            end
             τs = collect(range(c.span[1] - ev.tref, c.span[2] - ev.tref; length=400))
             xy = reduce(hcat, [collect(tr(τ)) for τ in τs])
             v = hypot(velocity(tr, τs[200])...)

@@ -335,6 +335,7 @@ end
     body, star, ev, lon0, lat0 = scene()
     O = ellipse_outline(; equatorial_radius=333.0, oblateness=0.15, position_angle=125.0)
     t = collect(-40:0.2:40.0)
+    lcs = Dict{String,Any}()
     for (j, dlat) in enumerate([-2.5, -1.0, 0.3, 1.6, 2.6, 4.0])
         o = Observer("S$j", lon0, lat0 + dlat, 0.0)
         pc = predicted_contacts(ev, o, O; center=(10.0, -5.0))
@@ -346,6 +347,7 @@ end
             v = hypot(velocity(tr, ti)...)
             lc = simulate_lightcurve(t, ti, te; tref=ev.tref, vel=v, dist=ev.ca.dist_km, σ=0.04, exptime=0.2, rng=rng)
             push!(ev, Chord("S$j", o, fit_timing(lc; vel=v, dist=ev.ca.dist_km)))
+            lcs["S$j"] = (o, lc)
         end
     end
     r = fit_limb(ev; rng=rng)
@@ -357,6 +359,22 @@ end
     @test rp[:center_f][1] ≈ 10 atol = 3rp[:center_f][2] + 0.05
     tt, mf = model_lightcurve(rp, "S3")
     @test length(mf) == length(t) && minimum(mf) < 0.1
+    # light curves without timed contacts: starting values from their drops (no `init`)
+    ev2 = Event(star, body, ev.tref; window=0)
+    for (n, (o, lc)) in sort(collect(lcs); by=first)
+        push!(ev2, Chord(n, o, lc))
+    end
+    p2 = LimbProblem(ev2; photometry=true)
+    @test hypot(parameters(p2)[1].value - 10, parameters(p2)[2].value + 5) < 100      # not (0, 0)
+    r2 = fit_limb(ev2; photometry=true, rng=rng, starts=2)
+    @test r2[:equatorial_radius][1] ≈ 333 atol = 3r2[:equatorial_radius][2] + 0.5
+    @test r2[:center_f][1] ≈ 10 atol = 3r2[:center_f][2] + 0.5
+    @test isempty(check_negative_chords(r2))                    # its light curves are not negative chords
+    # a light-curve chord with a drop that is not fitted photometrically: used as a negative chord, with a warning
+    names2 = sort(collect(keys(lcs)))
+    @test_logs (:warn, r"used as a negative chord") match_mode = :any LimbProblem(ev2; photometry=names2[2:end])
+    @test length(check_negative_chords(ev2, ellipse_outline(; equatorial_radius=333.0); center=(10.0, -5.0),
+                                       exclude=names2)) == 0
 end
 
 @testset "3-D ellipsoid over several events, rotational amplitude, meshes" begin
