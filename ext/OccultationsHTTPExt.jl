@@ -71,45 +71,56 @@ const _GAIA_COLS = "source_id, ra, dec, ra_error, dec_error, pmra, pmra_error, p
 function _tap_csv(adql::AbstractString)
     body = HTTP.URIs.escapeuri(Dict("REQUEST" => "doQuery", "LANG" => "ADQL", "FORMAT" => "csv", "QUERY" => adql))
     r = HTTP.post(GAIA_TAP_URL, ["Content-Type" => "application/x-www-form-urlencoded"], body; _timeout(120)...)
-    lines = filter(!isempty, split(String(r.body), r"\r?\n"))
-    hdr = String.(split(lines[1], ','))
-    rows = [Dict(zip(hdr, split(l, ','))) for l in lines[2:end]]
-    return rows
+    return Occultations._parse_tap_csv(String(r.body))
 end
 
-_num(d, k) = (v = get(d, k, ""); isempty(v) ? NaN : parse(Float64, v))
-_num0(d, k) = (v = _num(d, k); isnan(v) ? 0.0 : v)
+function _vizier_rows(server::AbstractString, release, constraints::Dict)
+    cat, epoch = Occultations._vizier_catalog(release)
+    q = merge(Dict("-source" => cat, "-out" => join(first.(Occultations._VIZIER_COLS), ","), "-out.max" => "10000"), constraints)
+    r = HTTP.get(rstrip(server, '/') * "/viz-bin/asu-tsv"; query=q, _timeout(120)...)
+    return Occultations._parse_vizier_tsv(String(r.body), epoch)
+end
 
-function _gaia_star(d)
-    mag = Dict{String,Float64}()
-    for (k, b) in (("phot_g_mean_mag", "G"), ("phot_bp_mean_mag", "BP"), ("phot_rp_mean_mag", "RP"))
-        v = _num(d, k)
-        isnan(v) || (mag[b] = v)
+function _gaia_query(esa, vizier, service::Symbol)
+    service in (:auto, :esa, :vizier) || throw(ArgumentError("service must be :auto, :esa or :vizier"))
+    service === :vizier && return vizier()
+    service === :esa && return esa()
+    try
+        return esa()
+    catch e
+        @warn "Gaia archive failed, trying VizieR" exception = (e, nothing)
+        return vizier()
     end
-    return Star(_num(d, "ra"), _num(d, "dec"); source_id=d["source_id"], name="Gaia " * d["source_id"],
-                pmra=_num0(d, "pmra"), pmdec=_num0(d, "pmdec"), parallax=_num0(d, "parallax"),
-                rv=_num0(d, "radial_velocity"), epoch=_num(d, "ref_epoch"),
-                ra_err=_num0(d, "ra_error"), dec_err=_num0(d, "dec_error"),
-                pmra_err=_num0(d, "pmra_error"), pmdec_err=_num0(d, "pmdec_error"),
-                parallax_err=_num0(d, "parallax_error"), mag=mag)
 end
 
 _gaia_table(release) = release == "dr3" ? "gaiadr3.gaia_source" :
                        release == "dr2" ? "gaiadr2.gaia_source" :
                        throw(ArgumentError("release must be \"dr3\" or \"dr2\""))
 
-function Occultations.query_gaia(source_id::Union{Integer,AbstractString}; release::AbstractString="dr3")
-    rows = _tap_csv("SELECT $(_GAIA_COLS) FROM $(_gaia_table(release)) WHERE source_id = $(source_id)")
+function Occultations.query_gaia(source_id::Union{Integer,AbstractString}; release::AbstractString="dr3",
+                                 service::Symbol=:auto, vizier::AbstractString=Occultations.VIZIER_MIRRORS[1])
+    esa() = _tap_csv("SELECT $(_GAIA_COLS) FROM $(_gaia_table(release)) WHERE source_id = $(source_id)")
+    viz() = _vizier_rows(vizier, release, Dict("Source" => string(source_id)))
+    rows = _gaia_query(esa, viz, service)
     isempty(rows) && error("Gaia $(release) source $(source_id) not found")
-    return _gaia_star(rows[1])
+    return Occultations._gaia_star(rows[1])
 end
 
 function Occultations.query_gaia(ra::Real, dec::Real; radius_arcsec::Real=2.0, release::AbstractString="dr3",
-                                 maxmag::Real=Inf)
-    q = "SELECT $(_GAIA_COLS) FROM $(_gaia_table(release)) WHERE 1 = CONTAINS(POINT('ICRS', ra, dec), " *
-        "CIRCLE('ICRS', $(ra), $(dec), $(radius_arcsec / 3600)))"
-    isfinite(maxmag) && (q *= " AND phot_g_mean_mag < $(maxmag)")
-    return [_gaia_star(d) for d in _tap_csv(q)]
+                                 maxmag::Real=Inf, service::Symbol=:auto,
+                                 vizier::AbstractString=Occultations.VIZIER_MIRRORS[1])
+    function esa()
+        q = "SELECT $(_GAIA_COLS) FROM $(_gaia_table(release)) WHERE 1 = CONTAINS(POINT('ICRS', ra, dec), " *
+            "CIRCLE('ICRS', $(ra), $(dec), $(radius_arcsec / 3600)))"
+        isfinite(maxmag) && (q *= " AND phot_g_mean_mag < $(maxmag)")
+        return _tap_csv(q)
+    end
+    function viz()
+        c = Dict("-c" => @sprintf("%.8f %+.8f", ra, dec), "-c.rs" => string(radius_arcsec))
+        isfinite(maxmag) && (c["Gmag"] = "<$(maxmag)")
+        return _vizier_rows(vizier, release, c)
+    end
+    return [Occultations._gaia_star(d) for d in _gaia_query(esa, viz, service)]
 end
 
 # --------------------------------------------------------------------------- minimal JSON reader

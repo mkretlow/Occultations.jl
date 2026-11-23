@@ -273,12 +273,81 @@ function query_sbdb end
 
 
 """
-    query_gaia(source_id; release="dr3") -> Star
-    query_gaia(ra, dec; radius_arcsec=2, release="dr3") -> Vector{Star}
+    query_gaia(source_id; release="dr3", service=:auto, vizier=VIZIER_MIRRORS[1]) -> Star
+    query_gaia(ra, dec; radius_arcsec=2, release="dr3", maxmag=Inf, service=:auto, vizier=...) -> Vector{Star}
 
-Retrieve stars from the Gaia archive (ESA TAP service). Requires `using HTTP`.
+Retrieve stars from Gaia DR3 (or `release = "dr2"`). Requires `using HTTP`.
+
+`service`: `:esa` (the Gaia archive TAP service), `:vizier` (the CDS VizieR copy, I/355/gaiadr3 or I/345/gaia2) or
+`:auto` (the default: ESA, and VizieR if the archive fails, e.g. during maintenance, when it returns an HTML page
+instead of data). `vizier` is the VizieR server, e.g. a mirror from `Occultations.VIZIER_MIRRORS`
+(`"https://vizier.cds.unistra.fr"`, `"https://vizier.idia.ac.za"`, `"https://vizier.cfa.harvard.edu"`). Both services give
+the catalogue positions at the reference epoch (2016.0 for DR3) with errors, proper motions, parallax, radial
+velocity and G, BP, RP magnitudes.
 """
 function query_gaia end
+
+# --- parsers of the Gaia services (used by the HTTP extension; plain text in, rows with the Gaia archive names out)
+
+# CSV of the ESA TAP service; anything else (an HTML maintenance page, an error document) is an error
+function _parse_tap_csv(text::AbstractString)
+    lines = filter(!isempty, split(text, r"\r?\n"))
+    if isempty(lines) || !startswith(lines[1], "source_id")
+        snippet = replace(first(strip(text), 300), r"\s+" => " ")
+        error("the Gaia archive did not return a table (maintenance or error?): \"$snippet\"")
+    end
+    hdr = String.(split(lines[1], ','))
+    return [Dict(zip(hdr, split(l, ','))) for l in lines[2:end]]
+end
+
+# VizieR (asu-tsv) → rows with the Gaia archive column names
+const _VIZIER_COLS = ("Source" => "source_id", "RA_ICRS" => "ra", "DE_ICRS" => "dec", "e_RA_ICRS" => "ra_error",
+                      "e_DE_ICRS" => "dec_error", "pmRA" => "pmra", "e_pmRA" => "pmra_error", "pmDE" => "pmdec",
+                      "e_pmDE" => "pmdec_error", "Plx" => "parallax", "e_Plx" => "parallax_error",
+                      "RV" => "radial_velocity", "Gmag" => "phot_g_mean_mag", "BPmag" => "phot_bp_mean_mag",
+                      "RPmag" => "phot_rp_mean_mag")
+_vizier_catalog(release) = release == "dr3" ? ("I/355/gaiadr3", "2016.0") :
+                           release == "dr2" ? ("I/345/gaia2", "2015.5") :
+                           throw(ArgumentError("release must be \"dr3\" or \"dr2\""))
+
+
+function _parse_vizier_tsv(text::AbstractString, epoch::AbstractString)
+    lines = [l for l in split(text, r"\r?\n") if !isempty(strip(l)) && !startswith(l, "#")]
+    i = findfirst(l -> startswith(l, "Source\t"), lines)
+    i === nothing && error("VizieR did not return a Gaia table: \"$(replace(first(strip(text), 300), r"\s+" => " "))\"")
+    hdr = String.(split(lines[i], '\t'))
+    names = Dict(_VIZIER_COLS)
+    rows = Dict{String,String}[]
+    for l in lines[i+3:end]                                  # skip the units and dashes lines
+        v = strip.(split(l, '\t'))
+        length(v) == length(hdr) || continue
+        d = Dict(names[h] => String(x) for (h, x) in zip(hdr, v) if haskey(names, h))
+        d["ref_epoch"] = epoch
+        push!(rows, d)
+    end
+    return rows
+end
+
+# a row (Gaia archive column names) → Star
+_gnum(d, k) = (v = get(d, k, ""); isempty(v) ? NaN : parse(Float64, v))
+_gnum0(d, k) = (v = _gnum(d, k); isnan(v) ? 0.0 : v)
+
+function _gaia_star(d)
+    mag = Dict{String,Float64}()
+    for (k, b) in (("phot_g_mean_mag", "G"), ("phot_bp_mean_mag", "BP"), ("phot_rp_mean_mag", "RP"))
+        v = _gnum(d, k)
+        isnan(v) || (mag[b] = v)
+    end
+    return Star(_gnum(d, "ra"), _gnum(d, "dec"); source_id=d["source_id"], name="Gaia " * d["source_id"],
+                pmra=_gnum0(d, "pmra"), pmdec=_gnum0(d, "pmdec"), parallax=_gnum0(d, "parallax"),
+                rv=_gnum0(d, "radial_velocity"), epoch=_gnum(d, "ref_epoch"),
+                ra_err=_gnum0(d, "ra_error"), dec_err=_gnum0(d, "dec_error"),
+                pmra_err=_gnum0(d, "pmra_error"), pmdec_err=_gnum0(d, "pmdec_error"),
+                parallax_err=_gnum0(d, "parallax_error"), mag=mag)
+end
+
+"VizieR servers usable by [`query_gaia`](@ref) (`vizier` keyword)."
+const VIZIER_MIRRORS = ("https://vizier.cds.unistra.fr", "https://vizier.idia.ac.za", "https://vizier.cfa.harvard.edu")
 
 # ---------------------------------------------------------------------------
 # Body

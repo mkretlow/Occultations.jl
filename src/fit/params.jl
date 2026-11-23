@@ -153,6 +153,11 @@ of a limb fit. [`fit`](@ref) propagates their uncertainties linearly through the
 NamedTuple.
 """
 derived(::AbstractProblem, values) = NamedTuple()
+
+# Additional variance of derived quantities that are not functions of the parameters alone, e.g.
+# linearly profiled flux levels (their least-squares variance at fixed parameters): a NamedTuple
+# name => variance, added to the linearly propagated variance. Default: none.
+_derived_variance(::AbstractProblem, values) = NamedTuple()
 # map equivalent parameter values to a canonical representation (e.g. swapped ellipse axes)
 canonical(::AbstractProblem, values) = values
 # the problem with its constraints (hard exclusions, soft penalties) as penalties of strength w

@@ -166,7 +166,7 @@ export LightCurve, Optics, read_lightcurve, read_pymovie, read_tangra, read_astr
        with_optics, epochs, timespan, detect_occultation, detect_occultations, simulate_lightcurve,
        magnitude_drop, fresnel_scale, occultation_flux
 export Atmosphere, AtmosphereProfile, atmosphere_profile, atmosphere_flux, half_light_radius,
-       xv93_atmosphere, pluto_atmosphere, triton_atmosphere, DO15Temperature
+       xv93_atmosphere, pluto_atmosphere, pluto_atmosphere_do15, triton_atmosphere, DO15Temperature
 export TimingProblem, fit_timing, contact_times, contact_gaps, model_flux
 # events
 export CoraReport, read_cora_report, cora_chord
@@ -178,7 +178,7 @@ export LimbModel, EllipseLimb, CircleLimb, EllipsoidLimb, MeshLimb, BinaryLimb, 
        RingedLimb, ProjectedRing, project_ring, ring_geometry,
        LimbProblem, RotationalAmplitude, RotationalPhase, rotational_phase,
        fit_limb, atmosphere_test, outlines, astrometry, contact_residuals, clock_offsets, check_negative_chords,
-       predicted_contacts, model_lightcurve
+       predicted_contacts, model_lightcurve, flux_levels
 # inference
 export AbstractProblem, Param, Prior, Gaussian, Flat, LogPrior, isotropic_pole, parameters, residuals, derived, setparam!, paramnames,
        fit, FitResult, errors, freenames, reduced_chi2, correlation, profile, confidence_interval,

@@ -679,7 +679,36 @@ function derived(p::LimbProblem, v)
         push!(d, :star_sep_km => sep, :star_sep_mas => sep / s.contexts[1].dist * RAD2MAS,
               :star_pa => mod(atand(-x1, -y1), 360.0), :star_dmag => 2.5 * log10(f1 / (1 - f1)))
     end
+    for (name, φ0, _) in _phi0_levels(p, v)
+        push!(d, name => φ0)
+    end
     return merge(NamedTuple(d), _model_derived(p.model, v, s))
 end
+
+# zero level φ0 = bottom/top of every light curve whose zero level is profiled (background = :free):
+# (name, φ0, conditional variance of φ0 from the 2×2 weighted least squares of the levels)
+function _phi0_levels(p::LimbProblem, v)
+    out = Tuple{Symbol,Float64,Float64}[]
+    p.background === :free || return out
+    outs = _outlines(p, v)
+    for d in p.photometry
+        name = Symbol("phi0_", d.chord)
+        m = _phot_model(p, d, outs[d.k], v)
+        if m === nothing
+            push!(out, (name, NaN, NaN)); continue
+        end
+        I, w = m
+        I = Float64.(I)
+        ft, fb = _flux_levels(I, d.lc.flux, w, 1.0, 0.0, true, true)
+        J = 1 .- I
+        A = [sum(w .* I .^ 2) sum(w .* I .* J); sum(w .* I .* J) sum(w .* J .^ 2)]
+        g = [-fb / ft^2, 1 / ft]
+        var = abs(det(A)) > 1e-12 * A[1, 1] * A[2, 2] ? dot(g, A \ g) : Inf
+        push!(out, (name, fb / ft, var))
+    end
+    return out
+end
+
+_derived_variance(p::LimbProblem, v) = NamedTuple(n => var for (n, _, var) in _phi0_levels(p, v))
 
 canonical(p::LimbProblem, v) = _canonical!(p.model, copy(v), p.setup)

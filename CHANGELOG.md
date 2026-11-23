@@ -22,6 +22,22 @@ All notable changes to Occultations.jl are documented here. The format follows
 - The 3-D guide page points to the interactive demo `examples/occview_demo.jl`.
 - `contact_gaps(timing_fit)`: whether each fitted contact falls in a gap between exposures, and
   the gap bounds (the honest interval there; the covariance error is not meaningful).
+- `pluto_atmosphere_do15()`: Pluto's DO15 template with the conic from the surface (1187 km) and the
+  pressure at 1215 km (p₁₂₁₅), as used for Pluto's pressure monitoring; p₁₁₈₇/p₁₂₁₅ = 1.844
+  (published 1.837). With DO15's r₁ = 1190.4 km the ratio would be 2.20.
+- `flux_levels(fit, chord)`: the profiled unocculted and zero levels of a light curve in a joint
+  photometric fit, and φ₀ = bottom/top (e.g. the flux of Pluto and Charon) with its uncertainty. With
+  `background=:free`, φ₀ of every light curve is a derived quantity (`fit[Symbol("phi0_", chord)]`, shown in the
+  fit summary); its σ combines the least-squares error of the levels with the propagated parameter covariance.
+- `LightCurve(times::Vector{String}, flux)`: times as ISO 8601 UTC strings (any number of decimals).
+- `query_gaia(...; service=:auto | :esa | :vizier, vizier=mirror)`: Gaia DR3/DR2 from VizieR
+  (I/355/gaiadr3, I/345/gaia2) when the ESA archive fails (`:auto`, the default) or on request;
+  mirrors in `Occultations.VIZIER_MIRRORS`.
+
+### Fixed
+
+- `query_gaia`: a clear error when the Gaia archive returns an HTML page (maintenance) instead of a
+  table; before, a `KeyError "source_id"`.
 
 ### Changed
 

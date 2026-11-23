@@ -231,6 +231,30 @@ function model_lightcurve(r::LimbFit, name::AbstractString)
 end
 
 """
+    flux_levels(fit, chord_name) -> (top, bottom, φ0, σφ0)
+
+Profiled flux levels of a light curve in a joint photometric fit: the unocculted level `top`, the zero level of the
+stellar flux `bottom` (fitted with `background = :free`, else 0) and `φ0 = bottom / top`, the fraction of the
+unocculted flux that does not come from the star — e.g. the flux of Pluto and Charon in a Pluto occultation, to be
+compared with an independent photometric estimate (frames with the body and the star separated).
+
+With `background = :free`, φ0 of every light curve is also a derived quantity of the fit, `fit[Symbol("phi0_",
+chord_name)]` (listed when the fit is displayed); its uncertainty `σφ0` combines the least-squares error of the
+levels at the best-fit parameters with the linear propagation of the parameter covariance (`NaN` otherwise).
+"""
+function flux_levels(r::LimbFit, name::AbstractString)
+    p, v = r.problem, r.values
+    i = findfirst(d -> d.chord == name, p.photometry)
+    i === nothing && throw(ArgumentError("chord $name is not part of the photometric fit"))
+    d = p.photometry[i]
+    I, w = _phot_model(p, d, _outlines(p, v)[d.k], v)
+    ft, fb = _flux_levels(I, d.lc.flux, w, 1.0, 0.0, true, _fit_bottom(p, I))
+    key = Symbol("phi0_", name)
+    σ = haskey(r.derived, key) ? r.derived_errors[key] : NaN
+    return (top=ft, bottom=fb, φ0=fb / ft, σφ0=σ)
+end
+
+"""
     fit_limb(events; starts=8, rng, σ_limb=0, relax=true, kwargs...) -> FitResult
 
 Shortcut for `fit(LimbProblem(events; kwargs...); starts, rng, relax)` (`relax`: the staged

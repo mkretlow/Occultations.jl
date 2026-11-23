@@ -27,6 +27,7 @@ the template of [DiasOliveira2015](@citet) used by the Sicardy group for Pluto a
 Triton (a conic from the surface to the inflection point, a cubic above, then a straight line):
 
 ```julia
+atm = pluto_atmosphere_do15()                        # Pluto: DO15 from 1187 km, pressure = p₁₂₁₅
 tp  = DO15Temperature(1353, 38, 5.0, 1363, 49.8, 1375, 48.2, 1403, 49.3, 0.105)   # Triton, 2017
 atm = Atmosphere(:N2; temperature=tp, rref=1400)    # = triton_atmosphere(): the pressure is p₁₄₀₀
 prof = atmosphere_profile(atm, 1180.0, 1353.0, 1428.0, 4.3506e9; λ=0.7, star_diam=0.65)
@@ -44,6 +45,14 @@ from a nearby planet sets the zero level of the stellar flux: `background=:free`
 r = fit_limb(ev; model=CircleLimb(), photometry=true, atmosphere=triton_atmosphere(),
              background=:free, fix=[:radius], init=Dict(:radius => 1353.0, :pressure => 1000.0, ...), starts=1)
 ```
+
+[`flux_levels`](@ref)`(fit, chord)` returns the profiled levels and φ₀ = bottom/top with its uncertainty; with
+`background=:free` the fit also lists φ₀ of every light curve as a derived quantity, `fit[Symbol("phi0_", chord)]`. Where the flux of
+the body can be measured independently (frames with the body and the star separated), compare it with φ₀: a fitted
+zero level below the measured flux of the body means less residual stellar flux at the bottom of the light curve
+than the clear-atmosphere model predicts (haze, or a steeper thermal gradient). When φ₀ is known, fix it by
+transforming the flux, `(f − φ₀)/(1 − φ₀)` with `σ/(1 − φ₀)`, and fit with `background=:zero`: for grazing chords on
+one side of the shadow, a free φ₀ makes the pressure degenerate with the distance from the shadow centre.
 
 Start such fits close to the solution (e.g. from a scan of the centre across the track): a
 central flash makes the χ² surface rugged in the centre coordinates.

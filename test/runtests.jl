@@ -56,6 +56,29 @@ Occultations.derived(p::ToyProblem, v) = length(v) == 1 ? (twice=2v[1],) : (twic
     ra, dec, _ = barycentric(s, Epoch("2026-01-01"))
     @test (ra - 10) * cosd(20) * 3.6e6 ≈ 1000 rtol = 0.01
     @test (dec - 20) * 3.6e6 ≈ -500 rtol = 0.01
+    # Gaia services (parsers used by the HTTP extension, offline)
+    html = "<html><head><title>ESDC Archives downtime</title></head></html>"
+    @test_throws ErrorException Occultations._parse_tap_csv(html)
+    @test occursin("downtime", try Occultations._parse_tap_csv(html) catch e; e.msg end)
+    rows = Occultations._parse_tap_csv("source_id,ra,dec,ref_epoch\n123,10.5,-20.25,2016.0\n")
+    @test rows[1]["ra"] == "10.5" && Occultations._gaia_star(rows[1]).source_id == "123"
+    tsv = """#RESOURCE=yCat_1355
+Source\tRA_ICRS\tDE_ICRS\te_RA_ICRS\te_DE_ICRS\tpmRA\te_pmRA\tpmDE\te_pmDE\tPlx\te_Plx\tRV\tGmag\tBPmag\tRPmag
+ \tdeg\tdeg\tmas\tmas\tmas/yr\tmas/yr\tmas/yr\tmas/yr\tmas\tmas\tkm/s\tmag\tmag\tmag
+---\t---\t---\t---\t---\t---\t---\t---\t---\t---\t---\t---\t---\t---\t---
+6852568854178387456\t303.16931115487\t-23.26427255467\t 0.0135\t 0.0095\t   12.562\t 0.017\t   -5.910\t 0.011\t   2.6535\t 0.0154\t -15.66\t13.398950\t13.845866\t12.789181
+"""
+    vr = Occultations._parse_vizier_tsv(tsv, "2016.0")
+    gs = Occultations._gaia_star(vr[1])
+    @test length(vr) == 1 && gs.source_id == "6852568854178387456" && isapprox(gs.ra, 303.16931115487)
+    @test isapprox(gs.pmra, 12.562) && isapprox(gs.parallax, 2.6535) && gs.epoch == 2016.0 && isapprox(gs.mag["G"], 13.39895)
+    @test_throws ErrorException Occultations._parse_vizier_tsv(html, "2016.0")
+    @test Occultations._vizier_catalog("dr2")[1] == "I/345/gaia2"
+    # light curve from ISO time strings with sub-millisecond digits
+    lcs = LightCurve(["2024-08-04T18:35:18.2541633", "2024-08-04T18:35:18.7430657", "2024-08-04T18:35:19.2541633"],
+                     [1.0, 0.9, 1.0]; exptime=0.5)
+    @test lcs.tref == Epoch("2024-08-04T18:35:18.2541633")
+    @test lcs.time ≈ [0.0, 0.4889024, 1.0] atol = 1e-6
 end
 
 @testset "outlines and 3-D projection" begin
@@ -591,6 +614,25 @@ end
     @test r[:center_g][1] ≈ -20 atol = 3r[:center_g][2]
     _, m = model_lightcurve(r, "S2")
     @test minimum(m) ≈ 0.35 + 0.65 * 0.07 atol = 0.02      # Triton's flux is the zero level of the model
+    fl = flux_levels(r, "S2")                               # profiled levels: φ₀ = 0.35 recovered
+    @test fl.φ0 ≈ 0.35 atol = 0.02
+    @test fl.top ≈ 1 atol = 0.01
+    @test fl.bottom ≈ fl.φ0 * fl.top
+    # φ0 as a derived quantity of the fit (background = :free), with an uncertainty, and in the display
+    v2, σ2 = r[:phi0_S2]
+    @test v2 ≈ fl.φ0 && fl.σφ0 == σ2 && 0 < σ2 < 0.05 && abs(v2 - 0.35) < 4σ2
+    @test all(n -> haskey(r.derived, Symbol("phi0_", n)), ("S1", "S2", "S3", "S4"))
+    @test occursin("phi0_S2", sprint(show, MIME"text/plain"(), r))
+    @test_throws ArgumentError flux_levels(r, "nope")
+    # Pluto, DO15 template with the conic from the surface (1187 km): p1187/p1215 and p1187/p1250 as published
+    # (Leiva et al. in prep.: 1.837, 3.426); the template with r1 = 1190.4 km holds 36 K over 3.4 km and gives 2.20
+    Dp = 5.098e9
+    ppl = atmosphere_profile(pluto_atmosphere_do15(), 6530.0, 1187.0, 869.6, Dp; λ=0.65, Δλ=0.0)
+    @test ppl.surface_pressure / 6530 ≈ 1.844 atol = 0.005
+    a1250 = Atmosphere(:N2; temperature=pluto_atmosphere_do15().temperature, rref=1250.0)
+    @test atmosphere_profile(a1250, 1000.0, 1187.0, 869.6, Dp; λ=0.65, Δλ=0.0).surface_pressure / 1000 ≈ 3.44 atol = 0.01
+    a904 = Atmosphere(:N2; temperature=DO15Temperature(1190.4, 36.0, 16.9, 1217.3, 109.7, 1302.4, 95.5, 1392.0, 80.6), rref=1215.0)
+    @test atmosphere_profile(a904, 6530.0, 1187.0, 869.6, Dp; λ=0.65, Δλ=0.0).surface_pressure / 6530 ≈ 2.20 atol = 0.01
     @test_throws ArgumentError LimbProblem(ev; model=CircleLimb(), photometry=true, background=:maybe)
 end
 

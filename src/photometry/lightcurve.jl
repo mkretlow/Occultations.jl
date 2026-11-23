@@ -5,10 +5,13 @@
 """
     LightCurve(time, flux; tref, σ=nothing, exptime=median(diff(time)), λ=0.7, Δλ=0.3, name="")
     LightCurve(epochs::Vector{Epoch}, flux; tref=epochs[1], kwargs...)
+    LightCurve(times::Vector{<:AbstractString}, flux; tref=times[1], kwargs...)
 
 Photometry of one station: `time` [s] relative to `tref` (an [`Epoch`](@ref), UTC) at
 mid-exposure, `flux`, per-point uncertainties `σ` (default: a robust noise estimate from
-the point-to-point scatter), the exposure time [s] and the passband (`λ`, `Δλ`, µm).
+the point-to-point scatter), the exposure time [s] and the passband (`λ`, `Δλ`, µm). The times can also be given as [`Epoch`](@ref)s or as ISO 8601 UTC strings
+(`"2024-08-04T18:35:18.2541633"`, any number of decimals; FITS `DATE-OBS`, SharpCap timestamps): they must then
+refer to mid-exposure as well.
 Light curves are immutable: [`normalize`](@ref), [`select`](@ref) return new ones.
 """
 struct LightCurve
@@ -38,6 +41,9 @@ function LightCurve(epochs::AbstractVector{Epoch}, flux::AbstractVector{<:Real};
     t0 = tref === nothing ? minimum(epochs) : _epoch(tref)
     return LightCurve([e - t0 for e in epochs], flux; tref=t0, kw...)
 end
+
+LightCurve(times::AbstractVector{<:AbstractString}, flux::AbstractVector{<:Real}; kw...) =
+    LightCurve(Epoch.(times), flux; kw...)
 
 "Robust per-point noise from the median absolute deviation of first differences."
 function _robust_noise(f::AbstractVector)

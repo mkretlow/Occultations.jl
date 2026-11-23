@@ -281,7 +281,7 @@ function fit(prob::AbstractProblem; starts::Integer=8, maxiter::Integer=200, rng
     dof = n - nfree
     scale_errors && dof > 0 && (C .*= c / dof)
     v = _full(F, x)
-    d, de, dC = _propagate(prob, F, x, C, scale; null=N)
+    d, de, dC = _propagate(prob, F, x, C, scale; null=N, extra_scale=scale_errors && dof > 0 ? c / dof : 1.0)
     _unconstrained!(C, N)
     return FitResult(prob, [p.name for p in ps], v, [p.free for p in ps], C, c, dof, conv && ok,
                      residuals(prob, v), d, de, dC)
@@ -314,7 +314,7 @@ end
 
 # derived quantities and their linearly propagated uncertainties (infinite for a quantity
 # that changes along a null direction of the fit)
-function _propagate(prob, F::_Free, x, C, scale; null=zeros(length(x), 0))
+function _propagate(prob, F::_Free, x, C, scale; null=zeros(length(x), 0), extra_scale=1.0)
     d = derived(prob, _full(F, x))
     isempty(d) && return d, d, zeros(0, 0)
     f(x) = collect(Float64, values(derived(prob, _full(F, x))))
@@ -327,6 +327,11 @@ function _propagate(prob, F::_Free, x, C, scale; null=zeros(length(x), 0))
         G[:, k] = (f(xp) .- f(xm)) ./ (2h)
     end
     DC = G * C * G'
+    ks = collect(keys(d))
+    for (name, var) in pairs(_derived_variance(prob, _full(F, x)))
+        j = findfirst(==(name), ks)
+        j === nothing || !isfinite(var) || (DC[j, j] += extra_scale * var)
+    end
     GN = G * null
     for j in axes(G, 1)
         norm(GN[j, :]) > 1e-6 * norm(G[j, :]) || continue

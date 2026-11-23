@@ -115,7 +115,7 @@ Spherically symmetric, transparent atmosphere in hydrostatic equilibrium.
 The free parameter of a fit is the pressure (`pressure`, nbar) at the surface or at `rref`;
 the radius comes from the limb model and the gravity from the body (`GM` or `density`). See
 [`atmosphere_profile`](@ref), [`xv93_atmosphere`](@ref), [`pluto_atmosphere`](@ref),
-[`triton_atmosphere`](@ref).
+[`pluto_atmosphere_do15`](@ref), [`triton_atmosphere`](@ref).
 """
 struct Atmosphere
     gas::Symbol
@@ -178,6 +178,21 @@ in October 2017). Use it with a radius of 1353 km and GM = 1428 km³/s².
 """
 triton_atmosphere() = Atmosphere(:N2; temperature=DO15Temperature(1353.0, 38.0, 5.0, 1363.0, 49.8, 1375.0, 48.2,
                                                                    1403.0, 49.3, 0.105), rref=1400.0)
+
+"""
+    pluto_atmosphere_do15()
+
+Pluto's N₂ atmosphere with the temperature template of Dias-Oliveira et al. (2015, Table 3) as used to monitor
+the pressure (Meza et al. 2019, Sicardy et al. 2021, Leiva et al. in prep.): a [`DO15Temperature`](@ref) rising from
+36 K at the surface (16.9 K/km) to a maximum of 109.7 K at r = 1217.3 km, 95.5 K at 1302.4 km and 80.6 K at 1392 km,
+isothermal above. The conic starts at the surface radius 1187 km (the bottom of Sputnik Planitia, Hinson et al.
+2017) instead of DO15's 1190.4 km; with 1190.4 km, 36 K would be held over the lowest 3.4 km and
+p₁₁₈₇/p₁₂₁₅ would be 2.20 instead of the published 1.837. This template gives p₁₁₈₇/p₁₂₁₅ = 1.844 and
+p₁₁₈₇/p₁₂₅₀ = 3.440 (published: 1.837, 3.426). The fitted pressure refers to r = 1215 km (`p₁₂₁₅`; 6.53 µbar
+in August 2024). Use it with R = 1187 km and GM = 869.6 km³/s².
+"""
+pluto_atmosphere_do15() = Atmosphere(:N2; temperature=DO15Temperature(1187.0, 36.0, 16.9, 1217.3, 109.7, 1302.4, 95.5,
+                                                                       1392.0, 80.6), rref=1215.0)
 
 _softplus(x) = x > 30 ? x : log1p(exp(x))
 _logistic(x) = 1 / (1 + exp(-x))
